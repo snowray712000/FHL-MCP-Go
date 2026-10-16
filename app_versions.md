@@ -2,10 +2,10 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.7**
+- last: **0.0.0.8**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
-- 目前沒有 Go 程式碼，尚無「程式內版本字串」；有了之後，`version` 指令與建置注入的版本須與 `last` 一致。
+- 程式內版本字串在 `internal/version/version.go`，須與 `last` 一致 (有測試檢查)；`fhl-mcp version` 會顯示。
 
 ## 寫法（給使用者看 vs. 給工程師看）
 
@@ -16,9 +16,26 @@
 
 ## TODOs
 
-- 🆕 新功能: 做出第一個能跑的版本：啟動後，Claude Code 與 Codex 可以同時連上來查經文
-- ✨ 優化: 確認之後的版本會在 macOS 13 以上的 Apple 晶片 Mac 上實際跑得起來（目前只有文件上的判斷，尚未用真機驗證）
+- 🆕 新功能: 補齊其餘 28 個查詢功能（目前只有「查經文」能用，其他功能已列在清單上，但呼叫會回「尚未實作」）
+- ✨ 優化: 在 Codex 實際連線驗證（這台電腦只找到 Codex 桌面版，沒有命令列工具，尚未測）
+- ✨ 優化: 兩個 AI 工具同時連線、伺服器重開後自動重連的測試
+- ✨ 優化: 確認之後的版本會在 macOS 13 以上的 Apple 晶片 Mac 與 Linux 上實際跑得起來（目前只有在 Windows 上實測，Mac／Linux 只確認能編譯出程式）
+- ⏳ 待決定: 查「提多書」時，原 Python 版推測會誤查到「多俾亞傳」，Go 版改為正確查提多書，需要你核准這項修正 (D17)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 0.0.0.8
+
+- 🆕 新功能: 可以啟動本程式並在 Claude Code 查經文（例如「約 3:16」），結果與原本的 Python 版完全一樣。
+- ℹ️ 說明: 目前只有「查經文」這一個功能真正能用；其餘 28 個功能的名稱與說明已經列出來，但呼叫時會明確回覆「尚未實作」。啟動方式是在命令列執行 `fhl-mcp serve`，Claude Code 要先註冊一次（`claude mcp add --transport http --scope user fhl http://127.0.0.1:8081/mcp`）。
+- ℹ️ 說明: 只接受本機連線，並擋掉其他網站從瀏覽器發來的請求。Codex 還沒驗證，Mac 與 Linux 版本尚未實機測試。
+- 📝工程師筆記-✨新增: M1 垂直切片：`cmd/fhl-mcp` (`serve`／`version`／`help`；`--host` 僅限 loopback、`--port` 預設 8081 被占用即失敗、`--log-level`、Ctrl+C 優雅關閉)；`internal/{app,transport,mcpserver,tools,bible,fhlapi,version}` 與 `assets/` (內嵌凍結的 `tools-list.json`)。
+- 📝工程師筆記-✨新增: `internal/mcpserver` 以低階 `AddTool` 逐字註冊契約 29 個工具；成功回 text + `structuredContent{result}`，錯誤回 `isError` 且文字前綴 `Error executing tool X: `；未知工具以 receiving middleware 轉成同形式 (D2)；capabilities 只有 tools (`listChanged:false`)。serverInfo 名稱 `FHL-MCP-Go`、版本為產品版本 (Python 為 `FHL Bible MCP Server`／`1.29.0`)，為假設。
+- 📝工程師筆記-✨新增: `get_bible_verse` 真實實作：參數 null 視同未給 (D5)、整數接受數字字串 (D6)、錯誤訊息自訂簡短 (D2)、不認得的書卷訊息同 D3、`use_simplified` 真正送 `gb=1` (D4)；輸出以 `MarshalIndent2` 對齊 Python `json.dumps(indent=2, ensure_ascii=False)`，3 個 Python 樣本逐位元組相同。
+- 📝工程師筆記-✨新增: 防護：SDK 預設擋非 localhost 的 `Host`，`http.NewCrossOriginProtection` 擋非同源 `Origin`；`/health` 不連上游；根路徑與其他路徑回 404 (不做根路徑相容)。
+- 📝工程師筆記-✨新增: 測試 (離線，fixtures 為 4 份實際抓取的 `qb.php` 回應與 3 份 Python golden)：書卷解析、上游 client (httptest)、經文服務、參數驗證、經真實 loopback 監聽與官方 SDK client 的端到端 (initialize／tools/list 與契約逐項相等／查經文／錯誤形式／Host 與 Origin／port 占用／優雅關閉)、版本字串與本檔 `last` 一致。`CGO_ENABLED=0` 已交叉編譯 windows/amd64、darwin/arm64、linux/amd64。
+- 📝工程師筆記-🐞發現: D17：Python `BIBLE_BOOKS` 中文簡寫「多」同時是提多書 (56) 與多俾亞傳 (101)，後者覆蓋前者；`get_bible_verse` 先轉中文簡寫再轉回 bid，`Titus`／`提多書` 推測會查到 101 (靜態推斷與離線 `get_book_id('多')=101`，未對 Python 實際重現)。Go 版皆解析為 56，實測 `Titus 1:1` 回 `book_eng: Titus`。待核准，記於 `doc/m0/tool-matrix.md`。
+- 📝工程師筆記-ℹ️說明: 驗證：`go vet` 與 `go test` 通過；Windows 版實際啟動並由 Claude Code 新對話呼叫 `get_bible_verse` 成功 (使用者驗證)。未驗證：Codex、`-race` (此環境無 cgo)、macOS／Linux 執行、同時雙客戶端、重啟後重連、`stateless` 與 stateful 模式取捨。
+- 📝工程師筆記-ℹ️說明: 假設事項：模組路徑 `github.com/snowray712000/FHL-MCP-Go`；SDK 預設 stateful 模式；未收窄 `SupportedProtocolVersions`。詳見 `code/ai-log/261016p`。
 
 ## 0.0.0.7
 

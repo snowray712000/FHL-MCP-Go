@@ -1,0 +1,20 @@
+{
+  "version": "unv",
+  "version_name": "FHL和合本",
+  "record_count": 0,
+  "verses": [],
+  "navigation": {
+    "prev": {
+      "book": "創",
+      "book_eng": "Gen",
+      "chapter": 1,
+      "verse": 1
+    },
+    "next": {
+      "book": "創",
+      "book_eng": "Gen",
+      "chapter": 1,
+      "verse": 1
+    }
+  }
+}

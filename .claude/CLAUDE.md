@@ -4,11 +4,14 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the repo contains no Go source yet** — only the
-plan (`doc/FHL-MCP-Go-重寫計畫書.md`, 正體中文, "discussion draft v0.1"), AI work logs, and a `go.mod` pinning
-Go 1.27.2 + `go-sdk` v1.8.0 (module path assumed; see ai-log 261016n). No build or tests yet. Do not invent build/test commands; the plan's intended checks are `go test ./...`,
-`go vet ./...`, and `go test -race` on the native platform. Real-upstream (FHL API) tests must be opt-in, never
-part of the default run; default tests use fixtures/mocks.
+Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the M1 vertical slice exists**: `go.mod` pins Go 1.27.2 + `go-sdk` v1.8.0 (module path
+`github.com/snowray712000/FHL-MCP-Go` is an assumption); `cmd/fhl-mcp` (`serve`/`version`/`help`), `internal/{app,transport,mcpserver,tools,bible,fhlapi,version}`
+and `assets/` (embedded frozen `tools-list.json`) are in place. Only `get_bible_verse` is implemented; the other 28 contract
+tools are registered but return an `isError` "not implemented yet" result. The plan is `doc/FHL-MCP-Go-重寫計畫書.md`
+(正體中文, "discussion draft v0.1"). Commands that work: `go test ./...`, `go vet ./...`, `CGO_ENABLED=0 go build ./cmd/fhl-mcp`
+(Go is at `C:\Program Files\Go\bin`, add it to PATH in fresh shells); `go test -race` needs cgo/gcc and is not verified on this
+machine. Real-upstream (FHL API) tests must be opt-in, never part of the default run; default tests use fixtures/mocks
+(`tests/fixtures/upstream`, goldens copied from the Python server in `tests/fixtures/golden`).
 
 The plan is the source of truth for scope, CLI, and milestones (M0–M6). **First release = the 29 Tools only**
 (user-decided 2026-10-16): the 19 Prompts and 7 Resource URIs are deferred to M4 / next version — do not build
@@ -30,8 +33,8 @@ coverage) are not verified facts. Do not touch the user's Claude Code / Codex cl
    Format, naming (`YYMMDD` + letter + `-title.md`) and template are defined in `index.md`.
 3. Logs are for AI readers: English, terse, What / Why / How. Replies to the user are 正體中文.
 
-Version history (user-facing, 正體中文) is `app_versions.md`, not ai-log. `code/` currently holds only `ai-log/`. Go sources follow the plan's layout at the repo root
-(`cmd/fhl-mcp/`, `internal/...`), not under `code/`.
+Version history (user-facing, 正體中文) is `app_versions.md`, not ai-log. `code/` holds only `ai-log/`. Go sources follow the plan's layout at the repo root
+(`cmd/fhl-mcp/`, `internal/...`, `assets/`), not under `code/`.
 
 ## Git commit convention
 

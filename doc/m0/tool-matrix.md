@@ -75,6 +75,7 @@
 | D14 | 文字 JSON 為 `indent=2`、`ensure_ascii=false`，字串內保留上游的 `\r\n` | 同樣的序列化設定 | 相容；建議 |
 | D15 | `get_parsing_reference` 輸出為 Markdown（非 JSON），仍包在 `outputSchema {result:string}` 裡 | 同樣；以 James 1:1 fixture 驗證 | 相容；已有 fixture |
 | D16 | 工具結果沒有分頁、沒有 `nextCursor`；`tools/list` 一次回 29 項 | 同樣 | 相容 |
+| D17 | **新發現（M1，靜態稽核＋Go 實測；尚待使用者核准）**：Python 的 `BIBLE_BOOKS` 中文簡寫 `多` 同時是提多書(56)與多俾亞傳(101)，索引字典後者覆蓋前者，而 `get_bible_verse` 先把書名轉成中文簡寫再轉回 bid：`Titus`／`提多書` → `多` → bid 101，推測會查到多俾亞傳（未實際對 Python 重現，只做離線 `get_book_id('多')=101` 驗證）。Go 版以書卷全名／英文名直接解析為 bid，`Titus`／`提多書`／`多` 皆為 56；實測 Go 版 `Titus 1:1` 回 `book_eng: Titus`。 | 屬明確 bug fix：提多書查提多書；`多` 單獨出現時解析為提多書(56)，多俾亞傳請用 `Tob`／`多俾亞傳`／`101` | 待核准；M2 其他工具照同一解析器 |
 
 ## 未涵蓋
 

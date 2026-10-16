@@ -1,0 +1,35 @@
+{
+  "version": "unv",
+  "version_name": "FHL和合本",
+  "record_count": 2,
+  "verses": [
+    {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 16,
+      "text": "「<WG1063>　神<WG2316>愛<WG25><WTG5656>{<WG3779>}世人<WG2889>，甚至<WG5620>將他的獨生<WG3439>子<WG5207>賜給<WG1325><WTG5656>他們，叫<WG2443>一切<WG3956>信<WG4100><WTG5723>他的<WG1519><WG846>，不<WG3361>致滅亡<WG622><WTG5672>，反<WG235>得<WG2192><WTG5725>永<WG166>生<WG2222>。"
+    },
+    {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 17,
+      "text": "因為<WG1063>　神<WG2316>差<WG649><WTG5656>他的兒子<WG5207>降<WG1519>世<WG2889>，不是<WG3756>要定<WG2443><WG2919><WTG5661>世人<WG2889>的罪（或譯：審判世人；下同），乃是<WG235>要<WG2443>叫世人<WG2889>因<WG1223>他<WG846>得救<WG4982><WTG5686>。"
+    }
+  ],
+  "navigation": {
+    "prev": {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 15
+    },
+    "next": {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 18
+    }
+  }
+}
