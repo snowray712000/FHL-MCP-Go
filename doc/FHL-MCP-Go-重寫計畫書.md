@@ -29,7 +29,7 @@
 - 第一里程碑完成現有 HTTP 的 29 個工具；完整重寫目標再包含 19 個 Prompts 與 7 個 Resource URI（4 個 scheme）。
 - **已決定（2026-10-16，使用者確認）：首版只交付 29 個 Tools；Prompts 與 Resources 移到下一版本（M4）。** 首版不註冊、不宣告這兩類 capability，文件與發佈說明不得宣稱已支援。
 - **首版完成定義**：M0–M3、M5、M6 全部達成（29 工具契約與差異已結案、本機 HTTP 服務、`setup`／`doctor`／`status`／`stop`／`disconnect`、三平台封裝與原生驗收）；M4 不影響首版驗收。
-- 首版平台基準（**已定案 2026-10-16**，見 §15）：Windows x64、macOS 12+ arm64、Ubuntu 22.04/24.04 x64；macOS 最低版本需與選定 Go 工具鏈、實際客戶端一起驗證後鎖定。
+- 首版平台基準（**已定案 2026-10-16**，見 §15）：Windows x64、macOS 13+ arm64、Ubuntu 22.04/24.04 x64（macOS 13 為 Go 1.27 工具鏈的下限，2026-10-16 使用者核准，見 §15）。
 
 ## 2. 產品使用方式
 
@@ -316,7 +316,7 @@ D1（text + `structuredContent`）已於上方決定；D13–D16 為相容性描
 | 發佈目標 | GOOS/GOARCH | 建議交付檔 | 驗收基準 |
 | --- | --- | --- | --- |
 | Windows 10/11 x64 | windows/amd64 | `fhl-mcp-go_VERSION_windows_amd64.zip` | Win 10 與 Win 11 各自驗證 |
-| Apple Silicon Mac | darwin/arm64 | `fhl-mcp-go_VERSION_darwin_arm64.tar.gz` | macOS 12+，最低版依實測鎖定 |
+| Apple Silicon Mac | darwin/arm64 | `fhl-mcp-go_VERSION_darwin_arm64.tar.gz` | macOS 13+（Go 1.27 下限） |
 | Ubuntu x64 | linux/amd64 | `fhl-mcp-go_VERSION_linux_amd64.tar.gz` | Ubuntu 22.04 與 24.04 |
 
 Mac 使用 tar.gz 以保留執行權限；可另產 ZIP，但需測試解壓縮工具保留 mode。最終封裝形式可在 beta 使用者試用後調整。首版不含 Windows ARM64、Ubuntu ARM64、Intel Mac、Windows 32 位元；之後有需求可擴充。
@@ -398,7 +398,7 @@ Mac 使用 tar.gz 以保留執行權限；可另產 ZIP，但需測試解壓縮�
 1. ~~專案命名~~ **已定案（2026-10-16）**：`FHL-MCP-Go`（使用者確認採用）。
 2. ~~完整功能範圍~~ **已定案（2026-10-16）**：首版只交付 29 Tools；Prompts、Resources 移到下一版本（M4）。
 3. ~~Ubuntu 最低版與 CPU~~ **已定案（2026-10-16）**：Ubuntu 22.04／24.04 x64；ARM64 列後續需求。
-4. ~~macOS 最低版~~ **已定案（2026-10-16）**：macOS 12+ arm64；最終最低版在 M1 選定 Go 工具鏈並完成實機驗證後鎖定，若工具鏈或測試機不支援 12，將回報並調整，不默默改動。
+4. ~~macOS 最低版~~ **已定案（2026-10-16，修訂）**：macOS 13+ arm64，以 Go 1.27.x 建置。原訂 12+，但 Go 1.26 是最後支援 macOS 12 的版本、Go 1.27 起需 macOS 13（Ventura）以上；使用者選擇升工具鏈、放棄 macOS 12。此限制須寫入 README 與發佈說明；實機驗證（macOS 13+ arm64）仍待 M1 / M5 執行
 5. ~~正式發佈憑證~~ **已定案（2026-10-16）**：首版為 beta，**不簽章、不公證**；文件標示 Windows SmartScreen 與 macOS Gatekeeper 可能攔阻，不指導停用系統防護。正式公開版再補 Windows 簽章與 Apple 公證（憑證與帳號由發佈者提供）。
 6. ~~Smithery／舊根路徑相容~~ **已定案（2026-10-16）**：不列首版；只提供 `/mcp`，不做 Smithery well-known 端點與每請求設定中介層，也不做根路徑 `/`→`/mcp` 轉向。若有既有使用者再另案列相容工作。
 

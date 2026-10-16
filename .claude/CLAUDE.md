@@ -4,16 +4,16 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the repo contains no Go code** — only the
-plan (`doc/FHL-MCP-Go-重寫計畫書.md`, 正體中文, "discussion draft v0.1") and AI work logs. There is no `go.mod`,
-no build, no tests yet. Do not invent build/test commands; the plan's intended checks are `go test ./...`,
+Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the repo contains no Go source yet** — only the
+plan (`doc/FHL-MCP-Go-重寫計畫書.md`, 正體中文, "discussion draft v0.1"), AI work logs, and a `go.mod` pinning
+Go 1.27.2 + `go-sdk` v1.8.0 (module path assumed; see ai-log 261016n). No build or tests yet. Do not invent build/test commands; the plan's intended checks are `go test ./...`,
 `go vet ./...`, and `go test -race` on the native platform. Real-upstream (FHL API) tests must be opt-in, never
 part of the default run; default tests use fixtures/mocks.
 
 The plan is the source of truth for scope, CLI, and milestones (M0–M6). **First release = the 29 Tools only**
 (user-decided 2026-10-16): the 19 Prompts and 7 Resource URIs are deferred to M4 / next version — do not build
 `internal/prompts`, `internal/resources`, or advertise those capabilities in the first release. Plan §15 is fully
-decided (2026-10-16): Ubuntu 22.04/24.04 x64 + macOS 12+ arm64 (final macOS floor locked in M1) + Windows x64;
+decided (2026-10-16): Ubuntu 22.04/24.04 x64 + macOS 13+ arm64 (Go 1.27.x toolchain; macOS 12 dropped, user-approved) + Windows x64;
 first release is a beta with no code signing/notarization; no Smithery or root-path `/` compat (`/mcp` only). The
 approved Python-vs-Go behavior differences are in plan §9 (D2–D12). Anything the plan still leaves open must not be
 silently decided — ask the user, or record the assumption in an ai-log entry.
@@ -46,8 +46,11 @@ Copied from the user's habit in `D:\coding\信望愛\FHLNUI\FHLNUI` (inferred fr
 - **Release commits** use `發版 {version}：...`; a roll-up commit reads `發版 X：整理 A ~ B (summary)`.
   Same as FHLNUI. Versions are 4-part (`0.0.0.1`); the first release is `0.0.0.1`.
   Changelog is `app_versions.md` at the repo root (the Markdown counterpart of FHLNUI's `app_versions.json`):
-  newest first, `TODOs` block always on top, `last` field kept in sync, items prefixed `🆕 / ✨ / 🐞 / ⏳`.
-  Update it in the same commit as the release. Once Go code exists, the binary's version string must match `last`.
+  newest first, `TODOs` block always on top, `last` field kept in sync.
+  Item style (user-decided 2026-10-16, spelled out in `app_versions.md`): `🆕 新功能` / `✨ 優化` / `🐞 Bug` / `ℹ️ 說明` are for
+  end users — plain 正體中文 a non-engineer understands (新功能/優化 short, 說明 longer). All technical detail goes in
+  `📝工程師筆記:` (sub-categories as `📝工程師筆記-✨新增` / `-🐞發現` / `-ℹ️說明`), placed at the end of the version.
+  `⏳ 待決定` is used in TODOs. Update it in the same commit as the release. Once Go code exists, the binary's version string must match `last`.
 - **One small logical change per commit.** Include the related doc updates in the same commit (CLAUDE.md edits,
   `doc/`, and the matching `code/ai-log/` entry + index row) rather than separate "update docs" commits.
 - **Trailer**: end with the `Co-Authored-By: Claude ...` line required by the session's attribution reminder.
