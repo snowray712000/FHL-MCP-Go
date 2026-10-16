@@ -295,3 +295,7 @@ func (f *searchAPI) SESub(context.Context, string, int, int) (*fhlapi.SubSearchR
 func (f *searchAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
 	return nil, errors.New("SEAF not expected in this test")
 }
+
+func (f *searchAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error) {
+	return nil, errors.New("RT not expected in this test")
+}

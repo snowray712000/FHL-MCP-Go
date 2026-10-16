@@ -1,0 +1,10 @@
+{
+  "status": "success",
+  "query_type": "bible_footnote",
+  "version": "TCV",
+  "version_name": "現代中文譯本",
+  "book_id": 1,
+  "book_name": "Gen",
+  "footnote_id": 1,
+  "text": "「太初，上帝創造天地。」或譯「太初，上帝創造天地的時候。」或「上帝開始創造天地的時候」。"
+}

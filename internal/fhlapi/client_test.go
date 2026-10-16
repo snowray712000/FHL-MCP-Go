@@ -442,7 +442,7 @@ func TestCacheMergesConcurrentRequests(t *testing.T) {
 }
 
 func TestEveryEndpointHasACachePolicy(t *testing.T) {
-	for _, ep := range []string{"qb.php", "ab.php", "se.php", "sd.php", "qp.php", "sc.php", "ssc.php", "st.php", "au.php", "qsub.php", "qaf.php", "sesub.php", "seaf.php"} {
+	for _, ep := range []string{"qb.php", "ab.php", "se.php", "sd.php", "qp.php", "sc.php", "ssc.php", "st.php", "au.php", "qsub.php", "qaf.php", "sesub.php", "seaf.php", "rt.php"} {
 		if _, ok := endpointTTL[ep]; !ok {
 			t.Errorf("%s has no cache policy", ep)
 		}
@@ -535,5 +535,29 @@ func TestSubEndpointQueries(t *testing.T) {
 	c = newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"Fail: Empty Query"}`)) })
 	if _, err := c.SESub(context.Background(), "", 10, 0); !errors.Is(err, ErrUpstream) {
 		t.Errorf("err = %v", err)
+	}
+}
+
+func TestRTQueryAndNotFound(t *testing.T) {
+	var query string
+	body := "rt_gen_1_1.json"
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		query = r.URL.RawQuery
+		_, _ = w.Write(fixture(t, body))
+	})
+	res, err := c.RT(context.Background(), 1, 1, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if query != "bid=1&gb=1&id=1&version=tcv" {
+		t.Errorf("query = %q", query)
+	}
+	if res.RecordCount != 1 || len(res.Record) != 1 || string(res.Record[0].ID) != "1" || res.Engs == nil || *res.Engs != "Gen" || res.Record[0].Text == nil {
+		t.Errorf("response = %+v", res)
+	}
+	body = "rt_999_999.json"
+	res, err = c.RT(context.Background(), 999, 999, false)
+	if err != nil || res.RecordCount != 0 || len(res.Record) != 0 {
+		t.Errorf("not found: %v %+v", err, res)
 	}
 }

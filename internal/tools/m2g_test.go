@@ -315,3 +315,7 @@ func TestScriptureBookTables(t *testing.T) {
 		}
 	}
 }
+
+func (f *scriptureAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error) {
+	return nil, errors.New("RT not expected in this test")
+}

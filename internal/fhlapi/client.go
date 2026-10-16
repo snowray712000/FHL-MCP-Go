@@ -55,6 +55,7 @@ var endpointTTL = map[string]time.Duration{
 	"qaf.php":   7 * 24 * time.Hour,
 	"sesub.php": 24 * time.Hour,
 	"seaf.php":  24 * time.Hour,
+	"rt.php":    7 * 24 * time.Hour,
 }
 
 // NewClient returns a Client with production defaults (30 s timeout, like the Python reference).
@@ -571,6 +572,38 @@ func (c *Client) subSearch(ctx context.Context, endpoint, keyword string, limit,
 	q.Set("limit", strconv.Itoa(limit))
 	var out SubSearchResponse
 	if err := c.getJSON(ctx, endpoint, q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// RTRecord is one footnote of rt.php.
+type RTRecord struct {
+	ID   json.RawMessage `json:"id"`
+	Text *string         `json:"text"`
+}
+
+// RTResponse is the rt.php (TCV footnote) response. engs is the book abbreviation, empty when nothing was found.
+type RTResponse struct {
+	Status      string     `json:"status"`
+	RecordCount int        `json:"record_count"`
+	Version     string     `json:"version"`
+	Engs        *string    `json:"engs"`
+	Record      []RTRecord `json:"record"`
+}
+
+// RT queries rt.php for one footnote of the TCV version (the only version that has footnotes).
+func (c *Client) RT(ctx context.Context, bid, id int, simplified bool) (*RTResponse, error) {
+	q := url.Values{}
+	q.Set("bid", strconv.Itoa(bid))
+	q.Set("id", strconv.Itoa(id))
+	q.Set("version", "tcv")
+	q.Set("gb", boolDigit(simplified))
+	var out RTResponse
+	if err := c.getJSON(ctx, "rt.php", q, &out); err != nil {
 		return nil, err
 	}
 	if out.Status != "success" {

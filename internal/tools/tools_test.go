@@ -88,10 +88,10 @@ func TestGetBibleVerseValidationErrors(t *testing.T) {
 
 func TestNotImplemented(t *testing.T) {
 	r := NewRegistry(&bible.Service{API: &fakeAPI{}})
-	if r.Implemented("get_bible_footnote") {
-		t.Fatal("get_bible_footnote should not be implemented yet")
+	if r.Implemented("search_fhl_articles") {
+		t.Fatal("search_fhl_articles should not be implemented yet")
 	}
-	if _, err := r.Call(context.Background(), "get_bible_footnote", nil); !errors.Is(err, ErrNotImplemented) {
+	if _, err := r.Call(context.Background(), "search_fhl_articles", nil); !errors.Is(err, ErrNotImplemented) {
 		t.Fatalf("err = %v", err)
 	}
 }
@@ -146,4 +146,8 @@ func (f *fakeAPI) SESub(context.Context, string, int, int) (*fhlapi.SubSearchRes
 
 func (f *fakeAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
 	return nil, errors.New("SEAF not expected in this test")
+}
+
+func (f *fakeAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error) {
+	return nil, errors.New("RT not expected in this test")
 }

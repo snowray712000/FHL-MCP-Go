@@ -256,3 +256,7 @@ func (f *cmtAPI) SESub(context.Context, string, int, int) (*fhlapi.SubSearchResp
 func (f *cmtAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
 	return nil, errors.New("SEAF not expected in this test")
 }
+
+func (f *cmtAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error) {
+	return nil, errors.New("RT not expected in this test")
+}
