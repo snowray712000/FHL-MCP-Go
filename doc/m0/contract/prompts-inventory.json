@@ -1,0 +1,515 @@
+{
+  "count": 19,
+  "prompts": [
+    {
+      "name": "basic_help_guide",
+      "description": "顯示 FHL Bible MCP Server 的完整使用指南，包含快速入門、工具說明和實用技巧",
+      "arguments": [
+        {
+          "name": "section",
+          "description": "指南章節 (all/quickstart/tools/resources/prompts/tips)",
+          "required": false
+        }
+      ],
+      "class": "BasicHelpGuidePrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 使用指南 (all)\n\n## 步驟 1: 介紹功能\n**執行**: 說明 FHL Bible MCP Server 主要功能\n**輸出**: 經文查詢、原文研究、註釋查閱簡介\n\n## 步驟 2: 列出工具\n**執行**: 展示6類工具\n- 經文: get_bible_verse, get_bible_chapter\n- 搜尋: search_bible\n- 原文: lookup_strongs\n- 註釋: get_commentary\n- 資訊: list_bible_versions\n**輸出**: 工具清單\n\n## 步驟 3: 說明 Prompts\n**執行**: 介紹提示詞範本\n- 基礎/讀經/研經/進階/特殊類\n**輸出**: Prompt 類別與用途\n\n## 步驟 4: 提供技巧\n**執行**: 分享使用建議\n**輸出**: 組合使用、URI 快速訪問\n\n💡 詳情: tool_reference / uri_demo\n"
+      },
+      "render_no_args": {
+        "ok": true,
+        "text": "# 使用指南 (all)\n\n## 步驟 1: 介紹功能\n**執行**: 說明 FHL Bible MCP Server 主要功能\n**輸出**: 經文查詢、原文研究、註釋查閱簡介\n\n## 步驟 2: 列出工具\n**執行**: 展示6類工具\n- 經文: get_bible_verse, get_bible_chapter\n- 搜尋: search_bible\n- 原文: lookup_strongs\n- 註釋: get_commentary\n- 資訊: list_bible_versions\n**輸出**: 工具清單\n\n## 步驟 3: 說明 Prompts\n**執行**: 介紹提示詞範本\n- 基礎/讀經/研經/進階/特殊類\n**輸出**: Prompt 類別與用途\n\n## 步驟 4: 提供技巧\n**執行**: 分享使用建議\n**輸出**: 組合使用、URI 快速訪問\n\n💡 詳情: tool_reference / uri_demo\n"
+      }
+    },
+    {
+      "name": "basic_uri_demo",
+      "description": "展示和教導如何使用各種 Resource URI，包含互動式範例和最佳實踐",
+      "arguments": [
+        {
+          "name": "uri_type",
+          "description": "URI 類型 (bible/strongs/commentary/info/all)",
+          "required": false
+        }
+      ],
+      "class": "BasicURIDemoPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# Resource URI 示範 (all)\n\n## 步驟 1: 解釋 URI\n**執行**: 說明 URI 是什麼及其用途\n**輸出**: URI 類似網址，用於快速訪問聖經資源\n\n## 步驟 2: 列出 URI 類型\n**執行**: 展示4種 URI 格式\n- bible://[type]/[version]/[book]/[chapter]/[verse]\n- strongs://[testament]/[number]\n- commentary://[id]/[book]/[chapter]/[verse]\n- info://[type]\n**輸出**: URI 格式清單\n\n## 步驟 3: 提供範例\n**執行**: 展示實際可用的 URI\n- bible://verse/unv/John/3/16\n- strongs://nt/26\n- commentary://1/John/3/16\n- info://versions\n**輸出**: 可點擊的 URI 連結\n\n## 步驟 4: 示範應用\n**執行**: 展示 URI 的實際使用場景\n**輸出**: 組合使用案例\n"
+      },
+      "render_no_args": {
+        "ok": true,
+        "text": "# Resource URI 示範 (all)\n\n## 步驟 1: 解釋 URI\n**執行**: 說明 URI 是什麼及其用途\n**輸出**: URI 類似網址，用於快速訪問聖經資源\n\n## 步驟 2: 列出 URI 類型\n**執行**: 展示4種 URI 格式\n- bible://[type]/[version]/[book]/[chapter]/[verse]\n- strongs://[testament]/[number]\n- commentary://[id]/[book]/[chapter]/[verse]\n- info://[type]\n**輸出**: URI 格式清單\n\n## 步驟 3: 提供範例\n**執行**: 展示實際可用的 URI\n- bible://verse/unv/John/3/16\n- strongs://nt/26\n- commentary://1/John/3/16\n- info://versions\n**輸出**: 可點擊的 URI 連結\n\n## 步驟 4: 示範應用\n**執行**: 展示 URI 的實際使用場景\n**輸出**: 組合使用案例\n"
+      }
+    },
+    {
+      "name": "basic_quick_lookup",
+      "description": "快速查詢聖經經文，簡單直接",
+      "arguments": [
+        {
+          "name": "query",
+          "description": "查詢內容",
+          "required": true
+        }
+      ],
+      "class": "BasicQuickLookupPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 快速查詢\n\n**查詢**: <query>\n\n## 步驟 1: 解析查詢\n**執行**: 理解查詢意圖\n- 經文引用？關鍵字？主題？\n**輸出**: 查詢類型\n\n## 步驟 2: 執行查詢\n**執行**: 使用適當工具\n- 經文: get_bible_verse\n- 關鍵字: search_bible\n- 主題: 組合搜尋\n**輸出**: 查詢結果\n\n## 步驟 3: 顯示結果\n**執行**: 清晰呈現結果\n**輸出**: 經文內容或搜尋結果\n\n💡 支援: 經文引用、關鍵字搜尋、主題查詢\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: query')"
+      }
+    },
+    {
+      "name": "basic_tool_reference",
+      "description": "顯示所有可用工具的詳細參考手冊，包含用法、參數和範例",
+      "arguments": [
+        {
+          "name": "tool_name",
+          "description": "特定工具名稱（可選）",
+          "required": false
+        },
+        {
+          "name": "category",
+          "description": "工具類別（verse/search/strongs/commentary/info/audio/all）",
+          "required": false
+        }
+      ],
+      "class": "BasicToolReferencePrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 工具參考\n\n## 步驟 1: 列出可用工具\n**執行**: 顯示 FHL Bible MCP Server 的所有工具\n**輸出**: 工具清單（經文查詢、搜尋、原文、註釋、資訊、音訊類）\n\n## 步驟 2: 查詢工具詳情\n**執行**: 根據用戶需求提供具體工具的使用說明\n- 工具名稱: 所有工具\n- 類別: all\n**輸出**: 工具名稱、參數、範例\n\n## 步驟 3: 提供使用範例\n**執行**: 展示 1-2 個實際調用範例\n**輸出**: 可執行的代碼範例\n\n💡 工具類別: verse/search/strongs/commentary/info/audio\n"
+      },
+      "render_no_args": {
+        "ok": true,
+        "text": "# 工具參考\n\n## 步驟 1: 列出可用工具\n**執行**: 顯示 FHL Bible MCP Server 的所有工具\n**輸出**: 工具清單（經文查詢、搜尋、原文、註釋、資訊、音訊類）\n\n## 步驟 2: 查詢工具詳情\n**執行**: 根據用戶需求提供具體工具的使用說明\n- 工具名稱: 所有工具\n- 類別: all\n**輸出**: 工具名稱、參數、範例\n\n## 步驟 3: 提供使用範例\n**執行**: 展示 1-2 個實際調用範例\n**輸出**: 可執行的代碼範例\n\n💡 工具類別: verse/search/strongs/commentary/info/audio\n"
+      }
+    },
+    {
+      "name": "reading_daily",
+      "description": "每日靈修讀經指引，包含默想和應用",
+      "arguments": [
+        {
+          "name": "passage",
+          "description": "今日經文",
+          "required": false
+        }
+      ],
+      "class": "ReadingDailyPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 每日讀經 - 取得今日金句 (get_verse_of_day)\n\n## 步驟 1: 獲取經文\n**執行**: 取得今日要讀的經文\n**輸出**: 經文內容\n\n## 步驟 2: 初步閱讀\n**執行**: 閱讀2-3遍\n- 整體印象\n- 關鍵字詞\n**輸出**: 初步理解\n\n## 步驟 3: 默想經文\n**執行**: 深入思考經文意義\n- 這段說什麼？\n- 對我說什麼？\n**輸出**: 個人領受\n\n## 步驟 4: 連結生活\n**執行**: 將經文應用到生活\n- 今天要學習什麼？\n- 今天要做什麼？\n**輸出**: 具體行動\n\n## 步驟 5: 禱告回應\n**執行**: 用經文禱告\n**輸出**: 禱告內容\n\n💡 開始: get_verse_of_day\n"
+      },
+      "render_no_args": {
+        "ok": true,
+        "text": "# 每日讀經 - 取得今日金句 (get_verse_of_day)\n\n## 步驟 1: 獲取經文\n**執行**: 取得今日要讀的經文\n**輸出**: 經文內容\n\n## 步驟 2: 初步閱讀\n**執行**: 閱讀2-3遍\n- 整體印象\n- 關鍵字詞\n**輸出**: 初步理解\n\n## 步驟 3: 默想經文\n**執行**: 深入思考經文意義\n- 這段說什麼？\n- 對我說什麼？\n**輸出**: 個人領受\n\n## 步驟 4: 連結生活\n**執行**: 將經文應用到生活\n- 今天要學習什麼？\n- 今天要做什麼？\n**輸出**: 具體行動\n\n## 步驟 5: 禱告回應\n**執行**: 用經文禱告\n**輸出**: 禱告內容\n\n💡 開始: get_verse_of_day\n"
+      }
+    },
+    {
+      "name": "reading_chapter",
+      "description": "閱讀和分析整章聖經，包含背景、結構、重點和應用",
+      "arguments": [
+        {
+          "name": "book",
+          "description": "經卷名稱",
+          "required": true
+        },
+        {
+          "name": "chapter",
+          "description": "章數",
+          "required": true
+        },
+        {
+          "name": "version",
+          "description": "聖經版本（預設：unv）",
+          "required": false
+        }
+      ],
+      "class": "ReadingChapterPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 整章讀經 - <book> <chapter>章\n\n## 步驟 1: 獲取章節\n**執行**: 取得完整章節經文\n- 經卷: <book>, 章數: <chapter>, 版本: unv\n**輸出**: 完整章節內容\n\n## 步驟 2: 分析背景\n**執行**: 了解章節的背景脈絡\n- 前後章節連結\n- 書卷整體位置\n**輸出**: 上下文說明\n\n## 步驟 3: 劃分結構\n**執行**: 將章節分段 (3-5段)\n- 識別自然段落\n- 每段主題摘要\n**輸出**: 結構大綱\n\n## 步驟 4: 標記重點\n**執行**: 找出關鍵經節 (3-5節)\n- 核心真理或命令\n- 特別觸動經文\n**輸出**: 重點經節及理由\n\n## 步驟 5: 提煉應用\n**執行**: 應用於生活\n- 核心信息\n- 實踐方向\n**輸出**: 應用建議與行動\n\n💡 深入: study_verse_deep, get_commentary\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: book')"
+      }
+    },
+    {
+      "name": "reading_passage",
+      "description": "閱讀和分析一段經文（可能跨越多個章節），包含背景、主題、解經和應用",
+      "arguments": [
+        {
+          "name": "book",
+          "description": "經卷名稱（中文或英文）",
+          "required": true
+        },
+        {
+          "name": "start_chapter",
+          "description": "起始章",
+          "required": true
+        },
+        {
+          "name": "start_verse",
+          "description": "起始節",
+          "required": true
+        },
+        {
+          "name": "end_chapter",
+          "description": "結束章",
+          "required": true
+        },
+        {
+          "name": "end_verse",
+          "description": "結束節",
+          "required": true
+        },
+        {
+          "name": "version",
+          "description": "聖經版本代碼（預設：unv）",
+          "required": false
+        }
+      ],
+      "class": "ReadingPassagePrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 段落讀經 - <book> <start_chapter>:<start_verse>-<end_chapter>:<end_verse>\n\n## 步驟 1: 獲取經文\n**執行**: 取得段落完整經文\n- 範圍: <book> <start_chapter>:<start_verse> 至 <end_chapter>:<end_verse>\n- 版本: unv\n- 跨章: 是\n**輸出**: 完整經文內容\n\n## 步驟 2: 分析背景\n**執行**: 了解段落的上下文脈絡\n- 查詢前後章節內容\n- 識別書卷主題與段落位置\n**輸出**: 歷史文化背景、寫作目的\n\n## 步驟 3: 識別主題\n**執行**: 找出核心與次要主題\n- 標記重複出現的關鍵詞\n- 搜尋聖經中相關經文\n**輸出**: 主要主題及支持經文\n\n## 步驟 4: 解析重點\n**執行**: 深入分析3-5節關鍵經文\n- 原文字詞分析 (get_word_analysis)\n- Strong's 字典查詢 (lookup_strongs)\n**輸出**: 關鍵經節的深度解釋\n\n## 步驟 5: 整理結構\n**執行**: 建立段落大綱\n- 識別文學體裁（敘事/詩歌/書信等）\n- 劃分論證或敘事流程\n**輸出**: 結構大綱與邏輯流程\n\n## 步驟 6: 實際應用\n**執行**: 將真理轉化為行動\n- 檢視信仰、品格、關係、服事\n- 制定具體 SMART 行動計畫\n**輸出**: 本週實踐目標與禱告回應\n\n💡 可查看註釋: get_commentary(book=\"<book>\", chapter=<start_chapter>, verse=<start_verse>)\n📖 延伸研讀: study_verse_deep, study_topic_deep\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: book')"
+      }
+    },
+    {
+      "name": "study_verse_deep",
+      "description": "深入研讀一節經文，包含經文內容、原文分析、註釋等",
+      "arguments": [
+        {
+          "name": "book",
+          "description": "經卷名稱（中文或英文縮寫）",
+          "required": true
+        },
+        {
+          "name": "chapter",
+          "description": "章數",
+          "required": true
+        },
+        {
+          "name": "verse",
+          "description": "節數",
+          "required": true
+        },
+        {
+          "name": "version",
+          "description": "聖經版本代碼（預設：unv）",
+          "required": false
+        }
+      ],
+      "class": "StudyVerseDeepPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 深入研讀經文 - <book> <chapter>:<verse>\n\n## 步驟 1: 獲取經文內容\n**執行**: get_bible_verse 查詢 <book> <chapter>:<verse> (unv)\n**輸出**: 經文內容及 Strong's Number 版本\n\n## 步驟 2: 分析原文字彙\n**執行**: get_word_analysis 取得希臘文/希伯來文分析\n**輸出**: 每個重要字詞的原文、詞性、字型變化\n\n## 步驟 3: 研究關鍵字詞\n**執行**: lookup_strongs 查詢關鍵字的 Strong's 字典\n**輸出**: 原文意義、用法、神學含義、同源字\n\n## 步驟 4: 查詢註釋解經\n**執行**: get_commentary 取得該節經文註釋\n**輸出**: 綜合不同註釋書的觀點和應用建議\n\n## 步驟 5: 連結相關經文\n**執行**: search_bible 搜尋相關主題或關鍵字\n**輸出**: 3-5 處相關經文供交叉參考\n\n## 步驟 6: 綜合研讀總結\n**執行**: 整合所有資訊\n**輸出**: 核心信息、神學意義、實際應用、思考問題\n\n💡 工具: get_bible_verse, get_word_analysis, lookup_strongs, get_commentary\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: book')"
+      }
+    },
+    {
+      "name": "study_topic_deep",
+      "description": "研究聖經中的特定主題",
+      "arguments": [
+        {
+          "name": "topic",
+          "description": "要研究的主題關鍵字",
+          "required": true
+        },
+        {
+          "name": "version",
+          "description": "聖經版本代碼（預設：unv）",
+          "required": false
+        },
+        {
+          "name": "max_verses",
+          "description": "最多顯示的經文數量（預設：10）",
+          "required": false
+        }
+      ],
+      "class": "StudyTopicDeepPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 主題研究 - 「<topic>」\n\n## 步驟 1: 搜尋相關經文\n**執行**: search_bible 在 unv 中搜尋「<topic>」\n**輸出**: 總數統計 + 最相關的 10 處經文\n\n## 步驟 2: 查詢主題查經資料\n**執行**: get_topic_study 取得「<topic>」的主題查經\n**輸出**: Torrey 和 Naves 相關條目，聖經神學架構\n\n## 步驟 3: 搜尋註釋討論\n**執行**: search_commentary 在註釋書中搜尋「<topic>」\n**輸出**: 註釋家見解摘要，不同神學傳統觀點\n\n## 步驟 4: 比較兩約教導\n**執行**: 分別搜尋舊約和新約相關經文\n**輸出**: 兩約異同，救恩歷史發展脈絡\n\n## 步驟 5: 研究原文洞察\n**執行**: lookup_strongs 查詢關鍵希伯來文/希臘文字詞\n**輸出**: 原文字義如何豐富主題理解\n\n## 步驟 6: 綜合分析與應用\n**執行**: 整合所有資料\n**輸出**: 整體教導總結、3-5個核心真理、生活應用\n\n💡 工具: search_bible, get_topic_study, search_commentary, lookup_strongs\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: topic')"
+      }
+    },
+    {
+      "name": "study_translation_compare",
+      "description": "比較不同聖經譯本的翻譯",
+      "arguments": [
+        {
+          "name": "book",
+          "description": "經卷名稱",
+          "required": true
+        },
+        {
+          "name": "chapter",
+          "description": "章數",
+          "required": true
+        },
+        {
+          "name": "verse",
+          "description": "節數",
+          "required": true
+        },
+        {
+          "name": "versions",
+          "description": "要比較的版本代碼列表（逗號分隔）",
+          "required": false
+        }
+      ],
+      "class": "StudyTranslationComparePrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 版本比較 - <book> <chapter>:<verse>\n\n## 步驟 1: 獲取各版本經文\n**執行**: get_bible_verse 查詢以下版本：\n   - unv\n   - nstrunv\n   - kjv\n   - niv\n**輸出**: 並列顯示各版本翻譯\n\n## 步驟 2: 查詢版本資訊\n**執行**: list_bible_versions 取得版本詳細資訊\n**輸出**: 各版本特色（直譯/意譯、目標讀者、年代）\n\n## 步驟 3: 分析原文基礎\n**執行**: get_word_analysis + lookup_strongs 查詢原文\n**輸出**: 關鍵字詞的希臘文/希伯來文及 Strong's 定義\n\n## 步驟 4: 比較翻譯差異\n**執行**: 分析字詞選擇、句子結構、語氣風格差異\n**輸出**: 差異原因和影響分析\n\n## 步驟 5: 對照原文評估\n**執行**: 評估各版本如何處理原文語法和修辭\n**輸出**: 字面意義 vs 原文意圖的忠實度分析\n\n## 步驟 6: 提供使用建議\n**執行**: 總結優缺點，針對不同目的推薦版本\n**輸出**: 深度研經、靈修、初信、講道的版本建議\n\n💡 工具: get_bible_verse, list_bible_versions, get_word_analysis, lookup_strongs\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: book')"
+      }
+    },
+    {
+      "name": "study_word_original",
+      "description": "深入研究希臘文或希伯來文單字",
+      "arguments": [
+        {
+          "name": "strongs_number",
+          "description": "Strong's 編號",
+          "required": true
+        },
+        {
+          "name": "testament",
+          "description": "約別（OT 或 NT）",
+          "required": true
+        },
+        {
+          "name": "max_occurrences",
+          "description": "最多顯示的出現次數（預設：20）",
+          "required": false
+        }
+      ],
+      "class": "StudyWordOriginalPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 原文字詞研究 - Strong's #<strongs_number> (舊約希伯來文)\n\n## 步驟 1: 查詢字典定義\n**執行**: lookup_strongs #<strongs_number>\n**輸出**: 原文拼寫、字根、基本字義、詳細定義\n\n## 步驟 2: 搜尋出現位置\n**執行**: search_strongs_occurrences 找出聖經中的所有位置\n**輸出**: 前 20 處具代表性經文\n\n## 步驟 3: 分析語境用法\n**執行**: 比較不同文學體裁、作者風格中的字義變化\n**輸出**: 語義範圍和特殊用法分析\n\n## 步驟 4: 探討神學意義\n**執行**: 研究該字在救恩歷史和核心教義中的角色\n**輸出**: 神學重要性和關鍵經文引用\n\n## 步驟 5: 跨約比較 (如適用)\n**執行**: 對照舊約希伯來文與新約希臘文的對應關係\n**輸出**: LXX翻譯選擇和新約詮釋分析\n\n## 步驟 6: 總結與應用\n**執行**: 綜合核心意涵，提供理解和生活應用建議\n**輸出**: 研究總結、避免誤解、實踐方向\n\n💡 工具: lookup_strongs, search_strongs_occurrences\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: strongs_number')"
+      }
+    },
+    {
+      "name": "special_sermon_prep",
+      "description": "輔助講道準備，從釋經到應用的完整流程",
+      "arguments": [
+        {
+          "name": "passage",
+          "description": "講道經文",
+          "required": true
+        },
+        {
+          "name": "sermon_type",
+          "description": "講道類型",
+          "required": false
+        }
+      ],
+      "class": "SpecialSermonPrepPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 講道準備 - <passage> (expository)\n\n## 步驟 1: 研讀經文\n**執行**: 深入理解經文\n- 獲取經文、查閱註釋、原文分析\n**輸出**: 釋經基礎\n\n## 步驟 2: 找出大綱\n**執行**: 建立講章結構 (3-5點)\n**輸出**: 講道大綱\n\n## 步驟 3: 發展內容\n**執行**: 充實各論點\n- 解釋意義、相關經文、例證說明\n**輸出**: 講道內容草稿\n\n## 步驟 4: 連結應用\n**執行**: 將真理應用到生活\n**輸出**: 應用部分\n\n## 步驟 5: 設計引言與結語\n**執行**: 完善講道框架\n**輸出**: 完整講章\n\n## 步驟 6: 準備輔助材料\n**執行**: 準備投影片與講義\n**輸出**: 輔助材料清單\n\n💡 工具: study_verse_deep, get_commentary\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: passage')"
+      }
+    },
+    {
+      "name": "special_devotional",
+      "description": "引導靈修默想，加深與神的關係",
+      "arguments": [
+        {
+          "name": "passage",
+          "description": "默想經文",
+          "required": false
+        },
+        {
+          "name": "theme",
+          "description": "靈修主題",
+          "required": false
+        }
+      ],
+      "class": "SpecialDevotionalPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 靈修默想 - 今日金句\n\n**主題**: 與神相遇\n\n## 步驟 1: 安靜預備\n**執行**: 預備心靈\n- 安靜環境\n- 禱告開始\n**輸出**: 預備心態\n\n## 步驟 2: 閱讀經文\n**執行**: 慢慢讀經文\n- 逐字細讀\n- 留意感動\n**輸出**: 經文印象\n\n## 步驟 3: 默想真理\n**執行**: 深入思考\n- 神在說什麼？\n- 關於神、關於我\n**輸出**: 個人領受\n\n## 步驟 4: 省察回應\n**執行**: 省察生命\n- 需要悔改？\n- 需要感恩？\n- 需要順服？\n**輸出**: 生命回應\n\n## 步驟 5: 禱告交通\n**執行**: 與神對話\n- 敬拜、認罪、感恩、祈求\n**輸出**: 禱告內容\n\n## 步驟 6: 記錄領受\n**執行**: 寫下感動\n**輸出**: 靈修筆記\n\n💡 建議: 每天15-30分鐘\n"
+      },
+      "render_no_args": {
+        "ok": true,
+        "text": "# 靈修默想 - 今日金句\n\n**主題**: 與神相遇\n\n## 步驟 1: 安靜預備\n**執行**: 預備心靈\n- 安靜環境\n- 禱告開始\n**輸出**: 預備心態\n\n## 步驟 2: 閱讀經文\n**執行**: 慢慢讀經文\n- 逐字細讀\n- 留意感動\n**輸出**: 經文印象\n\n## 步驟 3: 默想真理\n**執行**: 深入思考\n- 神在說什麼？\n- 關於神、關於我\n**輸出**: 個人領受\n\n## 步驟 4: 省察回應\n**執行**: 省察生命\n- 需要悔改？\n- 需要感恩？\n- 需要順服？\n**輸出**: 生命回應\n\n## 步驟 5: 禱告交通\n**執行**: 與神對話\n- 敬拜、認罪、感恩、祈求\n**輸出**: 禱告內容\n\n## 步驟 6: 記錄領受\n**執行**: 寫下感動\n**輸出**: 靈修筆記\n\n💡 建議: 每天15-30分鐘\n"
+      }
+    },
+    {
+      "name": "special_memory_verse",
+      "description": "協助經文背誦，提供記憶技巧和應用提醒",
+      "arguments": [
+        {
+          "name": "verse",
+          "description": "要背誦的經文",
+          "required": true
+        }
+      ],
+      "class": "SpecialMemoryVersePrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 經文背誦 - <verse>\n\n## 步驟 1: 獲取經文\n**執行**: 取得完整經文\n- 經文: <verse>\n**輸出**: 經文內容及引用\n\n## 步驟 2: 理解意義\n**執行**: 先理解再背誦\n- 經文意思\n- 關鍵字詞\n**輸出**: 經文解釋\n\n## 步驟 3: 分段記憶\n**執行**: 將經文分成小段\n- 每段3-5個字\n- 逐段記憶\n**輸出**: 分段方案\n\n## 步驟 4: 使用技巧\n**執行**: 應用記憶法\n- 首字記憶法\n- 圖像聯想法\n- 韻律記憶法\n**輸出**: 記憶提示\n\n## 步驟 5: 反覆練習\n**執行**: 多次複誦\n- 看著背、不看背\n- 每日複習\n**輸出**: 練習計畫\n\n## 步驟 6: 實際應用\n**執行**: 在生活中使用\n**輸出**: 應用場景\n\n💡 建議: 每週背誦1-2節\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: verse')"
+      }
+    },
+    {
+      "name": "special_topical_chain",
+      "description": "追蹤特定主題在聖經中的發展脈絡，建立主題經文鏈",
+      "arguments": [
+        {
+          "name": "topic",
+          "description": "研究主題",
+          "required": true
+        },
+        {
+          "name": "testament",
+          "description": "約別限制 (OT/NT/both)",
+          "required": false
+        }
+      ],
+      "class": "SpecialTopicalChainPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 主題經文串連 - <topic>\n\n## 步驟 1: 搜尋主題經文\n**執行**: 找出所有與主題相關的經文\n- 搜尋範圍: both\n- 主題: <topic>\n**輸出**: 經文清單與出現次數\n\n## 步驟 2: 建立時間線\n**執行**: 按聖經順序排列經文\n- 舊約 → 新約發展\n- 標記關鍵轉折點\n**輸出**: 時間線圖表\n\n## 步驟 3: 分析主題發展\n**執行**: 觀察主題如何演進\n- 初次出現與背景\n- 逐步深化過程\n- 高峰與完全揭示\n**輸出**: 發展階段分析\n\n## 步驟 4: 識別關鍵經文\n**執行**: 找出5-10節核心經文\n- 定義性經文\n- 轉折性經文\n**輸出**: 關鍵經文列表\n\n## 步驟 5: 建立經文鏈\n**執行**: 串連相關經文\n- 直接引用關係\n- 主題呼應關係\n**輸出**: 經文串連圖\n\n## 步驟 6: 提煉神學洞見\n**執行**: 總結主題的聖經神學\n**輸出**: 神學摘要與應用\n\n💡 工具: search_bible, study_topic_deep\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: topic')"
+      }
+    },
+    {
+      "name": "special_bible_trivia",
+      "description": "生成聖經知識問答題目，適合小組活動或教學",
+      "arguments": [
+        {
+          "name": "category",
+          "description": "問答類別",
+          "required": false
+        },
+        {
+          "name": "difficulty",
+          "description": "難度級別",
+          "required": false
+        }
+      ],
+      "class": "SpecialBibleTriviaPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 聖經知識問答\n\n**類別**: all\n**難度**: medium\n\n## 步驟 1: 選擇主題\n**執行**: 確定問答範圍\n- 人物、地點、事件、教義等\n**輸出**: 主題清單\n\n## 步驟 2: 設計問題\n**執行**: 創建問答題目 (5-10題)\n- 選擇題\n- 是非題\n- 簡答題\n**輸出**: 問題清單\n\n## 步驟 3: 提供答案\n**執行**: 給出正確答案及經文依據\n**輸出**: 答案與經文引用\n\n## 步驟 4: 加入延伸\n**執行**: 提供額外資訊\n- 背景說明\n- 相關經文\n**輸出**: 延伸資料\n\n💡 類別: 人物/地點/事件/教義/書卷\n💡 難度: easy/medium/hard\n"
+      },
+      "render_no_args": {
+        "ok": true,
+        "text": "# 聖經知識問答\n\n**類別**: all\n**難度**: medium\n\n## 步驟 1: 選擇主題\n**執行**: 確定問答範圍\n- 人物、地點、事件、教義等\n**輸出**: 主題清單\n\n## 步驟 2: 設計問題\n**執行**: 創建問答題目 (5-10題)\n- 選擇題\n- 是非題\n- 簡答題\n**輸出**: 問題清單\n\n## 步驟 3: 提供答案\n**執行**: 給出正確答案及經文依據\n**輸出**: 答案與經文引用\n\n## 步驟 4: 加入延伸\n**執行**: 提供額外資訊\n- 背景說明\n- 相關經文\n**輸出**: 延伸資料\n\n💡 類別: 人物/地點/事件/教義/書卷\n💡 難度: easy/medium/hard\n"
+      }
+    },
+    {
+      "name": "advanced_cross_reference",
+      "description": "深入研究經文的交叉引用，建立經文網絡",
+      "arguments": [
+        {
+          "name": "reference",
+          "description": "經文引用",
+          "required": true
+        }
+      ],
+      "class": "AdvancedCrossReferencePrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 交叉引用研究 - <reference>\n\n## 步驟 1: 獲取主經文\n**執行**: 取得研究的經文\n- 經文: <reference>\n**輸出**: 完整經文內容\n\n## 步驟 2: 找直接引用\n**執行**: 識別直接引用關係\n- 本節引用的舊約經文\n- 新約中引用本節的經文\n**輸出**: 直接引用清單\n\n## 步驟 3: 找主題相關\n**執行**: 搜尋相同主題的經文\n- 關鍵字搜尋\n- 主題串連\n**輸出**: 主題相關經文\n\n## 步驟 4: 找對照經文\n**執行**: 找出對比或補充的經文\n- 相似教導\n- 對立觀點\n**輸出**: 對照經文分析\n\n## 步驟 5: 建立經文網絡\n**執行**: 繪製經文關係圖\n**輸出**: 經文網絡圖\n\n## 步驟 6: 綜合解讀\n**執行**: 從多處經文理解真理\n**輸出**: 綜合解經\n\n💡 工具: search_bible, get_commentary\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: reference')"
+      }
+    },
+    {
+      "name": "advanced_parallel_gospels",
+      "description": "比較四福音書的平行記載，分析異同與神學重點",
+      "arguments": [
+        {
+          "name": "event",
+          "description": "事件名稱",
+          "required": true
+        },
+        {
+          "name": "references",
+          "description": "平行經文引用",
+          "required": false
+        }
+      ],
+      "class": "AdvancedParallelGospelsPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 四福音對觀 - <event>\n\n## 步驟 1: 找出平行經文\n**執行**: 識別四福音中的平行記載\n**輸出**: 平行經文對照表\n\n## 步驟 2: 比較內容異同\n**執行**: 逐節對比分析\n- 共同記載、獨特細節、順序差異\n**輸出**: 異同對照表\n\n## 步驟 3: 分析作者視角\n**執行**: 理解各作者的神學強調\n- 馬太(君王)、馬可(僕人)、路加(人子)、約翰(神子)\n**輸出**: 作者特色分析\n\n## 步驟 4: 識別獨特內容\n**執行**: 找出各福音書的特殊記載\n**輸出**: 獨特性分析\n\n## 步驟 5: 綜合神學意義\n**執行**: 整合四福音的見證\n**輸出**: 綜合神學洞見\n\n## 步驟 6: 實際應用\n**執行**: 從多角度認識真理\n**輸出**: 應用建議\n\n💡 工具: get_bible_verse, study_translation_compare\n"
+      },
+      "render_no_args": {
+        "ok": false,
+        "error": "ValueError('Missing required argument: event')"
+      }
+    },
+    {
+      "name": "advanced_character_study",
+      "description": "全面研究聖經人物，包含生平、性格、事蹟、屬靈教訓",
+      "arguments": [
+        {
+          "name": "character",
+          "description": "人物名稱",
+          "required": false
+        },
+        {
+          "name": "focus",
+          "description": "研究焦點 (all/biography/character/lessons)",
+          "required": false
+        },
+        {
+          "name": "testament",
+          "description": "約別限制 (OT/NT/both)",
+          "required": false
+        },
+        {
+          "name": "version",
+          "description": "聖經版本",
+          "required": false
+        }
+      ],
+      "class": "AdvancedCharacterStudyPrompt",
+      "render_required_only": {
+        "ok": true,
+        "text": "# 聖經人物研究 - Peter\n\n**研究焦點**: 全面研究\n**範圍**: 新舊約\n**版本**: unv\n\n## 步驟 1: 搜尋人物經文\n**執行**: 找出所有與此人物相關的經文\n- 搜尋人物名稱 (search_bible)\n- 記錄出現章節\n**輸出**: 經文位置清單及主要事件\n\n## 步驟 2: 建立生平時間線\n**執行**: 按時間順序整理重要事件\n- 出生背景與家庭\n- 關鍵轉折點（3-5個）\n- 主要成就與失敗\n**輸出**: 時間線圖表與事件摘要\n\n## 步驟 3: 分析性格特質\n**執行**: 從經文中觀察人物性格\n- 優點（信心、勇氣、智慧等）\n- 缺點（軟弱、驕傲、懷疑等）\n- 成長軌跡\n**輸出**: 性格優缺點及經文依據\n\n## 步驟 4: 識別關係網絡\n**執行**: 分析人物的重要關係\n- 與神的關係\n- 與家人的關係\n- 與同工的關係\n**輸出**: 關係圖與互動模式\n\n## 步驟 5: 提煉屬靈教訓\n**執行**: 從人物生命中學習功課\n- 正面榜樣（值得效法）\n- 負面警戒（應當避免）\n- 神的工作（恩典與管教）\n**輸出**: 3-5個核心教訓\n\n## 步驟 6: 應用於今日\n**執行**: 將教訓應用到現代生活\n- 信仰層面的啟發\n- 品格塑造的方向\n- 具體實踐的行動\n**輸出**: 個人應用計畫\n\n## 步驟 7: 深入原文研究（可選）\n**執行**: 研究關鍵經文的原文\n- 重要事件經文的原文分析 (get_word_analysis)\n- 關鍵字詞的 Strong's 研究 (lookup_strongs)\n**輸出**: 原文洞見與更深理解\n\n💡 **研究提示**:\n- biography焦點: 著重步驟1、2、4\n- character焦點: 著重步驟3、5\n- lessons焦點: 著重步驟5、6\n\n📚 **延伸工具**: \n- get_commentary: 查看註釋家的分析\n- search_topic: 研究相關主題\n- study_verse_deep: 深入關鍵經節\n"
+      },
+      "render_no_args": {
+        "ok": true,
+        "text": "# 聖經人物研究 - Peter\n\n**研究焦點**: 全面研究\n**範圍**: 新舊約\n**版本**: unv\n\n## 步驟 1: 搜尋人物經文\n**執行**: 找出所有與此人物相關的經文\n- 搜尋人物名稱 (search_bible)\n- 記錄出現章節\n**輸出**: 經文位置清單及主要事件\n\n## 步驟 2: 建立生平時間線\n**執行**: 按時間順序整理重要事件\n- 出生背景與家庭\n- 關鍵轉折點（3-5個）\n- 主要成就與失敗\n**輸出**: 時間線圖表與事件摘要\n\n## 步驟 3: 分析性格特質\n**執行**: 從經文中觀察人物性格\n- 優點（信心、勇氣、智慧等）\n- 缺點（軟弱、驕傲、懷疑等）\n- 成長軌跡\n**輸出**: 性格優缺點及經文依據\n\n## 步驟 4: 識別關係網絡\n**執行**: 分析人物的重要關係\n- 與神的關係\n- 與家人的關係\n- 與同工的關係\n**輸出**: 關係圖與互動模式\n\n## 步驟 5: 提煉屬靈教訓\n**執行**: 從人物生命中學習功課\n- 正面榜樣（值得效法）\n- 負面警戒（應當避免）\n- 神的工作（恩典與管教）\n**輸出**: 3-5個核心教訓\n\n## 步驟 6: 應用於今日\n**執行**: 將教訓應用到現代生活\n- 信仰層面的啟發\n- 品格塑造的方向\n- 具體實踐的行動\n**輸出**: 個人應用計畫\n\n## 步驟 7: 深入原文研究（可選）\n**執行**: 研究關鍵經文的原文\n- 重要事件經文的原文分析 (get_word_analysis)\n- 關鍵字詞的 Strong's 研究 (lookup_strongs)\n**輸出**: 原文洞見與更深理解\n\n💡 **研究提示**:\n- biography焦點: 著重步驟1、2、4\n- character焦點: 著重步驟3、5\n- lessons焦點: 著重步驟5、6\n\n📚 **延伸工具**: \n- get_commentary: 查看註釋家的分析\n- search_topic: 研究相關主題\n- study_verse_deep: 深入關鍵經節\n"
+      }
+    }
+  ]
+}

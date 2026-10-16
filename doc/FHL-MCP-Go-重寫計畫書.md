@@ -26,7 +26,9 @@
 - 專案名稱 `FHL-MCP-Go`，不另加 Server；產品顯示名「信望愛聖經 MCP 伺服器」。
 - 主執行檔 `fhl-mcp`／`fhl-mcp.exe`。
 - MCP 網址 `http://127.0.0.1:8081/mcp`。
-- 第一里程碑完成現有 HTTP 的 29 個工具；完整重寫目標再包含 19 個 Prompts 與 7 類 Resource URI。後兩者尚未經使用者明確定案，不應擅自省略或宣稱已承諾同版交付。
+- 第一里程碑完成現有 HTTP 的 29 個工具；完整重寫目標再包含 19 個 Prompts 與 7 個 Resource URI（4 個 scheme）。
+- **已決定（2026-10-16，使用者確認）：首版只交付 29 個 Tools；Prompts 與 Resources 移到下一版本（M4）。** 首版不註冊、不宣告這兩類 capability，文件與發佈說明不得宣稱已支援。
+- **首版完成定義**：M0–M3、M5、M6 全部達成（29 工具契約與差異已結案、本機 HTTP 服務、`setup`／`doctor`／`status`／`stop`／`disconnect`、三平台封裝與原生驗收）；M4 不影響首版驗收。
 - 首版平台基準：Windows x64、macOS 12+ arm64、Ubuntu 22.04/24.04 x64；最低版本需與選定 Go 工具鏈、實際客戶端一起驗證後鎖定。
 
 ## 2. 產品使用方式
@@ -110,13 +112,15 @@
 
 保留中文／英文書卷別名、章節範圍、多節引用、譯本代碼、繁簡、Strong's 編號、次經與使徒教父特殊書卷編號、搜尋限制、註腳與文章內容選項。特別測試希臘文、希伯來文、變音符號與原文分析 Markdown 排版。
 
-### Resources 與 Prompts 建議完整範圍
+### Resources 與 Prompts（下一版本範圍，首版不交付）
+
+M0 盤點結果見 `doc/m0/prompts-resources-inventory.md`：這兩類只存在於原版 stdio `server.py`，HTTP 入口實測為 0 項，沒有 HTTP 契約樣本；下列為下一版本的建議範圍。
 
 - Resources：`bible://verse/{version}/{book}/{chapter}/{verse}`、`bible://chapter/{version}/{book}/{chapter}`、`strongs://{testament}/{number}`、`commentary://{book}/{chapter}/{verse}`、`info://versions`、`info://books`、`info://commentaries`。
 - Prompts：基礎 4、讀經 3、研經 4、特殊 5、進階 3，共 19 項；盤點名稱、參數、必填性與渲染結果。
 - 透過同一 HTTP MCP 入口提供，不新增 stdio；各客戶端是否展示 Resources／Prompts 分別驗收，不以 server 宣告支援等同客戶端完整展示。
 - 適當區分固定 Resources 與 Resource Templates，避免僅列出示例 URI 冒充完整參數化介面。
-- 若同意首版只交付 Tools，另外兩類明確移入下一版本並調整完成定義。
+- 已同意首版只交付 Tools：上述兩類明確移入下一版本（M4），完成定義見 §1。為日後擴充預留：`internal/mcpserver` 的註冊來源設計成可再加入 resources／prompts，但首版不建立空殼套件、不宣告空 capability（原版 HTTP 曾宣告 prompts／resources 卻為空列表）。
 
 ## 5. Go 架構
 
@@ -128,7 +132,7 @@ Claude Code / Codex
         ▼
 HTTP 路由、Host/Origin 驗證、生命週期
         ▼
-官方 MCP SDK：Tools / Resources / Prompts
+官方 MCP SDK：Tools（首版）／Resources、Prompts（M4，下一版本）
         ▼
 聖經領域服務、書卷正規化、資料格式化
         ▼
@@ -147,8 +151,8 @@ FHL-MCP-Go/
   internal/transport/     # HTTP MCP 路由與防護
   internal/mcpserver/     # 一份功能註冊來源
   internal/tools/         # 29 個工具 adapter
-  internal/resources/     # URI 與模板
-  internal/prompts/       # 提示模板與渲染
+  internal/resources/     # URI 與模板（M4，下一版本才建立）
+  internal/prompts/       # 提示模板與渲染（M4，下一版本才建立）
   internal/bible/         # 書卷、章節、Strong's 等領域處理
   internal/fhlapi/        # 上游請求、回應型別、錯誤與重試
   internal/cache/         # 有上限的檔案快取
@@ -315,7 +319,7 @@ Mac 使用 tar.gz 以保留執行權限；可另產 ZIP，但需測試解壓縮�
 - 匯出原版 Tools schema；29 項名稱、參數與代表性輸出都有對照表及測試。
 - 書卷別名、引用範圍、版本、繁簡、Strong's、特殊書卷、註腳與文章選項有案例。
 - 原文分析使用現有 James 1:1 fixture，另補 HTML 變形、缺資料與 Unicode 案例。
-- Prompts／Resources 納入時，每項有列舉、讀取／渲染、錯誤參數測試。
+- 首版不含 Prompts／Resources；測試需確認 `initialize` 未宣告這兩類 capability。M4 納入時，每項再補列舉、讀取／渲染、錯誤參數測試。
 - 所有差異分為相容、明確 bug fix、核准變更或未解決，不能以測試總數代替盤點。
 
 ### MCP 與 HTTP
@@ -345,7 +349,7 @@ Mac 使用 tar.gz 以保留執行權限；可另產 ZIP，但需測試解壓縮�
 | M1 最小垂直切片 | Go SDK、HTTP、經文查詢、serve、雙客戶端手動連線 | 三平台編譯且原生 smoke，兩客戶端成功呼叫同一服務 |
 | M2 核心功能 | 經文、搜尋、原文、書卷、版本、註釋與快取 | fixture 比對與錯誤案例通過 |
 | M3 完整工具 | 次經、教父、註腳、文章、音訊，完成 29 工具 | schema 與語意差異已結案 |
-| M4 擴充協定功能 | 依範圍決議遷移 19 Prompts、7 類 Resources | HTTP 與實際客戶端能力驗收 |
+| M4 擴充協定功能（**延後至下一版本，不屬首版**） | 遷移 19 Prompts、7 個 Resource URI（含 Resource Templates） | HTTP 與實際客戶端能力驗收；首版 M5、M6 不等待 M4 |
 | M5 使用體驗 | setup、doctor、status、stop、disconnect、雙擊入口、說明 | 跨專案只設定一次，關機不自啟，停止無遺留 |
 | M6 發佈驗收 | 三平台完整封裝、資源量測、簽章／公證、beta 使用者試用 | 乾淨機器驗收報告與可下載套件 |
 
@@ -372,7 +376,7 @@ Mac 使用 tar.gz 以保留執行權限；可另產 ZIP，但需測試解壓縮�
 以下不阻擋本機按需啟動架構，但實作前應在 M0 定案：
 
 1. 專案命名：建議確定為 `FHL-MCP-Go`。
-2. 完整功能範圍：建議最終納入 Tools、Resources、Prompts，29 Tools 為第一可用里程碑；使用者尚未決定後兩者是否首版必備。
+2. ~~完整功能範圍~~ **已定案（2026-10-16）**：首版只交付 29 Tools；Prompts、Resources 移到下一版本（M4）。
 3. Ubuntu 最低版與 CPU：建議 22.04/24.04 x64，ARM64 列後續需求。
 4. macOS 最低版：建議暫以 12+，依選定工具鏈與可取得測試環境鎖定。
 5. 正式發佈憑證：Windows 簽章與 Apple 公證所需帳號／憑證由發佈者提供；不影響核心功能開發。
@@ -396,7 +400,7 @@ Mac 使用 tar.gz 以保留執行權限；可另產 ZIP，但需測試解壓縮�
 - [ ] 建立新專案、Go／SDK 鎖版與 CI。
 - [ ] 先完成經文查詢到兩客戶端的 HTTP 垂直切片。
 - [ ] 完成 29 Tools 契約與差異測試。
-- [ ] 依決議完成 Resources／Prompts。
+- [ ] ~~完成 Resources／Prompts~~ 移至下一版本（M4），首版不含。
 - [ ] 完成檔案快取、設定優先序及可讀錯誤。
 - [ ] 完成 setup、doctor、status、stop、disconnect。
 - [ ] 完成 Windows／Mac 雙擊入口與 Ubuntu 無桌面說明。

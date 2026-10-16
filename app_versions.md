@@ -2,16 +2,23 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.3**
+- last: **0.0.0.4**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 目前沒有 Go 程式碼，尚無「程式內版本字串」；有了之後，`version` 指令與建置注入的版本須與 `last` 一致。
 
 ## TODOs
 
-- 🆕 新功能: M0 來源與契約：(已匯出 29 個工具 schema 至 `doc/m0/contract/`) 盤點 Prompts／Resources、逐工具輸出取樣與差異表、確認是否納入首版 (見計畫書 §13、§15)
+- 🆕 新功能: M0 來源與契約：(已匯出 29 個工具 schema 至 `doc/m0/contract/`；已盤點 Prompts／Resources 至 `doc/m0/prompts-resources-inventory.md`) 逐工具輸出取樣與差異表 (見計畫書 §13)
 - 🆕 新功能: M1 最小垂直切片：Go SDK + HTTP + 經文查詢 + `serve`，Claude Code 與 Codex 同時連線
-- ⏳ 待決定: 計畫書 §15 的待定項目 (完整功能範圍、Ubuntu／macOS 最低版、簽章公證、Smithery 相容)
+- ⏳ 待決定: 計畫書 §15 的待定項目 (Ubuntu／macOS 最低版、簽章公證、Smithery 相容)；Prompts／Resources 已定案移至下一版本 (M4)
+
+## 0.0.0.4
+
+- ✨ 新增: `doc/m0/prompts-resources-inventory.md`：盤點 19 個 Prompts (4/3/4/5/3、45 個參數) 與 7 個 Resource URI (4 個 scheme)，並記錄 stdio `server.py` 的曝光方式與原版缺陷 (路徑未 `unquote`、`int()` 例外、`info://books` 忽略 `simplified`)
+- ✨ 新增: `doc/m0/contract/prompts-inventory.json`：19 個 Prompts 的參數與渲染結果樣本 (M4 可作 golden)
+- ✨ 新增: 決定「首版只交付 29 個 Tools，Prompts 與 Resources 移到下一版本 (M4)」；計畫書 §1 加入首版完成定義 (M0–M3、M5、M6)，§4、§5、§12、§13、§15、§17 與 `.claude/CLAUDE.md` 同步
+- ℹ️ 說明: Prompts／Resources 只存在於 stdio 的 `server.py`，HTTP 入口為 0 項；其餘 27 個工具尚未取樣輸出；仍無 Go 程式碼
 
 ## 0.0.0.3
 

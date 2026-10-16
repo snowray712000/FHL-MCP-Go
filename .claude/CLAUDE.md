@@ -10,9 +10,11 @@ no build, no tests yet. Do not invent build/test commands; the plan's intended c
 `go vet ./...`, and `go test -race` on the native platform. Real-upstream (FHL API) tests must be opt-in, never
 part of the default run; default tests use fixtures/mocks.
 
-The plan is the source of truth for scope, CLI, and milestones (M0–M6). Items it marks undecided
-(§15: whether 19 Prompts + 7 Resource kinds are in the first release, platform minimums, signing) must not be
-silently decided — ask the user, or record the assumption in an ai-log entry.
+The plan is the source of truth for scope, CLI, and milestones (M0–M6). **First release = the 29 Tools only**
+(user-decided 2026-10-16): the 19 Prompts and 7 Resource URIs are deferred to M4 / next version — do not build
+`internal/prompts`, `internal/resources`, or advertise those capabilities in the first release. Items the plan still
+marks undecided (§15: platform minimums, signing, Smithery compat) must not be silently decided — ask the user,
+or record the assumption in an ai-log entry.
 
 Reference implementation (read-only, never modify): `D:\coding\信望愛\FHL-MCP-Server` (Python). It has
 uncommitted/untracked files that must be included when capturing contracts (`tools/parsing_reference.py`,
