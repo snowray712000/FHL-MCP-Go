@@ -152,6 +152,109 @@ func (c *Client) AB(ctx context.Context, simplified bool) (*ABResponse, error) {
 	return &out, nil
 }
 
+// SERequest are the se.php (search) query parameters. count_only / index_only are always 0:
+// no tool exposes them.
+type SERequest struct {
+	Query      string
+	Version    string
+	Orig       int // 0 keyword, 1 Greek Strong's number, 2 Hebrew Strong's number
+	Range      int // 0 whole Bible, 1 NT, 2 OT, 3 book range (RangeBID..RangeEID)
+	Offset     int
+	Limit      int
+	RangeBID   int
+	RangeEID   int
+	Simplified bool
+}
+
+// SERecord is one matching verse returned by se.php.
+type SERecord struct {
+	Chineses  string `json:"chineses"`
+	Engs      string `json:"engs"`
+	Chap      int    `json:"chap"`
+	Sec       int    `json:"sec"`
+	BibleText string `json:"bible_text"`
+}
+
+// SEResponse is the se.php response. RecordCount is what the upstream reports (the
+// Python reference publishes it as total_count unchanged).
+type SEResponse struct {
+	Status      string     `json:"status"`
+	RecordCount int        `json:"record_count"`
+	Record      []SERecord `json:"record"`
+}
+
+// SE queries se.php. A status other than "success" (for example "Fail: Empty Query") is an ErrUpstream.
+func (c *Client) SE(ctx context.Context, r SERequest) (*SEResponse, error) {
+	q := url.Values{}
+	q.Set("VERSION", r.Version)
+	q.Set("orig", strconv.Itoa(r.Orig))
+	q.Set("q", r.Query)
+	q.Set("RANGE", strconv.Itoa(r.Range))
+	q.Set("offset", strconv.Itoa(r.Offset))
+	q.Set("count_only", "0")
+	q.Set("index_only", "0")
+	q.Set("limit", strconv.Itoa(r.Limit))
+	if r.Range == 3 {
+		q.Set("range_bid", strconv.Itoa(r.RangeBID))
+		q.Set("range_eid", strconv.Itoa(r.RangeEID))
+	}
+	q.Set("gb", boolDigit(r.Simplified))
+	var out SEResponse
+	if err := c.getJSON(ctx, "se.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// SDRelated is one related word of a Strong's dictionary entry. Values stay raw JSON
+// because the Python reference passes them through with their upstream types.
+type SDRelated struct {
+	Word json.RawMessage `json:"word"`
+	CSN  json.RawMessage `json:"csn"`
+	CCnt json.RawMessage `json:"ccnt"`
+	CExp json.RawMessage `json:"cexp"`
+}
+
+// SDRecord is one Strong's dictionary entry. Optional fields keep their raw JSON so an
+// absent field and an explicit null can be told apart (the Python reference does).
+type SDRecord struct {
+	SN       string          `json:"sn"`
+	Orig     json.RawMessage `json:"orig"`
+	DicText  json.RawMessage `json:"dic_text"`
+	EDicText json.RawMessage `json:"edic_text"`
+	Same     []SDRelated     `json:"same"`
+}
+
+// SDResponse is the sd.php response.
+type SDResponse struct {
+	Status      string     `json:"status"`
+	RecordCount int        `json:"record_count"`
+	Record      []SDRecord `json:"record"`
+}
+
+// SD queries sd.php (Strong's dictionary). nt selects Greek (N=0), otherwise Hebrew (N=1).
+func (c *Client) SD(ctx context.Context, nt bool, number int, simplified bool) (*SDResponse, error) {
+	q := url.Values{}
+	if nt {
+		q.Set("N", "0")
+	} else {
+		q.Set("N", "1")
+	}
+	q.Set("k", strconv.Itoa(number))
+	q.Set("gb", boolDigit(simplified))
+	var out SDResponse
+	if err := c.getJSON(ctx, "sd.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
 func (c *Client) getJSON(ctx context.Context, endpoint string, q url.Values, dst any) error {
 	u := strings.TrimRight(c.BaseURL, "/") + "/" + endpoint + "?" + q.Encode()
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)

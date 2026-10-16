@@ -246,3 +246,11 @@ func TestVersionListSendsSimplifiedFlag(t *testing.T) {
 		t.Errorf("ab.php simplified flags = %v, want [false true] (D4)", api.abGot)
 	}
 }
+
+func (f *routeAPI) SE(context.Context, fhlapi.SERequest) (*fhlapi.SEResponse, error) {
+	return nil, errors.New("SE not expected in this test")
+}
+
+func (f *routeAPI) SD(context.Context, bool, int, bool) (*fhlapi.SDResponse, error) {
+	return nil, errors.New("SD not expected in this test")
+}

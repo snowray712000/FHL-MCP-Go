@@ -123,3 +123,78 @@ func TestABUpstreamFailureStatus(t *testing.T) {
 		t.Errorf("err = %v, want ErrUpstream", err)
 	}
 }
+
+func TestSEQuery(t *testing.T) {
+	var q map[string]string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		q = map[string]string{}
+		for k := range r.URL.Query() {
+			q[k] = r.URL.Query().Get(k)
+		}
+		_, _ = w.Write(fixture(t, "se_ai_john_range_limit3.json"))
+	})
+	res, err := c.SE(context.Background(), SERequest{Query: "愛", Version: "unv", Orig: 0, Range: 3, Limit: 3, RangeBID: 43, RangeEID: 43, Simplified: true})
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := map[string]string{"VERSION": "unv", "orig": "0", "q": "愛", "RANGE": "3", "offset": "0", "count_only": "0", "index_only": "0", "limit": "3", "range_bid": "43", "range_eid": "43", "gb": "1"}
+	for k, v := range want {
+		if q[k] != v {
+			t.Errorf("param %s = %q, want %q", k, q[k], v)
+		}
+	}
+	if len(q) != len(want) {
+		t.Errorf("unexpected params: %v", q)
+	}
+	if res.RecordCount != 3 || len(res.Record) != 3 || res.Record[0].Engs != "John" || res.Record[0].Sec != 16 {
+		t.Errorf("unexpected parse: %+v", res)
+	}
+
+	c = newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		if _, ok := r.URL.Query()["range_bid"]; ok {
+			t.Error("range_bid must only be sent for RANGE=3")
+		}
+		_, _ = w.Write(fixture(t, "se_ai_limit3.json"))
+	})
+	if _, err := c.SE(context.Background(), SERequest{Query: "愛", Version: "unv", Limit: 3}); err != nil {
+		t.Fatal(err)
+	}
+}
+
+func TestSEEmptyQueryFailStatus(t *testing.T) {
+	c := newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write(fixture(t, "se_empty_query.json")) })
+	_, err := c.SE(context.Background(), SERequest{Version: "unv", Limit: 50})
+	if !errors.Is(err, ErrUpstream) {
+		t.Fatalf("err = %v, want ErrUpstream", err)
+	}
+}
+
+func TestSDQueryAndParse(t *testing.T) {
+	var n, k string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		n, k = r.URL.Query().Get("N"), r.URL.Query().Get("k")
+		_, _ = w.Write(fixture(t, "sd_nt_25.json"))
+	})
+	res, err := c.SD(context.Background(), true, 25, false)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if n != "0" || k != "25" {
+		t.Errorf("N=%s k=%s", n, k)
+	}
+	if len(res.Record) != 1 || res.Record[0].SN != "00025" || len(res.Record[0].Same) != 3 {
+		t.Errorf("unexpected parse: %+v", res.Record)
+	}
+
+	c = newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		n = r.URL.Query().Get("N")
+		_, _ = w.Write(fixture(t, "sd_nt_99999.json"))
+	})
+	res, err = c.SD(context.Background(), false, 430, false)
+	if err != nil || n != "1" {
+		t.Fatalf("err=%v N=%s (Hebrew must send N=1)", err, n)
+	}
+	if string(res.Record[0].Orig) != "null" || res.Record[0].SN != "" {
+		t.Errorf("not-found record must keep explicit nulls: %+v", res.Record[0])
+	}
+}

@@ -1,0 +1,34 @@
+{
+  "total_count": 3,
+  "query": "愛",
+  "search_type": "keyword",
+  "range": {
+    "start": 43,
+    "end": 43
+  },
+  "limit": 3,
+  "offset": 0,
+  "results": [
+    {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 16,
+      "text": "「神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。"
+    },
+    {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 19,
+      "text": "光來到世間，世人因自己的行為是惡的，不愛光，倒愛黑暗，定他們的罪就是在此。"
+    },
+    {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 35,
+      "text": "父愛子，已將萬有交在他手裡。"
+    }
+  ]
+}

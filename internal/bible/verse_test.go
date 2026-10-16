@@ -106,3 +106,11 @@ func TestGetVerseUpstreamErrorPassesThrough(t *testing.T) {
 func (f *fakeAPI) AB(context.Context, bool) (*fhlapi.ABResponse, error) {
 	return nil, errors.New("AB not expected in this test")
 }
+
+func (f *fakeAPI) SE(context.Context, fhlapi.SERequest) (*fhlapi.SEResponse, error) {
+	return nil, errors.New("SE not expected in this test")
+}
+
+func (f *fakeAPI) SD(context.Context, bool, int, bool) (*fhlapi.SDResponse, error) {
+	return nil, errors.New("SD not expected in this test")
+}
