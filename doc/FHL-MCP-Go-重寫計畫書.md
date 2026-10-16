@@ -296,6 +296,7 @@ Claude Code 的 user scope 儲存於 `~/.claude.json`，可跨專案使用；Cod
 | D18 | 已核准（2026-10-16，0.0.0.12）：`get_book_info` 的 `testament`：1–39 為 `OT`、101–115（次經，含表中沒有的有效碼如 113）為 `Apocrypha`、201–217（使徒教父）為 `Apostolic Fathers`，其餘為 `NT`。原版把 1–39 以外全標成 `NT`。`get_book_list` 不變。 |
 | D19 | 已核准（2026-10-16，0.0.0.13）：`search_bible_advanced` 指定書卷範圍時，`search_type` 的 `keyword`／`greek_number`／`hebrew_number` 皆可用（上游 `RANGE=3` 搭配 `orig=1`／`2` 實測可用）；原版在範圍模式只有 `keyword` 能用，工具說明列出的另兩個值反而被擋。未指定範圍時行為不變。 |
 | D21 | 已決定（2026-10-16，0.0.0.14）：`get_parsing_reference` 單次請求最多涵蓋 30 節（節清單、`end_verse`、跨章範圍皆計入）；超過時在送出任何上游請求前就回 `Invalid parameter 'verse': … the range covers more than 30 verses; get_parsing_reference allows at most 30 verses per request, split it into smaller requests`，不截斷。跨章範圍橫跨 30 章以上也直接拒絕（不查章節長度）。`get_word_analysis` 本來就只查一節。 |
+| D24 | 已決定（2026-10-16，0.0.0.17／0.0.0.18）：次經與使徒教父 6 個工具改用上游 `qsub.php`／`qaf.php` 實際的書卷編號與名稱（原版的編號表與上游不符，會查到別卷經文卻標成別的書名；詳見 `doc/m0/tool-matrix.md` D24）。範圍僅限這 6 個工具；`get_book_list`／`get_book_info` 與全域書名解析的 101 以上資料暫維持原版。工具說明列出的簡稱盡量可用，歧義者（`但補`、`伊`）回明確錯誤。 |
 
 D1（text + `structuredContent`）已於上方決定；D13–D16 為相容性描述，不需另行決策。D3 的靜態稽核另指出 `get_commentary`、`search_commentary`、`get_topic_study`、`lookup_strongs`、`search_strongs_occurrences` 可能有同樣缺陷（未實測），納入 D3 的測試範圍。
 

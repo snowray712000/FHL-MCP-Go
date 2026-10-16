@@ -206,3 +206,19 @@ func TestParsingReferenceCap(t *testing.T) {
 func (f *wordsAPI) AU(context.Context, int, int, int, bool) (*fhlapi.AUResponse, error) {
 	return nil, errors.New("AU not expected in this test")
 }
+
+func (f *wordsAPI) QSub(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QSub not expected in this test")
+}
+
+func (f *wordsAPI) QAF(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QAF not expected in this test")
+}
+
+func (f *wordsAPI) SESub(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SESub not expected in this test")
+}
+
+func (f *wordsAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SEAF not expected in this test")
+}

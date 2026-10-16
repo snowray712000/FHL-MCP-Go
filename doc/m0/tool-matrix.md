@@ -43,12 +43,12 @@
 | 有聲 | `get_audio_bible` | `au.php`（`version`,`bid`,`chap`） | `version`,`version_name`,`book`,`book_eng`,`chapter`,`audio_files`,`navigation` | 只回 `media.fhl.net` 連結；`chapter` 是字串 `"3"` |
 | 有聲 | `get_audio_chapter_with_text` | `au.php`，文字部分（本次由快取命中） | `audio`,`text` | `Phm` 失敗（見 D3） |
 | 有聲 | `list_audio_versions` | 無（靜態資料） | `total_count`,`versions` | 19 個，`id` 16 缺號 |
-| 次經 | `get_apocrypha_verse` | `qsub.php` | `status`,`query_type`,`book`,`book_id`,`chapter`,`verse`,`version`,`verse_count`,`verses` | 書卷 id 101–109；`verse` 未給時為 `null` |
+| 次經 | `get_apocrypha_verse` | `qsub.php` | `status`,`query_type`,`book`,`book_id`,`chapter`,`verse`,`version`,`verse_count`,`verses` | 書卷 id 101–115 (上游編號，D24)；`verse` 未給時為 `null` |
 | 次經 | `search_apocrypha` | `sesub.php`（`q`,`offset`,`limit`） | `status`,`query_type`,`keyword`,`total_count`,`returned_count`,`offset`,`results` | |
-| 次經 | `list_apocrypha_books` | 無（靜態資料） | `status`,`query_type`,`id_range`,`book_count`,`books` | 9 本，含縮寫清單 |
-| 教父 | `get_apostolic_fathers_verse` | `qaf.php` | 同次經 verse | 書卷 id 201–217 |
+| 次經 | `list_apocrypha_books` | 無（靜態資料） | `status`,`query_type`,`id_range`,`book_count`,`books` | 原版 9 本；Go 15 本 (D24)，含縮寫清單 |
+| 教父 | `get_apostolic_fathers_verse` | `qaf.php` | 同次經 verse | 書卷 id 201–217 (上游編號，D24) |
 | 教父 | `search_apostolic_fathers` | `seaf.php` | 同次經 search | |
-| 教父 | `list_apostolic_fathers_books` | 無（靜態資料） | 同次經 list | 8 本 |
+| 教父 | `list_apostolic_fathers_books` | 無（靜態資料） | 同次經 list | 原版 8 本；Go 17 本 (D24) |
 | 註腳 | `get_bible_footnote` | `rt.php`（`bid`,`id`,`version=tcv`,`gb`） | `status`,`query_type`,`version`,`version_name`,`book_id`,`book_name`,`footnote_id`,`text` | 查無時 `status: "not_found"` + `message`（成功路徑） |
 | 文章 | `search_fhl_articles` | `www.fhl.net/api/json.php`（`gb`,`title`…） | `status`,`query_type`,`total_count`,`returned_count`,`include_full_content`,`articles` | `limit` 不送上游；`articles[].id` 為字串 |
 | 文章 | `list_fhl_article_columns` | 無（靜態資料） | `status`,`query_type`,`column_count`,`columns` | 12 欄 |
@@ -82,6 +82,7 @@
 | D21 | **發現（M2-d；資訊）**：(a) `qp.php` 對不存在的節（如約 99:1）回**不合法的 JSON**（`"bid":,`），Go 以「上游回應不是合法 JSON」錯誤回報；(b) `get_parsing_reference` 每節一次上游請求（跨章再加每章一次 `qb.php` 查節數），依序進行，目前無上限、無快取，大範圍會產生大量請求；(c) 上游回 0 筆時 Python 會 `IndexError`，Go 回「no original-language data」；(d) 兩個工具只支援正典 1–66 卷，其他書卷回明確錯誤 | 快取與限流於 M2 後段處理；(b) 發版前需決定單次範圍上限 | 資訊；(b) **已決定（2026-10-16，0.0.0.14）**：單次最多 30 節，超過回參數錯誤，不截斷 |
 | D22 | **發現（M2-e；資訊，照原樣）**：(a) `get_commentary` 不給 `verse` 時，上游 `sc.php` 回 0 筆，輸出為 `"verse": null`、`commentary_count: 0`（沒有整章註釋；Go 不送 `sec`，Python 送空值，結果相同）；(b) 原版想輸出的 `navigation`（上一節／下一節）讀的是每筆記錄的 `prev`／`next`，但上游放在最上層，所以原版輸出從來沒有 `navigation`，Go 同樣不輸出；(c) `search_commentary` 結果的 `book` 欄保留上游補到 44 字元的尾端空白（與原版逐位元組相同）；(d) `search_commentary` 的 `total_count` 是回傳筆數；(e) 上游 `sc.php` 會依 `gb` 轉簡體（書名、標題、內文），`use_simplified` 依 D4 生效；(f) `ssc.php` 的 `Fail:record count > 500` 套用 D12，Go 以參數錯誤回報：`Invalid parameter 'keyword': 愛 - too many results (more than 500 records), use a more specific keyword (結果超過 500 筆，請縮小關鍵字)`（措辭為我的假設，待確認）；(g) HTTP 契約沒有 `commentary_id`／`topic_id` 參數，Go 也不暴露。 |
 | D23 | **發現（M2-f；資訊，照原樣）**：(a) `au.php` 對不存在的章（如約 99）也回 `success` 與看似正常的連結，Go 與 Python 同樣不檢查，連結可能是死的；(b) 創 1 的 `navigation.prev` 為創 50（循環）、啟 22 的 `navigation.next` 是 `book_id:"67"`、`book:""`、`chapter:"1"`，次經 101 的 `prev` 因空值而不出現——全部照上游原樣；(c) `chapter`、`navigation.*.book_id`／`chapter` 是上游的字串（`"3"`），不轉數字；(d) `get_audio_bible` 契約沒有 `use_simplified`，永遠送 `gb=0`；`get_audio_chapter_with_text` 的 `use_simplified` 依 D4 也送到 `au.php`（實測 `gb=1` 會把書名轉簡體，版本名稱不變），原版只把它用在經文部分；(e) 無效的 `audio_version` 回 `Invalid parameter 'audio_version': x - Must be one of: unv, taiwanese, …`（原版為單參數 `InvalidParameterError` 例外建構錯誤，D3），且先檢查版本再檢查書卷；(f) `Phm` 不認得（D3，與其他工具相同）；(g) `list_audio_versions` 為靜態表，19 個，缺 id 16。 |
+| D24 | **發現＋已決定（M2-g，2026-10-16，0.0.0.17／0.0.0.18）**：原版 `tools/apocrypha.py`、`apostolic_fathers.py` 的書卷編號與上游 `qsub.php`／`qaf.php` 實際編號不符。實測（`bid` → 回傳的 `engs`／`chineses`）：`qsub` 101 馬一、102 馬二、103 比（多比傳）、104 滴（友弟德）、105 便（便西拉智訓）、106 所（所羅門智訓）、107 拉上、108 拉下、109 巴、110 耶信、111 禱（瑪拿西禱詞）、112 童（三童歌）、113 蘇、114 勒（彼勒與大龍）、115 斯補；`qaf` 201 革利免一書、202 革利免二書、203–209 伊格那丟七封信、210 坡旅甲致腓立比人書、211 坡旅甲殉道記、212 十二使徒遺訓、213 巴拿巴書信、214 黑馬牧人書、215 致丟格那妥書、216 帕皮亞殘篇、217 衆長老的傳統。原版以自己的表送 `bid`（例：「多」→101），上游回的卻是別卷經文，再以原版表標書名，結果內容與書名不符（搜尋結果的書名同樣標錯）。另外，工具說明列為可用的簡稱 `1Mac`、`2Mac`、`但補`、`便西拉智訓`、`革二`、`伊`、`黑`、`訓`、`帕` 等，原版解析器其實查不到，`巴` 在使徒教父工具會解析成 107 而被拒。**已核准處理（使用者選「只修這 6 個工具」）**：6 個工具一律使用上游編號與名稱；工具說明列出的簡稱盡量可用（歧義者 `但補`、`伊` 例外，回明確錯誤）；`get_book_list`／`get_book_info`／全域書名解析的 101 以上資料維持原版（編號與上游不一致，列為待辦）。輸出欄位與原版相同，`book` 一律為解析後書卷的中文名；`list_*_books` 的 `id`／`abbreviations` 隨之改變（次經 15 卷、使徒教父 17 卷）。中文全名部分為我依上游簡稱／縮寫整理，待確認。其他：`verse` 只接受 `1`、`1-5`、`1,3,5` 及混合寫法（上游遇其他寫法會回帶 SQL 的 `status`），`query` 不可為空（上游 `Fail: Empty Query`）；`record_count` 在有 `limit` 時為本頁筆數（`total_count` 照原版輸出此值，同 D20）。 |
 
 ## 未涵蓋
 

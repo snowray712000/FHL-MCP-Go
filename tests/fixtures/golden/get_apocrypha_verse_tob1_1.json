@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "query_type": "apocrypha_verse",
+  "book": "多俾亞傳",
+  "book_id": 103,
+  "chapter": 1,
+  "verse": "1",
+  "version": {
+    "code": "c1933",
+    "name": "1933年聖公會出版"
+  },
+  "verse_count": 1,
+  "verses": [
+    {
+      "book": "多俾亞傳",
+      "book_id": 103,
+      "chapter": 1,
+      "verse": 1,
+      "text": "這書是多比的自述。他是多比爾的兒子、多比爾是哈楠業的兒子、哈楠業是愛圖爾的兒子、愛圖爾是加百爾的兒子、加百爾是亞薛的後裔、屬於拿弗他利支派。"
+    }
+  ]
+}

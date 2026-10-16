@@ -190,3 +190,19 @@ func TestAudioVersionTable(t *testing.T) {
 		last = x.ID
 	}
 }
+
+func (f *audioAPI) QSub(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QSub not expected in this test")
+}
+
+func (f *audioAPI) QAF(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QAF not expected in this test")
+}
+
+func (f *audioAPI) SESub(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SESub not expected in this test")
+}
+
+func (f *audioAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SEAF not expected in this test")
+}

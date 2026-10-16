@@ -442,7 +442,7 @@ func TestCacheMergesConcurrentRequests(t *testing.T) {
 }
 
 func TestEveryEndpointHasACachePolicy(t *testing.T) {
-	for _, ep := range []string{"qb.php", "ab.php", "se.php", "sd.php", "qp.php", "sc.php", "ssc.php", "st.php"} {
+	for _, ep := range []string{"qb.php", "ab.php", "se.php", "sd.php", "qp.php", "sc.php", "ssc.php", "st.php", "au.php", "qsub.php", "qaf.php", "sesub.php", "seaf.php"} {
 		if _, ok := endpointTTL[ep]; !ok {
 			t.Errorf("%s has no cache policy", ep)
 		}
@@ -484,6 +484,56 @@ func TestAUQueryAndRawFields(t *testing.T) {
 	}
 	c = newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"Fail:x"}`)) })
 	if _, err := c.AU(context.Background(), 0, 43, 3, false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("err = %v", err)
+	}
+}
+
+func TestSubEndpointQueries(t *testing.T) {
+	var path, query string
+	body := "qsub_tob_1_1-3.json"
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		path, query = r.URL.Path, r.URL.RawQuery
+		_, _ = w.Write(fixture(t, body))
+	})
+	verse := "1-3"
+	res, err := c.QSub(context.Background(), 103, 1, &verse)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if path != "/api/qsub.php" || query != "bid=103&chap=1&sec=1-3&strong=0" {
+		t.Errorf("qsub request = %s?%s", path, query)
+	}
+	if string(res.RecordCount) != "3" || len(res.Record) != 3 || string(res.Record[0].Bid) != "103" || res.Version == nil || *res.Version != "c1933" {
+		t.Errorf("qsub response = %+v", res)
+	}
+	// No verse means the whole chapter: sec is not sent at all.
+	if _, err := c.QAF(context.Background(), 201, 1, nil); err != nil {
+		t.Fatal(err)
+	}
+	if path != "/api/qaf.php" || query != "bid=201&chap=1&strong=0" {
+		t.Errorf("qaf request = %s?%s", path, query)
+	}
+
+	body = "sesub_wisdom_off2_limit2.json"
+	sr, err := c.SESub(context.Background(), "智慧", 2, 2)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if path != "/api/sesub.php" || query != "limit=2&offset=2&q=%E6%99%BA%E6%85%A7" {
+		t.Errorf("sesub request = %s?%s", path, query)
+	}
+	if string(sr.RecordCount) != "2" || len(sr.Record) != 2 {
+		t.Errorf("sesub response = %+v", sr)
+	}
+	if _, err := c.SEAF(context.Background(), "教會", 0, 0); err != nil {
+		t.Fatal(err)
+	}
+	if path != "/api/seaf.php" || query != "limit=0&offset=0&q=%E6%95%99%E6%9C%83" {
+		t.Errorf("seaf request = %s?%s", path, query)
+	}
+
+	c = newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"Fail: Empty Query"}`)) })
+	if _, err := c.SESub(context.Background(), "", 10, 0); !errors.Is(err, ErrUpstream) {
 		t.Errorf("err = %v", err)
 	}
 }

@@ -50,6 +50,11 @@ var endpointTTL = map[string]time.Duration{
 	"se.php":  24 * time.Hour,
 	"ssc.php": 24 * time.Hour,
 	"sd.php":  0,
+	// Apocrypha and Apostolic Fathers (qsub/qaf = text, sesub/seaf = search).
+	"qsub.php":  7 * 24 * time.Hour,
+	"qaf.php":   7 * 24 * time.Hour,
+	"sesub.php": 24 * time.Hour,
+	"seaf.php":  24 * time.Hour,
 }
 
 // NewClient returns a Client with production defaults (30 s timeout, like the Python reference).
@@ -484,6 +489,88 @@ func (c *Client) AU(ctx context.Context, version, bid, chapter int, simplified b
 	q.Set("gb", boolDigit(simplified))
 	var out AUResponse
 	if err := c.getJSON(ctx, "au.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// SubRecord is one verse of qsub / qaf / sesub / seaf.php. The numbers are kept raw because the
+// Python output passes them through unchanged.
+type SubRecord struct {
+	Engs      *string         `json:"engs"`
+	Chineses  *string         `json:"chineses"`
+	Bid       json.RawMessage `json:"bid"`
+	Chap      json.RawMessage `json:"chap"`
+	Sec       json.RawMessage `json:"sec"`
+	BibleText *string         `json:"bible_text"`
+}
+
+// SubVerseResponse is the qsub.php / qaf.php response.
+type SubVerseResponse struct {
+	Status      string          `json:"status"`
+	RecordCount json.RawMessage `json:"record_count"`
+	VName       *string         `json:"v_name"`
+	Version     *string         `json:"version"`
+	Record      []SubRecord     `json:"record"`
+}
+
+// SubSearchResponse is the sesub.php / seaf.php response.
+type SubSearchResponse struct {
+	Status      string          `json:"status"`
+	Key         *string         `json:"key"`
+	RecordCount json.RawMessage `json:"record_count"`
+	Record      []SubRecord     `json:"record"`
+}
+
+// QSub queries qsub.php (Apocrypha text, upstream book ids 101-115). verse is sent as given
+// ("1", "1-5", "1,3,5"); nil asks for the whole chapter.
+func (c *Client) QSub(ctx context.Context, bid, chapter int, verse *string) (*SubVerseResponse, error) {
+	return c.subVerse(ctx, "qsub.php", bid, chapter, verse)
+}
+
+// QAF queries qaf.php (Apostolic Fathers text, upstream book ids 201-217).
+func (c *Client) QAF(ctx context.Context, bid, chapter int, verse *string) (*SubVerseResponse, error) {
+	return c.subVerse(ctx, "qaf.php", bid, chapter, verse)
+}
+
+// SESub searches the Apocrypha (sesub.php). The upstream treats limit 0 as unlimited.
+func (c *Client) SESub(ctx context.Context, q string, limit, offset int) (*SubSearchResponse, error) {
+	return c.subSearch(ctx, "sesub.php", q, limit, offset)
+}
+
+// SEAF searches the Apostolic Fathers (seaf.php).
+func (c *Client) SEAF(ctx context.Context, q string, limit, offset int) (*SubSearchResponse, error) {
+	return c.subSearch(ctx, "seaf.php", q, limit, offset)
+}
+
+func (c *Client) subVerse(ctx context.Context, endpoint string, bid, chapter int, verse *string) (*SubVerseResponse, error) {
+	q := url.Values{}
+	q.Set("bid", strconv.Itoa(bid))
+	q.Set("chap", strconv.Itoa(chapter))
+	q.Set("strong", "0")
+	if verse != nil {
+		q.Set("sec", *verse)
+	}
+	var out SubVerseResponse
+	if err := c.getJSON(ctx, endpoint, q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+func (c *Client) subSearch(ctx context.Context, endpoint, keyword string, limit, offset int) (*SubSearchResponse, error) {
+	q := url.Values{}
+	q.Set("q", keyword)
+	q.Set("offset", strconv.Itoa(offset))
+	q.Set("limit", strconv.Itoa(limit))
+	var out SubSearchResponse
+	if err := c.getJSON(ctx, endpoint, q, &out); err != nil {
 		return nil, err
 	}
 	if out.Status != "success" {

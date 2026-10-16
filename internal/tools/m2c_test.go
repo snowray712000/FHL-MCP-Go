@@ -279,3 +279,19 @@ func (f *searchAPI) ST(context.Context, int, string, bool, bool) (*fhlapi.STResp
 func (f *searchAPI) AU(context.Context, int, int, int, bool) (*fhlapi.AUResponse, error) {
 	return nil, errors.New("AU not expected in this test")
 }
+
+func (f *searchAPI) QSub(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QSub not expected in this test")
+}
+
+func (f *searchAPI) QAF(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QAF not expected in this test")
+}
+
+func (f *searchAPI) SESub(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SESub not expected in this test")
+}
+
+func (f *searchAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SEAF not expected in this test")
+}

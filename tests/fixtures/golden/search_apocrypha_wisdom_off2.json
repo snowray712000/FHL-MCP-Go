@@ -1,0 +1,24 @@
+{
+  "status": "success",
+  "query_type": "apocrypha_search",
+  "keyword": "智慧",
+  "total_count": 2,
+  "returned_count": 2,
+  "offset": 2,
+  "results": [
+    {
+      "book": "瑪加伯下",
+      "book_id": 102,
+      "chapter": 13,
+      "verse": 26,
+      "text": "呂西亞上到臺上去演說、用智慧解辯這條約的利益、鼓吹人民應當信服、好收服民心、而後又到安提亞去。王侵犯猶太與撤兵的事、就是這樣。"
+    },
+    {
+      "book": "多俾亞傳",
+      "book_id": 103,
+      "chapter": 4,
+      "verse": 18,
+      "text": "應當請教智慧人、不可丟棄他們有益的教訓。"
+    }
+  ]
+}

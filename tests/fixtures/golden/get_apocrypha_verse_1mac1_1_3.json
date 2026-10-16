@@ -1,0 +1,29 @@
+{
+  "status": "success",
+  "query_type": "apocrypha_verse",
+  "book": "瑪加伯上",
+  "book_id": 101,
+  "chapter": 1,
+  "verse": "1,3",
+  "version": {
+    "code": "c1933",
+    "name": "1933年聖公會出版"
+  },
+  "verse_count": 2,
+  "verses": [
+    {
+      "book": "瑪加伯上",
+      "book_id": 101,
+      "chapter": 1,
+      "verse": 1,
+      "text": "腓力的兒子亞力山大是馬其頓人。他出離基庭境以後、戰勝了波斯和米太兩國的王大利烏、遂繼承了他的王位。"
+    },
+    {
+      "book": "瑪加伯上",
+      "book_id": 101,
+      "chapter": 1,
+      "verse": 3,
+      "text": "他踏遍了全地、直到地極、擄掠了各國的財物、地上的居民、在他面前無不馴服。從此他就傲氣橫生、趾高氣揚。"
+    }
+  ]
+}

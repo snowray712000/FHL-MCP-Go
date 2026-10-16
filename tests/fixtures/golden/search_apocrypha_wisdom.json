@@ -1,0 +1,31 @@
+{
+  "status": "success",
+  "query_type": "apocrypha_search",
+  "keyword": "智慧",
+  "total_count": 3,
+  "returned_count": 3,
+  "offset": 0,
+  "results": [
+    {
+      "book": "瑪加伯下",
+      "book_id": 102,
+      "chapter": 2,
+      "verse": 9,
+      "text": "書上又說、所羅門修造聖殿、殿成後、用他的智慧獻祭物。"
+    },
+    {
+      "book": "瑪加伯下",
+      "book_id": 102,
+      "chapter": 11,
+      "verse": 15,
+      "text": "智慧的瑪喀比、爲顧全人民的利益、將呂西亞所提的條件一件一件的都應允了。王也批准了瑪喀比呈給呂西亞的條陳、就是爲猶太人所要求的。"
+    },
+    {
+      "book": "瑪加伯下",
+      "book_id": 102,
+      "chapter": 13,
+      "verse": 26,
+      "text": "呂西亞上到臺上去演說、用智慧解辯這條約的利益、鼓吹人民應當信服、好收服民心、而後又到安提亞去。王侵犯猶太與撤兵的事、就是這樣。"
+    }
+  ]
+}

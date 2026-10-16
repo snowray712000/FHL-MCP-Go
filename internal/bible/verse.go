@@ -18,6 +18,7 @@ type API interface {
 	QP(ctx context.Context, bid, chapter, verse int, simplified bool) (*fhlapi.QPResponse, error)
 	CommentaryAPI
 	AudioAPI
+	ScriptureAPI
 }
 
 // Service holds the Bible domain logic. It does not know about MCP.

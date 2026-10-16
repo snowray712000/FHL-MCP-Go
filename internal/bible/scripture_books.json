@@ -1,0 +1,383 @@
+{
+ "apocrypha": {
+  "id_range": "101-115",
+  "min": 101,
+  "max": 115,
+  "books": [
+   {
+    "id": 101,
+    "name_zh": "瑪加伯上",
+    "name_en": "1 Maccabees",
+    "aliases": [
+     "加上",
+     "馬一",
+     "瑪加伯上",
+     "1Mac",
+     "1Mc",
+     "1 Maccabees"
+    ]
+   },
+   {
+    "id": 102,
+    "name_zh": "瑪加伯下",
+    "name_en": "2 Maccabees",
+    "aliases": [
+     "加下",
+     "馬二",
+     "瑪加伯下",
+     "2Mac",
+     "2Mc",
+     "2 Maccabees"
+    ]
+   },
+   {
+    "id": 103,
+    "name_zh": "多俾亞傳",
+    "name_en": "Tobit",
+    "aliases": [
+     "多",
+     "比",
+     "多俾亞傳",
+     "Tob",
+     "Tb",
+     "Tobit"
+    ]
+   },
+   {
+    "id": 104,
+    "name_zh": "友弟德傳",
+    "name_en": "Judith",
+    "aliases": [
+     "友",
+     "滴",
+     "友弟德傳",
+     "Jdt",
+     "Jth",
+     "Judith"
+    ]
+   },
+   {
+    "id": 105,
+    "name_zh": "德訓篇",
+    "name_en": "Sirach",
+    "aliases": [
+     "德",
+     "便",
+     "德訓篇",
+     "便西拉智訓",
+     "Sir",
+     "Sirach"
+    ]
+   },
+   {
+    "id": 106,
+    "name_zh": "智慧篇",
+    "name_en": "Wisdom",
+    "aliases": [
+     "智",
+     "所",
+     "智慧篇",
+     "Wis",
+     "Ws",
+     "Wisdom"
+    ]
+   },
+   {
+    "id": 107,
+    "name_zh": "以斯拉上",
+    "name_en": "1 Esdras",
+    "aliases": [
+     "拉上",
+     "以斯拉上",
+     "1Es",
+     "1 Esdras"
+    ]
+   },
+   {
+    "id": 108,
+    "name_zh": "以斯拉下",
+    "name_en": "2 Esdras",
+    "aliases": [
+     "拉下",
+     "以斯拉下",
+     "2Es",
+     "2 Esdras"
+    ]
+   },
+   {
+    "id": 109,
+    "name_zh": "巴錄書",
+    "name_en": "Baruch",
+    "aliases": [
+     "巴",
+     "巴錄書",
+     "Bar",
+     "Baruch"
+    ]
+   },
+   {
+    "id": 110,
+    "name_zh": "耶利米書信",
+    "name_en": "Letter of Jeremiah",
+    "aliases": [
+     "耶信",
+     "耶利米書信",
+     "EpJer",
+     "Letter of Jeremiah"
+    ]
+   },
+   {
+    "id": 111,
+    "name_zh": "瑪拿西禱詞",
+    "name_en": "Prayer of Manasseh",
+    "aliases": [
+     "禱",
+     "瑪拿西禱詞",
+     "PrM",
+     "Prayer of Manasseh"
+    ]
+   },
+   {
+    "id": 112,
+    "name_zh": "三童歌",
+    "name_en": "Song of the Three Holy Children",
+    "aliases": [
+     "童",
+     "三童歌",
+     "STHC",
+     "Song of the Three Holy Children"
+    ]
+   },
+   {
+    "id": 113,
+    "name_zh": "蘇撒拿傳",
+    "name_en": "Susanna",
+    "aliases": [
+     "蘇",
+     "蘇撒拿傳",
+     "Sus",
+     "Susanna"
+    ]
+   },
+   {
+    "id": 114,
+    "name_zh": "彼勒與大龍",
+    "name_en": "Bel and the Dragon",
+    "aliases": [
+     "勒",
+     "彼勒與大龍",
+     "Bel",
+     "Bel and the Dragon"
+    ]
+   },
+   {
+    "id": 115,
+    "name_zh": "以斯帖補篇",
+    "name_en": "Additions to Esther",
+    "aliases": [
+     "斯補",
+     "以斯帖補篇",
+     "Re",
+     "AddEsth",
+     "Additions to Esther"
+    ]
+   }
+  ]
+ },
+ "apostolic_fathers": {
+  "id_range": "201-217",
+  "min": 201,
+  "max": 217,
+  "books": [
+   {
+    "id": 201,
+    "name_zh": "革利免前書",
+    "name_en": "1 Clement",
+    "aliases": [
+     "革",
+     "革利免一書",
+     "革利免前書",
+     "1Clem",
+     "1 Clem.",
+     "1 Clement"
+    ]
+   },
+   {
+    "id": 202,
+    "name_zh": "革利免後書",
+    "name_en": "2 Clement",
+    "aliases": [
+     "革二",
+     "革利免二書",
+     "革利免後書",
+     "2Clem",
+     "2 Clem.",
+     "2 Clement"
+    ]
+   },
+   {
+    "id": 203,
+    "name_zh": "伊格那丟致以弗所人書",
+    "name_en": "Ignatius to the Ephesians",
+    "aliases": [
+     "伊格那丟致以弗所人書",
+     "Ign. Eph.",
+     "Ignatius to the Ephesians"
+    ]
+   },
+   {
+    "id": 204,
+    "name_zh": "伊格那丟致馬內夏人書",
+    "name_en": "Ignatius to the Magnesians",
+    "aliases": [
+     "伊格那丟致馬內夏人書",
+     "Ign. Mag.",
+     "Ignatius to the Magnesians"
+    ]
+   },
+   {
+    "id": 205,
+    "name_zh": "伊格那丟致他拉勒人書",
+    "name_en": "Ignatius to the Trallians",
+    "aliases": [
+     "伊格那丟致他拉勒人書",
+     "Ign. Trall.",
+     "Ignatius to the Trallians"
+    ]
+   },
+   {
+    "id": 206,
+    "name_zh": "伊格那丟致羅馬人書",
+    "name_en": "Ignatius to the Romans",
+    "aliases": [
+     "伊格那丟致羅馬人書",
+     "Ign. Rom.",
+     "Ignatius to the Romans"
+    ]
+   },
+   {
+    "id": 207,
+    "name_zh": "伊格那丟致非拉鐵非人書",
+    "name_en": "Ignatius to the Philadelphians",
+    "aliases": [
+     "伊格那丟致非拉鐵非人書",
+     "Ign. Phld.",
+     "Ignatius to the Philadelphians"
+    ]
+   },
+   {
+    "id": 208,
+    "name_zh": "伊格那丟致士每拿人書",
+    "name_en": "Ignatius to the Smyrnaeans",
+    "aliases": [
+     "伊格那丟致士每拿人書",
+     "Ign. Smyrn.",
+     "Ignatius to the Smyrnaeans"
+    ]
+   },
+   {
+    "id": 209,
+    "name_zh": "伊格那丟致坡旅甲書",
+    "name_en": "Ignatius to Polycarp",
+    "aliases": [
+     "伊格那丟致坡旅甲書",
+     "Ign. Pol.",
+     "Ignatius to Polycarp"
+    ]
+   },
+   {
+    "id": 210,
+    "name_zh": "坡旅甲致腓立比人書",
+    "name_en": "Polycarp to the Philippians",
+    "aliases": [
+     "坡",
+     "坡旅甲書信",
+     "坡旅甲致腓立比人書",
+     "Pol",
+     "Pol. Phil.",
+     "Polycarp",
+     "Polycarp to the Philippians"
+    ]
+   },
+   {
+    "id": 211,
+    "name_zh": "坡旅甲殉道記",
+    "name_en": "Martyrdom of Polycarp",
+    "aliases": [
+     "坡旅甲殉道記",
+     "Mart. Pol.",
+     "Martyrdom of Polycarp"
+    ]
+   },
+   {
+    "id": 212,
+    "name_zh": "十二使徒遺訓",
+    "name_en": "Didache",
+    "aliases": [
+     "訓",
+     "十二使徒遺訓",
+     "Did",
+     "Did.",
+     "Didache"
+    ]
+   },
+   {
+    "id": 213,
+    "name_zh": "巴拿巴書信",
+    "name_en": "Barnabas",
+    "aliases": [
+     "巴",
+     "巴拿巴書",
+     "巴拿巴書信",
+     "Barn",
+     "Barn.",
+     "Barnabas"
+    ]
+   },
+   {
+    "id": 214,
+    "name_zh": "黑馬牧人書",
+    "name_en": "Shepherd of Hermas",
+    "aliases": [
+     "黑",
+     "黑馬牧人書",
+     "Herm",
+     "Herm.",
+     "Shepherd of Hermas"
+    ]
+   },
+   {
+    "id": 215,
+    "name_zh": "致丟格那妥書",
+    "name_en": "Epistle to Diognetus",
+    "aliases": [
+     "致丟格那妥書",
+     "Diogn.",
+     "Epistle to Diognetus"
+    ]
+   },
+   {
+    "id": 216,
+    "name_zh": "帕皮亞殘篇",
+    "name_en": "Papias Fragments",
+    "aliases": [
+     "帕",
+     "帕皮亞殘篇",
+     "Pap",
+     "Frag. Papias",
+     "Papias Fragments"
+    ]
+   },
+   {
+    "id": 217,
+    "name_zh": "衆長老的傳統",
+    "name_en": "Traditions of the Elders",
+    "aliases": [
+     "衆長老的傳統",
+     "Trad. Elders",
+     "Traditions of the Elders"
+    ]
+   }
+  ]
+ }
+}

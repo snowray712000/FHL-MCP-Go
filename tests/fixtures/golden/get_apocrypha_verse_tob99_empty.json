@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "query_type": "apocrypha_verse",
+  "book": "多俾亞傳",
+  "book_id": "未知",
+  "chapter": 99,
+  "verse": null,
+  "version": {
+    "code": "c1933",
+    "name": "1933年聖公會出版"
+  },
+  "verse_count": 0,
+  "verses": []
+}

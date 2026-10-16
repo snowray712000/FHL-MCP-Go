@@ -240,3 +240,19 @@ func TestSearchCommentaryTooManyRecords(t *testing.T) {
 func (f *cmtAPI) AU(context.Context, int, int, int, bool) (*fhlapi.AUResponse, error) {
 	return nil, errors.New("AU not expected in this test")
 }
+
+func (f *cmtAPI) QSub(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QSub not expected in this test")
+}
+
+func (f *cmtAPI) QAF(context.Context, int, int, *string) (*fhlapi.SubVerseResponse, error) {
+	return nil, errors.New("QAF not expected in this test")
+}
+
+func (f *cmtAPI) SESub(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SESub not expected in this test")
+}
+
+func (f *cmtAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResponse, error) {
+	return nil, errors.New("SEAF not expected in this test")
+}

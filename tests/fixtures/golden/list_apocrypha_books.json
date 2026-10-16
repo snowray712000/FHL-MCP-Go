@@ -1,0 +1,186 @@
+{
+  "status": "success",
+  "query_type": "list_apocrypha_books",
+  "id_range": "101-115",
+  "book_count": 15,
+  "books": [
+    {
+      "id": 101,
+      "name_zh": "瑪加伯上",
+      "name_en": "1 Maccabees",
+      "abbreviations": [
+        "加上",
+        "馬一",
+        "瑪加伯上",
+        "1Mac",
+        "1Mc",
+        "1 Maccabees"
+      ]
+    },
+    {
+      "id": 102,
+      "name_zh": "瑪加伯下",
+      "name_en": "2 Maccabees",
+      "abbreviations": [
+        "加下",
+        "馬二",
+        "瑪加伯下",
+        "2Mac",
+        "2Mc",
+        "2 Maccabees"
+      ]
+    },
+    {
+      "id": 103,
+      "name_zh": "多俾亞傳",
+      "name_en": "Tobit",
+      "abbreviations": [
+        "多",
+        "比",
+        "多俾亞傳",
+        "Tob",
+        "Tb",
+        "Tobit"
+      ]
+    },
+    {
+      "id": 104,
+      "name_zh": "友弟德傳",
+      "name_en": "Judith",
+      "abbreviations": [
+        "友",
+        "滴",
+        "友弟德傳",
+        "Jdt",
+        "Jth",
+        "Judith"
+      ]
+    },
+    {
+      "id": 105,
+      "name_zh": "德訓篇",
+      "name_en": "Sirach",
+      "abbreviations": [
+        "德",
+        "便",
+        "德訓篇",
+        "便西拉智訓",
+        "Sir",
+        "Sirach"
+      ]
+    },
+    {
+      "id": 106,
+      "name_zh": "智慧篇",
+      "name_en": "Wisdom",
+      "abbreviations": [
+        "智",
+        "所",
+        "智慧篇",
+        "Wis",
+        "Ws",
+        "Wisdom"
+      ]
+    },
+    {
+      "id": 107,
+      "name_zh": "以斯拉上",
+      "name_en": "1 Esdras",
+      "abbreviations": [
+        "拉上",
+        "以斯拉上",
+        "1Es",
+        "1 Esdras"
+      ]
+    },
+    {
+      "id": 108,
+      "name_zh": "以斯拉下",
+      "name_en": "2 Esdras",
+      "abbreviations": [
+        "拉下",
+        "以斯拉下",
+        "2Es",
+        "2 Esdras"
+      ]
+    },
+    {
+      "id": 109,
+      "name_zh": "巴錄書",
+      "name_en": "Baruch",
+      "abbreviations": [
+        "巴",
+        "巴錄書",
+        "Bar",
+        "Baruch"
+      ]
+    },
+    {
+      "id": 110,
+      "name_zh": "耶利米書信",
+      "name_en": "Letter of Jeremiah",
+      "abbreviations": [
+        "耶信",
+        "耶利米書信",
+        "EpJer",
+        "Letter of Jeremiah"
+      ]
+    },
+    {
+      "id": 111,
+      "name_zh": "瑪拿西禱詞",
+      "name_en": "Prayer of Manasseh",
+      "abbreviations": [
+        "禱",
+        "瑪拿西禱詞",
+        "PrM",
+        "Prayer of Manasseh"
+      ]
+    },
+    {
+      "id": 112,
+      "name_zh": "三童歌",
+      "name_en": "Song of the Three Holy Children",
+      "abbreviations": [
+        "童",
+        "三童歌",
+        "STHC",
+        "Song of the Three Holy Children"
+      ]
+    },
+    {
+      "id": 113,
+      "name_zh": "蘇撒拿傳",
+      "name_en": "Susanna",
+      "abbreviations": [
+        "蘇",
+        "蘇撒拿傳",
+        "Sus",
+        "Susanna"
+      ]
+    },
+    {
+      "id": 114,
+      "name_zh": "彼勒與大龍",
+      "name_en": "Bel and the Dragon",
+      "abbreviations": [
+        "勒",
+        "彼勒與大龍",
+        "Bel",
+        "Bel and the Dragon"
+      ]
+    },
+    {
+      "id": 115,
+      "name_zh": "以斯帖補篇",
+      "name_en": "Additions to Esther",
+      "abbreviations": [
+        "斯補",
+        "以斯帖補篇",
+        "Re",
+        "AddEsth",
+        "Additions to Esther"
+      ]
+    }
+  ]
+}
