@@ -263,7 +263,9 @@ Claude Code 的 user scope 儲存於 `~/.claude.json`，可跨專案使用；Cod
 ### 輸出與錯誤
 
 - 保留工具名稱、參數語意與可觀察結果；空值、空陣列、缺欄位和字串／數字型別分別驗證。
-- HTTP 原版多以 MCP text content 回傳 JSON 字串，首版不要逕自只改成 structuredContent，應提供相容 text 並測試客戶端。
+- HTTP 原版以 MCP text content 回傳 JSON 字串（`indent=2`、`ensure_ascii=false`），M0 實測（`doc/m0/contract/`）另確認：每個工具宣告相同的 `outputSchema`（`{"result": string}`，required），成功時 `structuredContent.result` 與 `content[0].text` 是同一個字串。
+- **已決定（2026-10-16，使用者確認）**：Go 版同時輸出 text content 與 `structuredContent: {"result": "<同一字串>"}`，並對 29 個工具宣告相同 `outputSchema`；不可只改成 structuredContent，也不可省略任一者。需測試 Claude Code 與 Codex 兩客戶端皆能正常取用。
+- 原版錯誤路徑為 `isError: true` 加純文字訊息，且有已知缺陷（如 `get_book_info` 查無書卷時為 Python 例外建構錯誤）；Go 版錯誤格式於 M0 差異表另定，歸為「明確 bug fix」。
 - 調整舊 bug 必須記錄預期新行為與測試，避免把所有差異當成可接受。
 - 區分 JSON-RPC 協定錯誤、工具執行失敗、查無資料與上游故障；使用 SDK 合適的錯誤表示。
 - 有動態欄位的差異測試先正規化時間戳與非決定性資訊，不比較排版空白即可判定所有語意相同。

@@ -1,0 +1,1172 @@
+{
+  "tools": [
+    {
+      "name": "get_bible_verse",
+      "description": "查詢指定的聖經經文。支援單節、多節、節範圍查詢。\n    \n    Args:\n        book: 經卷名稱（中文或英文縮寫，如：約、John、創世記、Genesis）\n        chapter: 章數\n        verse: 節數（支援格式：'1', '1-5', '1,3,5', '1-2,5,8-10'）。若不提供則返回整章\n        version: 聖經版本代碼（預設：unv）\n        include_strong: 是否包含 Strong's Number（預設：false）\n        use_simplified: 是否使用簡體中文（預設：false）\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "verse": {
+            "default": null,
+            "title": "Verse",
+            "type": "string"
+          },
+          "version": {
+            "default": "unv",
+            "title": "Version",
+            "type": "string"
+          },
+          "include_strong": {
+            "default": false,
+            "title": "Include Strong",
+            "type": "boolean"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "book",
+          "chapter"
+        ],
+        "title": "get_bible_verseArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_bible_verseOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_bible_chapter",
+      "description": "查詢整章聖經經文。\n    \n    Args:\n        book: 經卷名稱\n        chapter: 章數\n        version: 聖經版本代碼（預設：unv）\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "version": {
+            "default": "unv",
+            "title": "Version",
+            "type": "string"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "book",
+          "chapter"
+        ],
+        "title": "get_bible_chapterArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_bible_chapterOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "query_verse_citation",
+      "description": "解析並查詢經文引用字串（如：'約 3:16', '太 5:3-10'）。\n    \n    Args:\n        citation: 經文引用字串\n        version: 聖經版本代碼\n        include_strong: 是否包含 Strong's Number\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "citation": {
+            "title": "Citation",
+            "type": "string"
+          },
+          "version": {
+            "default": "unv",
+            "title": "Version",
+            "type": "string"
+          },
+          "include_strong": {
+            "default": false,
+            "title": "Include Strong",
+            "type": "boolean"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "citation"
+        ],
+        "title": "query_verse_citationArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "query_verse_citationOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_bible",
+      "description": "在聖經中搜尋關鍵字或原文編號。\n    \n    Args:\n        query: 搜尋內容\n        search_type: 搜尋類型（keyword=關鍵字, greek_number=希臘文編號, hebrew_number=希伯來文編號）\n        scope: 搜尋範圍（all=全部, ot=舊約, nt=新約）\n        version: 聖經版本代碼\n        limit: 最多返回筆數\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "search_type": {
+            "default": "keyword",
+            "title": "Search Type",
+            "type": "string"
+          },
+          "scope": {
+            "default": "all",
+            "title": "Scope",
+            "type": "string"
+          },
+          "version": {
+            "default": "unv",
+            "title": "Version",
+            "type": "string"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_bibleArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_bibleOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_bible_advanced",
+      "description": "進階聖經搜尋，支援自訂書卷範圍。\n    \n    Args:\n        query: 搜尋內容\n        search_type: 搜尋類型（keyword/greek_number/hebrew_number）\n        range_start: 起始書卷編號 (1-66)\n        range_end: 結束書卷編號 (1-66)\n        version: 聖經版本代碼\n        limit: 最多返回筆數\n        offset: 跳過筆數\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "search_type": {
+            "default": "keyword",
+            "title": "Search Type",
+            "type": "string"
+          },
+          "range_start": {
+            "default": null,
+            "title": "Range Start",
+            "type": "integer"
+          },
+          "range_end": {
+            "default": null,
+            "title": "Range End",
+            "type": "integer"
+          },
+          "version": {
+            "default": "unv",
+            "title": "Version",
+            "type": "string"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "title": "Offset",
+            "type": "integer"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_bible_advancedArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_bible_advancedOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_word_analysis",
+      "description": "取得經文的原文字彙分析（希臘文/希伯來文）。\n    \n    Args:\n        book: 經卷名稱\n        chapter: 章數\n        verse: 節數\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "verse": {
+            "title": "Verse",
+            "type": "integer"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "book",
+          "chapter",
+          "verse"
+        ],
+        "title": "get_word_analysisArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_word_analysisOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_parsing_reference",
+      "description": "產生結構分析用的原文 Parsing 參考資料（Markdown）。\n\n    包含帶 token id 的「原文/直譯/原文分析」三段式內容，可直接貼入結構分析類 prompt。\n    支援單節、同章多節、跨章範圍查詢。\n\n    Args:\n        book: 經卷名稱（中文或英文，如：約、John）\n        chapter: 起始章數\n        verse: 起始章內的節數（支援 '1'、'1-4'、'1,3,5' 等格式）\n        end_chapter: 若提供，代表範圍跨到這一章（含）\n        end_verse: 搭配 end_chapter 使用，範圍結束於這一節（含）\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "verse": {
+            "title": "Verse",
+            "type": "string"
+          },
+          "end_chapter": {
+            "default": null,
+            "title": "End Chapter",
+            "type": "integer"
+          },
+          "end_verse": {
+            "default": null,
+            "title": "End Verse",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "book",
+          "chapter",
+          "verse"
+        ],
+        "title": "get_parsing_referenceArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_parsing_referenceOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "lookup_strongs",
+      "description": "查詢 Strong's 原文字典。支援多種格式：整數+testament (3056, 'NT')、G前綴 ('G3056')、H前綴 ('H430')。\n    \n    Args:\n        number: Strong's Number (整數、字串數字、或帶 G/H 前綴，如 'G3056' 或 'H430')\n        testament: 約別（OT=舊約, NT=新約）。當 number 包含 G/H 前綴時可省略。\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "number": {
+            "title": "Number",
+            "type": "string"
+          },
+          "testament": {
+            "default": null,
+            "title": "Testament",
+            "type": "string"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "number"
+        ],
+        "title": "lookup_strongsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "lookup_strongsOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_strongs_occurrences",
+      "description": "搜尋 Strong's Number 在聖經中的出現位置。\n    \n    Args:\n        number: Strong's Number（如 'G1344' 或 'H430'）\n        testament: 約別（當 number 包含 G/H 前綴時可省略）\n        limit: 最多返回筆數\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "number": {
+            "title": "Number",
+            "type": "string"
+          },
+          "testament": {
+            "default": null,
+            "title": "Testament",
+            "type": "string"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "number"
+        ],
+        "title": "search_strongs_occurrencesArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_strongs_occurrencesOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_commentary",
+      "description": "查詢經文註釋。\n    \n    Args:\n        book: 書卷名稱\n        chapter: 章數\n        verse: 節數（可選）\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "verse": {
+            "default": null,
+            "title": "Verse",
+            "type": "integer"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "book",
+          "chapter"
+        ],
+        "title": "get_commentaryArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_commentaryOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_commentaries",
+      "description": "列出所有可用的註釋書。\n    \n    Args:\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "title": "list_commentariesArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "list_commentariesOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_commentary",
+      "description": "在註釋書中搜尋關鍵字。\n    \n    Args:\n        keyword: 搜尋關鍵字\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "keyword": {
+            "title": "Keyword",
+            "type": "string"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "keyword"
+        ],
+        "title": "search_commentaryArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_commentaryOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_topic_study",
+      "description": "查詢主題查經資料（Torrey, Naves）。\n    \n    Args:\n        keyword: 主題關鍵字\n        source: 資料來源（all/torrey_en/naves_en/torrey_zh/naves_zh）\n        count_only: 是否只返回總數\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "keyword": {
+            "title": "Keyword",
+            "type": "string"
+          },
+          "source": {
+            "default": "all",
+            "title": "Source",
+            "type": "string"
+          },
+          "count_only": {
+            "default": false,
+            "title": "Count Only",
+            "type": "boolean"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "keyword"
+        ],
+        "title": "get_topic_studyArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_topic_studyOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_bible_versions",
+      "description": "列出所有可用的聖經版本。\n    \n    Args:\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "title": "list_bible_versionsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "list_bible_versionsOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_available_versions",
+      "description": "搜尋符合條件的聖經版本。\n    \n    Args:\n        testament: 約別（OT/NT/both）\n        has_strongs: 是否包含 Strong's Number\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "testament": {
+            "default": null,
+            "title": "Testament",
+            "type": "string"
+          },
+          "has_strongs": {
+            "default": null,
+            "title": "Has Strongs",
+            "type": "boolean"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "title": "search_available_versionsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_available_versionsOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_book_list",
+      "description": "取得聖經書卷列表。\n    \n    Args:\n        testament: 約別（all/OT/NT）\n    ",
+      "inputSchema": {
+        "properties": {
+          "testament": {
+            "default": "all",
+            "title": "Testament",
+            "type": "string"
+          }
+        },
+        "title": "get_book_listArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_book_listOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_book_info",
+      "description": "取得特定書卷的詳細資訊。\n    \n    Args:\n        book: 書卷名稱\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          }
+        },
+        "required": [
+          "book"
+        ],
+        "title": "get_book_infoArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_book_infoOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_audio_bible",
+      "description": "取得有聲聖經連結。\n    \n    Args:\n        book: 書卷名稱\n        chapter: 章數\n        audio_version: 有聲聖經版本代碼（預設 unv 和合本）\n            可用版本：unv, taiwanese, hakka, cantonese, tcv, hebrew, greek 等\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "audio_version": {
+            "default": "unv",
+            "title": "Audio Version",
+            "type": "string"
+          }
+        },
+        "required": [
+          "book",
+          "chapter"
+        ],
+        "title": "get_audio_bibleArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_audio_bibleOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_audio_chapter_with_text",
+      "description": "取得整章有聲聖經連結與經文。\n    \n    Args:\n        book: 書卷名稱\n        chapter: 章數\n        audio_version: 有聲聖經版本代碼（預設 unv 和合本）\n        text_version: 經文版本代碼（預設 unv 和合本）\n        use_simplified: 是否使用簡體中文\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "audio_version": {
+            "default": "unv",
+            "title": "Audio Version",
+            "type": "string"
+          },
+          "text_version": {
+            "default": "unv",
+            "title": "Text Version",
+            "type": "string"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "book",
+          "chapter"
+        ],
+        "title": "get_audio_chapter_with_textArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_audio_chapter_with_textOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_audio_versions",
+      "description": "列出所有可用的有聲聖經版本。",
+      "inputSchema": {
+        "properties": {},
+        "title": "list_audio_versionsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "list_audio_versionsOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_apocrypha_verse",
+      "description": "查詢次經 (Apocrypha) 經文內容。支援書卷 101-115。\n    包含：多俾亞傳、友弟德傳、瑪加伯上下、智慧篇、德訓篇(便西拉智訓)、巴錄書等。\n    \n    Args:\n        book: 次經書卷名稱（支援多種格式）。\n              中文縮寫：'多', '友', '加上', '加下', '智', '德', '巴', '耶信', '但補'\n              中文全名：'多俾亞傳', '友弟德傳', '瑪加伯上', '瑪加伯下', '智慧篇', '德訓篇', '便西拉智訓', '巴錄書' 等\n              英文：'Tob', 'Jdt', '1Mac', '2Mac', 'Wis', 'Sir', 'Bar', 'Tobit', 'Judith', 'Sirach' 等\n        chapter: 章數\n        verse: 節數（可選）。支援多種格式：\n              - 單節：'1'\n              - 範圍：'1-5'\n              - 多節：'1,3,5'\n              - 混合：'1-2,5,8-10'\n              若不提供則返回整章\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "verse": {
+            "default": null,
+            "title": "Verse",
+            "type": "string"
+          }
+        },
+        "required": [
+          "book",
+          "chapter"
+        ],
+        "title": "get_apocrypha_verseArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_apocrypha_verseOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_apocrypha",
+      "description": "在次經中搜尋關鍵字。\n    \n    Args:\n        query: 搜尋關鍵字\n        limit: 返回結果數量上限\n        offset: 跳過的結果數量（用於分頁）\n    ",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_apocryphaArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_apocryphaOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_apocrypha_books",
+      "description": "列出所有可用的次經書卷及其資訊。",
+      "inputSchema": {
+        "properties": {},
+        "title": "list_apocrypha_booksArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "list_apocrypha_booksOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_apostolic_fathers_verse",
+      "description": "查詢使徒教父文獻經文內容。\n    \n    Args:\n        book: 使徒教父書卷名稱\n        chapter: 章數\n        verse: 節數（可選）\n    ",
+      "inputSchema": {
+        "properties": {
+          "book": {
+            "title": "Book",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
+          "verse": {
+            "default": null,
+            "title": "Verse",
+            "type": "string"
+          }
+        },
+        "required": [
+          "book",
+          "chapter"
+        ],
+        "title": "get_apostolic_fathers_verseArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_apostolic_fathers_verseOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_apostolic_fathers",
+      "description": "在使徒教父文獻中搜尋關鍵字。\n    \n    Args:\n        query: 搜尋關鍵字\n        limit: 返回結果數量上限\n        offset: 跳過的結果數量（用於分頁）\n    ",
+      "inputSchema": {
+        "properties": {
+          "query": {
+            "title": "Query",
+            "type": "string"
+          },
+          "limit": {
+            "default": 10,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "offset": {
+            "default": 0,
+            "title": "Offset",
+            "type": "integer"
+          }
+        },
+        "required": [
+          "query"
+        ],
+        "title": "search_apostolic_fathersArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_apostolic_fathersOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_apostolic_fathers_books",
+      "description": "列出所有可用的使徒教父書卷及其資訊。",
+      "inputSchema": {
+        "properties": {},
+        "title": "list_apostolic_fathers_booksArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "list_apostolic_fathers_booksOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "get_bible_footnote",
+      "description": "查詢聖經經文註腳（僅限 TCV 現代中文譯本）。\n    註腳提供原文翻譯的不同選擇、古卷差異說明、或其他重要補充資訊。\n\n    **重要提示**: 僅台灣聖經公會現代中文譯本 (TCV) 有註腳功能。\n    \n    Args:\n        book_id: 書卷編號 (1-66)。例如：1=創世記, 19=詩篇, 43=約翰福音, 45=羅馬書\n        footnote_id: 註腳編號（每個書卷有自己的編號系統）。從 1 開始遞增。若編號不存在，會返回空結果。\n        use_simplified: 是否使用簡體中文（預設：否）\n    ",
+      "inputSchema": {
+        "properties": {
+          "book_id": {
+            "title": "Book Id",
+            "type": "integer"
+          },
+          "footnote_id": {
+            "title": "Footnote Id",
+            "type": "integer"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "required": [
+          "book_id",
+          "footnote_id"
+        ],
+        "title": "get_bible_footnoteArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "get_bible_footnoteOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "search_fhl_articles",
+      "description": "搜尋信望愛站的文章。\n\n    可以依據標題、作者、內容、摘要、專欄、發表日期等條件搜尋。\n    **至少需要提供一個搜尋條件**。\n\n    **回傳內容**：\n    - 預設模式 (include_content=false): 返回摘要和內容預覽（約 200 字）\n    - 完整模式 (include_content=true): 返回完整 HTML 內容\n\n    回傳文章列表，包含：\n    - 標題 (title)\n    - 作者 (author)\n    - 發表日期 (pubtime)\n    - 專欄 (column)\n    - 摘要 (abst)\n    - 內容預覽 (content_preview) 或完整內容 (content, HTML 格式)\n\n    ⚠️ **注意**: FHL API 不支援通過 ID 直接獲取文章，因此若需要完整內容，\n    請在搜尋時設定 include_content=true。\n    \n    Args:\n        title: 標題關鍵字\n        author: 作者名稱\n        content: 內文關鍵字\n        abstract: 摘要關鍵字\n        column: 專欄英文代碼（如 women3）。使用 list_fhl_article_columns 工具查看可用專欄\n        pub_date: 發表日期，格式為 YYYY.MM.DD（如 2025.10.19）\n        limit: 最多回傳結果數（預設：50，範圍：1-200）\n        include_content: 是否包含完整 HTML 內容（預設：false，只返回預覽）。設為 true 會返回完整文章內容，但輸出較大。\n        use_simplified: 是否使用簡體中文（預設：false，使用繁體）\n    ",
+      "inputSchema": {
+        "properties": {
+          "title": {
+            "default": null,
+            "title": "Title",
+            "type": "string"
+          },
+          "author": {
+            "default": null,
+            "title": "Author",
+            "type": "string"
+          },
+          "content": {
+            "default": null,
+            "title": "Content",
+            "type": "string"
+          },
+          "abstract": {
+            "default": null,
+            "title": "Abstract",
+            "type": "string"
+          },
+          "column": {
+            "default": null,
+            "title": "Column",
+            "type": "string"
+          },
+          "pub_date": {
+            "default": null,
+            "title": "Pub Date",
+            "type": "string"
+          },
+          "limit": {
+            "default": 50,
+            "title": "Limit",
+            "type": "integer"
+          },
+          "include_content": {
+            "default": false,
+            "title": "Include Content",
+            "type": "boolean"
+          },
+          "use_simplified": {
+            "default": false,
+            "title": "Use Simplified",
+            "type": "boolean"
+          }
+        },
+        "title": "search_fhl_articlesArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "search_fhl_articlesOutput",
+        "type": "object"
+      }
+    },
+    {
+      "name": "list_fhl_article_columns",
+      "description": "列出信望愛站可用的文章專欄。\n\n    回傳所有可搜尋的專欄，包含：\n    - 專欄代碼 (code): 用於 search_fhl_articles 的 column 參數\n    - 專欄名稱 (name): 中文名稱\n    - 專欄說明 (description): 專欄內容簡介\n\n    使用專欄代碼可以精確搜尋特定專欄的文章。\n\n    範例：\n    - 查看所有專欄：list_fhl_article_columns()\n    - 然後使用代碼搜尋：search_fhl_articles(column=\"women3\")\n    ",
+      "inputSchema": {
+        "properties": {},
+        "title": "list_fhl_article_columnsArguments",
+        "type": "object"
+      },
+      "outputSchema": {
+        "properties": {
+          "result": {
+            "title": "Result",
+            "type": "string"
+          }
+        },
+        "required": [
+          "result"
+        ],
+        "title": "list_fhl_article_columnsOutput",
+        "type": "object"
+      }
+    }
+  ]
+}

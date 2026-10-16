@@ -59,8 +59,9 @@ Copied from the user's habit in `D:\coding\信望愛\FHLNUI\FHLNUI` (inferred fr
   (`internal/fhlapi`, mockable) → file cache (`internal/cache`). Keep domain logic independent of the SDK.
   Do not translate Python line-by-line and do not keep two registration paths (Python had `server.py` stdio +
   `http_server.py` HTTP; only the HTTP 29-tool surface is the contract baseline).
-- **Output compatibility**: Python HTTP returns JSON strings as MCP text content. Keep text content for tools
-  (don't switch to structuredContent only); preserve tool names, parameter semantics, null/empty/number-vs-string
+- **Output compatibility**: Python HTTP returns JSON strings as MCP text content. Emit BOTH text content and
+  `structuredContent: {"result": "<same string>"}` with the same per-tool `outputSchema` (user-confirmed 2026-10-16;
+  see plan §9 and `doc/m0/contract/`) — never only one of them; preserve tool names, parameter semantics, null/empty/number-vs-string
   behavior. Freeze the contract from a real `tools/list` export, not from README or code reading alone.
 - **Upstream endpoints**: Python config shows both `/api/` and `/json/` plus `https://www.fhl.net/api/json.php`
   for articles — verify per-feature endpoints, no global string replace. Parsers handle HTML/Markdown, not just JSON.

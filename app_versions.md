@@ -2,16 +2,23 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.2**
+- last: **0.0.0.3**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 目前沒有 Go 程式碼，尚無「程式內版本字串」；有了之後，`version` 指令與建置注入的版本須與 `last` 一致。
 
 ## TODOs
 
-- 🆕 新功能: M0 來源與契約：匯出 29 個工具 schema、盤點 Prompts／Resources、確認是否納入首版 (見計畫書 §13、§15)
+- 🆕 新功能: M0 來源與契約：(已匯出 29 個工具 schema 至 `doc/m0/contract/`) 盤點 Prompts／Resources、逐工具輸出取樣與差異表、確認是否納入首版 (見計畫書 §13、§15)
 - 🆕 新功能: M1 最小垂直切片：Go SDK + HTTP + 經文查詢 + `serve`，Claude Code 與 Codex 同時連線
 - ⏳ 待決定: 計畫書 §15 的待定項目 (完整功能範圍、Ubuntu／macOS 最低版、簽章公證、Smithery 相容)
+
+## 0.0.0.3
+
+- ✨ 新增: M0 契約基準 `doc/m0/contract/`：Python HTTP server 實測匯出 `initialize`、`tools/list` (29 個工具含 inputSchema / outputSchema)、空的 prompts / resources 列表、3 筆 `tools/call` 樣本，附 `README.md` 整理事實
+- ✨ 新增: 決定輸出格式：Go 版同時輸出 text content 與 `structuredContent{result}`，並宣告相同 `outputSchema` (計畫書 §9、`.claude/CLAUDE.md` 已同步)
+- 🐞 發現: Python 原版 `get_book_info` 查無書卷時回 `InvalidParameterError.__init__() missing ... 'value'` (例外建構錯誤)，Go 版歸為明確 bug fix，錯誤格式待定
+- ℹ️ 說明: HTTP 入口的 Prompts / Resources 皆為 0 項 (19 Prompts、7 類 Resources 僅存在於 stdio 的 `server.py`)；其餘 27 個工具尚未取樣輸出；仍無 Go 程式碼
 
 ## 0.0.0.2
 

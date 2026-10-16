@@ -1,0 +1,35 @@
+{
+  "list_audio_versions:{}": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"total_count\": 19,\n  \"versions\": [\n    {\n      \"code\": \"unv\",\n      \"id\": 0,\n      \"name\": \"和合本\"\n    },\n    {\n      \"code\": \"taiwanese\",\n      \"id\": 1,\n      \"name\": \"台語\"\n    },\n    {\n      \"code\": \"hakka\",\n      \"id\": 2,\n      \"name\": \"客家話\"\n    },\n    {\n      \"code\": \"cantonese\",\n      \"id\": 3,\n      \"name\": \"廣東話\"\n    },\n    {\n      \"code\": \"tcv\",\n      \"id\": 4,\n      \"name\": \"現代中文譯本\"\n    },\n    {\n      \"code\": \"taiwanese_nt\",\n      \"id\": 5,\n      \"name\": \"台語新約\"\n    },\n    {\n      \"code\": \"red_bible\",\n      \"id\": 6,\n      \"name\": \"紅皮聖經\"\n    },\n    {\n      \"code\": \"hebrew\",\n      \"id\": 7,\n      \"name\": \"希伯來文\"\n    },\n    {\n      \"code\": \"fuzhou\",\n      \"id\": 8,\n      \"name\": \"福州話\"\n    },\n    {\n      \"code\": \"greek\",\n      \"id\": 9,\n      \"name\": \"希臘文\"\n    },\n    {\n      \"code\": \"spring_taiwanese\",\n      \"id\": 10,\n      \"name\": \"Spring台語\"\n    },\n    {\n      \"code\": \"spring_unv\",\n      \"id\": 11,\n      \"name\": \"Spring和合本\"\n    },\n    {\n      \"code\": \"netbible_chinese\",\n      \"id\": 12,\n      \"name\": \"NetBible中文版\"\n    },\n    {\n      \"code\": \"pct\",\n      \"id\": 13,\n      \"name\": \"全民台語聖經\"\n    },\n    {\n      \"code\": \"tsou\",\n      \"id\": 14,\n      \"name\": \"鄒語\"\n    },\n    {\n      \"code\": \"taiwanese_south\",\n      \"id\": 15,\n      \"name\": \"台語南部腔\"\n    },\n    {\n      \"code\": \"modern_taiwanese\",\n      \"id\": 17,\n      \"name\": \"現代台語譯本\"\n    },\n    {\n      \"code\": \"modern_hakka\",\n      \"id\": 18,\n      \"name\": \"現代客語譯本\"\n    },\n    {\n      \"code\": \"tao\",\n      \"id\": 19,\n      \"name\": \"達悟語\"\n    }\n  ]\n}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\n  \"total_count\": 19,\n  \"versions\": [\n    {\n      \"code\": \"unv\",\n      \"id\": 0,\n      \"name\": \"和合本\"\n    },\n    {\n      \"code\": \"taiwanese\",\n      \"id\": 1,\n      \"name\": \"台語\"\n    },\n    {\n      \"code\": \"hakka\",\n      \"id\": 2,\n      \"name\": \"客家話\"\n    },\n    {\n      \"code\": \"cantonese\",\n      \"id\": 3,\n      \"name\": \"廣東話\"\n    },\n    {\n      \"code\": \"tcv\",\n      \"id\": 4,\n      \"name\": \"現代中文譯本\"\n    },\n    {\n      \"code\": \"taiwanese_nt\",\n      \"id\": 5,\n      \"name\": \"台語新約\"\n    },\n    {\n      \"code\": \"red_bible\",\n      \"id\": 6,\n      \"name\": \"紅皮聖經\"\n    },\n    {\n      \"code\": \"hebrew\",\n      \"id\": 7,\n      \"name\": \"希伯來文\"\n    },\n    {\n      \"code\": \"fuzhou\",\n      \"id\": 8,\n      \"name\": \"福州話\"\n    },\n    {\n      \"code\": \"greek\",\n      \"id\": 9,\n      \"name\": \"希臘文\"\n    },\n    {\n      \"code\": \"spring_taiwanese\",\n      \"id\": 10,\n      \"name\": \"Spring台語\"\n    },\n    {\n      \"code\": \"spring_unv\",\n      \"id\": 11,\n      \"name\": \"Spring和合本\"\n    },\n    {\n      \"code\": \"netbible_chinese\",\n      \"id\": 12,\n      \"name\": \"NetBible中文版\"\n    },\n    {\n      \"code\": \"pct\",\n      \"id\": 13,\n      \"name\": \"全民台語聖經\"\n    },\n    {\n      \"code\": \"tsou\",\n      \"id\": 14,\n      \"name\": \"鄒語\"\n    },\n    {\n      \"code\": \"taiwanese_south\",\n      \"id\": 15,\n      \"name\": \"台語南部腔\"\n    },\n    {\n      \"code\": \"modern_taiwanese\",\n      \"id\": 17,\n      \"name\": \"現代台語譯本\"\n    },\n    {\n      \"code\": \"modern_hakka\",\n      \"id\": 18,\n      \"name\": \"現代客語譯本\"\n    },\n    {\n      \"code\": \"tao\",\n      \"id\": 19,\n      \"name\": \"達悟語\"\n    }\n  ]\n}"
+    },
+    "isError": false
+  },
+  "get_book_info:{\"book\": \"約\"}": {
+    "content": [
+      {
+        "type": "text",
+        "text": "{\n  \"id\": 43,\n  \"testament\": \"NT\",\n  \"names\": {\n    \"english\": {\n      \"short\": \"John\",\n      \"full\": \"John\"\n    },\n    \"chinese\": {\n      \"short\": \"約\",\n      \"full\": \"約翰福音\"\n    }\n  }\n}"
+      }
+    ],
+    "structuredContent": {
+      "result": "{\n  \"id\": 43,\n  \"testament\": \"NT\",\n  \"names\": {\n    \"english\": {\n      \"short\": \"John\",\n      \"full\": \"John\"\n    },\n    \"chinese\": {\n      \"short\": \"約\",\n      \"full\": \"約翰福音\"\n    }\n  }\n}"
+    },
+    "isError": false
+  },
+  "get_book_info:{\"book\": \"不存在書卷\"}": {
+    "content": [
+      {
+        "type": "text",
+        "text": "Error executing tool get_book_info: InvalidParameterError.__init__() missing 1 required positional argument: 'value'"
+      }
+    ],
+    "isError": true
+  }
+}
