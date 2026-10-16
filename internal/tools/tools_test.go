@@ -88,10 +88,10 @@ func TestGetBibleVerseValidationErrors(t *testing.T) {
 
 func TestNotImplemented(t *testing.T) {
 	r := NewRegistry(&bible.Service{API: &fakeAPI{}})
-	if r.Implemented("get_book_list") {
-		t.Fatal("get_book_list should not be implemented in the M1 slice")
+	if r.Implemented("list_bible_versions") {
+		t.Fatal("list_bible_versions should not be implemented yet")
 	}
-	if _, err := r.Call(context.Background(), "get_book_list", nil); !errors.Is(err, ErrNotImplemented) {
+	if _, err := r.Call(context.Background(), "list_bible_versions", nil); !errors.Is(err, ErrNotImplemented) {
 		t.Fatalf("err = %v", err)
 	}
 }

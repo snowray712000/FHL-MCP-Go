@@ -1,0 +1,35 @@
+{
+  "version": "unv",
+  "version_name": "FHL和合本",
+  "record_count": 2,
+  "verses": [
+    {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 16,
+      "text": "「　神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。"
+    },
+    {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 17,
+      "text": "因為　神差他的兒子降世，不是要定世人的罪（或譯：審判世人；下同），乃是要叫世人因他得救。"
+    }
+  ],
+  "navigation": {
+    "prev": {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 15
+    },
+    "next": {
+      "book": "約",
+      "book_eng": "John",
+      "chapter": 3,
+      "verse": 18
+    }
+  }
+}

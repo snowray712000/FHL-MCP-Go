@@ -187,7 +187,7 @@ func TestToolErrorsAreIsErrorResults(t *testing.T) {
 		wants string
 	}{
 		{"unknown tool (D2)", "no_such_tool", map[string]any{}, "Error executing tool no_such_tool: Unknown tool: no_such_tool"},
-		{"not implemented", "get_book_list", map[string]any{}, "Error executing tool get_book_list: Tool 'get_book_list' is not implemented yet in this build"},
+		{"not implemented", "list_bible_versions", map[string]any{}, "Error executing tool list_bible_versions: Tool 'list_bible_versions' is not implemented yet in this build"},
 		{"missing book", "get_bible_verse", map[string]any{"chapter": 3}, "Error executing tool get_bible_verse: Invalid parameter 'book': required parameter is missing"},
 		{"unknown book (D3)", "get_bible_verse", map[string]any{"book": "不存在書卷", "chapter": 1}, "Error executing tool get_bible_verse: Invalid parameter 'book': 不存在書卷 - Book not found. Please check the spelling or use a valid book code."},
 	}

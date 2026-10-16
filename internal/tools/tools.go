@@ -25,6 +25,30 @@ func NewRegistry(svc *bible.Service) *Registry {
 	r.handlers["get_bible_verse"] = func(ctx context.Context, a args) (string, error) {
 		return getBibleVerse(ctx, svc, a)
 	}
+	r.handlers["get_bible_chapter"] = func(ctx context.Context, a args) (string, error) {
+		return getBibleChapter(ctx, svc, a)
+	}
+	r.handlers["query_verse_citation"] = func(ctx context.Context, a args) (string, error) {
+		return queryVerseCitation(ctx, svc, a)
+	}
+	r.handlers["get_book_list"] = func(_ context.Context, a args) (string, error) {
+		testament, err := a.optString("testament", "all")
+		if err != nil {
+			return "", err
+		}
+		return bible.MarshalIndent2(bible.BookList(testament))
+	}
+	r.handlers["get_book_info"] = func(_ context.Context, a args) (string, error) {
+		book, err := a.requiredString("book")
+		if err != nil {
+			return "", err
+		}
+		res, err := bible.BookInfo(book)
+		if err != nil {
+			return "", err
+		}
+		return bible.MarshalIndent2(res)
+	}
 	return r
 }
 
@@ -77,6 +101,54 @@ func getBibleVerse(ctx context.Context, svc *bible.Service, a args) (string, err
 		Book: book, Chapter: chapter, Verse: verse, Version: version,
 		IncludeStrong: strong, UseSimplified: simplified,
 	})
+	if err != nil {
+		return "", err
+	}
+	return bible.MarshalIndent2(res)
+}
+
+func getBibleChapter(ctx context.Context, svc *bible.Service, a args) (string, error) {
+	book, err := a.requiredString("book")
+	if err != nil {
+		return "", err
+	}
+	chapter, err := a.requiredInt("chapter")
+	if err != nil {
+		return "", err
+	}
+	version, err := a.optString("version", "unv")
+	if err != nil {
+		return "", err
+	}
+	simplified, err := a.optBool("use_simplified", false)
+	if err != nil {
+		return "", err
+	}
+	res, err := svc.GetChapter(ctx, book, chapter, version, simplified)
+	if err != nil {
+		return "", err
+	}
+	return bible.MarshalIndent2(res)
+}
+
+func queryVerseCitation(ctx context.Context, svc *bible.Service, a args) (string, error) {
+	citation, err := a.requiredString("citation")
+	if err != nil {
+		return "", err
+	}
+	version, err := a.optString("version", "unv")
+	if err != nil {
+		return "", err
+	}
+	strong, err := a.optBool("include_strong", false)
+	if err != nil {
+		return "", err
+	}
+	simplified, err := a.optBool("use_simplified", false)
+	if err != nil {
+		return "", err
+	}
+	res, err := svc.QueryCitation(ctx, bible.CitationParams{Citation: citation, Version: version, IncludeStrong: strong, UseSimplified: simplified})
 	if err != nil {
 		return "", err
 	}

@@ -1,0 +1,195 @@
+{
+  "total_count": 27,
+  "testament": "NT",
+  "books": [
+    {
+      "id": 40,
+      "eng_short": "Matt",
+      "eng_full": "Matthew",
+      "chi_short": "太",
+      "chi_full": "馬太福音"
+    },
+    {
+      "id": 41,
+      "eng_short": "Mark",
+      "eng_full": "Mark",
+      "chi_short": "可",
+      "chi_full": "馬可福音"
+    },
+    {
+      "id": 42,
+      "eng_short": "Luke",
+      "eng_full": "Luke",
+      "chi_short": "路",
+      "chi_full": "路加福音"
+    },
+    {
+      "id": 43,
+      "eng_short": "John",
+      "eng_full": "John",
+      "chi_short": "約",
+      "chi_full": "約翰福音"
+    },
+    {
+      "id": 44,
+      "eng_short": "Acts",
+      "eng_full": "Acts",
+      "chi_short": "徒",
+      "chi_full": "使徒行傳"
+    },
+    {
+      "id": 45,
+      "eng_short": "Rom",
+      "eng_full": "Romans",
+      "chi_short": "羅",
+      "chi_full": "羅馬書"
+    },
+    {
+      "id": 46,
+      "eng_short": "1Cor",
+      "eng_full": "1 Corinthians",
+      "chi_short": "林前",
+      "chi_full": "哥林多前書"
+    },
+    {
+      "id": 47,
+      "eng_short": "2Cor",
+      "eng_full": "2 Corinthians",
+      "chi_short": "林後",
+      "chi_full": "哥林多後書"
+    },
+    {
+      "id": 48,
+      "eng_short": "Gal",
+      "eng_full": "Galatians",
+      "chi_short": "加",
+      "chi_full": "加拉太書"
+    },
+    {
+      "id": 49,
+      "eng_short": "Eph",
+      "eng_full": "Ephesians",
+      "chi_short": "弗",
+      "chi_full": "以弗所書"
+    },
+    {
+      "id": 50,
+      "eng_short": "Phil",
+      "eng_full": "Philippians",
+      "chi_short": "腓",
+      "chi_full": "腓立比書"
+    },
+    {
+      "id": 51,
+      "eng_short": "Col",
+      "eng_full": "Colossians",
+      "chi_short": "西",
+      "chi_full": "歌羅西書"
+    },
+    {
+      "id": 52,
+      "eng_short": "1Thess",
+      "eng_full": "1 Thessalonians",
+      "chi_short": "帖前",
+      "chi_full": "帖撒羅尼迦前書"
+    },
+    {
+      "id": 53,
+      "eng_short": "2Thess",
+      "eng_full": "2 Thessalonians",
+      "chi_short": "帖後",
+      "chi_full": "帖撒羅尼迦後書"
+    },
+    {
+      "id": 54,
+      "eng_short": "1Tim",
+      "eng_full": "1 Timothy",
+      "chi_short": "提前",
+      "chi_full": "提摩太前書"
+    },
+    {
+      "id": 55,
+      "eng_short": "2Tim",
+      "eng_full": "2 Timothy",
+      "chi_short": "提後",
+      "chi_full": "提摩太後書"
+    },
+    {
+      "id": 56,
+      "eng_short": "Titus",
+      "eng_full": "Titus",
+      "chi_short": "多",
+      "chi_full": "提多書"
+    },
+    {
+      "id": 57,
+      "eng_short": "Philem",
+      "eng_full": "Philemon",
+      "chi_short": "門",
+      "chi_full": "腓利門書"
+    },
+    {
+      "id": 58,
+      "eng_short": "Heb",
+      "eng_full": "Hebrews",
+      "chi_short": "來",
+      "chi_full": "希伯來書"
+    },
+    {
+      "id": 59,
+      "eng_short": "James",
+      "eng_full": "James",
+      "chi_short": "雅",
+      "chi_full": "雅各書"
+    },
+    {
+      "id": 60,
+      "eng_short": "1Pet",
+      "eng_full": "1 Peter",
+      "chi_short": "彼前",
+      "chi_full": "彼得前書"
+    },
+    {
+      "id": 61,
+      "eng_short": "2Pet",
+      "eng_full": "2 Peter",
+      "chi_short": "彼後",
+      "chi_full": "彼得後書"
+    },
+    {
+      "id": 62,
+      "eng_short": "1John",
+      "eng_full": "1 John",
+      "chi_short": "約壹",
+      "chi_full": "約翰一書"
+    },
+    {
+      "id": 63,
+      "eng_short": "2John",
+      "eng_full": "2 John",
+      "chi_short": "約貳",
+      "chi_full": "約翰二書"
+    },
+    {
+      "id": 64,
+      "eng_short": "3John",
+      "eng_full": "3 John",
+      "chi_short": "約參",
+      "chi_full": "約翰三書"
+    },
+    {
+      "id": 65,
+      "eng_short": "Jude",
+      "eng_full": "Jude",
+      "chi_short": "猶",
+      "chi_full": "猶大書"
+    },
+    {
+      "id": 66,
+      "eng_short": "Rev",
+      "eng_full": "Revelation",
+      "chi_short": "啟",
+      "chi_full": "啟示錄"
+    }
+  ]
+}
