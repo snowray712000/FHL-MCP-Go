@@ -12,9 +12,11 @@ part of the default run; default tests use fixtures/mocks.
 
 The plan is the source of truth for scope, CLI, and milestones (M0–M6). **First release = the 29 Tools only**
 (user-decided 2026-10-16): the 19 Prompts and 7 Resource URIs are deferred to M4 / next version — do not build
-`internal/prompts`, `internal/resources`, or advertise those capabilities in the first release. Items the plan still
-marks undecided (§15: platform minimums, signing, Smithery compat) must not be silently decided — ask the user,
-or record the assumption in an ai-log entry.
+`internal/prompts`, `internal/resources`, or advertise those capabilities in the first release. Plan §15 is fully
+decided (2026-10-16): Ubuntu 22.04/24.04 x64 + macOS 12+ arm64 (final macOS floor locked in M1) + Windows x64;
+first release is a beta with no code signing/notarization; no Smithery or root-path `/` compat (`/mcp` only). The
+approved Python-vs-Go behavior differences are in plan §9 (D2–D12). Anything the plan still leaves open must not be
+silently decided — ask the user, or record the assumption in an ai-log entry.
 
 Reference implementation (read-only, never modify): `D:\coding\信望愛\FHL-MCP-Server` (Python). It has
 uncommitted/untracked files that must be included when capturing contracts (`tools/parsing_reference.py`,

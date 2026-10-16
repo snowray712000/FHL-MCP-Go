@@ -2,16 +2,22 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.5**
+- last: **0.0.0.6**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 目前沒有 Go 程式碼，尚無「程式內版本字串」；有了之後，`version` 指令與建置注入的版本須與 `last` 一致。
 
 ## TODOs
 
-- 🆕 新功能: M0 來源與契約：(已匯出 29 個工具 schema 至 `doc/m0/contract/`；已盤點 Prompts／Resources 至 `doc/m0/prompts-resources-inventory.md`) (已取樣 29 個工具並產出 `doc/m0/tool-matrix.md` 差異清單 D1–D16；D2–D12 已核准並寫入計畫書 §9) §15 剩餘項確認、M0 退出檢查 (見計畫書 §13)
-- 🆕 新功能: M1 最小垂直切片：Go SDK + HTTP + 經文查詢 + `serve`，Claude Code 與 Codex 同時連線
-- ⏳ 待決定: 計畫書 §15 的待定項目 (Ubuntu／macOS 最低版、簽章公證、Smithery 相容)；Prompts／Resources 已定案移至下一版本 (M4)
+- 🆕 新功能: M1 最小垂直切片：鎖定 Go 與 `go-sdk` 版本、HTTP `/mcp`、經文查詢、`serve`，Claude Code 與 Codex 同時連線
+- 🆕 新功能: M1 早期試驗：(a) 未知工具回 `isError` 結果 (D2)、(b) text + `structuredContent{result}` + `outputSchema` (D1)、(c) Host／Origin 驗證、(d) 所選 Go 工具鏈對 macOS 12 的支援
+- ⏳ 待決定: macOS 最低版待 M1 選定 Go 工具鏈並實機驗證後鎖定
+
+## 0.0.0.6
+
+- ✨ 新增: M0 收尾：計畫書 §15 全部定案 — 專案名稱 `FHL-MCP-Go`；首版只交付 29 Tools；平台 Ubuntu 22.04/24.04 x64 + macOS 12+ arm64 (最終 macOS 最低版 M1 鎖定) + Windows x64；首版 beta 不簽章、不公證；不做 Smithery 與根路徑 `/` 相容 (只提供 `/mcp`)
+- ✨ 新增: `.claude/CLAUDE.md` 同步 §15 定案與 D2–D12 核准；`code/ai-log/261016l` 記錄決策與 M1 試驗清單
+- ℹ️ 說明: M0 退出條件全部滿足 (來源 manifest、契約基準、Prompts／Resources 盤點、工具矩陣與差異清單、範圍與平台定案)；仍無 Go 程式碼，下一步為 M1
 
 ## 0.0.0.5
 
