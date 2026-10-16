@@ -89,6 +89,17 @@ func (c *Client) Manual(mcpURL string) string {
 	return fmt.Sprintf("codex mcp add %s --url %s", ServerName, mcpURL)
 }
 
+// InstallHint tells a user whose CLI is not on PATH how to get it (npm works the same on
+// Windows, macOS and Linux) and what to do afterwards. It never installs anything itself.
+func (c *Client) InstallHint() string {
+	pkg := "@openai/codex"
+	if c.ID == Claude {
+		pkg = "@anthropic-ai/claude-code"
+	}
+	return fmt.Sprintf("還沒安裝的話，可先安裝 (需要 Node.js)：npm i -g %s\n"+
+		"    裝好後請開一個新的終端機視窗再重新執行；若已安裝卻仍找不到，多半是 npm 的全域資料夾 (npm prefix -g 可查) 不在 PATH。", pkg)
+}
+
 // Detect locates the CLI.
 func (c *Client) Detect() (string, error) { return c.R.LookPath(c.Binary) }
 

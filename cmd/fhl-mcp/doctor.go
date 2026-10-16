@@ -146,6 +146,7 @@ func doctorCmd(args []string, stdout, stderr io.Writer) int {
 		switch {
 		case err != nil && (errors.Is(err, exec.ErrNotFound) || errors.Is(err, os.ErrNotExist)):
 			d.warn("%s：找不到 %s 命令列工具 (不在 PATH)；沒裝可略過，要手動連接：%s", c.Title, c.Binary, c.Manual(url))
+			d.hint("%s", c.InstallHint())
 		case err != nil:
 			d.bad("%s：讀取登錄狀態失敗：%v", c.Title, err)
 		case !reg.Found:

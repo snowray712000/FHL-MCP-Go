@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.22**
+- last: **0.0.0.23**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 程式內版本字串在 `internal/version/version.go`，須與 `last` 一致 (有測試檢查)；`fhl-mcp version` 會顯示。
@@ -16,6 +16,7 @@
 
 ## TODOs
 
+- ✨ 優化: 「用引用查經文」放寬書卷名後面一定要有空格的限制（現在 `約 3:16` 可以、`約3:16` 會被拒絕，這是原 Python 版就有的行為，D10 先照原樣；Codex 實測時 AI 第一次就用了 `約3:16`，要多重試一次才成功）。怎麼放寬、書名本身含數字的寫法（如 `1John3:16`）怎麼處理，之後再研究
 - ✨ 優化: 上游暫時失敗時自動重試，並控制對信望愛網站送出請求的速度（目前有快取與合併相同請求，但還沒有重試與限速）
 - ✨ 優化: 在 Codex 實際連線驗證，包括 `setup`／`disconnect`／`doctor` 對 Codex 的部分（這台電腦只找到 Codex 桌面版，沒有命令列工具，尚未測；讀取登錄狀態的寫法是依 Codex 文件推測的）
 - ✨ 優化: 在 Mac 與 Ubuntu 上實際試 `setup`／`serve`／`stop` 與兩個 `.command` 雙擊入口（目前只在 Windows 實測）
@@ -29,6 +30,14 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 0.0.0.23
+
+- 🆕 新功能: Ubuntu 的發佈包現在附 `setup.sh`（首次設定）與 `start.sh`（啟動服務），在終端機執行 `./setup.sh`、`./start.sh` 即可，不必自己打 `fhl-mcp` 完整指令。
+- ✨ 優化: `setup`（以及 `doctor`）找不到 Claude Code 或 Codex 時，現在會多告訴你怎麼辦：先用 `npm i -g @anthropic-ai/claude-code`（Claude Code）或 `npm i -g @openai/codex`（Codex）安裝，裝好後開一個新的終端機視窗再執行一次。已在 Windows 與 Mac 上驗證照這個做法就能成功連接。
+- ℹ️ 說明: `doc/快速開始.md` 新增 Ubuntu 的解壓縮與執行步驟，以及找不到 CLI 時的處理。
+- 📝工程師筆記-✨新增: `scripts/setup.sh`、`scripts/start.sh`（0755，LF，`exec ./fhl-mcp setup|serve "$@"`）；`tools/release` 的 linux 目標納入並加進稽核白名單。
+- 📝工程師筆記-✨新增: `clients.Client.InstallHint()`，在 `setup` 印出手動指令的同一處（CLIMissing 且為 setup 時）與 `doctor` 的客戶端登錄節印出；只印文字，不會自動安裝。Mac 實測回報：npm 全域安裝後 `setup` 成功。未做：PATH 以外的常見位置備援搜尋（`~/.local/bin`、`/opt/homebrew/bin` 等），有需要再補。
 
 ## 0.0.0.22
 

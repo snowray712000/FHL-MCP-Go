@@ -261,6 +261,9 @@ func TestSetupReportsEachClientAndExitCodes(t *testing.T) {
 	if code != 0 || !strings.Contains(out, "codex mcp add fhl --url http://127.0.0.1:"+p+"/mcp") || !strings.Contains(out, "服務目前沒有執行") {
 		t.Errorf("claude only: %d %q", code, out)
 	}
+	if !strings.Contains(out, "npm i -g @openai/codex") {
+		t.Errorf("setup lacks the codex install hint: %q", out)
+	}
 	// Explicitly asking for the missing client is a failure.
 	if code, _, _ := sh(t, "setup", "--client", "codex", "--port", p, "--data-dir", dd); code != 1 {
 		t.Errorf("explicit missing client: exit %d, want 1", code)
@@ -308,6 +311,9 @@ func TestDoctor(t *testing.T) {
 		if !strings.Contains(out, want) {
 			t.Errorf("doctor output lacks %q:\n%s", want, out)
 		}
+	}
+	if !strings.Contains(out, "npm i -g @openai/codex") {
+		t.Errorf("doctor lacks the codex install hint:\n%s", out)
 	}
 	if code != 0 {
 		t.Errorf("exit %d, want 0 (warnings only):\n%s", code, out)

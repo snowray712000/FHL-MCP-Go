@@ -239,6 +239,8 @@ func buildFiles(root, staging string, t target, top, ver, stamp, date string) ([
 		scripts, crlf = []string{"啟動-FHL-MCP.cmd", "首次設定.cmd"}, true
 	case "darwin":
 		scripts = []string{"Start-FHL-MCP.command", "Setup.command"}
+	case "linux":
+		scripts = []string{"start.sh", "setup.sh"}
 	}
 	for _, s := range scripts {
 		b, err := read("scripts/" + s)
@@ -372,7 +374,7 @@ func writeTarGz(path, top string, files []file, when time.Time) error {
 // Built-in file lists are tiny and fixed, so the check is "no unexpected files" plus
 // "no local path / home directory / user name strings in any file".
 func audit(root string, files []file) error {
-	allowed := regexp.MustCompile(`^(fhl-mcp(\.exe)?|LICENSE|THIRD_PARTY_NOTICES\.md|快速開始\.md|啟動-FHL-MCP\.cmd|首次設定\.cmd|Start-FHL-MCP\.command|Setup\.command)$`)
+	allowed := regexp.MustCompile(`^(fhl-mcp(\.exe)?|LICENSE|THIRD_PARTY_NOTICES\.md|快速開始\.md|啟動-FHL-MCP\.cmd|首次設定\.cmd|Start-FHL-MCP.command|Setup.command|start.sh|setup.sh)$`)
 	forbidden := map[string]bool{}
 	add := func(s string) {
 		if len(s) >= 4 {

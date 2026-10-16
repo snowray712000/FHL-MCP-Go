@@ -175,6 +175,7 @@ func printOutcome(w io.Writer, o clients.Outcome, url string, setup bool) {
 	case clients.CLIMissing:
 		if setup {
 			fmt.Fprintf(w, "－ %s：找不到 %s 命令列工具 (不在 PATH)，沒有變更。要手動連接請執行：\n    %s\n", name, o.Client.Binary, o.Client.Manual(url))
+			fmt.Fprintf(w, "  %s\n", o.Client.InstallHint())
 		} else {
 			fmt.Fprintf(w, "－ %s：找不到 %s 命令列工具，略過。\n", name, o.Client.Binary)
 		}
