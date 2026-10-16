@@ -20,6 +20,7 @@ type API interface {
 	AudioAPI
 	ScriptureAPI
 	FootnoteAPI
+	ArticleAPI
 }
 
 // Service holds the Bible domain logic. It does not know about MCP.

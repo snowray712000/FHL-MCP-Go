@@ -442,7 +442,7 @@ func TestCacheMergesConcurrentRequests(t *testing.T) {
 }
 
 func TestEveryEndpointHasACachePolicy(t *testing.T) {
-	for _, ep := range []string{"qb.php", "ab.php", "se.php", "sd.php", "qp.php", "sc.php", "ssc.php", "st.php", "au.php", "qsub.php", "qaf.php", "sesub.php", "seaf.php", "rt.php"} {
+	for _, ep := range []string{"qb.php", "ab.php", "se.php", "sd.php", "qp.php", "sc.php", "ssc.php", "st.php", "au.php", "qsub.php", "qaf.php", "sesub.php", "seaf.php", "rt.php", "json.php"} {
 		if _, ok := endpointTTL[ep]; !ok {
 			t.Errorf("%s has no cache policy", ep)
 		}
@@ -559,5 +559,45 @@ func TestRTQueryAndNotFound(t *testing.T) {
 	res, err = c.RT(context.Background(), 999, 999, false)
 	if err != nil || res.RecordCount != 0 || len(res.Record) != 0 {
 		t.Errorf("not found: %v %+v", err, res)
+	}
+}
+
+func TestArticlesQueryServerAndCache(t *testing.T) {
+	n := 0
+	var path, query string
+	body := "articles_title_ai.json"
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		n++
+		path, query = r.URL.Path, r.URL.RawQuery
+		_, _ = w.Write(fixture(t, body))
+	}))
+	t.Cleanup(srv.Close)
+	// The article search lives on another server than BaseURL; BaseURL must stay unused.
+	c := &Client{BaseURL: "http://127.0.0.1:1/unused", ArticlesBaseURL: srv.URL + "/api", HTTP: srv.Client(), Cache: cache.New(t.TempDir(), 0)}
+	q := ArticleQuery{Title: "愛", Column: "women3", Simplified: true}
+	res, err := c.Articles(context.Background(), q)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if path != "/api/json.php" || query != "gb=1&ptab=women3&title=%E6%84%9B" {
+		t.Errorf("request = %s?%s", path, query)
+	}
+	if res.Status != 1 || res.RecordCount != 3 || len(res.Record) != 3 || string(res.Record[0].ID) != `"9247"` || len(res.Record[0].Txt) == 0 {
+		t.Errorf("response = %+v", res)
+	}
+	// status 1 is a success that may be cached, a second identical query is answered from disk.
+	if _, err := c.Articles(context.Background(), q); err != nil || n != 1 {
+		t.Errorf("err=%v requests=%d, want a cache hit", err, n)
+	}
+	// "no data" (status 0) comes back as a normal answer and is not cached.
+	body = "articles_none.json"
+	for i := 0; i < 2; i++ {
+		res, err = c.Articles(context.Background(), ArticleQuery{Title: "zzqqxx"})
+		if err != nil || res.Status != 0 || res.Result != "no data" {
+			t.Fatalf("no data: %v %+v", err, res)
+		}
+	}
+	if n != 3 {
+		t.Errorf("requests = %d, want 3 (failures are asked again)", n)
 	}
 }

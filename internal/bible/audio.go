@@ -100,7 +100,7 @@ func jsonOrNull(raw json.RawMessage) json.RawMessage {
 	if len(raw) == 0 {
 		return json.RawMessage("null")
 	}
-	return raw
+	return norm(raw)
 }
 
 func present(raw json.RawMessage) bool { return truthy(rawOr(raw, nil)) }
@@ -129,17 +129,17 @@ func (s *Service) GetAudio(ctx context.Context, book string, chapter int, audioV
 		Chapter:     jsonOrNull(resp.Chap),
 	}
 	if present(resp.MP3) {
-		out.AudioFiles.MP3 = resp.MP3
+		out.AudioFiles.MP3 = norm(resp.MP3)
 	}
 	if present(resp.OGG) {
-		out.AudioFiles.OGG = resp.OGG
+		out.AudioFiles.OGG = norm(resp.OGG)
 	}
 	var nav AudioNavigation
 	if present(resp.PBID) && present(resp.PChap) {
-		nav.Prev = &AudioNav{BookID: resp.PBID, Book: jsonOrNull(resp.PChinesef), Chapter: resp.PChap}
+		nav.Prev = &AudioNav{BookID: norm(resp.PBID), Book: jsonOrNull(resp.PChinesef), Chapter: norm(resp.PChap)}
 	}
 	if present(resp.NBID) && present(resp.NChap) {
-		nav.Next = &AudioNav{BookID: resp.NBID, Book: jsonOrNull(resp.NChinesef), Chapter: resp.NChap}
+		nav.Next = &AudioNav{BookID: norm(resp.NBID), Book: jsonOrNull(resp.NChinesef), Chapter: norm(resp.NChap)}
 	}
 	if nav.Prev != nil || nav.Next != nil {
 		out.Navigation = &nav

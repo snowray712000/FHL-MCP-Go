@@ -299,3 +299,7 @@ func (f *searchAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchRe
 func (f *searchAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error) {
 	return nil, errors.New("RT not expected in this test")
 }
+
+func (f *searchAPI) Articles(context.Context, fhlapi.ArticleQuery) (*fhlapi.ArticlesResponse, error) {
+	return nil, errors.New("Articles not expected in this test")
+}

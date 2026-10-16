@@ -85,6 +85,7 @@ func NewRegistry(svc *bible.Service) *Registry {
 	r.registerAudio(svc)
 	r.registerScripture(svc)
 	r.registerFootnote(svc)
+	r.registerArticles(svc)
 	return r
 }
 

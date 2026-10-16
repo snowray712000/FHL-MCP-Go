@@ -1,0 +1,36 @@
+{
+  "status": "success",
+  "query_type": "article_search",
+  "total_count": 3,
+  "returned_count": 3,
+  "include_full_content": false,
+  "articles": [
+    {
+      "id": "9247",
+      "title": "舊約裡的基督▪慈繩愛索",
+      "author": "小佑哥哥",
+      "pubtime": "2026.10.04",
+      "column": "家庭之歌",
+      "abstract": "\n何西阿娶了行為不檢的女人為妻，容忍她屢次背叛，則是遙遙指著耶穌對罪人的接納。 ",
+      "content_preview": "\n2026100401.jpg\n\n插圖繪製／Dorothy\n\n\n\n地點：何西阿書\n\n\n夥伴：聖父、何西阿\n\n\n何西阿的臉色，說有多難看，就有多難看，因為上帝初次對他說話，就給他一個很艱難的挑戰──竟然要他娶那位素行放蕩的女子歌篾！婚姻是何等大的事，若真娶了那個女子，可以想見他會馬上出名，壞事傳千里那種。\n\n\n何西阿第一個想到的是父母及親友必然會好言規勸，叫他可別那麼隨便吧！然後街坊鄰居一定會把他當..."
+    },
+    {
+      "id": "9248",
+      "title": "說好了愛你到底",
+      "author": "桃樂斯",
+      "pubtime": "2026.10.04",
+      "column": "信望愛閱讀",
+      "abstract": "\n我們知道上帝是信實的，凡有生命的必不再被洪水除滅，再沒有洪水來毀滅大地了，這就是彩虹之約的意義...... ",
+      "content_preview": "\nkellytf-children-1100507.jpg\n\n圖片提供／Kelly Taylor-Faye from Pixabay\n\n\n\n看到雨後的彩虹，總是會讓人感到心情愉悅，大部分人第一個反應是拿起手機拍照，然後分享到網路社群。但身為基督徒，會自然而然聯想到彩虹是上帝立約的記號，是上帝賜給人類的恩典。\n\n\n小朋友上兒童主日學時，應該都聽過老師說挪亞方舟的故事吧？故事中，義人挪亞聽從上帝的吩咐..."
+    },
+    {
+      "id": "9244",
+      "title": "利亞最後有沒有得到雅各的愛？神若沒改變令我痛苦的關係該怎麼辦？",
+      "author": "Monica Augustine Chen",
+      "pubtime": "2026.09.27",
+      "column": "網路作家Ⅱ",
+      "abstract": "\n利亞不需要透過丈夫的愛證明自己值得被愛，在神的救贖故事中，她不是多餘的人。 ",
+      "content_preview": "\nmetz_der_tod_rahels_edited.jpg\n\n《拉結生便雅憫後之死》（Der Tod Rahels nach der Geburt Benjamins），古斯塔夫．斐迪南．梅茨（Gustav Ferdinand Metz）。（圖片來源／WIKIMEDIA COMMONS）\n\n\n\n《犀利人妻》裡朱芯儀飾演的黎薇恩為了合理化自己介入溫瑞凡（溫昇豪飾）與謝安真（隋棠飾）婚姻的行為所說..."
+    }
+  ]
+}

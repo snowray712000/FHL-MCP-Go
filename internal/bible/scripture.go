@@ -188,7 +188,7 @@ func rawOrDefault(raw json.RawMessage, def string) json.RawMessage {
 	if len(raw) == 0 {
 		return json.RawMessage(def)
 	}
-	return raw
+	return norm(raw)
 }
 
 func strOr(s *string, def string) string {
@@ -224,7 +224,7 @@ func (s *Service) GetScriptureText(ctx context.Context, set *ScriptureSet, book 
 	}
 	bid := json.RawMessage(`"未知"`)
 	if len(resp.Record) > 0 && len(resp.Record[0].Bid) > 0 {
-		bid = resp.Record[0].Bid
+		bid = norm(resp.Record[0].Bid)
 	}
 	out := &ScriptureText{
 		Status: "success", QueryType: set.QueryType + "_verse",

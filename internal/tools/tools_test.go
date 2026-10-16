@@ -9,6 +9,7 @@ import (
 	"strings"
 	"testing"
 
+	"github.com/snowray712000/FHL-MCP-Go/assets"
 	"github.com/snowray712000/FHL-MCP-Go/internal/bible"
 	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
 )
@@ -86,10 +87,28 @@ func TestGetBibleVerseValidationErrors(t *testing.T) {
 	}
 }
 
-func TestNotImplemented(t *testing.T) {
+// Every tool of the frozen contract has a handler (since 0.0.0.20); a missing handler still reports ErrNotImplemented.
+func TestEveryContractToolIsImplemented(t *testing.T) {
+	var contract struct {
+		Tools []struct {
+			Name string `json:"name"`
+		} `json:"tools"`
+	}
+	if err := json.Unmarshal(assets.ToolsListJSON, &contract); err != nil {
+		t.Fatal(err)
+	}
+	if len(contract.Tools) != 29 {
+		t.Fatalf("contract has %d tools, want 29", len(contract.Tools))
+	}
 	r := NewRegistry(&bible.Service{API: &fakeAPI{}})
+	for _, tool := range contract.Tools {
+		if !r.Implemented(tool.Name) {
+			t.Errorf("%s has no handler", tool.Name)
+		}
+	}
+	delete(r.handlers, "search_fhl_articles")
 	if r.Implemented("search_fhl_articles") {
-		t.Fatal("search_fhl_articles should not be implemented yet")
+		t.Fatal("handler was removed")
 	}
 	if _, err := r.Call(context.Background(), "search_fhl_articles", nil); !errors.Is(err, ErrNotImplemented) {
 		t.Fatalf("err = %v", err)
@@ -150,4 +169,8 @@ func (f *fakeAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchResp
 
 func (f *fakeAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error) {
 	return nil, errors.New("RT not expected in this test")
+}
+
+func (f *fakeAPI) Articles(context.Context, fhlapi.ArticleQuery) (*fhlapi.ArticlesResponse, error) {
+	return nil, errors.New("Articles not expected in this test")
 }

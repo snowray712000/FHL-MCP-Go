@@ -226,3 +226,7 @@ func (f *wordsAPI) SEAF(context.Context, string, int, int) (*fhlapi.SubSearchRes
 func (f *wordsAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error) {
 	return nil, errors.New("RT not expected in this test")
 }
+
+func (f *wordsAPI) Articles(context.Context, fhlapi.ArticleQuery) (*fhlapi.ArticlesResponse, error) {
+	return nil, errors.New("Articles not expected in this test")
+}

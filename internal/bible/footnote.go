@@ -48,6 +48,6 @@ func (s *Service) GetFootnote(ctx context.Context, bookID, footnoteID int, simpl
 	}
 	return &Footnote{
 		Status: "success", QueryType: "bible_footnote", Version: "TCV", VersionName: "現代中文譯本",
-		BookID: bookID, BookName: strOr(resp.Engs, ""), FootnoteID: id, Text: strOr(rec.Text, ""),
+		BookID: bookID, BookName: strOr(resp.Engs, ""), FootnoteID: norm(id), Text: strOr(rec.Text, ""),
 	}, nil
 }

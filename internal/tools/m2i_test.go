@@ -141,3 +141,7 @@ func TestFootnoteValidation(t *testing.T) {
 		})
 	}
 }
+
+func (f *footnoteAPI) Articles(context.Context, fhlapi.ArticleQuery) (*fhlapi.ArticlesResponse, error) {
+	return nil, errors.New("Articles not expected in this test")
+}

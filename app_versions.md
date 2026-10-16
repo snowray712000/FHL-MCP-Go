@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.19**
+- last: **0.0.0.20**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 程式內版本字串在 `internal/version/version.go`，須與 `last` 一致 (有測試檢查)；`fhl-mcp version` 會顯示。
@@ -17,13 +17,24 @@
 ## TODOs
 
 - ✨ 優化: 上游暫時失敗時自動重試，並控制對信望愛網站送出請求的速度（目前有快取與合併相同請求，但還沒有重試與限速）
-- 🆕 新功能: 補齊其餘 2 個查詢功能（目前「查經文」「查整章」「查引用」「書卷清單」「書卷資訊」「版本清單」「版本篩選」「搜尋經文」「進階搜尋」「查原文字典」「查原文編號出處」「逐字原文分析」「結構分析參考資料」「查註釋」「註釋書清單」「搜尋註釋」「主題查經」「有聲聖經連結」「有聲聖經加經文」「有聲聖經版本清單」「查次經經文」「搜尋次經」「次經書卷清單」「查使徒教父文獻」「搜尋使徒教父」「使徒教父書卷清單」「查註腳」可用，其他功能已列在清單上，但呼叫會回「尚未實作」）
 - ✨ 優化: 在 Codex 實際連線驗證（這台電腦只找到 Codex 桌面版，沒有命令列工具，尚未測）
 - ✨ 優化: 兩個 AI 工具同時連線、伺服器重開後自動重連的測試
 - ✨ 優化: 確認之後的版本會在 macOS 13 以上的 Apple 晶片 Mac 與 Linux 上實際跑得起來（目前只有在 Windows 上實測，Mac／Linux 只確認能編譯出程式）
 - ⏳ 待決定: 「搜尋註釋」遇到太常見的字（如「愛」）時，上游會拒絕並說結果超過 500 筆；原 Python 版把它當成 0 筆，Go 版已核准改為明確回報，錯誤訊息的措辭請確認 (D12／D22)
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
+- ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 0.0.0.20
+
+- 🆕 新功能: 可以搜尋信望愛網站的文章（依標題、作者、內文、摘要、專欄、日期，可選簡體），預設回摘要與約 200 字的內容預覽，也可要求回完整內容；也可以列出文章專欄。
+- 🐞 Bug: 原 Python 版讀錯欄位，所以文章的「內容預覽」永遠沒有、要求完整內容也只會得到空白。這一版修正了，預覽與完整內容都會正確出現（你選的處理方式）。
+- ✨ 優化: 搜尋文章時完全沒給條件，或一次要的篇數不在 1～200 之間，會直接說明哪裡不對。
+- ℹ️ 說明: 到這一版，29 個功能全部真正能用，不再有「尚未實作」的項目。這一版也修正了一個小問題：部分功能（文章、有聲聖經、次經、註腳）回傳的中文可能顯示成 `\u662f` 這樣的跳脫碼，現在都會顯示成正常的中文。更新後需要把舊的 `fhl-mcp serve` 關掉再重新啟動。文章專欄清單與網站實際代碼不一致的問題見上方待決定。
+- 📝工程師筆記-✨新增: M2-j：`search_fhl_articles`、`list_fhl_article_columns`。`fhlapi.Articles`（`www.fhl.net/api/json.php`，新增 `Client.ArticlesBaseURL`；`getJSON` 抽出 `getJSONAt(base, endpoint, …, ok, …)` 讓不同伺服器與不同「成功」判斷可共用快取；json.php 的 `status` 是數字，`status==1` 才快取，`endpointTTL` 1 天）、`internal/bible/articles.go`（`ArticleAPI`、`SearchArticles`、靜態 12 欄 `ListArticleColumns`）。搜尋條件空字串視為未提供 (Python 真值判斷)；`limit` 在取得結果後才截斷 (`record_count` 改為 `limit`)，驗證 1–200；網站 `status:0` 的 `no data`／`data too much`／其他訊息依 Python 原樣當成一般結果回傳。
+- 📝工程師筆記-✨新增: `internal/bible/raw.go` 的 `norm`：以 raw JSON 原樣傳遞的上游值，其 `\uXXXX` 跳脫會原封不動輸出 (Python 會解碼再以 ensure_ascii=False 輸出)；套用於 `jsonOrNull`、`rawOrDefault`、有聲聖經直接傳遞的欄位、註腳 id。既有 golden 因 fixture 當初含實際字元而未暴露，本版把文章 fixture 還原成上游真實的 `\u` 跳脫並加 `TestNormUnescapesAndKeepsNumbers`。
+- 📝工程師筆記-🐞發現: D25：(a) 原版 `http_search_articles` 讀 `article.get("content")`，上游實際欄位為 `txt`，所以 `content_preview` 永遠不出現、`include_content=true` 只回 `""`；已核准修正（讀 `txt`）。(b) 原版專欄清單 12 欄多數代碼上游回 `no data`，待決定。(c) 不給任何條件原版丟 D3 型例外，Go 回 `Invalid parameter 'search_params': …`；`limit` 原版不檢查（0 回空、負數切片怪異）。(d) 上游單次最多回 10 筆。詳見 `doc/m0/tool-matrix.md`。
+- 📝工程師筆記-ℹ️說明: 驗證：`go vet`、`CGO_ENABLED=0 go test ./...` 通過。5 份 golden 由 Python 自己的 `search_articles`（AST 取出、`httpx` 換成重播）與 `http_search_articles`（僅 `content`→`txt` 兩處）在錄下的 fixture 上產生 (`tests/oracle/articles_oracle.py`)，`list_fhl_article_columns` 為 M0 實測樣本且逐位元組相同；oracle 產生的標題／作者／摘要與 M0 實測樣本一致。文章 fixture 為節錄前 3 筆 (原 10 筆約 118 KB)。經 MCP 實測：`women3` 專欄 limit 1、不給條件的錯誤。「尚未實作」的探測改為 `TestEveryContractToolIsImplemented` (29 個契約工具皆有 handler，並刪除一個 handler 驗證 `ErrNotImplemented` 路徑)；`serve_test` 裡走完整伺服器的「尚未實作」案例移除，該訊息格式 (`mcpserver/server.go`) 目前沒有端對端測試。未驗證：`data too much` 實際回應 (上游從未出現，只以合成資料測)、`gb=1` 文章內容是否完整轉簡體、長文章 (完整內容) 在客戶端的顯示。
 
 ## 0.0.0.19
 

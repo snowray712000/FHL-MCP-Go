@@ -33,6 +33,9 @@ type Client struct {
 	// Cache, when set, stores successful responses on disk (see endpointTTL) and merges concurrent
 	// identical requests. nil disables caching.
 	Cache *cache.Cache
+	// ArticlesBaseURL is the server of the article search (a different site from BaseURL).
+	// Empty means DefaultArticlesBaseURL.
+	ArticlesBaseURL string
 }
 
 // endpointTTL lists the endpoints whose successful responses are cached, with their lifetime
@@ -56,6 +59,8 @@ var endpointTTL = map[string]time.Duration{
 	"sesub.php": 24 * time.Hour,
 	"seaf.php":  24 * time.Hour,
 	"rt.php":    7 * 24 * time.Hour,
+	// Articles (www.fhl.net/api/json.php): the site updates weekly.
+	"json.php": 24 * time.Hour,
 }
 
 // NewClient returns a Client with production defaults (30 s timeout, like the Python reference).
@@ -612,22 +617,83 @@ func (c *Client) RT(ctx context.Context, bid, id int, simplified bool) (*RTRespo
 	return &out, nil
 }
 
+// DefaultArticlesBaseURL is the server of the 信望愛 article search.
+const DefaultArticlesBaseURL = "https://www.fhl.net/api"
+
+// ArticleQuery holds the article-search conditions; empty ones are not sent.
+type ArticleQuery struct {
+	Title, Author, Content, Abstract, Column, PubDate string
+	Simplified                                        bool
+}
+
+// ArticleRecord is one article of json.php. The fields are kept raw so the output passes them through as sent.
+type ArticleRecord struct {
+	ID      json.RawMessage `json:"id"`
+	Column  json.RawMessage `json:"column"`
+	Title   json.RawMessage `json:"title"`
+	Author  json.RawMessage `json:"author"`
+	PubTime json.RawMessage `json:"pubtime"`
+	Abst    json.RawMessage `json:"abst"`
+	Txt     json.RawMessage `json:"txt"`
+}
+
+// ArticlesResponse is the json.php response. Status is 1 for success and 0 for a failure whose reason
+// is in Result ("no data", "data too much", ...); json.php is the only endpoint with a numeric status.
+type ArticlesResponse struct {
+	Status      int             `json:"status"`
+	Result      string          `json:"result"`
+	RecordCount int             `json:"record_count"`
+	Record      []ArticleRecord `json:"record"`
+}
+
+// Articles searches the 信望愛 articles. Failure statuses are returned, not raised: the caller decides
+// what "no data" means.
+func (c *Client) Articles(ctx context.Context, a ArticleQuery) (*ArticlesResponse, error) {
+	q := url.Values{}
+	q.Set("gb", boolDigit(a.Simplified))
+	for k, v := range map[string]string{"title": a.Title, "author": a.Author, "txt": a.Content, "abst": a.Abstract, "ptab": a.Column, "pubtime": a.PubDate} {
+		if v != "" {
+			q.Set(k, v)
+		}
+	}
+	base := c.ArticlesBaseURL
+	if base == "" {
+		base = DefaultArticlesBaseURL
+	}
+	var out ArticlesResponse
+	ok := func(b []byte) bool {
+		var s struct {
+			Status int `json:"status"`
+		}
+		return json.Unmarshal(b, &s) == nil && s.Status == 1
+	}
+	if err := c.getJSONAt(ctx, base, "json.php", q, ok, &out); err != nil {
+		return nil, err
+	}
+	return &out, nil
+}
+
 // getJSON fetches endpoint (through the cache, when the endpoint is cacheable and a Cache is
 // configured) and decodes the JSON body into dst. Only complete, valid responses with
 // status "success" are stored; failures and malformed bodies are always asked for again.
 func (c *Client) getJSON(ctx context.Context, endpoint string, q url.Values, dst any) error {
+	return c.getJSONAt(ctx, c.BaseURL, endpoint, q, isSuccess, dst)
+}
+
+// getJSONAt is getJSON for a given server; ok says whether a response may be cached.
+func (c *Client) getJSONAt(ctx context.Context, base, endpoint string, q url.Values, ok func([]byte) bool, dst any) error {
 	var body []byte
 	var err error
 	ttl, cacheable := endpointTTL[endpoint]
 	if c.Cache != nil && cacheable {
 		// The key holds everything that shapes the answer: server, endpoint, every parameter (gb included).
-		key := c.BaseURL + "/" + endpoint + "?" + q.Encode()
+		key := base + "/" + endpoint + "?" + q.Encode()
 		body, err = c.Cache.Do(ctx, key, ttl, func(ctx context.Context) ([]byte, bool, error) {
-			b, err := c.fetch(ctx, endpoint, q)
-			return b, err == nil && isSuccess(b), err
+			b, err := c.fetch(ctx, base, endpoint, q)
+			return b, err == nil && ok(b), err
 		})
 	} else {
-		body, err = c.fetch(ctx, endpoint, q)
+		body, err = c.fetch(ctx, base, endpoint, q)
 	}
 	if err != nil {
 		return err
@@ -647,8 +713,8 @@ func isSuccess(body []byte) bool {
 }
 
 // fetch performs one upstream GET and returns the body.
-func (c *Client) fetch(ctx context.Context, endpoint string, q url.Values) ([]byte, error) {
-	u := strings.TrimRight(c.BaseURL, "/") + "/" + endpoint + "?" + q.Encode()
+func (c *Client) fetch(ctx context.Context, base, endpoint string, q url.Values) ([]byte, error) {
+	u := strings.TrimRight(base, "/") + "/" + endpoint + "?" + q.Encode()
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
 	if err != nil {
 		return nil, &Error{Kind: ErrNetwork, Message: err.Error()}
