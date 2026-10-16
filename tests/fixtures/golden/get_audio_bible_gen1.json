@@ -1,0 +1,23 @@
+{
+  "version": "unv",
+  "version_name": "和合本",
+  "book": "創世記",
+  "book_eng": "Genesis",
+  "chapter": "1",
+  "audio_files": {
+    "mp3": "https://media.fhl.net/unv1/1/1_001.mp3",
+    "ogg": "https://media.fhl.net/unv1/1/1_001.ogg"
+  },
+  "navigation": {
+    "prev": {
+      "book_id": "1",
+      "book": "創世記",
+      "chapter": "50"
+    },
+    "next": {
+      "book_id": "1",
+      "book": "創世記",
+      "chapter": "2"
+    }
+  }
+}

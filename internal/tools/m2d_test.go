@@ -202,3 +202,7 @@ func TestParsingReferenceCap(t *testing.T) {
 		})
 	}
 }
+
+func (f *wordsAPI) AU(context.Context, int, int, int, bool) (*fhlapi.AUResponse, error) {
+	return nil, errors.New("AU not expected in this test")
+}

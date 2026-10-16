@@ -1,0 +1,100 @@
+{
+  "total_count": 19,
+  "versions": [
+    {
+      "code": "unv",
+      "id": 0,
+      "name": "和合本"
+    },
+    {
+      "code": "taiwanese",
+      "id": 1,
+      "name": "台語"
+    },
+    {
+      "code": "hakka",
+      "id": 2,
+      "name": "客家話"
+    },
+    {
+      "code": "cantonese",
+      "id": 3,
+      "name": "廣東話"
+    },
+    {
+      "code": "tcv",
+      "id": 4,
+      "name": "現代中文譯本"
+    },
+    {
+      "code": "taiwanese_nt",
+      "id": 5,
+      "name": "台語新約"
+    },
+    {
+      "code": "red_bible",
+      "id": 6,
+      "name": "紅皮聖經"
+    },
+    {
+      "code": "hebrew",
+      "id": 7,
+      "name": "希伯來文"
+    },
+    {
+      "code": "fuzhou",
+      "id": 8,
+      "name": "福州話"
+    },
+    {
+      "code": "greek",
+      "id": 9,
+      "name": "希臘文"
+    },
+    {
+      "code": "spring_taiwanese",
+      "id": 10,
+      "name": "Spring台語"
+    },
+    {
+      "code": "spring_unv",
+      "id": 11,
+      "name": "Spring和合本"
+    },
+    {
+      "code": "netbible_chinese",
+      "id": 12,
+      "name": "NetBible中文版"
+    },
+    {
+      "code": "pct",
+      "id": 13,
+      "name": "全民台語聖經"
+    },
+    {
+      "code": "tsou",
+      "id": 14,
+      "name": "鄒語"
+    },
+    {
+      "code": "taiwanese_south",
+      "id": 15,
+      "name": "台語南部腔"
+    },
+    {
+      "code": "modern_taiwanese",
+      "id": 17,
+      "name": "現代台語譯本"
+    },
+    {
+      "code": "modern_hakka",
+      "id": 18,
+      "name": "現代客語譯本"
+    },
+    {
+      "code": "tao",
+      "id": 19,
+      "name": "達悟語"
+    }
+  ]
+}

@@ -236,3 +236,7 @@ func TestSearchCommentaryTooManyRecords(t *testing.T) {
 		t.Errorf("err = %v", err)
 	}
 }
+
+func (f *cmtAPI) AU(context.Context, int, int, int, bool) (*fhlapi.AUResponse, error) {
+	return nil, errors.New("AU not expected in this test")
+}

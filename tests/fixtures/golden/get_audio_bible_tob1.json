@@ -1,0 +1,18 @@
+{
+  "version": "unv",
+  "version_name": "和合本",
+  "book": "",
+  "book_eng": "",
+  "chapter": "1",
+  "audio_files": {
+    "mp3": "https://media.fhl.net/unv1/101/101_001.mp3",
+    "ogg": "https://media.fhl.net/unv1/101/101_001.ogg"
+  },
+  "navigation": {
+    "next": {
+      "book_id": "2",
+      "book": "出埃及記",
+      "chapter": "1"
+    }
+  }
+}

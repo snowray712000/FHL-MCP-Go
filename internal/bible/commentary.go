@@ -16,6 +16,11 @@ type CommentaryAPI interface {
 	ST(ctx context.Context, source int, keyword string, countOnly, simplified bool) (*fhlapi.STResponse, error)
 }
 
+// AudioAPI is the part of the upstream client the audio tools need (au.php).
+type AudioAPI interface {
+	AU(ctx context.Context, version, bid, chapter int, simplified bool) (*fhlapi.AUResponse, error)
+}
+
 // CommentaryEntry is one commentary text for a verse.
 type CommentaryEntry struct {
 	Name    string `json:"commentary_name"`

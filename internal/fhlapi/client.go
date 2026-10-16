@@ -45,6 +45,7 @@ var endpointTTL = map[string]time.Duration{
 	"qp.php":  7 * 24 * time.Hour,
 	"sc.php":  7 * 24 * time.Hour,
 	"st.php":  7 * 24 * time.Hour,
+	"au.php":  7 * 24 * time.Hour,
 	"ab.php":  7 * 24 * time.Hour,
 	"se.php":  24 * time.Hour,
 	"ssc.php": 24 * time.Hour,
@@ -447,6 +448,42 @@ func (c *Client) ST(ctx context.Context, source int, keyword string, countOnly, 
 	q.Set("gb", boolDigit(simplified))
 	var out STResponse
 	if err := c.getJSON(ctx, "st.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// AUResponse is the au.php (audio Bible) response. Every field is kept as raw JSON because the
+// upstream sends numbers as strings ("3") and the Python output passes them through unchanged.
+type AUResponse struct {
+	Status    string          `json:"status"`
+	Name      json.RawMessage `json:"name"`
+	Chinesef  json.RawMessage `json:"chinesef"`
+	Engf      json.RawMessage `json:"engf"`
+	Chap      json.RawMessage `json:"chap"`
+	PBID      json.RawMessage `json:"pbid"`
+	PChinesef json.RawMessage `json:"pchinesef"`
+	PChap     json.RawMessage `json:"pchap"`
+	NBID      json.RawMessage `json:"nbid"`
+	NChinesef json.RawMessage `json:"nchinesef"`
+	NChap     json.RawMessage `json:"nchap"`
+	MP3       json.RawMessage `json:"mp3"`
+	OGG       json.RawMessage `json:"ogg"`
+}
+
+// AU queries au.php for the audio files of one chapter. version is the upstream audio-version id.
+// (The upstream answers success even for a chapter that does not exist.)
+func (c *Client) AU(ctx context.Context, version, bid, chapter int, simplified bool) (*AUResponse, error) {
+	q := url.Values{}
+	q.Set("version", strconv.Itoa(version))
+	q.Set("bid", strconv.Itoa(bid))
+	q.Set("chap", strconv.Itoa(chapter))
+	q.Set("gb", boolDigit(simplified))
+	var out AUResponse
+	if err := c.getJSON(ctx, "au.php", q, &out); err != nil {
 		return nil, err
 	}
 	if out.Status != "success" {

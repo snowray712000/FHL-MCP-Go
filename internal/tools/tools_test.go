@@ -88,10 +88,10 @@ func TestGetBibleVerseValidationErrors(t *testing.T) {
 
 func TestNotImplemented(t *testing.T) {
 	r := NewRegistry(&bible.Service{API: &fakeAPI{}})
-	if r.Implemented("list_audio_versions") {
-		t.Fatal("list_audio_versions should not be implemented yet")
+	if r.Implemented("get_bible_footnote") {
+		t.Fatal("get_bible_footnote should not be implemented yet")
 	}
-	if _, err := r.Call(context.Background(), "list_audio_versions", nil); !errors.Is(err, ErrNotImplemented) {
+	if _, err := r.Call(context.Background(), "get_bible_footnote", nil); !errors.Is(err, ErrNotImplemented) {
 		t.Fatalf("err = %v", err)
 	}
 }
@@ -126,4 +126,8 @@ func (f *fakeAPI) SSC(context.Context, string, bool) (*fhlapi.SSCResponse, error
 
 func (f *fakeAPI) ST(context.Context, int, string, bool, bool) (*fhlapi.STResponse, error) {
 	return nil, errors.New("ST not expected in this test")
+}
+
+func (f *fakeAPI) AU(context.Context, int, int, int, bool) (*fhlapi.AUResponse, error) {
+	return nil, errors.New("AU not expected in this test")
 }

@@ -1,0 +1,23 @@
+{
+  "version": "unv",
+  "version_name": "和合本",
+  "book": "約翰福音",
+  "book_eng": "John",
+  "chapter": "99",
+  "audio_files": {
+    "mp3": "https://media.fhl.net/unv1/43/43_099.mp3",
+    "ogg": "https://media.fhl.net/unv1/43/43_099.ogg"
+  },
+  "navigation": {
+    "prev": {
+      "book_id": "43",
+      "book": "約翰福音",
+      "chapter": "98"
+    },
+    "next": {
+      "book_id": "44",
+      "book": "使徒行傳",
+      "chapter": "1"
+    }
+  }
+}

@@ -275,3 +275,7 @@ func (f *searchAPI) SSC(context.Context, string, bool) (*fhlapi.SSCResponse, err
 func (f *searchAPI) ST(context.Context, int, string, bool, bool) (*fhlapi.STResponse, error) {
 	return nil, errors.New("ST not expected in this test")
 }
+
+func (f *searchAPI) AU(context.Context, int, int, int, bool) (*fhlapi.AUResponse, error) {
+	return nil, errors.New("AU not expected in this test")
+}

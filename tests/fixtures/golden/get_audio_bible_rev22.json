@@ -1,0 +1,23 @@
+{
+  "version": "unv",
+  "version_name": "和合本",
+  "book": "啟示錄",
+  "book_eng": "Revelation",
+  "chapter": "22",
+  "audio_files": {
+    "mp3": "https://media.fhl.net/unv1/66/66_022.mp3",
+    "ogg": "https://media.fhl.net/unv1/66/66_022.ogg"
+  },
+  "navigation": {
+    "prev": {
+      "book_id": "66",
+      "book": "啟示錄",
+      "chapter": "21"
+    },
+    "next": {
+      "book_id": "67",
+      "book": "",
+      "chapter": "1"
+    }
+  }
+}

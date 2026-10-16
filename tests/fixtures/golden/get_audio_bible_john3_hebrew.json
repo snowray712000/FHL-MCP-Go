@@ -1,0 +1,23 @@
+{
+  "version": "hebrew",
+  "version_name": "希伯來文",
+  "book": "約翰福音",
+  "book_eng": "John",
+  "chapter": "3",
+  "audio_files": {
+    "mp3": "https://media.fhl.net/hebrew/43/43_003.mp3",
+    "ogg": "https://media.fhl.net/hebrew/43/43_003.ogg"
+  },
+  "navigation": {
+    "prev": {
+      "book_id": "43",
+      "book": "約翰福音",
+      "chapter": "2"
+    },
+    "next": {
+      "book_id": "43",
+      "book": "約翰福音",
+      "chapter": "4"
+    }
+  }
+}

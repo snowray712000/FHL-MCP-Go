@@ -464,3 +464,26 @@ func TestCacheDisabledByDefault(t *testing.T) {
 		t.Errorf("without a Cache every call goes upstream (requests=%d)", n)
 	}
 }
+
+func TestAUQueryAndRawFields(t *testing.T) {
+	var query string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		query = r.URL.RawQuery
+		_, _ = w.Write(fixture(t, "au_john_3.json"))
+	})
+	res, err := c.AU(context.Background(), 1, 43, 3, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if query != "bid=43&chap=3&gb=1&version=1" {
+		t.Errorf("query = %q", query)
+	}
+	// The upstream sends numbers as strings; they must reach the output unchanged.
+	if string(res.Chap) != `"3"` || string(res.PBID) != `"43"` || string(res.NChap) != `"4"` || len(res.MP3) == 0 {
+		t.Errorf("raw fields = %s %s %s", res.Chap, res.PBID, res.NChap)
+	}
+	c = newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"Fail:x"}`)) })
+	if _, err := c.AU(context.Background(), 0, 43, 3, false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("err = %v", err)
+	}
+}
