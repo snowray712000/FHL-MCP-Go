@@ -118,7 +118,16 @@ type ParsingParams struct {
 	EndVerse   *int
 }
 
+// MaxParsingVerses is the most verses one get_parsing_reference request may cover (D21, approved):
+// every verse costs one upstream request, so a larger range is refused up front instead of truncated.
+const MaxParsingVerses = 30
+
+func tooManyVerses(verse string) error {
+	return &InvalidParameterError{Name: "verse", Value: verse, Reason: fmt.Sprintf("the range covers more than %d verses; get_parsing_reference allows at most %d verses per request, split it into smaller requests", MaxParsingVerses, MaxParsingVerses)}
+}
+
 // expandVerseString expands "1-2,5,8-10" into the verse numbers, like the Python reference.
+// A list longer than MaxParsingVerses is refused before it is expanded.
 func expandVerseString(verse string) ([]int, error) {
 	var out []int
 	for _, part := range strings.Split(verse, ",") {
@@ -132,6 +141,9 @@ func expandVerseString(verse string) ([]int, error) {
 			if errA != nil || errB != nil {
 				return nil, &InvalidParameterError{Name: "verse", Value: verse, Reason: fmt.Sprintf("Cannot parse verse range: '%s'", part)}
 			}
+			if b >= a && (b-a < 0 || b-a >= MaxParsingVerses-len(out)) {
+				return nil, tooManyVerses(verse)
+			}
 			for v := a; v <= b; v++ {
 				out = append(out, v)
 			}
@@ -142,6 +154,9 @@ func expandVerseString(verse string) ([]int, error) {
 			return nil, &InvalidParameterError{Name: "verse", Value: verse, Reason: fmt.Sprintf("Cannot parse verse number: '%s'", part)}
 		}
 		out = append(out, n)
+	}
+	if len(out) > MaxParsingVerses {
+		return nil, tooManyVerses(verse)
 	}
 	return out, nil
 }
@@ -156,12 +171,16 @@ func (s *Service) lastVerse(ctx context.Context, engShort string, chapter int) (
 	return len(res.Verses), nil
 }
 
-func seq(from, to int) []int {
+// seq lists from..to, refusing a span that would not fit in room more verses.
+func seq(from, to, room int, verse string) ([]int, error) {
+	if to >= from && (to-from < 0 || to-from >= room) {
+		return nil, tooManyVerses(verse)
+	}
 	var out []int
 	for v := from; v <= to; v++ {
 		out = append(out, v)
 	}
-	return out
+	return out, nil
 }
 
 // resolveRefs works out the ordered (chapter, verse) list to query.
@@ -180,9 +199,17 @@ func (s *Service) resolveRefs(ctx context.Context, engShort string, p ParsingPar
 		}
 		return out
 	}
+	// span lists from..to of one chapter; room is how many more verses the request may still take.
+	span := func(ch, from, to, room int) ([]chapterVerse, error) {
+		vs, err := seq(from, to, room, p.Verse)
+		if err != nil {
+			return nil, err
+		}
+		return in(ch, vs), nil
+	}
 	if p.EndChapter == nil {
 		if p.EndVerse != nil {
-			return in(p.Chapter, seq(start[0], *p.EndVerse)), nil
+			return span(p.Chapter, start[0], *p.EndVerse, MaxParsingVerses)
 		}
 		return in(p.Chapter, start), nil
 	}
@@ -192,7 +219,7 @@ func (s *Service) resolveRefs(ctx context.Context, engShort string, p ParsingPar
 		if p.EndVerse != nil {
 			end = *p.EndVerse
 		}
-		return in(p.Chapter, seq(start[0], end)), nil
+		return span(p.Chapter, start[0], end, MaxParsingVerses)
 	}
 	if endChapter < p.Chapter {
 		return nil, &InvalidParameterError{Name: "end_chapter", Value: strconv.Itoa(endChapter), Reason: "end_chapter must be greater than or equal to chapter"}
@@ -200,19 +227,35 @@ func (s *Service) resolveRefs(ctx context.Context, engShort string, p ParsingPar
 	if p.EndVerse == nil {
 		return nil, &InvalidParameterError{Name: "end_verse", Reason: "required when end_chapter is in a later chapter"}
 	}
+	// Every chapter has at least one verse, so a span of more than MaxParsingVerses chapters is
+	// already too big and needs no chapter-length lookups.
+	if endChapter-p.Chapter >= MaxParsingVerses {
+		return nil, tooManyVerses(p.Verse)
+	}
 	last, err := s.lastVerse(ctx, engShort, p.Chapter)
 	if err != nil {
 		return nil, err
 	}
-	refs := in(p.Chapter, seq(start[0], last))
+	refs, err := span(p.Chapter, start[0], last, MaxParsingVerses)
+	if err != nil {
+		return nil, err
+	}
 	for c := p.Chapter + 1; c < endChapter; c++ {
 		last, err := s.lastVerse(ctx, engShort, c)
 		if err != nil {
 			return nil, err
 		}
-		refs = append(refs, in(c, seq(1, last))...)
+		more, err := span(c, 1, last, MaxParsingVerses-len(refs))
+		if err != nil {
+			return nil, err
+		}
+		refs = append(refs, more...)
 	}
-	return append(refs, in(endChapter, seq(1, *p.EndVerse))...), nil
+	more, err := span(endChapter, 1, *p.EndVerse, MaxParsingVerses-len(refs))
+	if err != nil {
+		return nil, err
+	}
+	return append(refs, more...), nil
 }
 
 // ParsingReference builds the Markdown "original text / translation / parsing" reference (qp.php).

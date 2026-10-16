@@ -5,6 +5,7 @@ import (
 	"encoding/json"
 	"errors"
 	"fmt"
+	"strings"
 	"testing"
 
 	"github.com/snowray712000/FHL-MCP-Go/internal/bible"
@@ -180,4 +181,24 @@ func (f *wordsAPI) SSC(context.Context, string, bool) (*fhlapi.SSCResponse, erro
 
 func (f *wordsAPI) ST(context.Context, int, string, bool, bool) (*fhlapi.STResponse, error) {
 	return nil, errors.New("ST not expected in this test")
+}
+
+// D21 (approved): ranges over 30 verses are refused up front, before any qp.php request.
+func TestParsingReferenceCap(t *testing.T) {
+	cases := []struct{ name, args string }{
+		{"verse range", `{"book":"James","chapter":1,"verse":"1-31"}`},
+		{"cross chapter", `{"book":"Ruth","chapter":1,"verse":"1","end_chapter":2,"end_verse":20}`}, // 22 + 20 verses
+	}
+	for _, c := range cases {
+		t.Run(c.name, func(t *testing.T) {
+			api := &wordsAPI{t: t}
+			_, err := callOn(t, api, "get_parsing_reference", c.args)
+			if err == nil || !strings.HasPrefix(err.Error(), "Invalid parameter 'verse': ") || !strings.Contains(err.Error(), "at most 30 verses per request") {
+				t.Fatalf("err = %v", err)
+			}
+			if len(api.qp) != 0 {
+				t.Errorf("qp.php must not be called: %+v", api.qp)
+			}
+		})
+	}
 }
