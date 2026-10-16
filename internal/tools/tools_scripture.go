@@ -13,6 +13,7 @@ func (r *Registry) registerScripture(svc *bible.Service) {
 		verseTool, searchTool, listTool string
 	}{
 		{bible.Apocrypha, "get_apocrypha_verse", "search_apocrypha", "list_apocrypha_books"},
+		{bible.ApostolicFathers, "get_apostolic_fathers_verse", "search_apostolic_fathers", "list_apostolic_fathers_books"},
 	} {
 		set := c.set
 		r.handlers[c.verseTool] = func(ctx context.Context, a args) (string, error) {

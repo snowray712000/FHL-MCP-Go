@@ -41,11 +41,13 @@ class FHLAPIEndpoints:
         return self._go("qsub", book, chapter, verse)
 
     async def get_apostolic_fathers_verse(self, book, chapter, verse=None):
+        return self._go("qaf", book, chapter, verse)
 
     async def search_apocrypha(self, query, limit=None, offset=0):
         return self._go("sesub", query, limit, offset)
 
     async def search_apostolic_fathers(self, query, limit=None, offset=0):
+        return self._go("seaf", query, limit, offset)
 
 
 FHLAPIEndpoints.ROUTES = {
@@ -53,9 +55,14 @@ FHLAPIEndpoints.ROUTES = {
     ("qsub", "Tobit", 1, "1-3"): "qsub_tob_1_1-3.json",
     ("qsub", "加上", 1, "1,3"): "qsub_1mac_1_1_3.json",
     ("qsub", "多俾亞傳", 99, None): "qsub_tob_99.json",
+    ("qaf", "革利免前書", 1, "1"): "qaf_1clem_1_1.json",
+    ("qaf", "Didache", 1, "1-2"): "qaf_did_1_1-2.json",
+    ("qaf", "1Clem", 99, None): "qaf_1clem_99.json",
     ("sesub", "智慧", 3, 0): "sesub_wisdom_limit3.json",
     ("sesub", "智慧", 2, 2): "sesub_wisdom_off2_limit2.json",
     ("sesub", "zzqqxx", 10, 0): "sesub_none.json",
+    ("seaf", "教會", 3, 0): "seaf_church_limit3.json",
+    ("seaf", "zzqqxx", 10, 0): "seaf_none.json",
 }
 
 ns = {"Optional": Optional, "Any": Any, "FHLAPIEndpoints": FHLAPIEndpoints,
@@ -76,6 +83,12 @@ cases = {
     "search_apocrypha_wisdom_off2.json": lambda: ns["http_search_apocrypha"]("智慧", 2, 2),
     "search_apocrypha_none.json": lambda: ns["http_search_apocrypha"]("zzqqxx", 10, 0),
     "list_apocrypha_books.json": lambda: ns["http_list_apocrypha_books"](),
+    "get_apostolic_fathers_verse_1clem1_1.json": lambda: ns["http_get_apostolic_fathers_verse"]("革利免前書", 1, "1"),
+    "get_apostolic_fathers_verse_did1_1-2.json": lambda: ns["http_get_apostolic_fathers_verse"]("Didache", 1, "1-2"),
+    "get_apostolic_fathers_verse_1clem99_empty.json": lambda: ns["http_get_apostolic_fathers_verse"]("1Clem", 99),
+    "search_apostolic_fathers_church.json": lambda: ns["http_search_apostolic_fathers"]("教會", 3, 0),
+    "search_apostolic_fathers_none.json": lambda: ns["http_search_apostolic_fathers"]("zzqqxx", 10, 0),
+    "list_apostolic_fathers_books.json": lambda: ns["http_list_apostolic_fathers_books"](),
 }
 os.makedirs(OUT, exist_ok=True)
 for name, fn in cases.items():

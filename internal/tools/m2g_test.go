@@ -158,6 +158,12 @@ func TestM2gGoldens(t *testing.T) {
 		{"search_apocrypha", `{"query":"智慧","limit":2,"offset":2}`, "search_apocrypha_wisdom_off2.json"},
 		{"search_apocrypha", `{"query":"zzqqxx"}`, "search_apocrypha_none.json"},
 		{"list_apocrypha_books", `{}`, "list_apocrypha_books.json"},
+		{"get_apostolic_fathers_verse", `{"book":"革利免前書","chapter":1,"verse":"1"}`, "get_apostolic_fathers_verse_1clem1_1.json"},
+		{"get_apostolic_fathers_verse", `{"book":"Didache","chapter":1,"verse":"1-2"}`, "get_apostolic_fathers_verse_did1_1-2.json"},
+		{"get_apostolic_fathers_verse", `{"book":"1Clem","chapter":99}`, "get_apostolic_fathers_verse_1clem99_empty.json"},
+		{"search_apostolic_fathers", `{"query":"教會","limit":3}`, "search_apostolic_fathers_church.json"},
+		{"search_apostolic_fathers", `{"query":"zzqqxx"}`, "search_apostolic_fathers_none.json"},
+		{"list_apostolic_fathers_books", `{}`, "list_apostolic_fathers_books.json"},
 	}
 	for _, c := range cases {
 		t.Run(c.golden+" "+c.args, func(t *testing.T) {
@@ -185,6 +191,18 @@ func TestScriptureBookNumbers(t *testing.T) {
 		_, _ = callOn(t, &failFast{api}, "get_apocrypha_verse", `{"book":"`+name+`","chapter":1}`)
 		if len(api.qsub) != 1 || api.qsub[0].bid != want {
 			t.Errorf("apocrypha %q -> qsub %+v, want bid %d", name, api.qsub, want)
+		}
+	}
+	apos := map[string]int{
+		"革": 201, "革利免前書": 201, "1Clem": 201, "革二": 202, "2Clem": 202, "訓": 212, "十二使徒遺訓": 212, "Did": 212,
+		"巴": 213, "巴拿巴書": 213, "Barn": 213, "黑": 214, "黑馬牧人書": 214, "Herm": 214, "帕": 216, "Pap": 216,
+		"坡": 210, "Polycarp": 210, "伊格那丟致羅馬人書": 206, "Ign. Rom.": 206, "205": 205, "217": 217,
+	}
+	for name, want := range apos {
+		api := &scriptureAPI{t: t}
+		_, _ = callOn(t, &failFast{api}, "get_apostolic_fathers_verse", `{"book":"`+name+`","chapter":1}`)
+		if len(api.qaf) != 1 || api.qaf[0].bid != want {
+			t.Errorf("apostolic %q -> qaf %+v, want bid %d", name, api.qaf, want)
 		}
 	}
 }
@@ -235,9 +253,14 @@ func TestScriptureValidation(t *testing.T) {
 		{"ambiguous Daniel additions", "get_apocrypha_verse", `{"book":"但補","chapter":1}`, notBook("101-115", "但補")},
 		{"apocrypha id out of range", "get_apocrypha_verse", `{"book":"116","chapter":1}`, notBook("101-115", "116")},
 		{"canon id", "get_apocrypha_verse", `{"book":"43","chapter":1}`, notBook("101-115", "43")},
+		{"apocrypha book in apostolic tool", "get_apostolic_fathers_verse", `{"book":"Tob","chapter":1}`, notBook("201-217", "Tob")},
+		{"ambiguous Ignatius", "get_apostolic_fathers_verse", `{"book":"伊","chapter":1}`, notBook("201-217", "伊")},
+		{"empty book", "get_apostolic_fathers_verse", `{"book":"","chapter":1}`, "Invalid parameter 'book': Not a book of this collection (201-217). Use the matching list_*_books tool to see the valid names and ids."},
 		{"missing chapter", "get_apocrypha_verse", `{"book":"多"}`, "Invalid parameter 'chapter': required parameter is missing"},
 		{"bad verse", "get_apocrypha_verse", `{"book":"多","chapter":1,"verse":"abc"}`, "Invalid parameter 'verse': abc - Use forms such as 1, 1-5, 1,3,5 or 1-2,5,8-10."},
+		{"empty verse", "get_apostolic_fathers_verse", `{"book":"革","chapter":1,"verse":""}`, "Invalid parameter 'verse': Use forms such as 1, 1-5, 1,3,5 or 1-2,5,8-10."},
 		{"empty query", "search_apocrypha", `{"query":"   "}`, "Invalid parameter 'query': must not be empty"},
+		{"missing query", "search_apostolic_fathers", `{}`, "Invalid parameter 'query': required parameter is missing"},
 		{"bad limit", "search_apocrypha", `{"query":"智慧","limit":"x"}`, "Invalid parameter 'limit': \"x\" - must be an integer"},
 	}
 	for _, c := range cases {
@@ -259,7 +282,7 @@ func TestScriptureBookTables(t *testing.T) {
 		tool     string
 		lo, hi   int
 		wantName string
-	}{{"list_apocrypha_books", 101, 115, "apocrypha"}} {
+	}{{"list_apocrypha_books", 101, 115, "apocrypha"}, {"list_apostolic_fathers_books", 201, 217, "apostolic_fathers"}} {
 		out, err := callOn(t, &scriptureAPI{t: t}, c.tool, `{}`)
 		if err != nil {
 			t.Fatal(err)

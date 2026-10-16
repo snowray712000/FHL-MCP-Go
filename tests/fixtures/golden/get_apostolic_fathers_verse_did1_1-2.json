@@ -1,0 +1,29 @@
+{
+  "status": "success",
+  "query_type": "apostolic_fathers_verse",
+  "book": "十二使徒遺訓",
+  "book_id": 212,
+  "chapter": 1,
+  "verse": "1-2",
+  "version": {
+    "code": "afhuang",
+    "name": "黃錫木主編《使徒教父著作》"
+  },
+  "verse_count": 2,
+  "verses": [
+    {
+      "book": "十二使徒遺訓",
+      "book_id": 212,
+      "chapter": 1,
+      "verse": 1,
+      "text": "道路有兩條：一條是生命之路，一條是死亡之路；二條路極為不同。"
+    },
+    {
+      "book": "十二使徒遺訓",
+      "book_id": 212,
+      "chapter": 1,
+      "verse": 2,
+      "text": "生命之路是這樣的：首先，“當愛那創造你的上帝”【1】；其次，“要愛鄰如己”；“你不願他人怎樣待你，也不要這樣對待他人”【2】。"
+    }
+  ]
+}

@@ -1,0 +1,14 @@
+{
+  "status": "success",
+  "query_type": "apostolic_fathers_verse",
+  "book": "革利免前書",
+  "book_id": "未知",
+  "chapter": 99,
+  "verse": null,
+  "version": {
+    "code": "afhuang",
+    "name": "黃錫木主編《使徒教父著作》"
+  },
+  "verse_count": 0,
+  "verses": []
+}

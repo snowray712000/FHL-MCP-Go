@@ -1,0 +1,22 @@
+{
+  "status": "success",
+  "query_type": "apostolic_fathers_verse",
+  "book": "革利免前書",
+  "book_id": 201,
+  "chapter": 1,
+  "verse": "1",
+  "version": {
+    "code": "afhuang",
+    "name": "黃錫木主編《使徒教父著作》"
+  },
+  "verse_count": 1,
+  "verses": [
+    {
+      "book": "革利免前書",
+      "book_id": 201,
+      "chapter": 1,
+      "verse": 1,
+      "text": "弟兄們，由於我們自身突然遭遇一連串的災禍與打擊，所以未能及時關注你們中間發生的紛爭，親愛的朋友啊，尤其是那可憎惡的、不聖潔的分裂行徑——這情形在蒙上帝揀選的人中間是不尋常【3】和陌生的。少數魯莽、狂傲之徒挑起如此荒唐的紛爭，極大地侮辱了你們為眾人所熟悉和愛戴的美名。"
+    }
+  ]
+}
