@@ -1,0 +1,4 @@
+# Byte-exact test data: never convert line endings (Windows autocrlf would break golden / contract comparisons).
+tests/fixtures/** -text
+assets/*.json -text
+doc/m0/contract/** -text

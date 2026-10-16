@@ -51,3 +51,8 @@ Layering as in the plan: mcpserver -> tools -> bible -> fhlapi. Tests are defaul
 - The leading `「　神` (unpaired quote + full-width space) is upstream data: present in the recorded `qb.php` fixture (as `\u300c\u3000`) and in the Python golden; Go did not introduce it.
 - Per-call tool invocations are not logged at info level (only errors); add request logging later if wanted.
 - Remaining for M1: Codex (no CLI found), concurrent two-client test, D17 approval.
+
+## Update: .gitattributes + Codex deferred (user decision)
+- User: add `.gitattributes`; Codex verification stays a TODO (already listed in `app_versions.md` TODOs), not done now.
+- Added `.gitattributes`: `tests/fixtures/** -text`, `assets/*.json -text`, `doc/m0/contract/** -text` so Windows `core.autocrlf` cannot rewrite byte-exact goldens / the embedded contract. `git check-attr text` reports `unset`; index and worktree are already LF; `CGO_ENABLED=0 go test ./...` still passes. Not yet committed.
+- This session is a fork and has the `mcp__fhl__*` tools, but the background Go server (port 8081) was stopped when the previous session ended, so no live MCP call was made here.
