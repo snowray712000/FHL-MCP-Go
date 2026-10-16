@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.21**
+- last: **0.0.0.22**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 程式內版本字串在 `internal/version/version.go`，須與 `last` 一致 (有測試檢查)；`fhl-mcp version` 會顯示。
@@ -22,10 +22,23 @@
 - ✨ 優化: 支援設定檔與 `FHL_` 環境變數來指定埠等選項（計畫書 §8；目前埠只能用 `--port` 指定）
 - ✨ 優化: 兩個 AI 工具同時連線、伺服器重開後自動重連的測試
 - ✨ 優化: 確認之後的版本會在 macOS 13 以上的 Apple 晶片 Mac 與 Linux 上實際跑得起來（目前只有在 Windows 上實測，Mac／Linux 只確認能編譯出程式）
+- ✨ 優化: 發佈包在 Windows 11 與 Mac／Ubuntu 實機的驗收（目前只在 Windows 10 驗過 Windows 發佈包；Mac、Ubuntu 的壓縮檔只確認內容與可執行權限正確）
+- ✨ 優化: 自動建置（CI）與公開發佈前的弱點檢查（目前專案還沒有遠端倉庫，所以還沒設 CI；發佈包由本機一行指令產生）
+- ✨ 優化: 邀請 beta 使用者在乾淨的電腦上試用，並整理驗收報告
 - ⏳ 待決定: 「搜尋註釋」遇到太常見的字（如「愛」）時，上游會拒絕並說結果超過 500 筆；原 Python 版把它當成 0 筆，Go 版已核准改為明確回報，錯誤訊息的措辭請確認 (D12／D22)
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 0.0.0.22
+
+- 🆕 新功能: 有可以下載的發佈包了：Windows（zip）、Apple 晶片 Mac（tar.gz）、Ubuntu（tar.gz）各一個，裡面有程式、雙擊用的入口檔、快速開始、授權條款與第三方聲明；另附 `SHA256SUMS.txt` 讓你核對檔案沒被改過。解壓縮到哪裡都能用（路徑有中文或空白也可以）。
+- ✨ 優化: `fhl-mcp version` 現在會顯示這份程式是從哪個版本的原始碼、哪一天建出來的，回報問題時比較好對照。
+- ℹ️ 說明: 本程式的授權定為 GPL-3.0-or-later（著作權人：財團法人信望愛資訊文化藝術基金會）。授權只涵蓋程式碼，不包含聖經與網站內容的著作權（有些譯本只授權給信望愛網站）。原 Python 版是 MIT 授權，聲明已附在 `THIRD_PARTY_NOTICES.md`。測試版沒有數位簽章與 Apple 公證，第一次執行時 Windows 或 macOS 可能跳出警告。目前只在 Windows 10 上實測過發佈包：解壓到有中文與空白的路徑、啟動約 0.6 秒、閒置時幾乎不耗 CPU、停止約 0.1 秒、停止後沒有遺留程序或連線；Mac 與 Ubuntu 的發佈包還沒在實機試過（見上方待辦）。
+- 📝工程師筆記-✨新增: M6：`tools/release`（`go run ./tools/release [-out dist] [-targets windows/amd64,...] [-allow-dirty]`，純標準函式庫）。對每個目標以 `CGO_ENABLED=0 -trimpath -buildvcs=false -ldflags "-s -w -X …/internal/version.Commit=<短 hash，未提交時加 -dirty> -X …Date=<commit 日期>"` 建置；封存檔檔名 `fhl-mcp-go_<版本>_<os>_<arch>.zip|.tar.gz`（Windows zip，其餘 tar.gz），內含單一頂層資料夾；內容固定為執行檔、`LICENSE`、`THIRD_PARTY_NOTICES.md`、`快速開始.md`，以及 Windows 的兩個 `.cmd`（轉 CRLF）、Mac 的兩個 `.command`（0755）；Ubuntu 沒有雙擊入口。檔案排序、mtime＝commit 時間、uid/gid 0，所以同一 commit 重跑結果逐位元組相同（實測兩次 `SHA256SUMS.txt` 一致）。版本常數與 `app_versions.md` 的 `last` 不一致、或工作樹有未提交變更（除非 `-allow-dirty`）會拒絕。建置後若目標等於本機平台，會實跑 `version` 確認含版本、commit、日期。`THIRD_PARTY_NOTICES.md` 由 `release/NOTICE-head.md` 加上實際連結進該目標執行檔的每個模組的 LICENSE（由 `go list -deps` 與模組快取取得，不會過期）。
+- 📝工程師筆記-✨新增: 發佈稽核 (`audit`)：檔案必須在白名單內（不可出現快取、狀態檔或其他檔案），且每個檔案（含執行檔）都不能含建置機器的 repo 路徑、使用者家目錄或 TEMP 路徑（正反斜線各查）。`tools/release/main_test.go` 測稽核、tar/zip 權限位元與可重現性。`internal/version` 新增 `Commit`／`Date`（ldflags 注入）與 `Describe()`；`version` 常數仍是 `Version`，由測試對照 `app_versions.md`。`LICENSE`（GNU 官方 gpl-3.0.txt，35149 bytes）與 `release/**` 在 `.gitattributes` 固定 LF。
+- 📝工程師筆記-ℹ️說明: 授權決策（使用者 2026-10-16）：GPL-3.0-or-later、著作權人為財團法人信望愛資訊文化藝術基金會。相容性核對：連結的函式庫為 go-sdk（Apache-2.0，部分早期貢獻為 MIT）、jsonschema-go／segmentio/asm／segmentio/encoding（MIT）、yosida95/uritemplate（BSD-3）、golang.org/x/*（BSD-3），皆與 GPLv3 相容；原 Python 版 MIT 的聲明（含其「聖經內容不在授權內」的提醒）放進 `THIRD_PARTY_NOTICES.md`。原始碼檔頭未加 GPL 標頭（GPL 不強制，需要時另案）。
+- 📝工程師筆記-ℹ️說明: Windows 10 實測（`go run ./tools/release` 產生的 zip 解壓到 `%TEMP%` 下名為「fhl 測試 路徑」的資料夾，`serve --port 18082 --data-dir` 在該路徑下）：`/health` 就緒 0.6 秒；啟動後工作集 12.5 MB（私有位元組 49 MB）；閒置 60 秒 CPU 0.000 秒；經 MCP（initialize + 100 次 `get_bible_verse`，50 筆不同經文各一次、其餘重複命中快取，間隔 0.1 秒）全部成功，最慢一次 625 毫秒（上游），快取命中約 20 毫秒；之後工作集 20 MB、私有位元組 52 MB、控制代碼 329、執行緒 11，快取寫入 50 個檔案；`stop` 0.12 秒結束，無遺留 listener、程序或 run 狀態檔。未驗證：計畫書 §10 要求的閒置 5 分鐘（只量 60 秒）、冷啟動與防毒首次掃描、Mac／Linux 的 RSS、Windows 11、解壓縮目錄為唯讀的情況。
 
 ## 0.0.0.21
 

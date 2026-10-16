@@ -5,3 +5,6 @@ doc/m0/contract/** -text
 *.cmd text eol=crlf
 *.command text eol=lf
 *.sh text eol=lf
+
+LICENSE text eol=lf
+release/** text eol=lf

@@ -74,7 +74,11 @@ func run(args []string, stdout, stderr io.Writer) int {
 	case "doctor":
 		return doctorCmd(args, stdout, stderr)
 	case "version":
-		fmt.Fprintf(stdout, "%s %s (%s/%s, %s)\n", version.Name, version.Version, runtime.GOOS, runtime.GOARCH, runtime.Version())
+		extra := ""
+		if d := version.Describe(); d != "" {
+			extra = ", " + d
+		}
+		fmt.Fprintf(stdout, "%s %s (%s/%s, %s%s)\n", version.Name, version.Version, runtime.GOOS, runtime.GOARCH, runtime.Version(), extra)
 		return 0
 	case "help":
 		fmt.Fprint(stdout, usage)
