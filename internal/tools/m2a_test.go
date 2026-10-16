@@ -258,3 +258,19 @@ func (f *routeAPI) SD(context.Context, bool, int, bool) (*fhlapi.SDResponse, err
 func (f *routeAPI) QP(context.Context, int, int, int, bool) (*fhlapi.QPResponse, error) {
 	return nil, errors.New("QP not expected in this test")
 }
+
+func (f *routeAPI) SC(context.Context, int, int, *int, bool) (*fhlapi.SCResponse, error) {
+	return nil, errors.New("SC not expected in this test")
+}
+
+func (f *routeAPI) SCList(context.Context, bool) (*fhlapi.SCListResponse, error) {
+	return nil, errors.New("SCList not expected in this test")
+}
+
+func (f *routeAPI) SSC(context.Context, string, bool) (*fhlapi.SSCResponse, error) {
+	return nil, errors.New("SSC not expected in this test")
+}
+
+func (f *routeAPI) ST(context.Context, int, string, bool, bool) (*fhlapi.STResponse, error) {
+	return nil, errors.New("ST not expected in this test")
+}

@@ -88,10 +88,10 @@ func TestGetBibleVerseValidationErrors(t *testing.T) {
 
 func TestNotImplemented(t *testing.T) {
 	r := NewRegistry(&bible.Service{API: &fakeAPI{}})
-	if r.Implemented("list_commentaries") {
-		t.Fatal("list_commentaries should not be implemented yet")
+	if r.Implemented("list_audio_versions") {
+		t.Fatal("list_audio_versions should not be implemented yet")
 	}
-	if _, err := r.Call(context.Background(), "list_commentaries", nil); !errors.Is(err, ErrNotImplemented) {
+	if _, err := r.Call(context.Background(), "list_audio_versions", nil); !errors.Is(err, ErrNotImplemented) {
 		t.Fatalf("err = %v", err)
 	}
 }
@@ -110,4 +110,20 @@ func (f *fakeAPI) SD(context.Context, bool, int, bool) (*fhlapi.SDResponse, erro
 
 func (f *fakeAPI) QP(context.Context, int, int, int, bool) (*fhlapi.QPResponse, error) {
 	return nil, errors.New("QP not expected in this test")
+}
+
+func (f *fakeAPI) SC(context.Context, int, int, *int, bool) (*fhlapi.SCResponse, error) {
+	return nil, errors.New("SC not expected in this test")
+}
+
+func (f *fakeAPI) SCList(context.Context, bool) (*fhlapi.SCListResponse, error) {
+	return nil, errors.New("SCList not expected in this test")
+}
+
+func (f *fakeAPI) SSC(context.Context, string, bool) (*fhlapi.SSCResponse, error) {
+	return nil, errors.New("SSC not expected in this test")
+}
+
+func (f *fakeAPI) ST(context.Context, int, string, bool, bool) (*fhlapi.STResponse, error) {
+	return nil, errors.New("ST not expected in this test")
 }

@@ -230,3 +230,116 @@ func TestQPMalformedJSONForMissingVerse(t *testing.T) {
 		t.Errorf("err = %v, want ErrParse (upstream sends invalid JSON for a verse that does not exist)", err)
 	}
 }
+
+func TestSCQueries(t *testing.T) {
+	var queries []string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		if r.URL.Path != "/api/sc.php" {
+			t.Errorf("path = %q", r.URL.Path)
+		}
+		queries = append(queries, r.URL.RawQuery)
+		if r.URL.Query().Has("validbook") {
+			_, _ = w.Write(fixture(t, "sc_list.json"))
+			return
+		}
+		_, _ = w.Write(fixture(t, "sc_john_3_16.json"))
+	})
+	list, err := c.SCList(context.Background(), true)
+	if err != nil || list.RecordCount != 7 || len(list.Record) != 7 || list.Record[3].ID != 4 {
+		t.Fatalf("list = %+v, err %v", list, err)
+	}
+	v := 16
+	res, err := c.SC(context.Background(), 43, 3, &v, false)
+	if err != nil || res.RecordCount != 1 || res.Record[0].ComText == nil || res.Record[0].BookName == "" {
+		t.Fatalf("sc = %+v, err %v", res, err)
+	}
+	if _, err := c.SC(context.Background(), 43, 3, nil, false); err != nil {
+		t.Fatal(err)
+	}
+	want := []string{"gb=1&validbook=1", "bid=43&chap=3&gb=0&sec=16", "bid=43&chap=3&gb=0"}
+	for i := range want {
+		if queries[i] != want[i] {
+			t.Errorf("query %d = %q, want %q", i, queries[i], want[i])
+		}
+	}
+}
+
+func TestSCWithoutRecords(t *testing.T) {
+	c := newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write(fixture(t, "sc_john_99_1.json")) })
+	v := 1
+	res, err := c.SC(context.Background(), 43, 99, &v, false)
+	if err != nil || res.RecordCount != 0 || len(res.Record) != 0 {
+		t.Errorf("res = %+v, err %v (no record key means no commentary)", res, err)
+	}
+}
+
+func TestSSCQueryAndStatuses(t *testing.T) {
+	var query string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		query = r.URL.RawQuery
+		switch r.URL.Query().Get("key") {
+		case "愛":
+			_, _ = w.Write(fixture(t, "ssc_love_fail.json"))
+		case "zzqqxx":
+			_, _ = w.Write(fixture(t, "ssc_none.json"))
+		default:
+			_, _ = w.Write(fixture(t, "ssc_nicodemus.json"))
+		}
+	})
+	res, err := c.SSC(context.Background(), "尼哥底母", true)
+	if err != nil || len(res.Record) != 5 || res.Record[2].BID != 42 || res.Record[0].Tag != 3 {
+		t.Fatalf("res = %+v, err %v", res, err)
+	}
+	if want := "gb=1&key=%E5%B0%BC%E5%93%A5%E5%BA%95%E6%AF%8D"; query != want {
+		t.Errorf("query = %q, want %q", query, want)
+	}
+	if res, err := c.SSC(context.Background(), "zzqqxx", false); err != nil || len(res.Record) != 0 {
+		t.Errorf("no hits: %+v, %v", res, err)
+	}
+	if _, err := c.SSC(context.Background(), "愛", false); !errors.Is(err, ErrTooManyRecords) {
+		t.Errorf("err = %v, want ErrTooManyRecords", err)
+	}
+}
+
+func TestSTQueryAndParse(t *testing.T) {
+	var queries []string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		queries = append(queries, r.URL.RawQuery)
+		if r.URL.Query().Get("count_only") == "1" {
+			_, _ = w.Write(fixture(t, "st_love_count.json"))
+			return
+		}
+		_, _ = w.Write(fixture(t, "st_faith_torrey_en.json"))
+	})
+	cnt, err := c.ST(context.Background(), 4, "愛", true, false)
+	if err != nil || cnt.RecordCount == nil || *cnt.RecordCount != 23 || len(cnt.Record) != 0 {
+		t.Fatalf("count = %+v, err %v", cnt, err)
+	}
+	res, err := c.ST(context.Background(), 0, "faith", false, true)
+	if err != nil || len(res.Record) != 3 || res.Record[2].ID != "T0000191" || res.Record[2].Topic == nil || *res.Record[2].Topic != "Faith" {
+		t.Fatalf("res = %+v, err %v", res, err)
+	}
+	want := []string{"N=4&count_only=1&gb=0&keyword=%E6%84%9B", "N=0&count_only=0&gb=1&keyword=faith"}
+	for i := range want {
+		if queries[i] != want[i] {
+			t.Errorf("query %d = %q, want %q", i, queries[i], want[i])
+		}
+	}
+}
+
+func TestCommentaryEndpointsRejectFailureStatus(t *testing.T) {
+	c := newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"Fail:something"}`)) })
+	v := 1
+	if _, err := c.SC(context.Background(), 43, 3, &v, false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("SC err = %v", err)
+	}
+	if _, err := c.SCList(context.Background(), false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("SCList err = %v", err)
+	}
+	if _, err := c.SSC(context.Background(), "x", false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("SSC err = %v", err)
+	}
+	if _, err := c.ST(context.Background(), 4, "x", false, false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("ST err = %v", err)
+	}
+}

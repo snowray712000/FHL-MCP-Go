@@ -296,6 +296,144 @@ func (c *Client) QP(ctx context.Context, bid, chapter, verse int, simplified boo
 	return &out, nil
 }
 
+// SCListRecord is one commentary book returned by sc.php?validbook=1.
+type SCListRecord struct {
+	ID   int    `json:"id"`
+	Name string `json:"name"`
+}
+
+// SCListResponse is the commentary-book list response.
+type SCListResponse struct {
+	Status      string         `json:"status"`
+	RecordCount int            `json:"record_count"`
+	Record      []SCListRecord `json:"record"`
+}
+
+// SCList queries sc.php?validbook=1 for the available commentary books.
+func (c *Client) SCList(ctx context.Context, simplified bool) (*SCListResponse, error) {
+	q := url.Values{}
+	q.Set("validbook", "1")
+	q.Set("gb", boolDigit(simplified))
+	var out SCListResponse
+	if err := c.getJSON(ctx, "sc.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// SCRecord is one commentary entry of a verse. Title and ComText may be null upstream.
+// (The response also carries top-level prev/next verse refs; no tool output uses them.)
+type SCRecord struct {
+	Title    *string `json:"title"`
+	BookName string  `json:"book_name"`
+	ComText  *string `json:"com_text"`
+}
+
+// SCResponse is the sc.php commentary response. A verse without commentary has no "record" key.
+type SCResponse struct {
+	Status      string     `json:"status"`
+	RecordCount int        `json:"record_count"`
+	Record      []SCRecord `json:"record"`
+}
+
+// SC queries sc.php for the commentaries of one verse. A nil verse leaves "sec" out; the upstream then answers with zero records.
+func (c *Client) SC(ctx context.Context, bid, chapter int, verse *int, simplified bool) (*SCResponse, error) {
+	q := url.Values{}
+	q.Set("bid", strconv.Itoa(bid))
+	q.Set("chap", strconv.Itoa(chapter))
+	if verse != nil {
+		q.Set("sec", strconv.Itoa(*verse))
+	}
+	q.Set("gb", boolDigit(simplified))
+	var out SCResponse
+	if err := c.getJSON(ctx, "sc.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// ErrTooManyRecords is an upstream search that matched more records than it is willing to return
+// (ssc.php answers status "Fail:record count > 500").
+var ErrTooManyRecords = errors.New("upstream result has more than 500 records")
+
+// SSCRecord is one hit of a commentary search. Chinesef keeps the upstream's space padding.
+type SSCRecord struct {
+	Title    *string `json:"title"`
+	Tag      int     `json:"tag"`
+	BookName string  `json:"book_name"`
+	Chinesef string  `json:"chinesef"`
+	BID      int     `json:"bid"`
+	Engs     string  `json:"engs"`
+	BChap    int     `json:"bchap"`
+	BSec     int     `json:"bsec"`
+	EChap    int     `json:"echap"`
+	ESec     int     `json:"esec"`
+}
+
+// SSCResponse is the ssc.php response. No hits means no "record" key.
+type SSCResponse struct {
+	Status      string      `json:"status"`
+	RecordCount int         `json:"record_count"`
+	Record      []SSCRecord `json:"record"`
+}
+
+// SSC searches the commentaries (ssc.php). Too common a keyword yields ErrTooManyRecords.
+func (c *Client) SSC(ctx context.Context, key string, simplified bool) (*SSCResponse, error) {
+	q := url.Values{}
+	q.Set("key", key)
+	q.Set("gb", boolDigit(simplified))
+	var out SSCResponse
+	if err := c.getJSON(ctx, "ssc.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status == "Fail:record count > 500" {
+		return nil, &Error{Kind: ErrTooManyRecords, Message: "status " + strconv.Quote(out.Status)}
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// STRecord is one topic entry of st.php. Book is the source: 0 Torrey (en), 1 Nave's (en), 2 Torrey (zh), 3 Nave's (zh).
+type STRecord struct {
+	Book  int     `json:"book"`
+	ID    string  `json:"id"`
+	Topic *string `json:"topic"`
+	Text  *string `json:"text"`
+}
+
+// STResponse is the st.php response. RecordCount stays a pointer: Python falls back to the
+// number of returned records when it is absent.
+type STResponse struct {
+	Status      string     `json:"status"`
+	RecordCount *int       `json:"record_count"`
+	Record      []STRecord `json:"record"`
+}
+
+// ST queries st.php (topical study). source is the upstream N value: 0..3 for one source, 4 for all.
+func (c *Client) ST(ctx context.Context, source int, keyword string, countOnly, simplified bool) (*STResponse, error) {
+	q := url.Values{}
+	q.Set("N", strconv.Itoa(source))
+	q.Set("count_only", boolDigit(countOnly))
+	q.Set("keyword", keyword)
+	q.Set("gb", boolDigit(simplified))
+	var out STResponse
+	if err := c.getJSON(ctx, "st.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
 func (c *Client) getJSON(ctx context.Context, endpoint string, q url.Values, dst any) error {
 	u := strings.TrimRight(c.BaseURL, "/") + "/" + endpoint + "?" + q.Encode()
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
