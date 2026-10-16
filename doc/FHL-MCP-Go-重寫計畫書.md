@@ -274,6 +274,26 @@ Claude Code 的 user scope 儲存於 `~/.claude.json`，可跨專案使用；Cod
 - 區分 JSON-RPC 協定錯誤、工具執行失敗、查無資料與上游故障；使用 SDK 合適的錯誤表示。
 - 有動態欄位的差異測試先正規化時間戳與非決定性資訊，不比較排版空白即可判定所有語意相同。
 
+### 已核准的原版差異（M0，2026-10-16，使用者確認）
+
+依據 M0 實測的差異清單（`doc/m0/tool-matrix.md` D1–D16，樣本在 `doc/m0/contract/`），以下為 Go 版的規格；實作與測試以此為準。
+
+| ID | Go 版行為 |
+| --- | --- |
+| D2 | 工具錯誤維持 `isError: true` 的結果，文字前綴 `Error executing tool {name}: `，無 `structuredContent`；未知工具名稱也維持此形式。參數驗證訊息改為自訂、簡潔、不含 Pydantic 原文。**M1 須確認 Go SDK 能讓未知工具回 `isError` 結果（而非 JSON-RPC 錯誤），否則另案決定。** |
+| D3 | 所有工具遇到不認得的書卷，統一回 `Invalid parameter 'book': X - Book not found. Please check the spelling or use a valid book code.`；不重現原版 `InvalidParameterError` 建構錯誤。 |
+| D4 | `use_simplified` 在所有接受它的工具都真正送出 `gb=1`，且繁簡納入快取 key（原版多數工具忽略此參數）。 |
+| D5 | 可選參數明確傳 `null` 視同未提供（原版會拒絕）。 |
+| D6 | 整數參數接受數字字串（如 `"3"`），非數字才報錯。 |
+| D7 | 「查無資料」保持原形狀：章數過大 → 成功、`record_count:0`；`lookup_strongs` 不存在 → 成功、`strongs_number:""` 其餘 `null`；註腳查無 → `status:"not_found"`。`search_bible` 空查詢改為清楚的參數錯誤（原版洩漏 `'record'`）。 |
+| D8 | 新舊兩種輸出家族（有／無 `status`、`query_type`）逐工具保持原形狀，不統一。 |
+| D9 | 型別差異逐欄位保留（音訊 `chapter` 字串、`strongs_number` 補零字串、文章 `id` 字串），以 golden 測試固定。 |
+| D10 | `query_verse_citation` 先照原樣：書卷與章之間須有空白；是否放寬日後再議。 |
+| D11 | 書卷別名表於 M2 從原始碼擷取為 fixture，保留中英別名行為。 |
+| D12 | 已調查：上游 `ssc.php` 對常見詞回 `status:"Fail:record count > 500"`，原版吞成 0 筆。**已核准（2026-10-16）：上游 `status` 非 `success` 時回明確訊息，不當 0 筆**；`Fail:record count > 500` 對應「結果超過 500 筆，請縮小關鍵字」。實作假設（未經使用者逐字確認）：以 D2 的 `isError: true` 錯誤結果回報；此規則先確定適用 `search_commentary`，其他端點的 `status` 慣例（尤其與 D7 保留的「查無資料」形狀的界線）於 M2 逐端點核對後再套用。 |
+
+D1（text + `structuredContent`）已於上方決定；D13–D16 為相容性描述，不需另行決策。D3 的靜態稽核另指出 `get_commentary`、`search_commentary`、`get_topic_study`、`lookup_strongs`、`search_strongs_occurrences` 可能有同樣缺陷（未實測），納入 D3 的測試範圍。
+
 ## 10. 效能與資源驗收
 
 不在量測前承諾「不耗資源」。關閉後不應遺留程序、子程序或背景排程；執行但無查詢時不主動抓取聖經、不建立健康輪詢、不預先下載資料。

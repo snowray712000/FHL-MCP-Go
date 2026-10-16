@@ -1,0 +1,1096 @@
+{
+  "exported": "2026-10-16",
+  "source": "Python HTTP server, 127.0.0.1:18081, mcp 1.29.0",
+  "calls": 55,
+  "upstream_requests_total": 32,
+  "samples": [
+    {
+      "label": "list_bible_versions",
+      "tool": "list_bible_versions",
+      "args": {},
+      "upstream_requests": [
+        "https://bible.fhl.net/api/ab.php?gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 86,\n  \"versions\": [\n    {\n      \"code\": \"unv\",\n      \"name\": \"FHL和合本\",\n      \"has_strongs\": true,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"kjv\",\n      \"name\": \"KJV\",\n      \"has_strongs\": true,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"bhs\",\n      \"name\": \"舊約馬索拉原文\",\n      \"has_strongs\": false,\n      \"testament\": \"ot_only\",\n      \"special_font\": \"hebrew\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"apskcl\",\n      \"name\": \"紅皮聖經全羅\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"apskhl\",\n      \"name\": \"紅皮聖經漢羅\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"bklcl\",\n      \"name\": \"巴克禮全羅\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tghg\",\n      \"name\": \"巴克禮台漢本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"openhan\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ttvhl2021\",\n      \"name\": \"現代台語2021版漢字\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"openhan\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ttvcl2021\",\n      \"name\": \"現代台語2021版全羅\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"bklhl\",\n      \"name\": \"巴克禮漢羅\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tte\",\n      \"name\": \"現代台語2013版全羅\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ttvh\",\n      \"name\": \"現代台語2013版漢字\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"fhlwh\",\n      \"name\": \"新約原文\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"greek\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"bbe\",\n      \"name\": \"BBE\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"asv\",\n      \"name\": \"ASV\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"web\",\n      \"name\": \"WEB\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"darby\",\n      \"name\": \"Darby\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"erv\",\n      \"name\": \"ERV\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"baru\",\n      \"name\": \"印尼聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ind1958\",\n      \"name\": \"印尼舊聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"vietnamese\",\n      \"name\": \"越南聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"russian\",\n      \"name\": \"俄文聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"korean\",\n      \"name\": \"韓文聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"thv2e\",\n      \"name\": \"現代客語全羅\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"hakka\",\n      \"name\": \"汕頭客語聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"recover\",\n      \"name\": \"恢復本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"wlunv\",\n      \"name\": \"深文理和合本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"prebklcl\",\n      \"name\": \"馬雅各全羅\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"genbklcl\",\n      \"name\": \"\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"nt1864\",\n      \"name\": \"新遺詔聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"jp\",\n      \"name\": \"日語聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"csb\",\n      \"name\": \"中文標準譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cnet\",\n      \"name\": \"NET聖經中譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cccbst\",\n      \"name\": \"四福音書共同譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tcv95\",\n      \"name\": \"現代中文譯本1995版\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tcv2019\",\n      \"name\": \"現代中文譯本2019版\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"rcuv\",\n      \"name\": \"和合本2010\",\n      \"has_strongs\": true,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"bunun\",\n      \"name\": \"布農語聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"pinuyan\",\n      \"name\": \"卑南語\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tay\",\n      \"name\": \"泰雅爾語聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tsou\",\n      \"name\": \"鄒語聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"rukai\",\n      \"name\": \"魯凱語聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ams\",\n      \"name\": \"阿美語1997\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"amis2\",\n      \"name\": \"阿美語2019\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"sed\",\n      \"name\": \"賽德克族Tgdaya語\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ttnt94\",\n      \"name\": \"達悟語新約聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"wanshandia\",\n      \"name\": \"萬山魯凱語馬可福音\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"maolindia\",\n      \"name\": \"茂林魯凱語馬可福音\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tonadia\",\n      \"name\": \"多納魯凱語馬可福音\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"tibet\",\n      \"name\": \"藏語聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cvul\",\n      \"name\": \"武加大譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"nvul\",\n      \"name\": \"新武加大譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"lcc\",\n      \"name\": \"呂振中譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ofm\",\n      \"name\": \"思高譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cumv\",\n      \"name\": \"官話和合本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"pmb\",\n      \"name\": \"北京官話譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cuwv\",\n      \"name\": \"文理和合本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cuwve\",\n      \"name\": \"淺文理和合本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwang\",\n      \"name\": \"王元德官話譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"orthdox\",\n      \"name\": \"俄羅斯正教文理譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"basset\",\n      \"name\": \"白日昇徐約翰文理譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"mormil\",\n      \"name\": \"神天聖書\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"wdv\",\n      \"name\": \"文理委辦譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ssewb\",\n      \"name\": \"施約瑟淺文理譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"marwb\",\n      \"name\": \"馬殊曼譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"goddwb\",\n      \"name\": \"高德譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"hudsonwb\",\n      \"name\": \"胡德邁譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"deanwb\",\n      \"name\": \"粦為仁譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"sgebklcl\",\n      \"name\": \"全民台語聖經全羅\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"sgebklhl\",\n      \"name\": \"全民台語聖經漢羅\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"roman\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cmxuhsb\",\n      \"name\": \"徐匯官話新譯福音\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwangdmm\",\n      \"name\": \"王多默聖史宗徒行實\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwhsiaosb\",\n      \"name\": \"蕭舜華官話\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwmgbm\",\n      \"name\": \"四人小組譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwfaubsb\",\n      \"name\": \"聖保祿書翰並數位宗徒涵牘\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwjdsb\",\n      \"name\": \"德如瑟四史聖經譯註\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwkfag\",\n      \"name\": \"郭實臘新遺詔書和舊遺詔聖書\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwliwysb\",\n      \"name\": \"宗徒大事錄和新經譯義\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwmxb\",\n      \"name\": \"馬相伯救世福音\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwont\",\n      \"name\": \"俄羅斯正教新遺詔聖經\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwplbsb\",\n      \"name\": \"卜士傑新經公函與默示錄\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cwtaiping\",\n      \"name\": \"太平天國文理譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cxubinwsb\",\n      \"name\": \"許彬文四史全編\",\n      \"has_strongs\": false,\n      \"testament\": \"nt_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"cogorw\",\n      \"name\": \"高連茨基聖詠經\",\n      \"has_strongs\": false,\n      \"testament\": \"ot_only\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"wcb\",\n      \"name\": \"環球譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"ncv\",\n      \"name\": \"新譯本\",\n      \"has_strongs\": false,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "list_commentaries",
+      "tool": "list_commentaries",
+      "args": {},
+      "upstream_requests": [
+        "https://bible.fhl.net/api/sc.php?validbook=1&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 7,\n  \"commentaries\": [\n    {\n      \"id\": 1,\n      \"name\": \"CBOL加插註釋\"\n    },\n    {\n      \"id\": 2,\n      \"name\": \"parsing 註釋\"\n    },\n    {\n      \"id\": 3,\n      \"name\": \"信望愛站註釋\"\n    },\n    {\n      \"id\": 4,\n      \"name\": \"串珠\"\n    },\n    {\n      \"id\": 8,\n      \"name\": \"蔡茂堂牧師講道\"\n    },\n    {\n      \"id\": 9,\n      \"name\": \"盧俊義牧師講道\"\n    },\n    {\n      \"id\": 10,\n      \"name\": \"康來昌牧師講道\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "list_audio_versions",
+      "tool": "list_audio_versions",
+      "args": {},
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 19,\n  \"versions\": [\n    {\n      \"code\": \"unv\",\n      \"id\": 0,\n      \"name\": \"和合本\"\n    },\n    {\n      \"code\": \"taiwanese\",\n      \"id\": 1,\n      \"name\": \"台語\"\n    },\n    {\n      \"code\": \"hakka\",\n      \"id\": 2,\n      \"name\": \"客家話\"\n    },\n    {\n      \"code\": \"cantonese\",\n      \"id\": 3,\n      \"name\": \"廣東話\"\n    },\n    {\n      \"code\": \"tcv\",\n      \"id\": 4,\n      \"name\": \"現代中文譯本\"\n    },\n    {\n      \"code\": \"taiwanese_nt\",\n      \"id\": 5,\n      \"name\": \"台語新約\"\n    },\n    {\n      \"code\": \"red_bible\",\n      \"id\": 6,\n      \"name\": \"紅皮聖經\"\n    },\n    {\n      \"code\": \"hebrew\",\n      \"id\": 7,\n      \"name\": \"希伯來文\"\n    },\n    {\n      \"code\": \"fuzhou\",\n      \"id\": 8,\n      \"name\": \"福州話\"\n    },\n    {\n      \"code\": \"greek\",\n      \"id\": 9,\n      \"name\": \"希臘文\"\n    },\n    {\n      \"code\": \"spring_taiwanese\",\n      \"id\": 10,\n      \"name\": \"Spring台語\"\n    },\n    {\n      \"code\": \"spring_unv\",\n      \"id\": 11,\n      \"name\": \"Spring和合本\"\n    },\n    {\n      \"code\": \"netbible_chinese\",\n      \"id\": 12,\n      \"name\": \"NetBible中文版\"\n    },\n    {\n      \"code\": \"pct\",\n      \"id\": 13,\n      \"name\": \"全民台語聖經\"\n    },\n    {\n      \"code\": \"tsou\",\n      \"id\": 14,\n      \"name\": \"鄒語\"\n    },\n    {\n      \"code\": \"taiwanese_south\",\n      \"id\": 15,\n      \"name\": \"台語南部腔\"\n    },\n    {\n      \"code\": \"modern_taiwanese\",\n      \"id\": 17,\n      \"name\": \"現代台語譯本\"\n    },\n    {\n      \"code\": \"modern_hakka\",\n      \"id\": 18,\n      \"name\": \"現代客語譯本\"\n    },\n    {\n      \"code\": \"tao\",\n      \"id\": 19,\n      \"name\": \"達悟語\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "list_apocrypha_books",
+      "tool": "list_apocrypha_books",
+      "args": {},
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"list_apocrypha_books\",\n  \"id_range\": \"101-115\",\n  \"book_count\": 9,\n  \"books\": [\n    {\n      \"id\": 101,\n      \"name_zh\": \"多俾亞傳\",\n      \"name_en\": \"Tobit\",\n      \"abbreviations\": [\n        \"多\",\n        \"多俾亞傳\",\n        \"Tob\",\n        \"Tobit\"\n      ]\n    },\n    {\n      \"id\": 102,\n      \"name_zh\": \"友弟德傳\",\n      \"name_en\": \"Judith\",\n      \"abbreviations\": [\n        \"友\",\n        \"友弟德傳\",\n        \"Jdt\",\n        \"Judith\"\n      ]\n    },\n    {\n      \"id\": 103,\n      \"name_zh\": \"瑪加伯上\",\n      \"name_en\": \"1 Maccabees\",\n      \"abbreviations\": [\n        \"加上\",\n        \"瑪加伯上\",\n        \"1Mac\",\n        \"1 Maccabees\"\n      ]\n    },\n    {\n      \"id\": 104,\n      \"name_zh\": \"瑪加伯下\",\n      \"name_en\": \"2 Maccabees\",\n      \"abbreviations\": [\n        \"加下\",\n        \"瑪加伯下\",\n        \"2Mac\",\n        \"2 Maccabees\"\n      ]\n    },\n    {\n      \"id\": 105,\n      \"name_zh\": \"智慧篇\",\n      \"name_en\": \"Wisdom\",\n      \"abbreviations\": [\n        \"智\",\n        \"智慧篇\",\n        \"Wis\",\n        \"Wisdom\"\n      ]\n    },\n    {\n      \"id\": 106,\n      \"name_zh\": \"德訓篇\",\n      \"name_en\": \"Sirach\",\n      \"abbreviations\": [\n        \"德\",\n        \"德訓篇\",\n        \"便西拉智訓\",\n        \"Sir\",\n        \"Sirach\"\n      ]\n    },\n    {\n      \"id\": 107,\n      \"name_zh\": \"巴錄書\",\n      \"name_en\": \"Baruch\",\n      \"abbreviations\": [\n        \"巴\",\n        \"巴錄書\",\n        \"Bar\",\n        \"Baruch\"\n      ]\n    },\n    {\n      \"id\": 108,\n      \"name_zh\": \"耶利米書信\",\n      \"name_en\": \"Letter of Jeremiah\",\n      \"abbreviations\": [\n        \"耶信\",\n        \"耶利米書信\",\n        \"EpJer\"\n      ]\n    },\n    {\n      \"id\": 109,\n      \"name_zh\": \"但以理補篇\",\n      \"name_en\": \"Additions to Daniel\",\n      \"abbreviations\": [\n        \"但補\",\n        \"但以理補篇\"\n      ]\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "list_apostolic_fathers_books",
+      "tool": "list_apostolic_fathers_books",
+      "args": {},
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"list_apostolic_fathers_books\",\n  \"id_range\": \"201-217\",\n  \"book_count\": 8,\n  \"books\": [\n    {\n      \"id\": 201,\n      \"name_zh\": \"革利免前書\",\n      \"name_en\": \"1 Clement\",\n      \"abbreviations\": [\n        \"革\",\n        \"革利免前書\",\n        \"1Clem\",\n        \"1 Clement\"\n      ]\n    },\n    {\n      \"id\": 202,\n      \"name_zh\": \"革利免後書\",\n      \"name_en\": \"2 Clement\",\n      \"abbreviations\": [\n        \"革二\",\n        \"革利免後書\",\n        \"2Clem\",\n        \"2 Clement\"\n      ]\n    },\n    {\n      \"id\": 203,\n      \"name_zh\": \"伊格那丟書信\",\n      \"name_en\": \"Ignatius\",\n      \"abbreviations\": [\n        \"伊\",\n        \"伊格那丟書信\",\n        \"Ign\",\n        \"Ignatius\"\n      ]\n    },\n    {\n      \"id\": 204,\n      \"name_zh\": \"坡旅甲書信\",\n      \"name_en\": \"Polycarp\",\n      \"abbreviations\": [\n        \"坡\",\n        \"坡旅甲書信\",\n        \"Pol\",\n        \"Polycarp\"\n      ]\n    },\n    {\n      \"id\": 205,\n      \"name_zh\": \"黑馬牧人書\",\n      \"name_en\": \"Shepherd of Hermas\",\n      \"abbreviations\": [\n        \"黑\",\n        \"黑馬牧人書\",\n        \"Herm\",\n        \"Shepherd of Hermas\"\n      ]\n    },\n    {\n      \"id\": 206,\n      \"name_zh\": \"巴拿巴書\",\n      \"name_en\": \"Barnabas\",\n      \"abbreviations\": [\n        \"巴\",\n        \"巴拿巴書\",\n        \"Barn\",\n        \"Barnabas\"\n      ]\n    },\n    {\n      \"id\": 207,\n      \"name_zh\": \"十二使徒遺訓\",\n      \"name_en\": \"Didache\",\n      \"abbreviations\": [\n        \"訓\",\n        \"十二使徒遺訓\",\n        \"Did\",\n        \"Didache\"\n      ]\n    },\n    {\n      \"id\": 216,\n      \"name_zh\": \"帕皮亞殘篇\",\n      \"name_en\": \"Papias Fragments\",\n      \"abbreviations\": [\n        \"帕\",\n        \"帕皮亞殘篇\",\n        \"Pap\",\n        \"Papias Fragments\"\n      ]\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "list_fhl_article_columns",
+      "tool": "list_fhl_article_columns",
+      "args": {},
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"list_article_columns\",\n  \"column_count\": 12,\n  \"columns\": [\n    {\n      \"code\": \"women3\",\n      \"name\": \"麻辣姊妹\",\n      \"description\": \"女性信仰生活分享\"\n    },\n    {\n      \"code\": \"sunday\",\n      \"name\": \"主日學\",\n      \"description\": \"主日學教材與資源\"\n    },\n    {\n      \"code\": \"youth\",\n      \"name\": \"青少年\",\n      \"description\": \"青少年信仰與生活\"\n    },\n    {\n      \"code\": \"family\",\n      \"name\": \"家庭\",\n      \"description\": \"家庭生活與信仰\"\n    },\n    {\n      \"code\": \"theology\",\n      \"name\": \"神學\",\n      \"description\": \"神學探討與研究\"\n    },\n    {\n      \"code\": \"bible_study\",\n      \"name\": \"查經\",\n      \"description\": \"聖經研究與分享\"\n    },\n    {\n      \"code\": \"devotion\",\n      \"name\": \"靈修\",\n      \"description\": \"靈修心得與見證\"\n    },\n    {\n      \"code\": \"mission\",\n      \"name\": \"宣教\",\n      \"description\": \"宣教事工與分享\"\n    },\n    {\n      \"code\": \"church\",\n      \"name\": \"教會\",\n      \"description\": \"教會生活與事奉\"\n    },\n    {\n      \"code\": \"culture\",\n      \"name\": \"文化\",\n      \"description\": \"信仰與文化對話\"\n    },\n    {\n      \"code\": \"history\",\n      \"name\": \"歷史\",\n      \"description\": \"教會歷史與傳統\"\n    },\n    {\n      \"code\": \"counseling\",\n      \"name\": \"輔導\",\n      \"description\": \"心理輔導與關懷\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_book_list_nt",
+      "tool": "get_book_list",
+      "args": {
+        "testament": "NT"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 27,\n  \"testament\": \"NT\",\n  \"books\": [\n    {\n      \"id\": 40,\n      \"eng_short\": \"Matt\",\n      \"eng_full\": \"Matthew\",\n      \"chi_short\": \"太\",\n      \"chi_full\": \"馬太福音\"\n    },\n    {\n      \"id\": 41,\n      \"eng_short\": \"Mark\",\n      \"eng_full\": \"Mark\",\n      \"chi_short\": \"可\",\n      \"chi_full\": \"馬可福音\"\n    },\n    {\n      \"id\": 42,\n      \"eng_short\": \"Luke\",\n      \"eng_full\": \"Luke\",\n      \"chi_short\": \"路\",\n      \"chi_full\": \"路加福音\"\n    },\n    {\n      \"id\": 43,\n      \"eng_short\": \"John\",\n      \"eng_full\": \"John\",\n      \"chi_short\": \"約\",\n      \"chi_full\": \"約翰福音\"\n    },\n    {\n      \"id\": 44,\n      \"eng_short\": \"Acts\",\n      \"eng_full\": \"Acts\",\n      \"chi_short\": \"徒\",\n      \"chi_full\": \"使徒行傳\"\n    },\n    {\n      \"id\": 45,\n      \"eng_short\": \"Rom\",\n      \"eng_full\": \"Romans\",\n      \"chi_short\": \"羅\",\n      \"chi_full\": \"羅馬書\"\n    },\n    {\n      \"id\": 46,\n      \"eng_short\": \"1Cor\",\n      \"eng_full\": \"1 Corinthians\",\n      \"chi_short\": \"林前\",\n      \"chi_full\": \"哥林多前書\"\n    },\n    {\n      \"id\": 47,\n      \"eng_short\": \"2Cor\",\n      \"eng_full\": \"2 Corinthians\",\n      \"chi_short\": \"林後\",\n      \"chi_full\": \"哥林多後書\"\n    },\n    {\n      \"id\": 48,\n      \"eng_short\": \"Gal\",\n      \"eng_full\": \"Galatians\",\n      \"chi_short\": \"加\",\n      \"chi_full\": \"加拉太書\"\n    },\n    {\n      \"id\": 49,\n      \"eng_short\": \"Eph\",\n      \"eng_full\": \"Ephesians\",\n      \"chi_short\": \"弗\",\n      \"chi_full\": \"以弗所書\"\n    },\n    {\n      \"id\": 50,\n      \"eng_short\": \"Phil\",\n      \"eng_full\": \"Philippians\",\n      \"chi_short\": \"腓\",\n      \"chi_full\": \"腓立比書\"\n    },\n    {\n      \"id\": 51,\n      \"eng_short\": \"Col\",\n      \"eng_full\": \"Colossians\",\n      \"chi_short\": \"西\",\n      \"chi_full\": \"歌羅西書\"\n    },\n    {\n      \"id\": 52,\n      \"eng_short\": \"1Thess\",\n      \"eng_full\": \"1 Thessalonians\",\n      \"chi_short\": \"帖前\",\n      \"chi_full\": \"帖撒羅尼迦前書\"\n    },\n    {\n      \"id\": 53,\n      \"eng_short\": \"2Thess\",\n      \"eng_full\": \"2 Thessalonians\",\n      \"chi_short\": \"帖後\",\n      \"chi_full\": \"帖撒羅尼迦後書\"\n    },\n    {\n      \"id\": 54,\n      \"eng_short\": \"1Tim\",\n      \"eng_full\": \"1 Timothy\",\n      \"chi_short\": \"提前\",\n      \"chi_full\": \"提摩太前書\"\n    },\n    {\n      \"id\": 55,\n      \"eng_short\": \"2Tim\",\n      \"eng_full\": \"2 Timothy\",\n      \"chi_short\": \"提後\",\n      \"chi_full\": \"提摩太後書\"\n    },\n    {\n      \"id\": 56,\n      \"eng_short\": \"Titus\",\n      \"eng_full\": \"Titus\",\n      \"chi_short\": \"多\",\n      \"chi_full\": \"提多書\"\n    },\n    {\n      \"id\": 57,\n      \"eng_short\": \"Philem\",\n      \"eng_full\": \"Philemon\",\n      \"chi_short\": \"門\",\n      \"chi_full\": \"腓利門書\"\n    },\n    {\n      \"id\": 58,\n      \"eng_short\": \"Heb\",\n      \"eng_full\": \"Hebrews\",\n      \"chi_short\": \"來\",\n      \"chi_full\": \"希伯來書\"\n    },\n    {\n      \"id\": 59,\n      \"eng_short\": \"James\",\n      \"eng_full\": \"James\",\n      \"chi_short\": \"雅\",\n      \"chi_full\": \"雅各書\"\n    },\n    {\n      \"id\": 60,\n      \"eng_short\": \"1Pet\",\n      \"eng_full\": \"1 Peter\",\n      \"chi_short\": \"彼前\",\n      \"chi_full\": \"彼得前書\"\n    },\n    {\n      \"id\": 61,\n      \"eng_short\": \"2Pet\",\n      \"eng_full\": \"2 Peter\",\n      \"chi_short\": \"彼後\",\n      \"chi_full\": \"彼得後書\"\n    },\n    {\n      \"id\": 62,\n      \"eng_short\": \"1John\",\n      \"eng_full\": \"1 John\",\n      \"chi_short\": \"約壹\",\n      \"chi_full\": \"約翰一書\"\n    },\n    {\n      \"id\": 63,\n      \"eng_short\": \"2John\",\n      \"eng_full\": \"2 John\",\n      \"chi_short\": \"約貳\",\n      \"chi_full\": \"約翰二書\"\n    },\n    {\n      \"id\": 64,\n      \"eng_short\": \"3John\",\n      \"eng_full\": \"3 John\",\n      \"chi_short\": \"約參\",\n      \"chi_full\": \"約翰三書\"\n    },\n    {\n      \"id\": 65,\n      \"eng_short\": \"Jude\",\n      \"eng_full\": \"Jude\",\n      \"chi_short\": \"猶\",\n      \"chi_full\": \"猶大書\"\n    },\n    {\n      \"id\": 66,\n      \"eng_short\": \"Rev\",\n      \"eng_full\": \"Revelation\",\n      \"chi_short\": \"啟\",\n      \"chi_full\": \"啟示錄\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_book_info_john",
+      "tool": "get_book_info",
+      "args": {
+        "book": "約"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"id\": 43,\n  \"testament\": \"NT\",\n  \"names\": {\n    \"english\": {\n      \"short\": \"John\",\n      \"full\": \"John\"\n    },\n    \"chinese\": {\n      \"short\": \"約\",\n      \"full\": \"約翰福音\"\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_available_versions_strongs",
+      "tool": "search_available_versions",
+      "args": {
+        "has_strongs": true
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 3,\n  \"filters\": {\n    \"has_strongs\": true,\n    \"testament\": null\n  },\n  \"versions\": [\n    {\n      \"code\": \"unv\",\n      \"name\": \"FHL和合本\",\n      \"has_strongs\": true,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"kjv\",\n      \"name\": \"KJV\",\n      \"has_strongs\": true,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    },\n    {\n      \"code\": \"rcuv\",\n      \"name\": \"和合本2010\",\n      \"has_strongs\": true,\n      \"testament\": \"both\",\n      \"special_font\": \"none\",\n      \"can_download\": false,\n      \"version\": \"\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_bible_verse_john316",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "John",
+        "chapter": 3,
+        "verse": "16"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qb.php?bid=43&chap=3&version=unv&strong=0&sec=16&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 1,\n  \"verses\": [\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 16,\n      \"text\": \"「　神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 17\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_bible_verse_zh_book_range_strong_simplified",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "約",
+        "chapter": 3,
+        "verse": "16-17",
+        "include_strong": true,
+        "use_simplified": true
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qb.php?bid=43&chap=3&version=unv&strong=1&sec=16-17&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 2,\n  \"verses\": [\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 16,\n      \"text\": \"「<WG1063>　神<WG2316>愛<WG25><WTG5656>{<WG3779>}世人<WG2889>，甚至<WG5620>將他的獨生<WG3439>子<WG5207>賜給<WG1325><WTG5656>他們，叫<WG2443>一切<WG3956>信<WG4100><WTG5723>他的<WG1519><WG846>，不<WG3361>致滅亡<WG622><WTG5672>，反<WG235>得<WG2192><WTG5725>永<WG166>生<WG2222>。\"\n    },\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 17,\n      \"text\": \"因為<WG1063>　神<WG2316>差<WG649><WTG5656>他的兒子<WG5207>降<WG1519>世<WG2889>，不是<WG3756>要定<WG2443><WG2919><WTG5661>世人<WG2889>的罪（或譯：審判世人；下同），乃是<WG235>要<WG2443>叫世人<WG2889>因<WG1223>他<WG846>得救<WG4982><WTG5686>。\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 18\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_bible_chapter_phm1",
+      "tool": "get_bible_chapter",
+      "args": {
+        "book": "Phm",
+        "chapter": 1
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_bible_chapter: Invalid parameter 'book': Phm - Book not found. Please check the spelling or use a valid book code."
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "query_verse_citation",
+      "tool": "query_verse_citation",
+      "args": {
+        "citation": "約3:16-17"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool query_verse_citation: Invalid parameter 'citation': 約3:16-17 - 無效的經文引用格式"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "search_bible_keyword",
+      "tool": "search_bible",
+      "args": {
+        "query": "愛",
+        "limit": 3
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/se.php?VERSION=unv&orig=0&q=%E6%84%9B&RANGE=0&offset=0&count_only=0&index_only=0&limit=3&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 3,\n  \"query\": \"愛\",\n  \"search_type\": \"keyword\",\n  \"scope\": \"all\",\n  \"limit\": 3,\n  \"offset\": 0,\n  \"results\": [\n    {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 3,\n      \"verse\": 6,\n      \"text\": \"於是女人見那棵樹的果子好作食物，也悅人的眼目，且是可喜愛的，能使人有智慧，就摘下果子來吃了，又給她丈夫，她丈夫也吃了。\"\n    },\n    {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 19,\n      \"verse\": 19,\n      \"text\": \"你僕人已經在你眼前蒙恩；你又向我顯出莫大的慈愛，救我的性命。我不能逃到山上去，恐怕這災禍臨到我，我便死了。\"\n    },\n    {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 22,\n      \"verse\": 2,\n      \"text\": \"神說：「你帶著你的兒子，就是你獨生的兒子，你所愛的以撒，往摩利亞地去，在我所要指示你的山上，把他獻為燔祭。」\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_bible_advanced_range",
+      "tool": "search_bible_advanced",
+      "args": {
+        "query": "愛",
+        "range_start": 43,
+        "range_end": 43,
+        "limit": 3
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/se.php?VERSION=unv&orig=0&q=%E6%84%9B&RANGE=3&offset=0&count_only=0&index_only=0&limit=3&range_bid=43&range_eid=43&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 3,\n  \"query\": \"愛\",\n  \"search_type\": \"keyword\",\n  \"range\": {\n    \"start\": 43,\n    \"end\": 43\n  },\n  \"limit\": 3,\n  \"offset\": 0,\n  \"results\": [\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 16,\n      \"text\": \"「神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。\"\n    },\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 19,\n      \"text\": \"光來到世間，世人因自己的行為是惡的，不愛光，倒愛黑暗，定他們的罪就是在此。\"\n    },\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 35,\n      \"text\": \"父愛子，已將萬有交在他手裡。\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_word_analysis_john1_1",
+      "tool": "get_word_analysis",
+      "args": {
+        "book": "John",
+        "chapter": 1,
+        "verse": 1
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qp.php?bid=43&chap=1&sec=1&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"testament\": \"NT\",\n  \"book\": \"John\",\n  \"chapter\": 1,\n  \"verse\": 1,\n  \"original_text\": \"Ἐν ἀρχῇ ἦν ὁ λόγος,\\n καὶ ὁ λόγος ἦν πρὸς τὸν θεόν,\\n καὶ θεὸς ἦν ὁ λόγος.\",\n  \"translation\": \"太初有道，\\n且道與上帝同在，\\n道就是上帝。\",\n  \"word_count\": 17,\n  \"words\": [\n    {\n      \"position\": 1,\n      \"word\": \"Ἐν\",\n      \"strongs_number\": \"01722\",\n      \"part_of_speech\": \"介系詞\",\n      \"morphology\": \"\",\n      \"lemma\": \"ἐν\",\n      \"gloss\": \"後接間接受格，意思是「在...之內、藉著」\"\n    },\n    {\n      \"position\": 2,\n      \"word\": \"ἀρχῇ\",\n      \"strongs_number\": \"00746\",\n      \"part_of_speech\": \"名詞\",\n      \"morphology\": \"間接受格 單數 陰性   \",\n      \"lemma\": \"ἀρχή\",\n      \"gloss\": \"起初\"\n    },\n    {\n      \"position\": 3,\n      \"word\": \"ἦν\",\n      \"strongs_number\": \"01510\",\n      \"part_of_speech\": \"動詞\",\n      \"morphology\": \"不完成 主動 直說語氣 第三人稱 單數 \",\n      \"lemma\": \"εἰμί\",\n      \"gloss\": \"有、是\",\n      \"remark\": \"過去已有的，現今是否仍有不確知\"\n    },\n    {\n      \"position\": 4,\n      \"word\": \"ὁ\",\n      \"strongs_number\": \"03588\",\n      \"part_of_speech\": \"冠詞\",\n      \"morphology\": \"主格 單數 陽性   \",\n      \"lemma\": \"ὁ ἡ τό\",\n      \"gloss\": \"視情況翻譯，有時可譯成「這個」、「那個」等\"\n    },\n    {\n      \"position\": 5,\n      \"word\": \"λόγος\",\n      \"strongs_number\": \"03056\",\n      \"part_of_speech\": \"名詞\",\n      \"morphology\": \"主格 單數 陽性   \",\n      \"lemma\": \"λόγος\",\n      \"gloss\": \"道、話語\"\n    },\n    {\n      \"position\": 6,\n      \"word\": \"καὶ\",\n      \"strongs_number\": \"02532\",\n      \"part_of_speech\": \"連接詞\",\n      \"morphology\": \"\",\n      \"lemma\": \"καί\",\n      \"gloss\": \"並且、和\"\n    },\n    {\n      \"position\": 7,\n      \"word\": \"ὁ\",\n      \"strongs_number\": \"03588\",\n      \"part_of_speech\": \"冠詞\",\n      \"morphology\": \"主格 單數 陽性   \",\n      \"lemma\": \"ὁ ἡ τό\",\n      \"gloss\": \"視情況翻譯，有時可譯成「這個」、「那個」等\"\n    },\n    {\n      \"position\": 8,\n      \"word\": \"λόγος\",\n      \"strongs_number\": \"03056\",\n      \"part_of_speech\": \"名詞\",\n      \"morphology\": \"主格 單數 陽性   \",\n      \"lemma\": \"λόγος\",\n      \"gloss\": \"道、話語\"\n    },\n    {\n      \"position\": 9,\n      \"word\": \"ἦν\",\n      \"strongs_number\": \"01510\",\n      \"part_of_speech\": \"動詞\",\n      \"morphology\": \"不完成 主動 直說語氣 第三人稱 單數 \",\n      \"lemma\": \"εἰμί\",\n      \"gloss\": \"有、是\",\n      \"remark\": \"過去已有的，現今是否仍有不確知\"\n    },\n    {\n      \"position\": 10,\n      \"word\": \"πρὸς\",\n      \"strongs_number\": \"04314\",\n      \"part_of_speech\": \"介系詞\",\n      \"morphology\": \"\",\n      \"lemma\": \"πρός\",\n      \"gloss\": \"後接直接受格時意思是「與...同在、向...」\"\n    },\n    {\n      \"position\": 11,\n      \"word\": \"τὸν\",\n      \"strongs_number\": \"03588\",\n      \"part_of_speech\": \"冠詞\",\n      \"morphology\": \"直接受格 單數 陽性   \",\n      \"lemma\": \"ὁ ἡ τό\",\n      \"gloss\": \"視情況翻譯，有時可譯成「這個」、「那個」等\"\n    },\n    {\n      \"position\": 12,\n      \"word\": \"θεόν\",\n      \"strongs_number\": \"02316\",\n      \"part_of_speech\": \"名詞\",\n      \"morphology\": \"直接受格 單數 陽性   \",\n      \"lemma\": \"θεός\",\n      \"gloss\": \"上帝\"\n    },\n    {\n      \"position\": 13,\n      \"word\": \"καὶ\",\n      \"strongs_number\": \"02532\",\n      \"part_of_speech\": \"連接詞\",\n      \"morphology\": \"\",\n      \"lemma\": \"καί\",\n      \"gloss\": \"並且、和\"\n    },\n    {\n      \"position\": 14,\n      \"word\": \"θεὸς\",\n      \"strongs_number\": \"02316\",\n      \"part_of_speech\": \"名詞\",\n      \"morphology\": \"主格 單數 陽性   \",\n      \"lemma\": \"θεός\",\n      \"gloss\": \"上帝\"\n    },\n    {\n      \"position\": 15,\n      \"word\": \"ἦν\",\n      \"strongs_number\": \"01510\",\n      \"part_of_speech\": \"動詞\",\n      \"morphology\": \"不完成 主動 直說語氣 第三人稱 單數 \",\n      \"lemma\": \"εἰμί\",\n      \"gloss\": \"有、是\",\n      \"remark\": \"過去已有的，現今是否仍有不確知\"\n    },\n    {\n      \"position\": 16,\n      \"word\": \"ὁ\",\n      \"strongs_number\": \"03588\",\n      \"part_of_speech\": \"冠詞\",\n      \"morphology\": \"主格 單數 陽性   \",\n      \"lemma\": \"ὁ ἡ τό\",\n      \"gloss\": \"視情況翻譯，有時可譯成「這個」、「那個」等\"\n    },\n    {\n      \"position\": 17,\n      \"word\": \"λόγος\",\n      \"strongs_number\": \"03056\",\n      \"part_of_speech\": \"名詞\",\n      \"morphology\": \"主格 單數 陽性   \",\n      \"lemma\": \"λόγος\",\n      \"gloss\": \"道、話語\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_parsing_reference_james1_1",
+      "tool": "get_parsing_reference",
+      "args": {
+        "book": "James",
+        "chapter": 1,
+        "verse": "1"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qp.php?bid=59&chap=1&sec=1&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "# 參考資料: 原文\n\n- 標記說明: `b` `c` `v` `w` (用於標示聖經原文的章節位置與詞索引)\n\t- b = book (書卷)\n\t- c = chapter (章)\n\t- v = verse (節)\n\t- w = word (詞索引，用於標示該節中的原文字，編號為唯一ID，通常遞增，但不一定連續)\n\t- 範例: b1c1v1w1 = 創世記 1:1 的第一個原文詞\n\t- 若內容都在同一節中，則可省略 v，例如: w1 w2 w3\n\t- 若內容都在同一章中，則可省略 c，例如: v1w1 v2w1\n\t- 若內容都在同一書中，則可省略 b，例如: c1v31w1 c2v1w1\n\n## 節: 雅各書 1:1 \n\n### 類型: 原文\n\nw1 `Ἰάκωβος` ↩  w2 `θεοῦ` w3 `καὶ` w4 `κυρίου` w5 `Ἰησοῦ` w6 `Χριστοῦ` w7 `δοῦλος`  ↩ w8 `ταῖς` w9 `δώδεκα` w10 `φυλαῖς` w11 `ταῖς` w12 `ἐν` w13 `τῇ` w14 `διασπορᾷ` w15 `χαίρειν`.\n\n### 類型: 直譯\n\n雅各 ↩ 上帝和主-耶穌基督的僕人 ↩ 向分散各處的十二個支派問候。\n\n### 類型: 原文分析\n\n- 詞索引: `w1` | SN: `G2385` | 原文字: `Ἰάκωβος` | 詞性: `名詞` | 字彙分析: `主格 單數 陽性` | 原型: `Ἰάκωβος` | 原型簡義: `專有名詞，人名：雅各` | 備註: ` `\n- 詞索引: `w2` | SN: `G2316` | 原文字: `θεοῦ` | 詞性: `名詞` | 字彙分析: `所有格 單數 陽性` | 原型: `θεός` | 原型簡義: `上帝` | 備註: ` `\n- 詞索引: `w3` | SN: `G2532` | 原文字: `καὶ` | 詞性: `連接詞` | 字彙分析: ` ` | 原型: `καί` | 原型簡義: `並且、然後、和` | 備註: ` `\n- 詞索引: `w4` | SN: `G2962` | 原文字: `κυρίου` | 詞性: `名詞` | 字彙分析: `所有格 單數 陽性` | 原型: `κύριος` | 原型簡義: `主、先生` | 備註: ` `\n- 詞索引: `w5` | SN: `G2424` | 原文字: `Ἰησοῦ` | 詞性: `名詞` | 字彙分析: `所有格 單數 陽性` | 原型: `Ἰησοῦς` | 原型簡義: `專有名詞，人名：耶穌` | 備註: `為希伯來文人名「約書亞」的希臘文形式，原意是「上主拯救」。`\n- 詞索引: `w6` | SN: `G5547` | 原文字: `Χριστοῦ` | 詞性: `名詞` | 字彙分析: `所有格 單數 陽性` | 原型: `Χριστός` | 原型簡義: `基督（音譯）、承受膏油的、受膏者` | 備註: `為希伯來文「彌賽亞」的希臘文翻譯。`\n- 詞索引: `w7` | SN: `G1401` | 原文字: `δοῦλος` | 詞性: `名詞` | 字彙分析: `主格 單數 陽性` | 原型: `δοῦλος` | 原型簡義: `僕人、奴僕` | 備註: ` `\n- 詞索引: `w8` | SN: `G3588` | 原文字: `ταῖς` | 詞性: `冠詞` | 字彙分析: `間接受格 複數 陰性` | 原型: `ὁ ἡ τό` | 原型簡義: `視情況翻譯，有時可譯成「這個」、「那個」等` | 備註: ` `\n- 詞索引: `w9` | SN: `G1427` | 原文字: `δώδεκα` | 詞性: `形容詞` | 字彙分析: `間接受格 複數 陰性` | 原型: `δώδεκα` | 原型簡義: `十二` | 備註: ` `\n- 詞索引: `w10` | SN: `G5443` | 原文字: `φυλαῖς` | 詞性: `名詞` | 字彙分析: `間接受格 複數 陰性` | 原型: `φυλή` | 原型簡義: `支派、宗族` | 備註: ` `\n- 詞索引: `w11` | SN: `G3588` | 原文字: `ταῖς` | 詞性: `冠詞` | 字彙分析: `間接受格 複數 陰性` | 原型: `ὁ ἡ τό` | 原型簡義: `視情況翻譯，有時可譯成「這個」、「那個」等` | 備註: ` `\n- 詞索引: `w12` | SN: `G1722` | 原文字: `ἐν` | 詞性: `介系詞` | 字彙分析: ` ` | 原型: `ἐν` | 原型簡義: `後接間接受格，意思是「在...裡面、藉著」` | 備註: ` `\n- 詞索引: `w13` | SN: `G3588` | 原文字: `τῇ` | 詞性: `冠詞` | 字彙分析: `間接受格 單數 陰性` | 原型: `ὁ ἡ τό` | 原型簡義: `視情況翻譯，有時可譯成「這個」、「那個」等` | 備註: ` `\n- 詞索引: `w14` | SN: `G1290` | 原文字: `διασπορᾷ` | 詞性: `名詞` | 字彙分析: `間接受格 單數 陰性` | 原型: `διασπορά` | 原型簡義: `分散的人聚集處` | 備註: ` `\n- 詞索引: `w15` | SN: `G5463` | 原文字: `χαίρειν` | 詞性: `動詞` | 字彙分析: `現在 主動 不定詞` | 原型: `χαίρω` | 原型簡義: `問候他人、 向人致意` | 備註: ` `"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "lookup_strongs_nt25",
+      "tool": "lookup_strongs",
+      "args": {
+        "number": "25",
+        "testament": "NT"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/sd.php?N=0&k=25&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"strongs_number\": \"00025\",\n  \"original_word\": \"ἀγαπάω\",\n  \"chinese_definition\": \"25 agapao {ag-ap-ah'-o}\\r\\n\\r\\n可能源自 agan (多) [或參 SNG05368]; TDNT - 1:21,5; 動詞\\r\\n\\r\\n欽定本 - love 135, beloved 7; 142\\r\\n\\r\\n1)珍愛,喜歡,愛上\\r\\n 1a)人的愛\\r\\n  1a1)對人\\r\\n  1a2)對神\\r\\n 1b)神的愛\\r\\n  1b1)對人\\r\\n  1b2)對神(例:神對耶穌的愛)\\r\\n2)以...為樂\\r\\n3)證明自己的愛 (#約13:1,34; 約一3:18|)\",\n  \"english_definition\": \"25 agapao {ag-ap-ah'-o}\\n\\nperhaps from agan (much) [or cf 5368]; TDNT - 1:21,5; v\\n\\nAV - love 135, beloved 7; 142\\n\\n1) of persons\\n   1a) to welcome, to entertain, to be fond of, to love dearly\\n2) of things\\n   2a) to be well pleased, to be contented at or with a thing\",\n  \"testament\": \"NT\",\n  \"related_words\": [\n    {\n      \"word\": \"ἀγαπάω\",\n      \"number\": \"00025\",\n      \"occurrences\": 143,\n      \"gloss\": \"愛；表明或證明一個人的愛；渴望\"\n    },\n    {\n      \"word\": \"ἀγάπη, ης, ἡ\",\n      \"number\": \"00026\",\n      \"occurrences\": 116,\n      \"gloss\": \"愛；早期教會信徒一同分享的愛餐\"\n    },\n    {\n      \"word\": \"ἀγαπητός, ή, όν\",\n      \"number\": \"00027\",\n      \"occurrences\": 61,\n      \"gloss\": \"親愛的，至愛的\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_strongs_occurrences_nt25",
+      "tool": "search_strongs_occurrences",
+      "args": {
+        "number": "25",
+        "testament": "NT",
+        "limit": 3
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/se.php?VERSION=unv&orig=1&q=25&RANGE=1&offset=0&count_only=0&index_only=0&limit=3&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"strongs_info\": {\n    \"strongs_number\": \"00025\",\n    \"original_word\": \"ἀγαπάω\",\n    \"chinese_definition\": \"25 agapao {ag-ap-ah'-o}\\r\\n\\r\\n可能源自 agan (多) [或參 SNG05368]; TDNT - 1:21,5; 動詞\\r\\n\\r\\n欽定本 - love 135, beloved 7; 142\\r\\n\\r\\n1)珍愛,喜歡,愛上\\r\\n 1a)人的愛\\r\\n  1a1)對人\\r\\n  1a2)對神\\r\\n 1b)神的愛\\r\\n  1b1)對人\\r\\n  1b2)對神(例:神對耶穌的愛)\\r\\n2)以...為樂\\r\\n3)證明自己的愛 (#約13:1,34; 約一3:18|)\",\n    \"english_definition\": \"25 agapao {ag-ap-ah'-o}\\n\\nperhaps from agan (much) [or cf 5368]; TDNT - 1:21,5; v\\n\\nAV - love 135, beloved 7; 142\\n\\n1) of persons\\n   1a) to welcome, to entertain, to be fond of, to love dearly\\n2) of things\\n   2a) to be well pleased, to be contented at or with a thing\",\n    \"testament\": \"NT\",\n    \"related_words\": [\n      {\n        \"word\": \"ἀγαπάω\",\n        \"number\": \"00025\",\n        \"occurrences\": 143,\n        \"gloss\": \"愛；表明或證明一個人的愛；渴望\"\n      },\n      {\n        \"word\": \"ἀγάπη, ης, ἡ\",\n        \"number\": \"00026\",\n        \"occurrences\": 116,\n        \"gloss\": \"愛；早期教會信徒一同分享的愛餐\"\n      },\n      {\n        \"word\": \"ἀγαπητός, ή, όν\",\n        \"number\": \"00027\",\n        \"occurrences\": 61,\n        \"gloss\": \"親愛的，至愛的\"\n      }\n    ]\n  },\n  \"occurrences\": {\n    \"total_count\": 3,\n    \"showing\": 3,\n    \"results\": [\n      {\n        \"book\": \"太\",\n        \"book_eng\": \"Matt\",\n        \"chapter\": 5,\n        \"verse\": 43,\n        \"text\": \"「你們聽見<WG191><WTG5656>有話說<WG3004><WTG5681>：『{<WG3754>}當愛<WG25><WTG5692>你的<WG4771>鄰舍<WG4139>，{<WG2532>}恨<WG3404><WTG5692>你的<WG4771>仇敵<WG2190>。』\"\n      },\n      {\n        \"book\": \"太\",\n        \"book_eng\": \"Matt\",\n        \"chapter\": 5,\n        \"verse\": 44,\n        \"text\": \"只是<WG1161>我<WG1473>告訴<WG3004><WTG5719>你們<WG4771>，要愛<WG25><WTG5720>你們的<WG4771>仇敵<WG2190>，為<WG5228>那<WG3588>逼迫<WG1377><WTG5723>{<WG2532>}你們<WG4771>的禱告<WG4336><WTG5737>。\"\n      },\n      {\n        \"book\": \"太\",\n        \"book_eng\": \"Matt\",\n        \"chapter\": 5,\n        \"verse\": 46,\n        \"text\": \"{<WG1063>}你們若<WG1437>單愛<WG25><WTG5661>那<WG3588>愛<WG25><WTG5723>你們<WG4771>的人，有<WG2192><WTG5719>甚麼<WG5101>賞賜<WG3408>呢？就是稅吏<WG5057>不<WG3780>也<WG2532>是這樣<WG846>行<WG4160><WTG5719>嗎？\"\n      }\n    ]\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_commentary_john316",
+      "tool": "get_commentary",
+      "args": {
+        "book": "John",
+        "chapter": 3,
+        "verse": 16
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/sc.php?bid=43&chap=3&sec=16&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"book\": \"John\",\n  \"chapter\": 3,\n  \"verse\": 16,\n  \"commentary_count\": 1,\n  \"commentaries\": [\n    {\n      \"commentary_name\": \"信望愛站註釋\",\n      \"title\": \"約翰福音 3章1節 到 3章21節\",\n      \"content\": \"    （二）耶穌與尼哥底母 #3:1-21|\\r\\n          1.尼哥底母來訪與其對耶穌的認識#3:1-2|\\r\\n           (1)尼哥底母的背景：猶太人、法利賽人、官#3:1|，老人#3:4|，\\r\\n              有錢人（依據#約 19:39|記載，有能力提供大量香料的人必然有\\r\\n              錢），猶太人的老師。#3:10|\\r\\n              ●「法利賽人」：SNG05330，字義是「分離者」，當代法利賽人的\\r\\n                              人數大約有六千，散佈在整個巴勒斯坦。他們是會\\r\\n                              堂裡的教師，人們心目中的宗教楷模，自命是律法\\r\\n                              的護衛者，監管人們正確的遵行律法。他們認為傳\\r\\n                              統上對律法的解釋和規條，具有實質上和聖經同等\\r\\n                              的權威。\\r\\n              ●「尼哥底母」：字義是「征服者」。\\r\\n              ●猶太人的「官」：SNH00758，「統治者」、「領袖」、「官員」\\r\\n                                。\\r\\n              ◎「猶太人的官」：即「猶太公會的成員」。「猶太公會」由大祭\\r\\n                                司擔任主席，有七十個成員。\\r\\n              ◎這樣有錢、有道德知識的人還來找耶穌，而由耶穌後來與他的對\\r\\n                話，可以知道尼哥底母真正的問題是沒有把握進神的國，這豈不\\r\\n                令我們側目？\\r\\n\\r\\n           (2)尼哥底母對耶穌的認識：由神那裡來作老師的。他這樣認定的理由\\r\\n              是：神蹟證明了耶穌的身份。#3:2|\\r\\n              ●「拉比」：SNG04461，「師父」、「猶太人對老師的尊稱」。\\r\\n              ●「師傅」：SNG01320，「教師」、「教導有關神的事及人的責任\\r\\n                          的人」。\\r\\n              ●「神蹟」：SNG04592，「記號」、「表徵」。原文是複數型態，\\r\\n                          顯見當時耶穌已經公開行過不少神蹟，但約翰福音並\\r\\n                          沒有記載。\\r\\n              ◎尼哥底母是說「我們」知道，表示許多與他有一同身份地位的法\\r\\n                利賽人們也都知道耶穌是由上帝那裡來的。然而後來正是這一群\\r\\n                人害死耶穌。是不是我們所知的跟我們所做的常常是不一樣？\\r\\n              ◎尼哥底母因為耶穌的神蹟認定耶穌是由上帝那裡來的，但這一段\\r\\n                前的#2:23-25|，正好說明耶穌並不信賴持這樣信仰（因神蹟信\\r\\n                耶穌）的人。\\r\\n\\r\\n           (3)尼哥底母夜間來見耶穌。 #3:2|\\r\\n              ◎理由可能是因為怕人說閒話，或者是他認為須要與耶穌長談，因\\r\\n                此選擇夜間來找耶穌。\\r\\n\\r\\n          2.耶穌說明人必須重生才能見神的國，而尼哥底母質疑重生的可能性。\\r\\n            #3:3-4|\\r\\n            ●「實實在在」：SNG00281+SNG00281，「阿們」、「阿們」。\\r\\n            ●「重生」：SNG00509，有「從上頭而生」、「再次生」兩種含義。\\r\\n            ●「見」神的國：SNG03708，「看見」、「體驗」、「經歷」。\\r\\n            ●神的「國」：SNG00932，「王權」、「王國」。\\r\\n            ●「神的國」：指「上帝的統治權和版圖」。\\r\\n            ◎此處「見神的國」與#3:5|的「進神的國」意義應該是一致的。\\r\\n            ◎尼哥底母顯然選擇「再次生」的涵義，因此直接質疑再一次生出來\\r\\n              的可能性，但耶穌顯然是採「從上頭而生」的意思。\\r\\n\\r\\n          3.耶穌表明重生就是由水和靈生。 #3:5-6|\\r\\n            ●水和「聖靈」生：SNG04151，「風」、「靈」。由上下文可以看出\\r\\n                              此處指的應該是「神的靈」、「聖靈」。\\r\\n            ◎「水」：可能有以下幾種解釋\\r\\n                      (1)施洗約翰的洗禮。\\r\\n                      (2)肉身的出生（「水」指的是「羊水」，這是加爾文的\\r\\n                                    看法）。\\r\\n                      (3)信心。\\r\\n                      (4)神的道（#弗 5:25-26|）。\\r\\n                      (5)指基督徒的洗禮（這是馬丁路德的看法）。\\r\\n                      (6)水就是聖靈，原文的「和」也可以翻譯成「就是」。\\r\\n                      (7)潔淨（法利賽人用水潔淨的禮儀）。\\r\\n            ◎考慮到尼哥底母當時所聽見的意義，以(1)、(6)、(7)比較有可\\r\\n              能。\\r\\n\\r\\n          4.耶穌說明我們可以感覺重生的影響力卻無法瞭解重生的細節。\\r\\n            #3:7-9|\\r\\n            ●「必須」重生：SNG01163，「一定」、「理當」。\\r\\n            ●「風」：SNG04151，原文跟「靈」字是同一個字。\\r\\n\\r\\n          5.耶穌感嘆尼哥底母的無法理解，並說明自己所說的是真，而且是人可\\r\\n            以領悟的。 #3:10-12|\\r\\n            ●「先生」：SNG01320，「教師」、「教導有關神的事及人的責任\\r\\n                        的人」，此字前有定冠詞，指尼哥底母是有官位的教\\r\\n                        師，而不是一般人私下認可的老師。\\r\\n            ●「我們」：可能是包含「門徒和耶穌」。\\r\\n\\r\\n          6.除了耶穌之外，沒有人升過天，摩西在曠野怎樣舉銅蛇，耶穌也要被\\r\\n            舉起來，叫一切信耶穌的人得永生。#3:13-15|\\r\\n            ●「除了從天降下、仍舊在天」：有些抄本僅有「除了從天降下」。\\r\\n                                          沒有「仍舊在天」。\\r\\n            ●「舉蛇」：參考#民 21:5-9|，摩西舉銅蛇，讓被火蛇咬\\r\\n                        傷的百姓可以仰望銅蛇得生。這銅蛇後來被希西家銷毀\\r\\n                        #王下 18:4|。\\r\\n            ●「必」照樣：SNG01163，「一定」、「理當」。\\r\\n            ●一切「信」他：SNG04100，「信靠」、「將一件事交託給某人」。\\r\\n            ●#3:15|有一個SNG01722，沒有被和合本翻譯出來。這一節的意義應\\r\\n              該是「使得所有相信的人，在他裡面有永生」。\\r\\n            ◎「耶穌被舉」：應該是指耶穌被釘十字架的事情。而人得永生的必\\r\\n                            要條件是信靠被釘十字架的耶穌。\\r\\n\\r\\n          7.上帝愛世人，將獨生子耶穌賜給人，叫信耶穌的不致滅亡，反得永生\\r\\n            。 #3:16|\\r\\n            ●「世人」：SNG02889，「世界」，也許包括所有的受造物。\\r\\n            ●「永生」：SNG02222+SNG00166，「永遠的生命」。\\r\\n            ◎#3:16-21|，到底是約翰的評論還是耶穌對尼哥底母的表白，並不\\r\\n              能確定。約翰福音常常有這一類難以確定的經文存在。主要是因為\\r\\n              沒有明確的方法可以區分到底那一段話是耶穌的話還是約翰的感言\\r\\n              。雖然如此，對整體意義的影響不大。\\r\\n\\r\\n          8.神兒子降世目的主要不是要定世人的罪，而是希望世人因神子得救。\\r\\n            #3:17|\\r\\n            ●「定....罪」、「定罪」：SNG02919，「宣判」、「裁決」、「交\\r\\n                                      付判罪」。\\r\\n            ◎這裡提到上帝差派耶穌到世上的主要目的並非是要定罪，而是要拯\\r\\n              救。但是後面立刻提到耶穌來所帶來的附帶審判作用。\\r\\n\\r\\n          9.但是真理的出現也帶來必然的審判，因為人對真理的不接受就顯出自\\r\\n            己不喜愛真理，應該受審判。 #3:18-21|\\r\\n            ●「定....罪」：SNG02920，「審判」、「判斷」。\\r\\n            ●「信」、「不信」：原文的時態都顯示這是指持續的信或不信，而\\r\\n                                非指暫時的狀態。\\r\\n            ◎真理出現，自然就帶來「區別」。因著每個人對真理的不同反應，\\r\\n              就顯出每個人到底是不是屬於真理的，是不是真心愛真理的。因此\\r\\n              真理來的主要目的雖然不是定罪，卻也必然帶來「分別」的作用。\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_commentary",
+      "tool": "search_commentary",
+      "args": {
+        "keyword": "愛"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/ssc.php?key=%E6%84%9B&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"keyword\": \"愛\",\n  \"total_count\": 0,\n  \"results\": []\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_topic_study_count_only",
+      "tool": "get_topic_study",
+      "args": {
+        "keyword": "愛",
+        "count_only": true
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/st.php?N=4&count_only=1&keyword=%E6%84%9B&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"keyword\": \"愛\",\n  \"source\": \"all\",\n  \"total_count\": 23\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_audio_bible_john3",
+      "tool": "get_audio_bible",
+      "args": {
+        "book": "John",
+        "chapter": 3
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/au.php?version=0&bid=43&chap=3&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"和合本\",\n  \"book\": \"約翰福音\",\n  \"book_eng\": \"John\",\n  \"chapter\": \"3\",\n  \"audio_files\": {\n    \"mp3\": \"https://media.fhl.net/unv1/43/43_003.mp3\",\n    \"ogg\": \"https://media.fhl.net/unv1/43/43_003.ogg\"\n  },\n  \"navigation\": {\n    \"prev\": {\n      \"book_id\": \"43\",\n      \"book\": \"約翰福音\",\n      \"chapter\": \"2\"\n    },\n    \"next\": {\n      \"book_id\": \"43\",\n      \"book\": \"約翰福音\",\n      \"chapter\": \"4\"\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_audio_chapter_with_text_phm1",
+      "tool": "get_audio_chapter_with_text",
+      "args": {
+        "book": "Phm",
+        "chapter": 1
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_audio_chapter_with_text: InvalidParameterError.__init__() missing 1 required positional argument: 'value'"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "get_bible_footnote_1_1",
+      "tool": "get_bible_footnote",
+      "args": {
+        "book_id": 1,
+        "footnote_id": 1
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/rt.php?bid=1&id=1&version=tcv&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"bible_footnote\",\n  \"version\": \"TCV\",\n  \"version_name\": \"現代中文譯本\",\n  \"book_id\": 1,\n  \"book_name\": \"Gen\",\n  \"footnote_id\": 1,\n  \"text\": \"「太初，上帝創造天地。」或譯「太初，上帝創造天地的時候。」或「上帝開始創造天地的時候」。\"\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_fhl_articles_title",
+      "tool": "search_fhl_articles",
+      "args": {
+        "title": "愛",
+        "limit": 2
+      },
+      "upstream_requests": [
+        "https://www.fhl.net/api/json.php?gb=0&title=%E6%84%9B"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"article_search\",\n  \"total_count\": 2,\n  \"returned_count\": 2,\n  \"include_full_content\": false,\n  \"articles\": [\n    {\n      \"id\": \"9247\",\n      \"title\": \"舊約裡的基督▪慈繩愛索\",\n      \"author\": \"小佑哥哥\",\n      \"pubtime\": \"2026.10.04\",\n      \"column\": \"家庭之歌\",\n      \"abstract\": \"\\n何西阿娶了行為不檢的女人為妻，容忍她屢次背叛，則是遙遙指著耶穌對罪人的接納。 \"\n    },\n    {\n      \"id\": \"9248\",\n      \"title\": \"說好了愛你到底\",\n      \"author\": \"桃樂斯\",\n      \"pubtime\": \"2026.10.04\",\n      \"column\": \"信望愛閱讀\",\n      \"abstract\": \"\\n我們知道上帝是信實的，凡有生命的必不再被洪水除滅，再沒有洪水來毀滅大地了，這就是彩虹之約的意義...... \"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_book_info_Phm",
+      "tool": "get_book_info",
+      "args": {
+        "book": "Phm"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_book_info: InvalidParameterError.__init__() missing 1 required positional argument: 'value'"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "get_book_info_men",
+      "tool": "get_book_info",
+      "args": {
+        "book": "門"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"id\": 57,\n  \"testament\": \"NT\",\n  \"names\": {\n    \"english\": {\n      \"short\": \"Philem\",\n      \"full\": \"Philemon\"\n    },\n    \"chinese\": {\n      \"short\": \"門\",\n      \"full\": \"腓利門書\"\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_book_info_Philemon",
+      "tool": "get_book_info",
+      "args": {
+        "book": "Philemon"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"id\": 57,\n  \"testament\": \"NT\",\n  \"names\": {\n    \"english\": {\n      \"short\": \"Philem\",\n      \"full\": \"Philemon\"\n    },\n    \"chinese\": {\n      \"short\": \"門\",\n      \"full\": \"腓利門書\"\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "val_missing_book",
+      "tool": "get_bible_verse",
+      "args": {
+        "chapter": 3
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_bible_verse: 1 validation error for get_bible_verseArguments\nbook\n  Field required [type=missing, input_value={'chapter': 3}, input_type=dict]\n    For further information visit https://errors.pydantic.dev/2.13/v/missing"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "val_chapter_abc",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "John",
+        "chapter": "abc"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_bible_verse: 1 validation error for get_bible_verseArguments\nchapter\n  Input should be a valid integer, unable to parse string as an integer [type=int_parsing, input_value='abc', input_type=str]\n    For further information visit https://errors.pydantic.dev/2.13/v/int_parsing"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "val_verse_null",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "John",
+        "chapter": 3,
+        "verse": null
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_bible_verse: 1 validation error for get_bible_verseArguments\nverse\n  Input should be a valid string [type=string_type, input_value=None, input_type=NoneType]\n    For further information visit https://errors.pydantic.dev/2.13/v/string_type"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "val_unknown_book_verse",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "不存在書卷",
+        "chapter": 1,
+        "verse": "1"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool get_bible_verse: Invalid parameter 'book': 不存在書卷 - Book not found. Please check the spelling or use a valid book code."
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "val_unknown_tool",
+      "tool": "no_such_tool",
+      "args": {},
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Unknown tool: no_such_tool"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "val_empty_query",
+      "tool": "search_bible",
+      "args": {
+        "query": ""
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/se.php?VERSION=unv&orig=0&q=&RANGE=0&offset=0&count_only=0&index_only=0&limit=50&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "Error executing tool search_bible: 'record'"
+          }
+        ],
+        "isError": true
+      }
+    },
+    {
+      "label": "cache_repeat_john316",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "John",
+        "chapter": 3,
+        "verse": "16"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 1,\n  \"verses\": [\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 16,\n      \"text\": \"「　神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 17\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "val_chapter_string_3",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "John",
+        "chapter": "3",
+        "verse": "16"
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 1,\n  \"verses\": [\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 16,\n      \"text\": \"「　神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 17\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "query_verse_citation_space",
+      "tool": "query_verse_citation",
+      "args": {
+        "citation": "約 3:16-17"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qb.php?bid=43&chap=3&version=unv&strong=0&sec=16-17&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 2,\n  \"verses\": [\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 16,\n      \"text\": \"「　神愛世人，甚至將他的獨生子賜給他們，叫一切信他的，不致滅亡，反得永生。\"\n    },\n    {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 17,\n      \"text\": \"因為　神差他的兒子降世，不是要定世人的罪（或譯：審判世人；下同），乃是要叫世人因他得救。\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"約\",\n      \"book_eng\": \"John\",\n      \"chapter\": 3,\n      \"verse\": 18\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_bible_chapter_men1",
+      "tool": "get_bible_chapter",
+      "args": {
+        "book": "門",
+        "chapter": 1
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qb.php?bid=57&chap=1&version=unv&strong=0&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 25,\n  \"verses\": [\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 1,\n      \"text\": \"為基督耶穌被囚的保羅，同兄弟提摩太寫信給我們所親愛的同工腓利門，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 2,\n      \"text\": \"和妹子亞腓亞並與我們同當兵的亞基布，以及在你家的教會。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 3,\n      \"text\": \"願恩惠、平安從　神我們的父和主耶穌基督歸與你們！\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 4,\n      \"text\": \"我禱告的時候提到你，常為你感謝我的　神；\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 5,\n      \"text\": \"因聽說你的愛心並你向主耶穌和眾聖徒的信心（或譯：因聽說你向主耶穌和眾聖徒有愛心有信心）。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 6,\n      \"text\": \"願你與人所同有的信心顯出功效，使人知道你們各樣善事都是為基督做的。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 7,\n      \"text\": \"兄弟啊，我為你的愛心，大有快樂，大得安慰，因眾聖徒的心從你得了暢快。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 8,\n      \"text\": \"我雖然靠著基督能放膽吩咐你合宜的事，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 9,\n      \"text\": \"然而像我這有年紀的保羅，現在又是為基督耶穌被囚的，寧可憑著愛心求你，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 10,\n      \"text\": \"就是為我在捆鎖中所生的兒子阿尼西母（就是有益處的意思）求你。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 11,\n      \"text\": \"他從前與你沒有益處，但如今與你我都有益處。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 12,\n      \"text\": \"我現在打發他親自回你那裡去；他是我心上的人。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 13,\n      \"text\": \"我本來有意將他留下，在我為福音所受的捆鎖中替你伺候我。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 14,\n      \"text\": \"但不知道你的意思，我就不願意這樣行，叫你的善行不是出於勉強，乃是出於甘心。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 15,\n      \"text\": \"他暫時離開你，或者是叫你永遠得著他，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 16,\n      \"text\": \"不再是奴僕，乃是高過奴僕，是親愛的兄弟。在我實在是如此，何況在你呢！這也不拘是按肉體說，是按主說。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 17,\n      \"text\": \"你若以我為同伴，就收納他，如同收納我一樣。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 18,\n      \"text\": \"他若虧負你，或欠你甚麼，都歸在我的帳上；\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 19,\n      \"text\": \"我必償還，這是我─保羅親筆寫的。我並不用對你說，連你自己也是虧欠於我。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 20,\n      \"text\": \"兄弟啊，望你使我在主裡因你得快樂（或譯：益處），並望你使我的心在基督裡得暢快。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 21,\n      \"text\": \"我寫信給你，深信你必順服，知道你所要行的必過於我所說的。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 22,\n      \"text\": \"此外你還要給我預備住處；因為我盼望藉著你們的禱告，必蒙恩到你們那裡去。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 23,\n      \"text\": \"為基督耶穌與我同坐監的以巴弗問你安。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 24,\n      \"text\": \"與我同工的馬可、亞里達古、底馬、路加也都問你安。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 25,\n      \"text\": \"願我們主耶穌基督的恩常在你的心裡。阿們！\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"多\",\n      \"book_eng\": \"Titus\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"來\",\n      \"book_eng\": \"Heb\",\n      \"chapter\": 1,\n      \"verse\": 1\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_bible_chapter_men1_simplified",
+      "tool": "get_bible_chapter",
+      "args": {
+        "book": "門",
+        "chapter": 1,
+        "use_simplified": true
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 25,\n  \"verses\": [\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 1,\n      \"text\": \"為基督耶穌被囚的保羅，同兄弟提摩太寫信給我們所親愛的同工腓利門，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 2,\n      \"text\": \"和妹子亞腓亞並與我們同當兵的亞基布，以及在你家的教會。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 3,\n      \"text\": \"願恩惠、平安從　神我們的父和主耶穌基督歸與你們！\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 4,\n      \"text\": \"我禱告的時候提到你，常為你感謝我的　神；\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 5,\n      \"text\": \"因聽說你的愛心並你向主耶穌和眾聖徒的信心（或譯：因聽說你向主耶穌和眾聖徒有愛心有信心）。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 6,\n      \"text\": \"願你與人所同有的信心顯出功效，使人知道你們各樣善事都是為基督做的。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 7,\n      \"text\": \"兄弟啊，我為你的愛心，大有快樂，大得安慰，因眾聖徒的心從你得了暢快。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 8,\n      \"text\": \"我雖然靠著基督能放膽吩咐你合宜的事，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 9,\n      \"text\": \"然而像我這有年紀的保羅，現在又是為基督耶穌被囚的，寧可憑著愛心求你，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 10,\n      \"text\": \"就是為我在捆鎖中所生的兒子阿尼西母（就是有益處的意思）求你。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 11,\n      \"text\": \"他從前與你沒有益處，但如今與你我都有益處。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 12,\n      \"text\": \"我現在打發他親自回你那裡去；他是我心上的人。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 13,\n      \"text\": \"我本來有意將他留下，在我為福音所受的捆鎖中替你伺候我。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 14,\n      \"text\": \"但不知道你的意思，我就不願意這樣行，叫你的善行不是出於勉強，乃是出於甘心。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 15,\n      \"text\": \"他暫時離開你，或者是叫你永遠得著他，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 16,\n      \"text\": \"不再是奴僕，乃是高過奴僕，是親愛的兄弟。在我實在是如此，何況在你呢！這也不拘是按肉體說，是按主說。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 17,\n      \"text\": \"你若以我為同伴，就收納他，如同收納我一樣。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 18,\n      \"text\": \"他若虧負你，或欠你甚麼，都歸在我的帳上；\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 19,\n      \"text\": \"我必償還，這是我─保羅親筆寫的。我並不用對你說，連你自己也是虧欠於我。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 20,\n      \"text\": \"兄弟啊，望你使我在主裡因你得快樂（或譯：益處），並望你使我的心在基督裡得暢快。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 21,\n      \"text\": \"我寫信給你，深信你必順服，知道你所要行的必過於我所說的。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 22,\n      \"text\": \"此外你還要給我預備住處；因為我盼望藉著你們的禱告，必蒙恩到你們那裡去。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 23,\n      \"text\": \"為基督耶穌與我同坐監的以巴弗問你安。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 24,\n      \"text\": \"與我同工的馬可、亞里達古、底馬、路加也都問你安。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 25,\n      \"text\": \"願我們主耶穌基督的恩常在你的心裡。阿們！\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"多\",\n      \"book_eng\": \"Titus\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"來\",\n      \"book_eng\": \"Heb\",\n      \"chapter\": 1,\n      \"verse\": 1\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_bible_verse_men1_no_verse",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "門",
+        "chapter": 1
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 25,\n  \"verses\": [\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 1,\n      \"text\": \"為基督耶穌被囚的保羅，同兄弟提摩太寫信給我們所親愛的同工腓利門，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 2,\n      \"text\": \"和妹子亞腓亞並與我們同當兵的亞基布，以及在你家的教會。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 3,\n      \"text\": \"願恩惠、平安從　神我們的父和主耶穌基督歸與你們！\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 4,\n      \"text\": \"我禱告的時候提到你，常為你感謝我的　神；\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 5,\n      \"text\": \"因聽說你的愛心並你向主耶穌和眾聖徒的信心（或譯：因聽說你向主耶穌和眾聖徒有愛心有信心）。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 6,\n      \"text\": \"願你與人所同有的信心顯出功效，使人知道你們各樣善事都是為基督做的。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 7,\n      \"text\": \"兄弟啊，我為你的愛心，大有快樂，大得安慰，因眾聖徒的心從你得了暢快。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 8,\n      \"text\": \"我雖然靠著基督能放膽吩咐你合宜的事，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 9,\n      \"text\": \"然而像我這有年紀的保羅，現在又是為基督耶穌被囚的，寧可憑著愛心求你，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 10,\n      \"text\": \"就是為我在捆鎖中所生的兒子阿尼西母（就是有益處的意思）求你。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 11,\n      \"text\": \"他從前與你沒有益處，但如今與你我都有益處。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 12,\n      \"text\": \"我現在打發他親自回你那裡去；他是我心上的人。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 13,\n      \"text\": \"我本來有意將他留下，在我為福音所受的捆鎖中替你伺候我。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 14,\n      \"text\": \"但不知道你的意思，我就不願意這樣行，叫你的善行不是出於勉強，乃是出於甘心。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 15,\n      \"text\": \"他暫時離開你，或者是叫你永遠得著他，\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 16,\n      \"text\": \"不再是奴僕，乃是高過奴僕，是親愛的兄弟。在我實在是如此，何況在你呢！這也不拘是按肉體說，是按主說。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 17,\n      \"text\": \"你若以我為同伴，就收納他，如同收納我一樣。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 18,\n      \"text\": \"他若虧負你，或欠你甚麼，都歸在我的帳上；\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 19,\n      \"text\": \"我必償還，這是我─保羅親筆寫的。我並不用對你說，連你自己也是虧欠於我。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 20,\n      \"text\": \"兄弟啊，望你使我在主裡因你得快樂（或譯：益處），並望你使我的心在基督裡得暢快。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 21,\n      \"text\": \"我寫信給你，深信你必順服，知道你所要行的必過於我所說的。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 22,\n      \"text\": \"此外你還要給我預備住處；因為我盼望藉著你們的禱告，必蒙恩到你們那裡去。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 23,\n      \"text\": \"為基督耶穌與我同坐監的以巴弗問你安。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 24,\n      \"text\": \"與我同工的馬可、亞里達古、底馬、路加也都問你安。\"\n    },\n    {\n      \"book\": \"門\",\n      \"book_eng\": \"Philem\",\n      \"chapter\": 1,\n      \"verse\": 25,\n      \"text\": \"願我們主耶穌基督的恩常在你的心裡。阿們！\"\n    }\n  ],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"多\",\n      \"book_eng\": \"Titus\",\n      \"chapter\": 3,\n      \"verse\": 15\n    },\n    \"next\": {\n      \"book\": \"來\",\n      \"book_eng\": \"Heb\",\n      \"chapter\": 1,\n      \"verse\": 1\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_audio_chapter_with_text_men1",
+      "tool": "get_audio_chapter_with_text",
+      "args": {
+        "book": "門",
+        "chapter": 1
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/au.php?version=0&bid=57&chap=1&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"audio\": {\n    \"version\": \"unv\",\n    \"version_name\": \"和合本\",\n    \"book\": \"腓利門書\",\n    \"book_eng\": \"Philemon\",\n    \"chapter\": \"1\",\n    \"audio_files\": {\n      \"mp3\": \"https://media.fhl.net/unv1/57/57_001.mp3\",\n      \"ogg\": \"https://media.fhl.net/unv1/57/57_001.ogg\"\n    },\n    \"navigation\": {\n      \"prev\": {\n        \"book_id\": \"56\",\n        \"book\": \"提多書\",\n        \"chapter\": \"3\"\n      },\n      \"next\": {\n        \"book_id\": \"58\",\n        \"book\": \"希伯來書\",\n        \"chapter\": \"1\"\n      }\n    }\n  },\n  \"text\": {\n    \"version\": \"unv\",\n    \"version_name\": \"FHL和合本\",\n    \"record_count\": 25,\n    \"verses\": [\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 1,\n        \"text\": \"為基督耶穌被囚的保羅，同兄弟提摩太寫信給我們所親愛的同工腓利門，\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 2,\n        \"text\": \"和妹子亞腓亞並與我們同當兵的亞基布，以及在你家的教會。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 3,\n        \"text\": \"願恩惠、平安從　神我們的父和主耶穌基督歸與你們！\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 4,\n        \"text\": \"我禱告的時候提到你，常為你感謝我的　神；\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 5,\n        \"text\": \"因聽說你的愛心並你向主耶穌和眾聖徒的信心（或譯：因聽說你向主耶穌和眾聖徒有愛心有信心）。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 6,\n        \"text\": \"願你與人所同有的信心顯出功效，使人知道你們各樣善事都是為基督做的。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 7,\n        \"text\": \"兄弟啊，我為你的愛心，大有快樂，大得安慰，因眾聖徒的心從你得了暢快。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 8,\n        \"text\": \"我雖然靠著基督能放膽吩咐你合宜的事，\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 9,\n        \"text\": \"然而像我這有年紀的保羅，現在又是為基督耶穌被囚的，寧可憑著愛心求你，\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 10,\n        \"text\": \"就是為我在捆鎖中所生的兒子阿尼西母（就是有益處的意思）求你。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 11,\n        \"text\": \"他從前與你沒有益處，但如今與你我都有益處。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 12,\n        \"text\": \"我現在打發他親自回你那裡去；他是我心上的人。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 13,\n        \"text\": \"我本來有意將他留下，在我為福音所受的捆鎖中替你伺候我。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 14,\n        \"text\": \"但不知道你的意思，我就不願意這樣行，叫你的善行不是出於勉強，乃是出於甘心。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 15,\n        \"text\": \"他暫時離開你，或者是叫你永遠得著他，\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 16,\n        \"text\": \"不再是奴僕，乃是高過奴僕，是親愛的兄弟。在我實在是如此，何況在你呢！這也不拘是按肉體說，是按主說。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 17,\n        \"text\": \"你若以我為同伴，就收納他，如同收納我一樣。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 18,\n        \"text\": \"他若虧負你，或欠你甚麼，都歸在我的帳上；\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 19,\n        \"text\": \"我必償還，這是我─保羅親筆寫的。我並不用對你說，連你自己也是虧欠於我。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 20,\n        \"text\": \"兄弟啊，望你使我在主裡因你得快樂（或譯：益處），並望你使我的心在基督裡得暢快。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 21,\n        \"text\": \"我寫信給你，深信你必順服，知道你所要行的必過於我所說的。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 22,\n        \"text\": \"此外你還要給我預備住處；因為我盼望藉著你們的禱告，必蒙恩到你們那裡去。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 23,\n        \"text\": \"為基督耶穌與我同坐監的以巴弗問你安。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 24,\n        \"text\": \"與我同工的馬可、亞里達古、底馬、路加也都問你安。\"\n      },\n      {\n        \"book\": \"門\",\n        \"book_eng\": \"Philem\",\n        \"chapter\": 1,\n        \"verse\": 25,\n        \"text\": \"願我們主耶穌基督的恩常在你的心裡。阿們！\"\n      }\n    ],\n    \"navigation\": {\n      \"prev\": {\n        \"book\": \"多\",\n        \"book_eng\": \"Titus\",\n        \"chapter\": 3,\n        \"verse\": 15\n      },\n      \"next\": {\n        \"book\": \"來\",\n        \"book_eng\": \"Heb\",\n        \"chapter\": 1,\n        \"verse\": 1\n      }\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_apocrypha_verse_tob1_1",
+      "tool": "get_apocrypha_verse",
+      "args": {
+        "book": "Tob",
+        "chapter": 1,
+        "verse": "1"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qsub.php?bid=101&chap=1&strong=0&sec=1&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"apocrypha_verse\",\n  \"book\": \"多俾亞傳\",\n  \"book_id\": 101,\n  \"chapter\": 1,\n  \"verse\": \"1\",\n  \"version\": {\n    \"code\": \"c1933\",\n    \"name\": \"1933年聖公會出版\"\n  },\n  \"verse_count\": 1,\n  \"verses\": [\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 1,\n      \"text\": \"腓力的兒子亞力山大是馬其頓人。他出離基庭境以後、戰勝了波斯和米太兩國的王大利烏、遂繼承了他的王位。\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_apocrypha_verse_zh_chapter",
+      "tool": "get_apocrypha_verse",
+      "args": {
+        "book": "多",
+        "chapter": 1
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qsub.php?bid=101&chap=1&strong=0&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"apocrypha_verse\",\n  \"book\": \"多俾亞傳\",\n  \"book_id\": 101,\n  \"chapter\": 1,\n  \"verse\": null,\n  \"version\": {\n    \"code\": \"c1933\",\n    \"name\": \"1933年聖公會出版\"\n  },\n  \"verse_count\": 63,\n  \"verses\": [\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 1,\n      \"text\": \"腓力的兒子亞力山大是馬其頓人。他出離基庭境以後、戰勝了波斯和米太兩國的王大利烏、遂繼承了他的王位。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 2,\n      \"text\": \"他經歷了多次的戰爭、得了許多的堅壘、並殺了世上的許多君王。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 3,\n      \"text\": \"他踏遍了全地、直到地極、擄掠了各國的財物、地上的居民、在他面前無不馴服。從此他就傲氣橫生、趾高氣揚。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 4,\n      \"text\": \"他招募了許多精壯的兵卒、轄制各國、各族、和諸王、勒令他們入貢。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 5,\n      \"text\": \"此後他染病在牀、自覺死期將到、乃召集他的臣僕、就是那些當他年幼的時候與他同棹共食的尊貴人。當他還活着的時候、將國分給他們、令他們各得一份。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 6,\n      \"text\": \"a\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 7,\n      \"text\": \"亞力山大在位十二年就死了。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 8,\n      \"text\": \"於是他的臣僕就各據一方。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 9,\n      \"text\": \"他死後，各人都自己加上王冕、子孫世襲多年、在遍地多行不義。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 10,\n      \"text\": \"在他們當中生了一條禍根、就是安提阿渴王的兒子安提阿渴合披反、先前曾在羅馬被押爲質。他於希臘國之第一百三十七年即了王位。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 11,\n      \"text\": \"那時在以色列人中出了一派亂黨、他們誘惑許多人說：我們去與四方的外邦人立約、因爲我們自從與他們絕交以來、常遭遇災難。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 12,\n      \"text\": \"衆人聽見這話都以爲然。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 13,\n      \"text\": \"那時也確實有人進行這件事。他們去見王、王也准他們輸入外邦的風化、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 14,\n      \"text\": \"按照外邦的習俗。他們就在耶路撒冷建築了一處體育場、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 15,\n      \"text\": \"並廢棄受割禮的手術、棄絕了聖約、實行與異族有交際來往、甘心自棄、習以爲惡。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 16,\n      \"text\": \"安提阿渴以爲自己的國基穩固、又想要統轄埃及、這樣他便可以握有兩國的統治權。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 17,\n      \"text\": \"他就一方面調大隊戰車、象、和騎兵；一方面調大批的軍艦、水陸並進、進攻埃及。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 18,\n      \"text\": \"與埃及王托力梅交戰。但托力梅因爲懼怕而脫逃、以致他的部下死傷的甚多。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 19,\n      \"text\": \"這樣他們佔領了埃及許多的堅固城、並擄掠了許多財物。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 20,\n      \"text\": \"當一百五十三年、安提阿渴征服埃及後、率領着大軍回國、路過以色列和耶路撒冷。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 21,\n      \"text\": \"他狂傲的進了聖所、將金祭壇發光的燈臺、和所有的器皿、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 22,\n      \"text\": \"並陳設餅的供案、奠酒的杯盌、金香爐、幔帳、和冠冕等物、都帶去了；將聖殿正面的金裝也削去了；\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 23,\n      \"text\": \"又將金銀、及寶貴的器皿、和藏在庫裏的東西、都找着、一併帶去了。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 24,\n      \"text\": \"他攜帶這些東西回國、並施行大慘殺、說話很是驕傲。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 25,\n      \"text\": \"所以以色列境內處處有大哀號。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 26,\n      \"text\": \"百官長老俱各悲歎、貞女童男全都憔悴、美麗的婦女失了光澤、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 27,\n      \"text\": \"做新郎的俱各舉哀、坐在洞房裏的無不痛哭、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 28,\n      \"text\": \"大地爲這些居民而震動、雅各的全家慚愧蒙羞。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 29,\n      \"text\": \"二年之後、王差遣一位總務稅司到猶大的各城來收稅、帶着許多僕從來到耶路撒冷。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 30,\n      \"text\": \"這人假意的說些和平話、以致大衆都深信不疑；他却忽然用全力積極攻城、殺死了以色列許多人、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 31,\n      \"text\": \"掠了城中的財物、又放火燒城、燒燬了民房和四圍的城墻、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 32,\n      \"text\": \"擄去婦女、幼童、和牲畜。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 33,\n      \"text\": \"於是在大衛城的周圍築起高厚的墻、和鞏固的敵樓來、作爲自己的衛所。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 34,\n      \"text\": \"在其中安置不法的罪人、作爲他們的防禦兵。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 35,\n      \"text\": \"他們積聚軍器和糧食、並將從耶路撒冷掠來的東西、都儲藏其內。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 36,\n      \"text\": \"因此這地方成了凶險的陷阱、凡要入聖所的人、他們暗伏着預備攻擊、常作以色列的惡敵。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 37,\n      \"text\": \"爲此聖所周圍長流着無辜人的血、污穢了聖所。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 38,\n      \"text\": \"爲這些人的緣故、耶路撒冷的居民逃散、城邑作了異族人的巢穴。她所生的看她爲怪物；她自己的子女也離棄她。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 39,\n      \"text\": \"聖所竟如曠野之荒涼；節期竟成爲愁慘的日期；安息日成了侮辱；她的尊榮被人藐視。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 40,\n      \"text\": \"從前是何等的光榮、如今恥辱却驟增；她的尊貴竟變成了哀聲。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 41,\n      \"text\": \"其後、王下令曉諭各處的人、都須結合成爲一國的國民。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 42,\n      \"text\": \"每一個人都當棄掉他本國的教規、而合於王的諭旨；各外邦人都當勉勵從事。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 43,\n      \"text\": \"這樣以色列人中也有樂意遵從王敬拜的條例的、而竟祭祀偶像、不守安息日了。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 44,\n      \"text\": \"王又頒發詔書、給使臣帶着。詔書到耶路撒冷和猶太的各城、命令衆民皆當遵行異教的禮節。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 45,\n      \"text\": \"凡聖所內的一切火焚祭、平安祭、奠酒祭、都當廢止；也不可守安息日、和節期。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 46,\n      \"text\": \"又令污穢聖所、和受聖職的人、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 47,\n      \"text\": \"又令設立邱壇、栽叢樹、作神龕；並用豬、和別樣不潔的牲畜作祭品。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 48,\n      \"text\": \"有了子嗣不准行割禮、却當教導他們種種不潔和褻瀆的事、使他們成爲兇惡頑梗的民。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 49,\n      \"text\": \"違背律法、混亂誠規。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 50,\n      \"text\": \"如有敢違背王命的、殺無赦。於是這種諭旨傳佈於各地。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 51,\n      \"text\": \"又派遣監察員、勉強人民實行。又令以色列各城都獻祭物。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 52,\n      \"text\": \"人民中也有和他們結交的、違反律法的。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 53,\n      \"text\": \"自從這些人犯罪後、以色列的那些義民、多有隱藏於各種秘密洞中的。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 54,\n      \"text\": \"基斯留月的十五日、一百四十五年、他們在祭壇上造了一個行毀壞可憎之物、又在猶太四方的各城設立邱壇、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 55,\n      \"text\": \"在各家的門口、和街市上獻祭。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 56,\n      \"text\": \"他們找着律法書就撕碎焚燬。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 57,\n      \"text\": \"若偵查出藏有約書的、和遵守律法的、不論是誰、必按王的命令立刻斬首。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 58,\n      \"text\": \"他們每一個月必這樣強迫各城的以色列民。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 59,\n      \"text\": \"並且於二十五日在上帝的祭壇上另築新祭壇獻祭。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 60,\n      \"text\": \"若有婦女爲他的童子行割禮、\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 61,\n      \"text\": \"照王的命令、必將這嬰孩懸在女人的頸項上、殺死他們；就是他們的家屬、和執行割禮的人、也當處斬。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 62,\n      \"text\": \"雖然如此、以色列人中仍有許多人剛毅不屈、志願堅决、不喫不潔的物；寧死不願沾染污穢、而干犯聖約、以致使衆民同遭殺戮。\"\n    },\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 1,\n      \"verse\": 63,\n      \"text\": \"這次誠然是以色列民的大刼數。\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_apocrypha",
+      "tool": "search_apocrypha",
+      "args": {
+        "query": "天使",
+        "limit": 2
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/sesub.php?q=%E5%A4%A9%E4%BD%BF&offset=0&limit=2&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"apocrypha_search\",\n  \"keyword\": \"天使\",\n  \"total_count\": 2,\n  \"returned_count\": 2,\n  \"offset\": 0,\n  \"results\": [\n    {\n      \"book\": \"多俾亞傳\",\n      \"book_id\": 101,\n      \"chapter\": 7,\n      \"verse\": 41,\n      \"text\": \"「昔日主的天使下降、誅殺從王那裏來的褻慢人十八萬五千名；\"\n    },\n    {\n      \"book\": \"友弟德傳\",\n      \"book_id\": 102,\n      \"chapter\": 11,\n      \"verse\": 6,\n      \"text\": \"瑪喀比和他的同人、聽說呂西亞圍攻堡壘、就與衆民號哭流淚的懇求主、遣一位善良的天使拯救以色列。\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_apostolic_fathers_verse_1clem1_1",
+      "tool": "get_apostolic_fathers_verse",
+      "args": {
+        "book": "1Clem",
+        "chapter": 1,
+        "verse": "1"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qaf.php?bid=201&chap=1&strong=0&sec=1&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"apostolic_fathers_verse\",\n  \"book\": \"革利免前書\",\n  \"book_id\": 201,\n  \"chapter\": 1,\n  \"verse\": \"1\",\n  \"version\": {\n    \"code\": \"afhuang\",\n    \"name\": \"黃錫木主編《使徒教父著作》\"\n  },\n  \"verse_count\": 1,\n  \"verses\": [\n    {\n      \"book\": \"革利免前書\",\n      \"book_id\": 201,\n      \"chapter\": 1,\n      \"verse\": 1,\n      \"text\": \"弟兄們，由於我們自身突然遭遇一連串的災禍與打擊，所以未能及時關注你們中間發生的紛爭，親愛的朋友啊，尤其是那可憎惡的、不聖潔的分裂行徑——這情形在蒙上帝揀選的人中間是不尋常【3】和陌生的。少數魯莽、狂傲之徒挑起如此荒唐的紛爭，極大地侮辱了你們為眾人所熟悉和愛戴的美名。\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_apostolic_fathers",
+      "tool": "search_apostolic_fathers",
+      "args": {
+        "query": "愛",
+        "limit": 2
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/seaf.php?q=%E6%84%9B&offset=0&limit=2&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"apostolic_fathers_search\",\n  \"keyword\": \"愛\",\n  \"total_count\": 2,\n  \"returned_count\": 2,\n  \"offset\": 0,\n  \"results\": [\n    {\n      \"book\": \"帕皮亞殘篇\",\n      \"book_id\": 216,\n      \"chapter\": 0,\n      \"verse\": 0,\n      \"text\": \"帕皮亞是西元二世紀上半葉，小亞細亞弗呂家省希拉波立城（Hierapolis）的主教，和坡旅甲一樣，傳統認為他是使徒約翰的門徒（愛任紐：《駁異端》5.33.4），我們現在沒有這位主教著作的任何抄本，只能從後來教父著作的索引中，收集到他的著作的片段。 對於這位教父時期顯赫的領袖，我們所知不多，甚至他出生或死去的年份也不清楚，他可能是坡旅甲同時期的人（愛任紐：《駁異端》5.33.4），即西元70至160年之間。<br/><br/>優西比烏起初似乎接受帕氏是使徒的門生及見證人，但後來卻質疑這一說法（《教會歷史》3.39.2）。 優氏對帕皮亞與使徒約翰之間師徒關係的質疑，是因為在帕皮亞著作的前言中，帕皮亞提到有兩位約翰，一位是使徒約翰，另一位是長老約翰，帕皮亞似乎是與長老約翰以及一位名叫雅里斯提遜（Aristion）的人有關（《教會歷史》3.39.3-7）。 但不能確定優氏是否因為帕皮亞只是長老約翰的門生，其權威有限，因而語帶貶抑，還是因為優氏不贊成帕氏的千年國度的說法（chiliasm），甚而認為持這信念的帕皮亞，是一位智力低下的人（《教會歷史》3.39.13）。 按此解釋，優氏認為《啟示錄》是長老約翰所寫，帕皮亞和這位長老屬於同一陣營。 這長老約翰是主的門徒之一，但他不可能與使徒約翰是同一人，極可能這位稱為長老的約翰和雅里斯提遜，同是耶穌的門徒，稱這約翰為長老，是要將他與十二門徒之一的約翰分別開來。<br/><br/>根據優西比烏（《教會歷史》3.39.15）的敘述，帕皮亞從“長老”處得悉馬可是彼得的詮釋者（ἑρμηνευτής），馬可並非耶穌的親眼見證人，他寫《馬可福音》時，沒有按照耶穌言行的真實次序，只是將記憶中彼得所教導的耶穌的言行事蹟寫下來;另外馬太收集了耶穌希伯來語（亞蘭語？ ）的教訓，並盡其所能將之解釋（ἑρμηνεῦσεν）出來（《教會歷史》3.39.16;參2.15），這可能是指將它翻譯成希臘文。 此外還有另一本福音書，叫《希伯來人福音書》（《教會歷史》3.39.17）。 並沒有確切的證據表明帕皮亞知道《路加福音》和《約翰福音》的存在。 優西比烏曾說帕皮亞使用了《約翰一書》和彼得書信的見證，然而就我們已有的資料，他的著作並沒有受約翰和彼得的書信所影響，但帕皮亞對猶太基督教的興趣，可見於他對彼得的傳統的興趣，包括《馬可福音》和《彼得前書》，以及《馬太福音》來自希伯來語（亞蘭語？）的語錄。 耶柔米就曾指出「千年國度」的看法是出於猶太傳統的。 <br/><br/>根據愛任紐（《駁異端》5.33.4）的敘述，帕皮亞曾著有一部名為《主的語錄釋義》（“Exposition of the Lord's Logia”，見優西比烏：《教會歷史》3.39.1）的書，共五冊。 所謂「語錄」泛指耶穌的言行，所謂「釋義」（exegesis）可能是指將這些言詞收集及排列起來。 對比已寫下來的著作，大概指福音書，帕皮亞指那些“活的長存的聲音”（“living and abiding voice”），即使徒或他們的門徒口傳的傳統，他認為口傳的教導，比寫下來的著作更勝一籌（《教會歷史》3.39.3-4）。 <br/><br/>帕皮亞對口述傳統的注重，可見於以下的例子，他曾引用一份沒有耶穌言論的口述資料，就是在死人復活後，基督國度在地上建立一千年（《教會歷史》3.39.11-12;參啟廿1-6），在那些日子，難以想像在地上有那麼多葡萄和麥子的收成（愛任紐：《駁異端》5.33.3-4），他假設這傳統是出自耶穌，從約翰和長老們而來。 帕皮亞似乎對末世盼望，千禧年國度的問題，甚感興趣。 他對千年國度的觀點，後來為愛任紐和亞波里拿留所支援（Apollinaris of Laodicaeo，西元第4世紀）。<br/><br/>帕皮亞亦保留了一些使徒行神蹟的故事，如希拉波立城居住的腓力的女兒們所行的神蹟（參徒21：8），以及巴撒巴猶士都和馬提亞（徒1：23）所行的神蹟（《教 會歷史》3.39.8-10）;還有記載於《希伯來人福音書》，有關一名犯了許多罪的婦人來到主的面前的事蹟（《教會歷史》3.39.17;參約七53-八11）。 根據老底嘉的亞波里拿留的記載，帕皮亞在《主的語錄釋義》的第四冊中，記載了出賣耶穌的猶大悲慘的下場。 《亞歷山大抄本》（西元9世紀）聲稱約翰福音書是使徒約翰的門徒帕皮亞，將約翰所說的原原本本地默寫下來的，然而這傳統的可靠性，均被質疑。<br/><br/><h2>補充參考：</h2><br/>W. R. Schoedel， Polycarp， Martyrdom of Polycarp， Fragments of Papias.The Apostolic Fathers第5卷，R. M. Grant（1967）編輯;同上作者ABD 5：140-42。\"\n    },\n    {\n      \"book\": \"黑馬牧人書\",\n      \"book_id\": 214,\n      \"chapter\": 0,\n      \"verse\": 0,\n      \"text\": \"《黑馬牧人書》是使徒教父著作中最長的一卷，全書由三部分組成，依次為〈異象篇〉、〈命令篇〉和〈比喻篇〉。 “黑馬”並非牧人，這書名的意思應是“黑馬的牧人”，黑馬和牧人是兩個不同的人物。 從〈異象篇〉第五卷開始，一位天使以牧人的形象出現，指導黑馬關於他所見到的異象的意義，黑馬要將這些教導傳遞給教會，差不多整本〈命令篇〉及大部分的〈比喻篇〉，都是牧人向黑馬所傳遞的教導。 這牧人被稱為「悔改的天使」（〈異象篇〉5.7[25：7]; 〈命令篇〉12.6.1[49：1]），其公職是監管整個人悔改的過程。 最後他被委派作為黑馬家庭的守護天使（〈比喻篇〉10.24.4[114：4]）。<br/><br/>本書在西元第二至第三世紀基督教圈子中，備受歡迎。 亞歷山大的革利免是首位提及此書的人，並且曾多次引用此書，將之看為是基於啟示而來的經書，與保羅書信平等並列。 革利免的學生俄利根（約西元185-254）雖對此書的權威較有保留，也曾三次引用此書（《源起》1.3.3，4.1.1-12及《約翰福音註釋》），視之為具權威的經書。 根據優西比烏的記載（《教會歷史》5.8.7），里昂主教愛任紐（約西元140-200年）也視《黑馬牧人書》為經書，但他似乎從來沒有引用過這書。 第三世紀希臘的神學家多接受它為正典。 西奈抄本（西元四世紀）則將《巴拿巴書信》和《黑馬牧人書》列為新約的最後兩卷，然而有學者認為西奈抄本只是將此兩卷書看為附頁，並非經目的一部分。 此外第六世紀的《清山抄本》（Codex Claromontanus）也將此書與《巴拿巴書信》、《保羅行傳》、《彼得啟示錄》一同納入新約經目之中。 惟在第四世紀時，優西比烏是第一位主要的學者（《教會歷史》3.3），不將它放在正典經目之列，優氏認為有一些權威（沒有說明是哪些）不接受此書為正典，但他仍視之為一本在教導上很有説明的書。 《穆拉多利正典》（Muratorian Canon）將此書排除在正典之外，因為它缺乏使徒性（apostolicity），非來自使徒的統緒，同時認為此書是較後期寫成，雖然如此，《穆拉多利正典》的作者仍認為此書有閱讀的價值，但不值得公開在教會的敬拜中誦讀。 特土良雖曾一度接受這書為經書，但在加入了孟他努派系之後，認為這書對悔改的看法過於寬鬆，稱這書為“犯者的牧人”。 <br/><br/>此書見於三份希臘抄本：西奈抄本，只由〈異象篇〉1.1.1[1：1]至〈命令篇〉4.3.6[31：6]; 《雅富士抄本》（Codex Athous，西元十四-五世紀，以〈比喻篇〉9.30.2[107：2]作結）; 和《密西根蒲草卷》129（Michigan Papyrus; 西元三世紀），有〈比喻篇〉2.8-9.5.1[51：1-82：1]。 此外還有一些希臘的殘篇、兩份完整的拉丁版本（《武加大譯本》和《巴列丁版本》）、一份衣索比亞版本（西元四世紀）、及少量科普替和中波斯版本。 這表示〈比喻篇〉9.30.3至10.4.5[107：3-114：5]主要依賴拉丁版本。 <br/><br/>本書有兩種分章節的方法，舊的方式分段以〈異象篇〉、〈命令篇〉和〈比喻篇〉作大題，然後分章節，新的方式則只有章節。<br/><br/><h2>作者</h2><br/>根據黑馬牧人書作者的自述，他原是羅馬一位稱為羅大（Rhoda）女士的奴隸（〈異象篇〉1.1.1-2［1:1－2］）。 大概後來羅大還了黑馬的自由身，自此他便經營某種事業，但卻未有說明是什麼，可能是工匠、賣酒商人（Jeffers）或是務農（J. C. Wilson），但他坦言他在其中並不誠實（〈異象篇〉2.3.1[7：1]; 〈命令篇〉3.3[28：3]），收入可觀（〈異象篇〉3.6.7[14：7]）。 俄利根在他的《羅馬書註釋》中，將本書的作者與羅十六14中的黑米，看為是同一人，但除了名字相似外，沒有任何其它證明。 <br/><br/>有學者（如Dibelius）認為本書作者的自述，全是虛構的，只是寓意。 《穆拉多利殘篇》指本書的作者是新近羅馬主教庇護（Pius）的兄弟黑馬所寫（西元140年），然而本書應是寫於更早時期。 若本書作者是自述中的黑馬，他大概沒有受過正式的教育，在文學和神學上，都沒有很傑出的表現，然而他能讀能寫，因為他並非文人或貴族出身，所以更能反映出當時一般平民百姓的心態。 <br/><br/>另一假說是基於本書各部分用字的不同，及神學觀念上的不統一，認為此書是經過不同階段，由不同作者所寫成，最後由一位作為編輯，將之結集成書（S. Giet）。 另一種可能就是內中有不同的傳統，由一位作者集其大成。 米高斯（Michaels）就指出本書曾使用猶太裔基督徒的傳統，根據第三世紀羅馬主教希坡律陀（Hippolytus）的記述，一位名為愛爾克賽（Elkesai，時約西元100年）的猶太裔基督徒（伊便尼派人士），曾宣告羅馬皇帝他雅努（西元53-117年）在位第三年，為聖徒悔改的限期，這期限的說法，亦見於《黑馬牧人書》（〈異象篇〉 2.2.4-5[6：4-5]），但這隻是對這段說話一個可能的解釋。<br/><br/>亦有認為本書用字的不同是因為作者使用不同的文體，處理不同的主題，書中亦有很多統一的思想，而且沒有證據顯示有編輯者試圖調協其中的矛盾作（Wilson）。 我們只可以說《黑馬牧人書》中有不同的傳統，包括猶太、希羅及基督教著作的傳統（Osiek），難以確定本書是出自一人的手筆，有待更多的研究。<br/><br/><h2>寫作日期及地點</h2><br/>這書極可能是寫於羅馬城，因為其內容反映出羅馬教會的生活，特別是書中提及從政權而來的迫害（7：4[〈異象篇〉2.3.4]; 50：6，98：3，105：2-6，114：3[〈比喻篇〉1.6，9.21.3，9.28.2-6，10.4.3]）。 若本書是一人寫成，則可能寫於尼錄王時期（西元54-68年），當時羅馬基督教會曾面對逼迫，保羅亦在尼錄在位期間被處死（西元64-68年）。 若本書是經過不同的階段編輯成書，有一說法認為本書第1至24章（〈異象篇〉1-4[1-24]）反映出在尼錄王和多米田（西元81-96年）治下教會受逼迫的情況，第25至114章可能是第二世紀中葉的作品，其中第78至114章（78-114[〈比喻篇〉9-10]）可能是後加的。 有認為8：3[〈異象篇〉2.4.3]中提及有一位叫革利免的，他以將某些著作傳達到各處為己任，若這是羅馬主教革利免，此書便是第一世紀末之後的作品。 但不確定這人是否羅馬的主教，故甚難以此斷定。 本書所描述的羅馬教會，是集體長老管理的制度而非獨一主教制（8：3[〈異象篇〉2.4.3]; 參6：6，17：7-8[2.2.6，3.9.7-8]），反映出較早期羅馬教會的情況。 並且書中似乎有針對諾斯底主義的言論（60：1、4[〈比喻篇〉5.7.1、4]），但卻未有任何涉及孟他努主義的言論，孟他努主義約在西元135年左右影響到羅馬，因此此書很可能最終完成於此時期（Jeffers）。<br/><br/><h2>寫作目的</h2><br/>整卷書都強調基督徒的道德操守，特別是應如何處理受洗之後再次墮入罪中的問題。 當時有一種說法認為若一個人在受洗之後，又重新墮入犯罪的生活，便會喪失救恩，不可重新懊悔（參來6：4-6），然而本書則認為第二次悔改是可能的，但只有多一次的機會，若然不掌握這機會，便再沒有任何盼望可言，這第二次的悔改，叫人得以免去那末日天啟審判所帶來的痛苦。 本書鼓勵在逼迫和試煉中的信徒，藉著聖靈忠心忍耐，過聖潔的生活，與別人建立忠誠的關係，抗拒異端的誘惑; 教會裡有忠心（公義）亦有不那麼忠心（犯罪）的信徒，最後主必審判。<br/><br/><h2>體裁及內容概要</h2><br/>本書聲稱其內容，不論是〈異象篇〉（第1-25章）、〈命令篇〉（第26-49章）、還是〈比喻篇〉（第50-114章），都是源自黑馬從天上而得的啟示，這三部分的關係並不緊密，主題卻不時重複。 主要的啟示者是牧人，此外還有來自其它天使，及一名象徵教會的老婦人的教導，黑馬只是一個記敘和傳言的人。 這種以第一人稱透過天使的啟示得見天界境象的敘述，顯明本書屬於天啟文學。 其中〈比喻篇〉實非真正的比喻，有點像〈以諾的比喻〉（Similitude of Enoch），都是黑馬在異象中牧人向他展現帶有象徵性意義的境象。 <br/><br/>〈異象篇〉記載黑馬所見的五個異象（1-4，5-8，9-21，22-24，25），在首四個異象中，他所遇見的老婦人、少婦人、年青人和新婦，都是教會的象徵，到第五個異象，牧人便出現，他是叫人悔改的天使，他吩咐黑馬要留下來，他要傳授黑馬命令和比喻，黑馬要將這些都寫下來。 第五個異象便成為〈命令篇〉和〈比喻篇〉的引言。 這亦反映於科普替版本和蒲草卷129，及其他教父的引述，都是以以第五個異象作為開始。<br/><br/>這些比喻在天啟文獻中可以說是相當獨特的，因為作者並沒有託其他上古有名偉人的名字寫下這些異象，而是以自己的名義將之記下。 開始時他以自述的方式，介紹自己曾在羅馬當奴隸，他的前主人是一位名叫羅大的女性，黑馬表達對她的傾慕。 然而羅大在異象中責備他不應存這非分之想，警告他要悔改（1：1-9[〈異象篇〉1.1.1-9]）。 接著的三個異象，有一位象徵教會的老婦人出現，他向沮喪的黑馬保證他的罪尚未有真正地實現，然而他要悔改，不只他自己，就是他的家人，也要為罪悔過（2：1-4：3[1.2.1-1.4.3]）。 在第二個異象中，那老婦人向黑馬說明那些犯罪的基督徒，可以在一定的時限之內悔改，在此之前他們的罪可得赦免，不然便會失去救恩（6：5[2.2.5]）。 在第三個異象中，黑馬看見有七位青年（象徵天使），在水中（象徵水禮）興建一座塔，就好像那老婦人一樣，這塔代表教會，那些用作建造塔的石頭代表各式各樣的基督徒，然而有些是合用的，有些則不中用，以致被丟棄，象徵著忠心的信徒和不法之子。 那些沒有被丟得太遠的石頭，代表那些犯罪的信徒，他們若悔改，必被挽回，再被使用。 圍繞著那塔有七個婦人，代表七個品德：信心、節制、真誠、知識、純真、敬畏和愛，這些都是屬於那些屬這塔的人。 在第四個異象，黑馬看見一隻巨獸，它的頭有四種顏色（黑、火與血的顏色、金、白），這獸代表將臨的迫害，惟有忠心，不心懷二意的人才可克服。 黑馬在第五個異象中遇見牧人，牧人會向黑馬展示和解釋命令和比喻。 這牧人雖然執行一些類似基督所作的工作，但他並非基督，這牧人是叫人悔改的天使（如25：7[〈異象篇〉5.7]; 47：7[〈命令篇〉12.4.7]）。〈命令篇〉的十二段（26，27，28，29-32，33-34，35-36，37，38，39，40-42，43，44：1-46：1）闡釋一連串的德行：信上帝、真誠及清白、愛慕真實、純潔、在苦難中的忍耐、信心、敬畏、自製。 並且要防避懷疑與心懷二意、憂愁、假先知、和邪惡的慾望。 其中處理的課題包括離婚，第二次的婚姻，考驗假教師。 並且使用了好像《巴拿巴書信》和《十二使徒遺訓》中“兩條路”的傳統，並且使用接近死海文獻的《群體守則》（1QS）兩個靈的傳統，有兩個天使/靈在人生命中的工作，一個為善，一個為惡（36：2，43：11[〈命令篇〉6.2，11.11]）。 目的是要説明信徒知道兩者的分別，及如何擇善固執。〈比喻篇〉的十個比喻是牧人指示黑馬，如何理解〈異象篇〉和〈命令篇〉的教導。 這九個比喻分別為兩個城市（有關基督徒作為天上的公民; 第50章）、葡萄樹和榆樹（有關貧富之間的關係; 第51章）、冬天的樹（第52章）和夏天的樹（這兩個比喻對比義人和罪人，在來世的“夏天”，一切便會顯露; 第53章）、葡萄園的工人（基督徒作為所賜予的靈之管家的職分; 第54-60章）、兩個牧人（奢侈和欺騙的結果是嚴厲的懲罰; 第61-65章）、柳樹（各式各樣不同的信徒，他們之間的分別在於如何使用他們的恩賜，並他們如何悔改; 第67-77章）、以及眾山和塔（教會並其中的信徒; 第78-110章）。 最後第十個比喻是總結性的指導（第111-114章）。<br/><br/><h2>補充參考：</h2><br/>James S. Jeffers，羅馬衝突：早期基督教的社會秩序和等級制度。明尼阿波利斯：堡壘，1991年。 M. Dibelius， Der Hirt des Hermas（HNT 20，1923）; G. F. Synder， The Shepherd of Hermas.（The Apostolic Fathers 6，1968）; 同上作者，ABD 3：148;E. M. Humphrey， The Ladies and the Cities（JSPSup 17; 1995）; J. C. Wilson， Five Problems in the Interpretation of the Shepherd of Hermas（MBPS 34，1996）; S. Giet，  Hermas et les Pasteurs： Les Trios auteurs du Pasteur d'Hermas .巴黎：法蘭西大學出版社，1963年; C. 奧西克，《赫爾馬斯的牧羊人》（Hermeneia，1999年）。\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_bible_simplified",
+      "tool": "search_bible",
+      "args": {
+        "query": "愛",
+        "limit": 3,
+        "use_simplified": true
+      },
+      "upstream_requests": [],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"total_count\": 3,\n  \"query\": \"愛\",\n  \"search_type\": \"keyword\",\n  \"scope\": \"all\",\n  \"limit\": 3,\n  \"offset\": 0,\n  \"results\": [\n    {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 3,\n      \"verse\": 6,\n      \"text\": \"於是女人見那棵樹的果子好作食物，也悅人的眼目，且是可喜愛的，能使人有智慧，就摘下果子來吃了，又給她丈夫，她丈夫也吃了。\"\n    },\n    {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 19,\n      \"verse\": 19,\n      \"text\": \"你僕人已經在你眼前蒙恩；你又向我顯出莫大的慈愛，救我的性命。我不能逃到山上去，恐怕這災禍臨到我，我便死了。\"\n    },\n    {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 22,\n      \"verse\": 2,\n      \"text\": \"神說：「你帶著你的兒子，就是你獨生的兒子，你所愛的以撒，往摩利亞地去，在我所要指示你的山上，把他獻為燔祭。」\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_bible_footnote_simplified",
+      "tool": "get_bible_footnote",
+      "args": {
+        "book_id": 1,
+        "footnote_id": 1,
+        "use_simplified": true
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/rt.php?bid=1&id=1&version=tcv&gb=1"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"bible_footnote\",\n  \"version\": \"TCV\",\n  \"version_name\": \"現代中文譯本\",\n  \"book_id\": 1,\n  \"book_name\": \"Gen\",\n  \"footnote_id\": 1,\n  \"text\": \"「太初，上帝创造天地。」或译「太初，上帝创造天地的时候。」或「上帝开始创造天地的时候」。\"\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_fhl_articles_simplified",
+      "tool": "search_fhl_articles",
+      "args": {
+        "title": "愛",
+        "limit": 1,
+        "use_simplified": true
+      },
+      "upstream_requests": [
+        "https://www.fhl.net/api/json.php?gb=1&title=%E6%84%9B"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"article_search\",\n  \"total_count\": 1,\n  \"returned_count\": 1,\n  \"include_full_content\": false,\n  \"articles\": [\n    {\n      \"id\": \"9247\",\n      \"title\": \"舊約裡的基督▪慈繩愛索\",\n      \"author\": \"小佑哥哥\",\n      \"pubtime\": \"2026.10.04\",\n      \"column\": \"家庭之歌\",\n      \"abstract\": \"\\n何西阿娶了行為不檢的女人為妻，容忍她屢次背叛，則是遙遙指著耶穌對罪人的接納。 \"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "search_fhl_articles_include_content",
+      "tool": "search_fhl_articles",
+      "args": {
+        "title": "愛",
+        "limit": 1,
+        "include_content": true
+      },
+      "upstream_requests": [
+        "https://www.fhl.net/api/json.php?gb=0&title=%E6%84%9B"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"success\",\n  \"query_type\": \"article_search\",\n  \"total_count\": 1,\n  \"returned_count\": 1,\n  \"include_full_content\": true,\n  \"articles\": [\n    {\n      \"id\": \"9247\",\n      \"title\": \"舊約裡的基督▪慈繩愛索\",\n      \"author\": \"小佑哥哥\",\n      \"pubtime\": \"2026.10.04\",\n      \"column\": \"家庭之歌\",\n      \"abstract\": \"\\n何西阿娶了行為不檢的女人為妻，容忍她屢次背叛，則是遙遙指著耶穌對罪人的接納。 \",\n      \"content\": \"\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "get_topic_study_default",
+      "tool": "get_topic_study",
+      "args": {
+        "keyword": "愛"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/st.php?N=4&count_only=0&keyword=%E6%84%9B&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"keyword\": \"愛\",\n  \"source\": \"all\",\n  \"total_count\": 23,\n  \"results\": [\n    {\n      \"id\": \"T0001038\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"仁愛/寬厚\",\n      \"content\": \" -關於仁愛的一般經文\\r\\n    #箴 10:12; 17:9; 太 5:23,24; 6:14; 7:1-5; 18:21-35|\\r\\n    #路 6:36-42; 17:3,4; 約 7:24; 羅 14:1-23; 林前 4:5; 10:28-33|\\r\\n    #林前 13:1-13; 16:14; 加 6:1; 弗 4:32; 西 3:13,14; 提前 1:5|\\r\\n    #提前 4:12; 提後 2:22; 雅 2:13; 4:11,12; 彼前 3:9; 4:8|\\r\\n\\r\\n -見 <a href=\\\"t.php?k=0003095&N=1\\\">愛</a>\\r\\n\\r\\n -見 <a href=\\\"t.php?k=0005027&N=1\\\">不寬厚</a>\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0000348\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"基督的愛\",\n      \"content\": \" - 對天父的愛\\r\\n     #詩 91:14; 約 14:31|\\r\\n\\r\\n - 對教會的愛\\r\\n     #歌 4:8,9; 5:1; 約 15:9; 弗 5:24|\\r\\n\\r\\n - 對愛祂之人的愛\\r\\n     #箴 8:17; 約 14:21|\\r\\n\\r\\n - 彰顯在祂的\\r\\n   . 來世上尋找失喪的人\\r\\n       #路 19:10|\\r\\n\\r\\n   . 為祂的敵人祈禱\\r\\n       #路 23:34|\\r\\n\\r\\n   . 為我們捨己\\r\\n       #加 2:20|\\r\\n\\r\\n   . 為我們而死\\r\\n       #約 15:13; 約一 3:16|\\r\\n\\r\\n   . 洗淨我們的罪\\r\\n       #啟 1:5|\\r\\n\\r\\n   . 為我們代求\\r\\n       #來 7:25; 9:24|\\r\\n\\r\\n   . 差派聖靈\\r\\n       #詩 68:18; 約 16:7|\\r\\n\\r\\n   . 責備和管教\\r\\n       #啟 3:19|\\r\\n\\r\\n - 傳遞了知識\\r\\n     #弗 3:19|\\r\\n\\r\\n - 應當被仿效\\r\\n     #約 13:34; 15:12; 弗 5:2; 約一 3:16|\\r\\n\\r\\n - 基督對聖徒的愛, 是\\r\\n   . 遏制不了的\\r\\n       #歌 8:7|\\r\\n\\r\\n   . 激勵人的\\r\\n       #林後 5:14|\\r\\n\\r\\n   . 不變的\\r\\n       #約 13:1|\\r\\n\\r\\n   . 牢不可破的\\r\\n       #羅 8:35|\\r\\n\\r\\n - 順服的聖徒住在基督的愛裡\\r\\n     #約 15:10|\\r\\n\\r\\n - 聖徒靠著基督的愛獲得勝利\\r\\n     #羅 8:37|\\r\\n\\r\\n - 基督以愛為旗在祂的聖徒之上\\r\\n     #歌 2:4|\\r\\n\\r\\n - 是祂的聖徒愛祂的理由\\r\\n     #路 7:47|\\r\\n\\r\\n - 基督對聖徒的愛, 連敵人也將承認\\r\\n     #啟 3:9|\\r\\n\\r\\n - 說明\\r\\n     #太 18:11-13|\\r\\n\\r\\n - 基督愛人的例子\\r\\n   . 彼得\\r\\n       #路 22:32,61|\\r\\n\\r\\n   . 拉撒路等人\\r\\n       #約 11:5,36|\\r\\n\\r\\n   . 祂的使徒\\r\\n       #約 13:1,34|\\r\\n\\r\\n   . 約翰\\r\\n       #約 13:23|\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0003840\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"博愛/仁慈\",\n      \"content\": \" -一般經文\\r\\n    #賽 58:6-12|\\r\\n\\r\\n -見[!賙濟!]\\r\\n\\r\\n -見[!善行!]\\r\\n\\r\\n -見[!仁愛/寬厚!]\\r\\n\\r\\n -見 <a href=\\\"t.php?k=0003050&N=3\\\">慷慨</a>\\r\\n\\r\\n -見[!鄰居/鄰舍!]\\r\\n\\r\\n -見[!窮人!]\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0000003\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"愛慕\",\n      \"content\": \" - 最深切的愛慕對象應當在於上帝\\r\\n     #申 6:3; 可 12:30|\\r\\n\\r\\n - 應當愛慕\\r\\n   . 上帝的誡命\\r\\n       #詩 19:8-10; 119:20,97,103,167|\\r\\n\\r\\n   . 上帝的殿與崇拜上帝\\r\\n       #代上 29:3; 詩 26:8; 27:4; 84:1,2|\\r\\n\\r\\n   . 上帝的子民\\r\\n       #詩 16:3; 羅 12:10; 林後 7:13-15; 帖前 2:8|\\r\\n\\r\\n   . 屬天的事物\\r\\n       #西 3:1,2|\\r\\n\\r\\n - 應當熱切忙著追求上帝\\r\\n     #詩 69:9; 119:139; 加 4:18|\\r\\n\\r\\n - 基督有權要求居於愛的首位\\r\\n     #太 10:37; 路 14:26|\\r\\n\\r\\n - 藉著與基督密契而點燃\\r\\n     #路 24:32|\\r\\n\\r\\n - 以上帝為愛的對象者有福了\\r\\n     #詩 91:14|\\r\\n\\r\\n - 不應冷淡\\r\\n     #詩 106:12,13; 太 24:12; 加 4:15; 啟 2:4|\\r\\n\\r\\n - 聖徒最深切的愛慕在於上帝\\r\\n     #詩 42:1; 73:25; 119:10|\\r\\n\\r\\n - 惡人並未誠心愛上帝\\r\\n     #賽 58:1,2; 結 33:31,32; 路 8:13|\\r\\n\\r\\n - 應當克制肉體的情愛\\r\\n     #羅 8:13; 13:14; 林前 9:27; 西 3:5; 帖前 4:5|\\r\\n\\r\\n - 肉體的情愛在聖徒身上被釘死\\r\\n     #羅 6:6; 加 5:24|\\r\\n\\r\\n - 虛偽的教師企圖用愛蠱惑人\\r\\n     #加 1:10; 4:17; 提後 3:6; 彼後 2:3,18; 啟 2:14,20|\\r\\n\\r\\n - 惡人的愛是不自然而反常的\\r\\n     #羅 1:31; 提後 3:3; 彼後 2:10|\"\n    },\n    {\n      \"id\": \"T0000350\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"對基督的愛\",\n      \"content\": \" - 由上帝展現\\r\\n     #太 17:5; 約 5:20|\\r\\n\\r\\n - 由聖徒展現\\r\\n     #彼前 1:8|\\r\\n\\r\\n - 祂個人的卓越配得人愛祂\\r\\n     #歌 5:9-16|\\r\\n\\r\\n - 祂對我們的愛是我們愛祂的原動力\\r\\n     #林後 5:14|\\r\\n\\r\\n - 表明在\\r\\n   . 尋求祂\\r\\n       #歌 3:2|\\r\\n\\r\\n   . 聽從祂\\r\\n       #約 14:15,21,23|\\r\\n\\r\\n   . 事奉祂\\r\\n       #太 27:55; 25:40|\\r\\n\\r\\n   . 喜歡祂勝於其他所有人\\r\\n       #太 10:37|\\r\\n\\r\\n   . 為祂背起十字架\\r\\n       #太 10:38|\\r\\n\\r\\n - 聖徒的特徵\\r\\n     #歌 1:4|\\r\\n\\r\\n - 被收納為兒女的確據\\r\\n     #約 8:42|\\r\\n\\r\\n - 應當是\\r\\n   . 誠摯的\\r\\n       #弗 6:24|\\r\\n\\r\\n   . 發自心靈的\\r\\n       #歌 1:7|\\r\\n\\r\\n   . 與我們的善行相稱\\r\\n       #路 7:47|\\r\\n\\r\\n   . 至高無上的\\r\\n       #太 10:37|\\r\\n\\r\\n   . 熱切的\\r\\n       #歌 2:5; 8:6|\\r\\n\\r\\n   . 遏制不了的\\r\\n       #歌 8:7|\\r\\n\\r\\n   . 至死不渝\\r\\n       #徒 21:13; 啟 12:11|\\r\\n\\r\\n - 所蒙的應許\\r\\n     #提後 4:8; 雅 1:12|\\r\\n\\r\\n - 當祈求對基督的愛日漸增加\\r\\n     #腓 1:9|\\r\\n\\r\\n - 當祈求那些愛基督的人蒙恩\\r\\n     #弗 6:24|\\r\\n\\r\\n - 愛基督的人\\r\\n   . 蒙天父所愛\\r\\n       #約 14:21,23; 16:27|\\r\\n\\r\\n   . 蒙基督所愛\\r\\n       #箴 8:17; 約 14:21|\\r\\n\\r\\n   . 享有與上帝和基督的密契\\r\\n       #約 14:23|\\r\\n\\r\\n - 對基督的愛減少者, 受到責難\\r\\n     #啟 2:4|\\r\\n\\r\\n - 不愛基督者, 受到譴責\\r\\n     #林前 16:22|\\r\\n\\r\\n - 惡人缺乏對基督的愛\\r\\n     #詩 35:19; 約 15:18,25|\\r\\n\\r\\n - 例子\\r\\n   . 亞利馬太的約瑟\\r\\n       #太 27:57-60|\\r\\n\\r\\n   . 懺悔的婦人\\r\\n       #路 7:47|\\r\\n\\r\\n   . 特定的某些婦人\\r\\n       #路 23:28|\\r\\n\\r\\n   . 多馬\\r\\n       #約 11:16|\\r\\n\\r\\n   . 抹大拉的馬利亞\\r\\n       #約 20:11|\\r\\n\\r\\n   . 彼得\\r\\n       #約 21:15-17|\\r\\n\\r\\n   . 保羅\\r\\n       #徒 21:13|\"\n    },\n    {\n      \"id\": \"T0003096\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛筵\",\n      \"content\": \" -基督徒團契的集會\\r\\n    #彼後 2:13; 猶 1:12|\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0001807\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"偏愛\",\n      \"content\": \" -例子\\r\\n   .雅各偏愛拉結\\r\\n      #創 29:30,34|\\r\\n   .以利加拿偏愛哈拿\\r\\n      #撒上 1:4,5|\\r\\n   .利百加偏愛雅各\\r\\n      #創 27:6-17|\\r\\n   .雅各偏愛約瑟\\r\\n      #創 37:3,4|\\r\\n   .雅各偏愛便雅憫\\r\\n      #創 43:34|\\r\\n   .禁止父母偏愛子女\\r\\n      #申 21:15-17|\\r\\n   .見 [!偏心/厚此薄彼!]\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0000072\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"愛管閒事的人\",\n      \"content\": \" - 愚人屬之\\r\\n     #箴 20:3|\\r\\n\\r\\n - 懶人屬之\\r\\n     #帖後 3:11; 提前 5:13|\\r\\n\\r\\n - 惡意說話中傷人\\r\\n     #提前 5:13|\\r\\n\\r\\n - 自作自受\\r\\n     #王下 14:10; 箴 26:17|\\r\\n\\r\\n - 基督徒不能作愛管閒事的人\\r\\n     #彼前 4:15|\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0000190\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛雅\",\n      \"content\": \" -見 AJAH(亞雅)\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0000901\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛弟兄的心\",\n      \"content\": \" -見[!兄弟/弟兄!]\\r\\n\\r\\n -見[!仁愛!]\\r\\n\\r\\n -見[!團契/密契!]\\r\\n\\r\\n -見[!兄弟關係/友愛!]\\r\\n\\r\\n -見[!友誼!]\\r\\n\\r\\n -見 <a href=\\\"t.php?k=0003095&N=1\\\">愛</a>\"\n    },\n    {\n      \"id\": \"T0004332\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"喜愛感官享受\",\n      \"content\": \" -一般經文\\r\\n    #傳 2:24; 8:15; 11:9; 賽 22:13; 56:12; 路 12:19,20; 16:25|\\r\\n    #林前 15:32,33; 雅 5:5; 猶 1:18,19|\\r\\n\\r\\n -見[!姦淫!]\\r\\n\\r\\n -見[!醉酒!]\\r\\n\\r\\n -見[!通姦!]\\r\\n\\r\\n -見[!貪食!]\\r\\n\\r\\n -見[!淫亂!]\\r\\n\\r\\n -見[!放縱!] \\r\\n\\r\\n -見[!雞姦!]\\r\\n\\r\\n -又見[!禁酒, 完全的!]\\r\\n\\r\\n -見 <a href=\\\"t.php?k=0001212&N=1\\\">禁慾</a>\\r\\n\\r\\n -見[!克己/自我犧牲!]\\r\\n\\r\\n -見 <a href=\\\"t.php?k=0004860&N=1\\\">節制</a>\"\n    },\n    {\n      \"id\": \"T0004148\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"敬愛/崇敬/敬畏\",\n      \"content\": \" -敬畏上帝\\r\\n    #創 17:3; 出 3:5; 19:16-24; 34:29-35; 賽 45:9|\\r\\n\\r\\n -見[!敬畏上帝!]\\r\\n\\r\\n -崇敬上帝的殿\\r\\n    #利 19:30; 26:2|\\r\\n\\r\\n -敬畏上帝的用人\\r\\n    #撒上 16:4; 徒 28:10; 林前 16:18; 腓 2:29; 帖前 5:12,13|\\r\\n    #提前 5:17; 來 13:7,17|\\r\\n\\r\\n -見[!神僕!]\\r\\n\\r\\n -尊敬君王\\r\\n    #撒上 24:6; 26:9,11; 撒下 1:14; 16:21; 傳 10:20; 彼前 2:17|\\r\\n\\r\\n -見[!統治者!]\\r\\n\\r\\n -尊敬地方官\\r\\n    #出 22:28; 彼後 2:10; 猶 1:8|\\r\\n\\r\\n -見[!統治者!]\\r\\n\\r\\n -孝敬父母\\r\\n    #出 20:12; 利 19:3; 賽 45:10|\\r\\n\\r\\n -見[!父母!]\\r\\n\\r\\n -敬愛長輩\\r\\n    #利 19:32; 伯 32:4-7|\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0003095\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛\",\n      \"content\": \" -兒女對父母的愛\\r\\n   .見[!兒女/小孩子!]\\r\\n\\r\\n -上帝的愛\\r\\n   .見 <a href=\\\"t.php?k=0002043&N=1\\\">上帝</a>, 上帝的愛\\r\\n\\r\\n -人對上帝的愛\\r\\n    #出 20:6; 申 5:10; 6:5; 7:9; 10:12; 11:1,13,22; 13:3|\\r\\n    #申 30:6,16,20; 書 22:5; 23:11; 詩 18:1; 31:23; 37:4; 45:10,11|\\r\\n    #詩 63:5,6; 69:35,36; 73:25,26; 91:14; 97:10; 116:1; 145:20|\\r\\n    #箴 8:17; 23:26; 賽 56:6,7; 耶 2:2,3; 太 22:37,38|\\r\\n    #太 12:29,30,32,33; 路 11:42; 約 5:42; 羅 5:5; 8:28; 林前 8:3|\\r\\n    #腓 1:9; 帖後 3:5; 提後 1:7; 約一 2:5,15; 3:17,18; 4:12,16-21|\\r\\n    #約一 5:1-3; 約二 1:6; 猶 1:21|\\r\\n\\r\\n -人對耶穌的愛\\r\\n    #太 10:37,38; 25:34-40; 27:55-61; 可 9:41; 路 2:29,30; 7:47|\\r\\n    #約 8:42; 14:15,21,23,28; 15:9; 16:27; 17:26; 21:17|\\r\\n    #徒 21:13; 林前 16:22; 林後 5:6,8,14,15; 加 5:6,22; 6:14|\\r\\n    #弗 3:17-19; 4:15; 6:24; 腓 1:9,20,21,23; 3:7,8; 西 1:8|\\r\\n    #帖後 3:5; 提後 1:13; 4:8; 門 1:5; 來 6:10; 雅 1:12; 2:5|\\r\\n    #彼前 1:8; 2:7; 啟 2:4|\\r\\n\\r\\n -愛耶穌的例子\\r\\n   .馬利亞\\r\\n      #太 26:6-13; 約 12:3-8; 路 10:39|\\r\\n   .彼得\\r\\n      #太 17:4; 約 13:37; 18:10; 20:3-6; 21:7|\\r\\n   .多馬\\r\\n      #約 11:16|\\r\\n   .門徒\\r\\n      #可 16:10; 路 24:17-41; 約 20:20|\\r\\n   .抹大拉的馬利亞和其他門徒\\r\\n      #太 27:55,56,61; 28:1-9; 路 8:2,3; 23:27,55,56; 24:1-10|\\r\\n      #約 20:1,2,11-18|\\r\\n   .格大拉 (格拉森) 人, 耶穌曾為他趕鬼\\r\\n      #可 5:18|\\r\\n   .亞利馬太的約瑟\\r\\n      #太 27:57-60|\\r\\n   .尼哥底母\\r\\n      #約 19:39,40|\\r\\n   .耶路撒冷的婦女\\r\\n      #路 23:27|\\r\\n\\r\\n -人對人的愛\\r\\n    #利 19:18,34; 申 10:19; 詩 133:1-3; 箴 10:12; 15:17|\\r\\n    #箴 17:9,17; 歌 8:6,7; 太 5:41-47; 7:12; 10:41,42; 19:19|\\r\\n    #太 25:34-40; 可 9:41; 12:30-33; 路 6:31-35; 10:30-37|\\r\\n    #約 13:14,15,34,35; 15:12,13,17; 羅 12:9,10; 13:8-10; 林前 8:1|\\r\\n    #林前 13:1-13; 14:1; 16:14; 林後 8:7,8; 加 5:13,14,22,26; 弗 5:2|\\r\\n    #腓 1:9; 2:2; 西 2:2; 3:12; 帖前 1:3; 3:12; 4:9; 提前 1:5,14|\\r\\n    #提前 2:15; 4:12; 6:2; 提後 2:22; 多 3:15; 門 1:12-16; 來 10:24|\\r\\n    #雅 2:8; 彼前 1:22; 2:17; 3:8,9; 4:8; 彼後 1:7; 約一 2:9-11|\\r\\n    #約一 3:11,14,16-19,23; 4:7,11,12,20,21; 5:1,2; 約二 1:5|\\r\\n\\r\\n -人愛人的範例\\r\\n    #出 32:31,32; 詩 133:1-3; 箴 24:17,18; 太 5:41,42; 10:41,42|\\r\\n    #太 25:34-40; 可 9:41; 路 10:25-37; 徒 20:26,27,31; 26:29|\\r\\n    #羅 1:12; 5:7; 9:1-3; 12:15,16; 14:19,21; 15:1,2,5,7,14,15,24,32|\\r\\n    #羅 16:1-16,19; 林前 1:4; 4:14-16; 10:24; 林後 1:3-6,14,23,24|\\r\\n    #林後 2:1-17; 3:2; 4:5; 6:4-6,11-13; 7:1-4,7,12; 11:2|\\r\\n    #林後 12:14-16,19-21; 13:9; 加 4:11-20; 6:1,2,10; 弗 3:13|\\r\\n    #弗 4:2,32; 6:22,24; 腓 1:3-5,7,8,23-26; 2:19; 3:18; 4:1|\\r\\n    #西 1:3,4,24,28,29; 2:1,5; 4:7; 帖前 1:3,4; 2:7,8,11,12,17-20|\\r\\n    #帖前 3:5,7-10,12; 5:8,11,14; 帖後 1:4; 提前 1:5; 5:9,10; 6:2,11|\\r\\n    #提後 1:3,4,8; 2:10; 門 1:8,9,12,16-21; 來 5:2; 6:9,10|\\r\\n    #來 13:1-3,22; 雅 1:27|\\r\\n   .見[!兄弟關係/友愛!]\\r\\n\\r\\n -例子\\r\\n   .亞伯拉罕愛羅得\\r\\n      #創 14:14-16|\\r\\n   .拿俄米、路得、波阿斯\\r\\n      #得 1; 得 2; 得 3|\\r\\n   .大衛的臣民\\r\\n      #撒下 15:30; 17:27-29|\\r\\n   .俄巴底憐惜先知\\r\\n      #王上 18:4|\\r\\n   .約示巴憐愛約阿施\\r\\n      #代下 22:11|\\r\\n   .尼希米愛以色列人\\r\\n      #尼 5:10-15|\\r\\n   .末底改愛以斯帖\\r\\n      #斯 2:7|\\r\\n   .約伯的朋友\\r\\n      #伯 42:11|\\r\\n   .百夫長愛他的僕人\\r\\n      #路 7:2-6|\\r\\n   .羅馬的基督徒愛保羅\\r\\n      #徒 28:15|\\r\\n\\r\\n -貪愛錢財\\r\\n   .是萬惡的根源\\r\\n      #提前 6:10|\\r\\n   .見[!財富!]\\r\\n\\r\\n -父母對子女的愛\\r\\n   .見[!父母!]\\r\\n\\r\\n -又見[!兄弟/弟兄!]\\r\\n -見[!兄弟關係/友愛!]\\r\\n -見[!友誼!]\"\n    },\n    {\n      \"id\": \"T0000351\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"對上帝的愛\",\n      \"content\": \" - 人類被吩咐要愛上帝\\r\\n     #申 11:1; 書 22:5|\\r\\n\\r\\n - 是最大的誡命\\r\\n     #太 22:38|\\r\\n\\r\\n - 盡心愛上帝\\r\\n     #申 6:5; 太 22:37|\\r\\n\\r\\n - 勝於所有獻祭\\r\\n     #可 12:33|\\r\\n\\r\\n - 產生的原因\\r\\n   . 聖靈\\r\\n       #加 5:22; 帖後 3:5|\\r\\n\\r\\n   . 上帝對我們的愛\\r\\n       #約一 4:19|\\r\\n\\r\\n   . 禱告的回應\\r\\n       #詩 116:1|\\r\\n\\r\\n - 由基督展現\\r\\n     #約 14:31|\\r\\n\\r\\n - 聖徒的特徵\\r\\n     #詩 5:11|\\r\\n\\r\\n - 應當產生\\r\\n   . 喜樂\\r\\n       #詩 5:11|\\r\\n\\r\\n   . 對眾聖徒的愛\\r\\n       #約一 5:1|\\r\\n\\r\\n   . 恨惡罪\\r\\n       #詩 97:10|\\r\\n\\r\\n   . 聽從上帝\\r\\n       #申 30:20; 約一 5:3|\\r\\n\\r\\n - 藉著聽命得以完全\\r\\n     #約一 2:5|\\r\\n\\r\\n - 對上帝的愛既完全, 就生發出坦然無懼的心\\r\\n     #約一 4:17,18|\\r\\n\\r\\n - 上帝對愛祂的人是信實的\\r\\n     #申 7:9|\\r\\n\\r\\n - 愛上帝的人\\r\\n   . 為祂所知道\\r\\n       #林前 8:3|\\r\\n\\r\\n   . 蒙祂保守\\r\\n       #詩 145:20|\\r\\n\\r\\n   . 被祂搭救\\r\\n       #詩 91:14|\\r\\n\\r\\n   . 有分於祂的慈愛\\r\\n       #出 20:6; 申 7:9|\\r\\n\\r\\n   . 萬事都互相效益, 叫他們得益處\\r\\n       #羅 8:28|\\r\\n\\r\\n - 當堅持對上帝的愛\\r\\n     #猶 1:21|\\r\\n\\r\\n - 當彼此勸勉愛上帝\\r\\n     #詩 31:23|\\r\\n\\r\\n - 當祈求能有愛上帝的心\\r\\n     #帖後 3:5|\\r\\n\\r\\n - 愛世界就證明了不愛上帝\\r\\n     #約一 2:15|\\r\\n\\r\\n - 不愛他人的就是不愛上帝\\r\\n     #約一 4:20|\\r\\n\\r\\n - 假冒為善者缺少對上帝的愛\\r\\n     #路 11:42; 約 5:42|\\r\\n\\r\\n - 沒有愛心的人缺少對上帝的愛\\r\\n     #約一 3:17|\\r\\n\\r\\n - 上帝會試驗人愛祂之心的真偽\\r\\n     #申 13:3|\\r\\n\\r\\n - 與愛上帝相關的應許\\r\\n     #申 11:13-15; 詩 69:36; 賽 56:6,7; 雅 1:12|\"\n    },\n    {\n      \"id\": \"T0000087\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"愛\",\n      \"content\": \" - 被闡明\\r\\n     #林前 13:4-7|\\r\\n\\r\\n - 被囑咐\\r\\n     #西 3:14|\\r\\n\\r\\n   . 見「<a href=\\\"st.php?N=0&keyword=Love to Man\\\">對人的愛</a>」\"\n    },\n    {\n      \"id\": \"T0001889\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"兄弟關係/友愛\",\n      \"content\": \" -一般經文\\r\\n    #創 13:8; 申 15:7-15; 詩 22:22; 133:1-3; 亞 11:14|\\r\\n    #瑪 2:10; 太 5:22-24; 18:15-18,21,22,35; 23:8; 25:40; 約 13:34|\\r\\n    #約 15:12; 20:17; 羅 12:10; 林前 6:1-8; 8:1-13; 加 6:1,2|\\r\\n    #帖前 4:9; 帖後 3:14,15; 來 13:1; 彼前 1:22; 2:17; 3:8; 彼後 1:5,7|\\r\\n    #約一 2:9-11; 3:17|\\r\\n\\r\\n -見[!兄弟/弟兄!]\\r\\n\\r\\n -見 <a href=\\\"t.php?k=0001107&N=1\\\">教會</a>\\r\\n\\r\\n -見[!團契/密契!]\\r\\n\\r\\n -見[!友誼!]\\r\\n\\r\\n -例子\\r\\n   .拿細耳人所許的願\\r\\n      #民 6:1-21; 哀 4:7; 摩 2:11,12; 徒 21:24-31|\\r\\n   .見[!拿細耳人!]\"\n    },\n    {\n      \"id\": \"T0000353\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"上帝的慈愛\",\n      \"content\": \" - 乃是藉由基督顯明\\r\\n     #弗 2:7; 多 3:4-6|\\r\\n\\r\\n - 被描述為\\r\\n   . 豐盛的\\r\\n       #尼 9:17|\\r\\n\\r\\n   . 寶貴的\\r\\n       #詩 36:7|\\r\\n\\r\\n   . 美好的\\r\\n       #詩 69:16|\\r\\n\\r\\n   . 奇妙的\\r\\n       #詩 17:7; 31:21|\\r\\n\\r\\n   . 極多的\\r\\n       #賽 63:7|\\r\\n\\r\\n   . 永遠的\\r\\n       #賽 54:8|\\r\\n\\r\\n   . 慈憐的\\r\\n       #詩 117:2|\\r\\n\\r\\n   . 比生命更好\\r\\n       #詩 63:3|\\r\\n\\r\\n - 深思上帝與人的往來使人認識上帝的慈愛\\r\\n     #詩 107:43|\\r\\n\\r\\n - 聖徒\\r\\n   . 以上帝的慈愛被聘與祂\\r\\n       #何 2:19|\\r\\n\\r\\n   . 被上帝的慈愛吸引\\r\\n       #耶 31:3|\\r\\n\\r\\n   . 被上帝的慈愛保佑\\r\\n       #詩 40:11|\\r\\n\\r\\n   . 照上帝的慈愛被救活\\r\\n       #詩 119:88|\\r\\n\\r\\n   . 被上帝的慈愛安慰\\r\\n       #詩 119:76|\\r\\n\\r\\n   . 透過上帝的慈愛尋求憐恤\\r\\n       #詩 51:1|\\r\\n\\r\\n   . 透過上帝的慈愛蒙受憐恤\\r\\n       #賽 54:8|\\r\\n\\r\\n   . 按照上帝的慈愛禱告蒙垂聽\\r\\n       #詩 119:149|\\r\\n\\r\\n   . 總是想念上帝的慈愛\\r\\n       #詩 26:3; 48:9|\\r\\n\\r\\n   . 在患難中應期待上帝的慈愛\\r\\n       #詩 42:7,8|\\r\\n\\r\\n   . 以上帝的慈愛為冠冕\\r\\n       #詩 103:4|\\r\\n\\r\\n - 從未完全離開聖徒\\r\\n     #詩 89:33; 賽 54:10|\\r\\n\\r\\n - 禱告時應訴諸先前上帝彰顯的慈愛\\r\\n     #詩 25:6; 89:49|\\r\\n\\r\\n - 當祈求\\r\\n   . 上帝展現其慈愛\\r\\n       #詩 17:7; 143:8|\\r\\n\\r\\n   . 上帝的慈愛能繼續\\r\\n       #詩 36:10|\\r\\n\\r\\n   . 上帝的慈愛能擴展\\r\\n       #創 24:12; 撒下 2:6|\\r\\n\\r\\n - 當為了上帝的慈愛而讚美祂\\r\\n     #詩 92:2; 138:2|\\r\\n\\r\\n - 當宣告上帝的慈愛\\r\\n     #詩 40:10|\"\n    },\n    {\n      \"id\": \"T0000923\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛管閒事的人\",\n      \"content\": \" -關於愛管閒事之人的一般經文\\r\\n    #利 19:16; 箴 20:3; 帖後 3:11,12; 提前 5:13; 彼前 4:15|\\r\\n\\r\\n -見[!搬弄是非的人!]\\r\\n\\r\\n -見[!言語!], 毀謗的話\"\n    },\n    {\n      \"id\": \"T0000128\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛(熱愛)\",\n      \"content\": \" -須全心用在神身上\\r\\n    #申 6:5; 可 12:30|\\r\\n\\r\\n -須用在神的誡命\\r\\n    #詩 19:8-10; 119:20,97,103,167|\\r\\n\\r\\n -應用在神的殿與敬拜\\r\\n    #代上 29:3; 詩 26:8; 27:4; 84:1,2|\\r\\n\\r\\n -應在神的百姓上\\r\\n    #詩 16:3; 羅 12:10; 林後 7:13-16; 帖前 2:8|\\r\\n\\r\\n -須用在屬天事物\\r\\n    #西 3:1,2|\\r\\n\\r\\n -須熱切追求神\\r\\n    #詩 69:9; 119:139; 加 4:18|\\r\\n\\r\\n -基督宣稱居首位處\\r\\n    #太 10:37; 路 14:26|\\r\\n\\r\\n -藉與基督聯合以燃起\\r\\n    #路 24:32|\\r\\n\\r\\n -因而有神的賜福\\r\\n    #詩 91:14|\\r\\n\\r\\n -應不冷淡\\r\\n    #詩 106:12,13; 太 24:12; 加 4:15; 啟 2:4|\\r\\n\\r\\n -聖徒, 全心在神\\r\\n    #詩 42:1; 73:25; 119:10|\\r\\n\\r\\n -於惡者, 並不真誠對神\\r\\n    #賽 58:1,2; 結 33:31,32; 路 8:13|\\r\\n\\r\\n -肉體需被禁慾\\r\\n    #羅 8:13; 13:14; 林前 9:27; 西 3:5; 帖前 4:5|\\r\\n\\r\\n -成聖中肉體己定死\\r\\n    #羅 6:6; 加 5:24|\\r\\n\\r\\n -假教師求迷惑\\r\\n    #加 1:10; 4:17; 提後 3:6; 彼後 2:3,18; 啟 2:14,20|\\r\\n\\r\\n -於惡者, 是不真與扭曲\\r\\n    #羅 1:31; 提後 3:3; 彼後 2:10|\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0000349\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"上帝的愛\",\n      \"content\": \" - 是祂性格的一部份\\r\\n     #林後 13:11; 約一 4:8|\\r\\n\\r\\n - 基督是上帝之愛的特別對象\\r\\n     #約 15:9; 17:26|\\r\\n\\r\\n - 基督住在上帝的愛裡\\r\\n     #約 15:10|\\r\\n\\r\\n - 被描述為\\r\\n   . 不折不扣的\\r\\n       #申 7:8; 10:15|\\r\\n\\r\\n   . 大的\\r\\n       #弗 2:4|\\r\\n\\r\\n   . 持續的\\r\\n       #番 3:17|\\r\\n\\r\\n   . 經久不衰的\\r\\n       #賽 49:15,16|\\r\\n\\r\\n   . 隔絕不了的\\r\\n       #羅 8:39|\\r\\n\\r\\n   . 拘束人的\\r\\n       #何 11:4|\\r\\n\\r\\n   . 永遠的\\r\\n       #耶 31:3|\\r\\n\\r\\n - 不論功績\\r\\n     #申 7:7; 伯 7:17|\\r\\n\\r\\n - 彰顯的對象\\r\\n   . 必死的罪人\\r\\n       #約 3:16; 多 3:4|\\r\\n\\r\\n   . 祂的聖徒\\r\\n       #約 16:27; 17:23; 帖後 2:16; 約一 4:16|\\r\\n\\r\\n   . 貧困的人\\r\\n       #申 10:18|\\r\\n\\r\\n   . 樂意捐獻的人\\r\\n       #林後 9:7|\\r\\n\\r\\n - 展現在\\r\\n   . 賜下基督\\r\\n       #約 3:16|\\r\\n\\r\\n   . 差遣基督\\r\\n       #約一 4:9|\\r\\n\\r\\n   . 基督在我們還是罪人時為我們死\\r\\n       #羅 5:8; 約一 4:10|\\r\\n\\r\\n   . 揀選我們\\r\\n       #瑪 1:2,3; 羅 9:11-13|\\r\\n\\r\\n   . 將我們收為兒女\\r\\n       #約一 3:1|\\r\\n\\r\\n   . 買贖我們\\r\\n       #賽 43:3,4; 63:9|\\r\\n\\r\\n   . 白白賜下的救恩\\r\\n       #多 3:4-7|\\r\\n\\r\\n   . 赦罪\\r\\n       #賽 38:17|\\r\\n\\r\\n   . 使靈魂甦醒\\r\\n       #弗 2:4,5|\\r\\n\\r\\n   . 牽引我們轉向祂\\r\\n       #何 11:4|\\r\\n\\r\\n   . 今生的賜福\\r\\n       #申 7:13|\\r\\n\\r\\n   . 管教\\r\\n       #來 12:6|\\r\\n\\r\\n   . 擊破惡謀\\r\\n       #申 23:5|\\r\\n\\r\\n - 聖靈將上帝的愛澆灌在人心裡\\r\\n     #羅 5:5|\\r\\n\\r\\n - 聖徒知道並相信上帝的愛\\r\\n     #約一 4:16|\\r\\n\\r\\n - 聖徒應當住在上帝的愛裡\\r\\n     #猶 1:21|\\r\\n\\r\\n - 成全在聖徒身上\\r\\n   . 藉著順服\\r\\n       #約一 2:5|\\r\\n\\r\\n   . 藉著弟兄之間的愛\\r\\n       #約一 4:12|\\r\\n\\r\\n - 是我們對祂的愛的源頭\\r\\n     #約一 4:19|\\r\\n\\r\\n - 要在禱告中尋求\\r\\n     #林後 13:14|\"\n    },\n    {\n      \"id\": \"T0003760\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛國心\",\n      \"content\": \" -一般經文\\r\\n    #申 26:1-11; 士 5:1-31; 詩 51:18; 85:1-13; 122:6,7|\\r\\n    #詩 128:5,6; 137:1-6; 賽 62:1; 耶 8:11,21,22; 9:1,2|\\r\\n    #哀 5:1-22|\\r\\n\\r\\n -見[!國家/祖國!], 對國家的愛\\r\\n\\r\\n -例子\\r\\n   .摩西\\r\\n      #來 11:24-26|\\r\\n   .底波拉\\r\\n      #士 4; 士 5|\\r\\n   .西布倫和拿弗他利支派\\r\\n      #士 5:18-20|\\r\\n   .以利\\r\\n      #撒上 4:17,18|\\r\\n   .非尼哈的妻子\\r\\n      #撒上 4:19-22|\\r\\n   .約押\\r\\n      #撒下 10:12|\\r\\n   .烏利亞\\r\\n      #撒下 11:11|\\r\\n   .哈達\\r\\n      #王上 11:21,22|\\r\\n   .撒馬利亞的痲瘋病患\\r\\n      #王下 7:9|\\r\\n   .尼希米\\r\\n      #尼 1:2,4-11; 2:3|\\r\\n\\r\\n -缺乏愛國心\\r\\n   .流便、亞設、但支派\\r\\n      #士 5:15-17|\\r\\n   .米羅斯的居民\\r\\n      #士 5:23|\\r\\n   .疏割和毗努伊勒的居民\\r\\n      #士 8:4-17|\"\n    },\n    {\n      \"id\": \"T0003097\",\n      \"source\": \"Naves (中文)\",\n      \"topic\": \"愛人/情人\",\n      \"content\": \" -例子\\r\\n   .以撒愛利百加\\r\\n      #創 24:67|\\r\\n   .雅各愛拉結\\r\\n      #創 29:20,30|\\r\\n   .示劍愛底拿\\r\\n      #創 34:3,12|\\r\\n   .波阿斯愛路得\\r\\n      #得 2; 3; 4|\\r\\n\\r\\n\"\n    },\n    {\n      \"id\": \"T0000352\",\n      \"source\": \"Torrey (中文)\",\n      \"topic\": \"對人的愛\",\n      \"content\": \" - 乃是從上帝而來\\r\\n     #約一 4:7|\\r\\n\\r\\n - 為上帝所吩咐\\r\\n     #約一 4:21|\\r\\n\\r\\n - 為基督所吩咐\\r\\n     #約 13:34; 15:12; 約一 3:23|\\r\\n\\r\\n - 乃是效法基督的榜樣\\r\\n     #約 13:34; 15:12; 弗 5:2|\\r\\n\\r\\n - 為上帝所教導\\r\\n     #帖前 4:9|\\r\\n\\r\\n - 信心靠著愛人之心生發功效\\r\\n     #加 5:6|\\r\\n\\r\\n - 聖靈的果子之一\\r\\n     #加 5:22; 西 1:8|\\r\\n\\r\\n - 清潔的心促就對人的愛\\r\\n     #彼前 1:22|\\r\\n\\r\\n - 闡明\\r\\n     #林前 13:4-7|\\r\\n\\r\\n - 是活潑的原則\\r\\n     #帖前 1:3; 來 6:10|\\r\\n\\r\\n - 是不變的原則\\r\\n     #林前 13:8,13|\\r\\n\\r\\n - 是第二大的誡命\\r\\n     #太 22:37-39|\\r\\n\\r\\n - 是命令的總歸\\r\\n     #提前 1:5|\\r\\n\\r\\n - 沒有愛人的心, 超自然的恩賜便不算什麼\\r\\n     #林前 13:1,2|\\r\\n\\r\\n - 沒有愛人的心, 最大的犧牲便不算什麼\\r\\n     #林前 13:3|\\r\\n\\r\\n - 牧者特別受命要愛人\\r\\n     #提前 4:12; 提後 2:22|\\r\\n\\r\\n - 聖徒應當\\r\\n   . 存著愛人的心\\r\\n       #西 3:14|\\r\\n\\r\\n   . 追求愛人的心\\r\\n       #林前 14:1|\\r\\n\\r\\n   . 滿懷愛人的心\\r\\n       #腓 1:9; 帖前 3:12|\\r\\n\\r\\n   . 持續愛人\\r\\n       #提前 2:15; 來 13:1|\\r\\n\\r\\n   . 彼此激發愛人的心\\r\\n       #林後 8:7; 9:2; 來 10:24|\\r\\n\\r\\n   . 對人的愛要真誠\\r\\n       #羅 12:9; 林後 6:6; 8:8; 約一 3:18|\\r\\n\\r\\n   . 對人的愛要無私\\r\\n       #林前 10:24; 13:5; 腓 2:4|\\r\\n\\r\\n   . 對人的愛要熱切\\r\\n       #彼前 1:22; 4:8|\\r\\n\\r\\n - 應當與愛弟兄的心相連結\\r\\n     #羅 12:10; 彼後 1:7|\\r\\n\\r\\n - 應當用清潔的心愛人\\r\\n     #彼前 1:22|\\r\\n\\r\\n - 一切事應當憑著愛心而做\\r\\n     #林前 16:14|\\r\\n\\r\\n - 應當向下列人士展現\\r\\n   . 聖徒\\r\\n       #彼前 2:17; 約一 5:1|\\r\\n\\r\\n   . 牧者\\r\\n       #帖前 5:13|\\r\\n\\r\\n   . 我們的家人\\r\\n       #弗 5:25; 多 2:4|\\r\\n\\r\\n   . 同胞\\r\\n       #出 32:32; 羅 9:2,3; 10:1|\\r\\n\\r\\n   . 外人\\r\\n       #利 19:34; 申 10:19|\\r\\n\\r\\n   . 敵人\\r\\n       #出 23:4,5; 王下 6:22; 太 5:44; 羅 12:14,20; 彼前 3:9|\\r\\n\\r\\n   . 所有人\\r\\n       #加 6:10|\\r\\n\\r\\n - 應當展現的時刻\\r\\n   . 伺候他人需要\\r\\n       #太 25:35; 來 6:10|\\r\\n\\r\\n   . 彼此相愛\\r\\n       #加 5:13|\\r\\n\\r\\n   . 幫助外人\\r\\n       #利 25:35; 太 25:36|\\r\\n\\r\\n   . 給赤身露體者穿上衣服\\r\\n       #賽 58:7; 太 25:36|\\r\\n\\r\\n   . 探望病人等\\r\\n       #伯 31:16-22; 雅 1:27|\\r\\n\\r\\n   . 同情人\\r\\n       #羅 12:15; 林前 12:26|\\r\\n\\r\\n   . 扶持軟弱的人\\r\\n       #加 6:2; 帖前 5:14|\\r\\n\\r\\n   . 遮掩他人的過錯\\r\\n       #箴 10:12; 彼前 4:8|\\r\\n\\r\\n   . 饒恕他人加諸於自己的傷害\\r\\n       #弗 4:32; 西 3:13|\\r\\n\\r\\n   . 寬容\\r\\n       #弗 4:2|\\r\\n\\r\\n   . 指責\\r\\n       #利 19:17; 太 18:15|\\r\\n\\r\\n - 要愛人才能真正快樂 \\r\\n     #箴 15:17|\\r\\n\\r\\n - 上帝的愛是愛人的原動力\\r\\n     #約 13:34; 約一 4:11|\\r\\n\\r\\n - 愛人的證據\\r\\n   . 住在光明中\\r\\n       #約一 2:10|\\r\\n\\r\\n   . 是基督的門徒\\r\\n       #約 13:35|\\r\\n\\r\\n   . 靈性生活\\r\\n       #約一 3:14|\\r\\n\\r\\n - 愛人便完全了律法\\r\\n     #羅 13:8-10; 加 5:14; 雅 2:8|\\r\\n\\r\\n - 愛自己是衡量愛他人與否的標準\\r\\n     #可 12:33|\\r\\n\\r\\n - 愛人是美善愉悅的\\r\\n     #詩 133:1,2|\\r\\n\\r\\n - 是合一的聯繫力量\\r\\n     #西 2:2|\\r\\n\\r\\n - 是聯絡全德的\\r\\n     #西 3:14|\\r\\n\\r\\n - 假冒為善者缺乏對人的愛\\r\\n     #約一 2:9,11; 4:20|\\r\\n\\r\\n - 惡人缺乏對人的愛\\r\\n     #約一 3:10|\\r\\n\\r\\n - 例子\\r\\n   . 約瑟\\r\\n       #創 45:15|\\r\\n\\r\\n   . 路得\\r\\n       #得 1:16,17|\\r\\n\\r\\n   . 約拿單\\r\\n       #撒上 20:17,41,42|\\r\\n\\r\\n   . 俄巴底\\r\\n       #王上 18:4|\\r\\n\\r\\n   . 百夫長\\r\\n       #路 7:5|\\r\\n\\r\\n   . (初代) 教會\\r\\n       #徒 2:46; 來 10:33,34|\\r\\n\\r\\n   . 呂底亞\\r\\n       #徒 16:15|\\r\\n\\r\\n   . 亞居拉\\r\\n       #羅 16:3,4|\\r\\n\\r\\n   . 保羅\\r\\n       #林後 6:11,12|\\r\\n\\r\\n   . 以巴弗提\\r\\n       #腓 2:25,26,30|\\r\\n\\r\\n   . 腓立比人\\r\\n       #腓 4:15-19|\\r\\n\\r\\n   . 歌羅西人\\r\\n       #西 1:4|\\r\\n\\r\\n   . 帖撒羅尼迦人\\r\\n       #帖前 3:6|\\r\\n\\r\\n   . 阿尼色弗\\r\\n       #提後 1:16-18|\\r\\n\\r\\n   . 腓利門\\r\\n       #門 1:7-9|\\r\\n\\r\\n   . 摩西\\r\\n       #來 11:25|\"\n    }\n  ]\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "err_chapter_out_of_range",
+      "tool": "get_bible_verse",
+      "args": {
+        "book": "John",
+        "chapter": 99,
+        "verse": "1"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/qb.php?bid=43&chap=99&version=unv&strong=0&sec=1&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"version\": \"unv\",\n  \"version_name\": \"FHL和合本\",\n  \"record_count\": 0,\n  \"verses\": [],\n  \"navigation\": {\n    \"prev\": {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 1,\n      \"verse\": 1\n    },\n    \"next\": {\n      \"book\": \"創\",\n      \"book_eng\": \"Gen\",\n      \"chapter\": 1,\n      \"verse\": 1\n    }\n  }\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "err_footnote_not_found",
+      "tool": "get_bible_footnote",
+      "args": {
+        "book_id": 999,
+        "footnote_id": 999
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/rt.php?bid=999&id=999&version=tcv&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"status\": \"not_found\",\n  \"message\": \"找不到書卷 999 的註腳 #999\"\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    },
+    {
+      "label": "err_strongs_not_found",
+      "tool": "lookup_strongs",
+      "args": {
+        "number": "99999",
+        "testament": "NT"
+      },
+      "upstream_requests": [
+        "https://bible.fhl.net/api/sd.php?N=0&k=99999&gb=0"
+      ],
+      "result": {
+        "content": [
+          {
+            "type": "text",
+            "text": "{\n  \"strongs_number\": \"\",\n  \"original_word\": null,\n  \"chinese_definition\": null,\n  \"english_definition\": null,\n  \"testament\": \"NT\"\n}"
+          }
+        ],
+        "isError": false,
+        "structuredContent": "identical to content[0].text as {result: text}"
+      }
+    }
+  ]
+}

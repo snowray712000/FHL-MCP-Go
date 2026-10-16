@@ -2,16 +2,24 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.4**
+- last: **0.0.0.5**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 目前沒有 Go 程式碼，尚無「程式內版本字串」；有了之後，`version` 指令與建置注入的版本須與 `last` 一致。
 
 ## TODOs
 
-- 🆕 新功能: M0 來源與契約：(已匯出 29 個工具 schema 至 `doc/m0/contract/`；已盤點 Prompts／Resources 至 `doc/m0/prompts-resources-inventory.md`) 逐工具輸出取樣與差異表 (見計畫書 §13)
+- 🆕 新功能: M0 來源與契約：(已匯出 29 個工具 schema 至 `doc/m0/contract/`；已盤點 Prompts／Resources 至 `doc/m0/prompts-resources-inventory.md`) (已取樣 29 個工具並產出 `doc/m0/tool-matrix.md` 差異清單 D1–D16；D2–D12 已核准並寫入計畫書 §9) §15 剩餘項確認、M0 退出檢查 (見計畫書 §13)
 - 🆕 新功能: M1 最小垂直切片：Go SDK + HTTP + 經文查詢 + `serve`，Claude Code 與 Codex 同時連線
 - ⏳ 待決定: 計畫書 §15 的待定項目 (Ubuntu／macOS 最低版、簽章公證、Smithery 相容)；Prompts／Resources 已定案移至下一版本 (M4)
+
+## 0.0.0.5
+
+- ✨ 新增: `doc/m0/tool-matrix.md`：29 個工具契約矩陣 (實測上游端點、輸出欄位、備註) 與原版差異清單 D1–D16
+- ✨ 新增: `doc/m0/contract/tool-samples.json` (55 次呼叫、32 次上游請求的原始樣本)、`contract/upstream-ssc-samples.json` (D12 上游回應)
+- ✨ 新增: 計畫書 §9「已核准的原版差異」：D2–D12 經使用者核准 (錯誤格式維持 `isError`、不認得書卷統一訊息、`use_simplified` 真正生效並納入快取 key、`null`／數字字串放寬、查無資料形狀保留、上游 `status` 非 success 回明確訊息)；D10 先照原樣
+- 🐞 發現: Python 原版 `use_simplified` 在多數工具被忽略；`InvalidParameterError` 建構錯誤不只 `get_book_info`；`search_commentary` 常見詞被上游 `record count > 500` 吞成 0 筆
+- ℹ️ 說明: 實測上游一律為 `bible.fhl.net/api/*.php` (文章為 `www.fhl.net/api/json.php`)，未使用 `/json/`；M1 須確認 Go SDK 能讓未知工具回 `isError` 結果；仍無 Go 程式碼
 
 ## 0.0.0.4
 

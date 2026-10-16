@@ -1,0 +1,78 @@
+{
+  "fetched": "2026-10-16",
+  "note": "direct GET https://bible.fhl.net/api/ssc.php?key=<kw>&gb=0, UA FHL-Bible-MCP-Server/0.1.0, 3 requests >=2s apart",
+  "samples": {
+    "愛": {
+      "status": "Fail:record count > 500"
+    },
+    "耶穌": {
+      "status": "Fail:record count > 500"
+    },
+    "尼哥底母": {
+      "status": "success",
+      "record_count": 5,
+      "record": [
+        {
+          "title": "約翰福音 3章1節 到 3章21節",
+          "tag": 3,
+          "book_name": "信望愛站註釋",
+          "chinesef": "約翰福音                                    ",
+          "bid": 43,
+          "engs": "John",
+          "bchap": 3,
+          "bsec": 1,
+          "echap": 3,
+          "esec": 21
+        },
+        {
+          "title": "約翰福音 7章1節 到 7章52節",
+          "tag": 3,
+          "book_name": "信望愛站註釋",
+          "chinesef": "約翰福音                                    ",
+          "bid": 43,
+          "engs": "John",
+          "bchap": 7,
+          "bsec": 1,
+          "echap": 7,
+          "esec": 52
+        },
+        {
+          "title": "路加福音 13章31節 到 13章35節",
+          "tag": 3,
+          "book_name": "信望愛站註釋",
+          "chinesef": "路加福音                                    ",
+          "bid": 42,
+          "engs": "Luke",
+          "bchap": 13,
+          "bsec": 31,
+          "echap": 13,
+          "esec": 35
+        },
+        {
+          "title": "約翰福音 19章17節 到 19章42節",
+          "tag": 3,
+          "book_name": "信望愛站註釋",
+          "chinesef": "約翰福音                                    ",
+          "bid": 43,
+          "engs": "John",
+          "bchap": 19,
+          "bsec": 17,
+          "echap": 19,
+          "esec": 42
+        },
+        {
+          "title": "使徒行傳 4章15節 到 4章22節",
+          "tag": 3,
+          "book_name": "信望愛站註釋",
+          "chinesef": "使徒行傳                                    ",
+          "bid": 44,
+          "engs": "Acts",
+          "bchap": 4,
+          "bsec": 15,
+          "echap": 4,
+          "esec": 22
+        }
+      ]
+    }
+  }
+}
