@@ -37,6 +37,8 @@ func fakeUpstream(t *testing.T) *fhlapi.Client {
 		q := r.URL.Query()
 		name := "qb_john_3_16.json"
 		switch {
+		case strings.HasSuffix(r.URL.Path, "/ab.php"):
+			name = "ab.json"
 		case q.Get("chap") == "99":
 			name = "qb_john_99_1_empty.json"
 		case q.Get("sec") == "16-17":
@@ -177,6 +179,19 @@ func TestGetBibleVerseEndToEnd(t *testing.T) {
 	}
 }
 
+func TestListBibleVersionsEndToEnd(t *testing.T) {
+	base, _ := startServer(t)
+	sess := connect(t, base)
+	res, err := sess.CallTool(context.Background(), &mcp.CallToolParams{Name: "list_bible_versions", Arguments: map[string]any{}})
+	if err != nil || res.IsError {
+		t.Fatalf("err=%v isError=%v", err, res != nil && res.IsError)
+	}
+	want := string(fixtureFile(t, "golden", "list_bible_versions.json"))
+	if got := textOf(t, res); got != want {
+		t.Errorf("text differs from Python golden (len %d vs %d)", len(got), len(want))
+	}
+}
+
 func TestToolErrorsAreIsErrorResults(t *testing.T) {
 	base, _ := startServer(t)
 	sess := connect(t, base)
@@ -187,7 +202,7 @@ func TestToolErrorsAreIsErrorResults(t *testing.T) {
 		wants string
 	}{
 		{"unknown tool (D2)", "no_such_tool", map[string]any{}, "Error executing tool no_such_tool: Unknown tool: no_such_tool"},
-		{"not implemented", "list_bible_versions", map[string]any{}, "Error executing tool list_bible_versions: Tool 'list_bible_versions' is not implemented yet in this build"},
+		{"not implemented", "list_commentaries", map[string]any{}, "Error executing tool list_commentaries: Tool 'list_commentaries' is not implemented yet in this build"},
 		{"missing book", "get_bible_verse", map[string]any{"chapter": 3}, "Error executing tool get_bible_verse: Invalid parameter 'book': required parameter is missing"},
 		{"unknown book (D3)", "get_bible_verse", map[string]any{"book": "不存在書卷", "chapter": 1}, "Error executing tool get_bible_verse: Invalid parameter 'book': 不存在書卷 - Book not found. Please check the spelling or use a valid book code."},
 	}

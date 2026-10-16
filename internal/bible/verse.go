@@ -9,14 +9,15 @@ import (
 	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
 )
 
-// VerseAPI is the slice of the upstream client the verse service needs (mockable).
-type VerseAPI interface {
+// API is the slice of the upstream client the Bible service needs (mockable).
+type API interface {
 	QB(ctx context.Context, r fhlapi.QBRequest) (*fhlapi.QBResponse, error)
+	AB(ctx context.Context, simplified bool) (*fhlapi.ABResponse, error)
 }
 
 // Service holds the Bible domain logic. It does not know about MCP.
 type Service struct {
-	API VerseAPI
+	API API
 }
 
 // InvalidParameterError is a caller mistake (bad or missing parameter), reported to the model as a tool error.

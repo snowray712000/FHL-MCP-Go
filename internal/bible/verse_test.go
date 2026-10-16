@@ -102,3 +102,7 @@ func TestGetVerseUpstreamErrorPassesThrough(t *testing.T) {
 		t.Fatalf("err = %v", err)
 	}
 }
+
+func (f *fakeAPI) AB(context.Context, bool) (*fhlapi.ABResponse, error) {
+	return nil, errors.New("AB not expected in this test")
+}

@@ -23,8 +23,15 @@ func fixture(t *testing.T, kind, name string) []byte {
 
 // routeAPI answers qb.php requests from the recorded upstream fixtures.
 type routeAPI struct {
-	t   *testing.T
-	got []fhlapi.QBRequest
+	t     *testing.T
+	got   []fhlapi.QBRequest
+	abGot []bool // simplified flag of every ab.php request
+}
+
+func (f *routeAPI) AB(_ context.Context, simplified bool) (*fhlapi.ABResponse, error) {
+	f.abGot = append(f.abGot, simplified)
+	var out fhlapi.ABResponse
+	return &out, json.Unmarshal(fixture(f.t, "upstream", "ab.json"), &out)
 }
 
 func (f *routeAPI) QB(_ context.Context, r fhlapi.QBRequest) (*fhlapi.QBResponse, error) {
@@ -56,6 +63,8 @@ func TestM2aGoldens(t *testing.T) {
 		{"get_book_info", `{"book":"Philemon"}`, "get_book_info_philemon.json"},
 		{"get_bible_chapter", `{"book":"門","chapter":1}`, "get_bible_chapter_philem1.json"},
 		{"query_verse_citation", `{"citation":"約 3:16-17"}`, "query_verse_citation_john316_17.json"},
+		{"list_bible_versions", `{}`, "list_bible_versions.json"},
+		{"search_available_versions", `{"has_strongs":true}`, "search_available_versions_strongs.json"},
 	}
 	for _, c := range cases {
 		t.Run(c.golden, func(t *testing.T) {
@@ -173,5 +182,67 @@ func TestChapterSendsSimplifiedAndNoStrong(t *testing.T) {
 	}
 	if len(api.got) != 1 || !api.got[0].Simplified || api.got[0].Strong || api.got[0].Verse != "" || api.got[0].Version != "unv" {
 		t.Errorf("request = %+v", api.got)
+	}
+}
+
+func TestSearchAvailableVersionsFilters(t *testing.T) {
+	api := &routeAPI{t: t}
+	type result struct {
+		Total   int `json:"total_count"`
+		Filters struct {
+			HasStrongs *bool   `json:"has_strongs"`
+			Testament  *string `json:"testament"`
+		} `json:"filters"`
+	}
+	run := func(args string) result {
+		out, err := callTool(t, api, "search_available_versions", args)
+		if err != nil {
+			t.Fatal(err)
+		}
+		var v result
+		if err := json.Unmarshal([]byte(out), &v); err != nil {
+			t.Fatal(err)
+		}
+		return v
+	}
+	// Fixture: 86 versions = 52 both + 32 nt_only + 2 ot_only; 3 have Strong's (all "both").
+	cases := []struct {
+		name, args string
+		total      int
+	}{
+		{"no filter", `{}`, 86},
+		{"null filters (D5)", `{"testament":null,"has_strongs":null}`, 86},
+		{"both is not a filter (Python)", `{"testament":"both"}`, 86},
+		{"empty testament is not a filter", `{"testament":""}`, 86},
+		{"OT lowercase", `{"testament":"ot"}`, 54},
+		{"NT", `{"testament":"NT"}`, 84},
+		{"strongs", `{"has_strongs":true}`, 3},
+		{"no strongs", `{"has_strongs":false}`, 83},
+		{"combined", `{"has_strongs":false,"testament":"NT"}`, 81},
+	}
+	for _, c := range cases {
+		if got := run(c.args).Total; got != c.total {
+			t.Errorf("%s: total_count = %d, want %d", c.name, got, c.total)
+		}
+	}
+	f := run(`{"testament":"ot","has_strongs":false}`).Filters
+	if f.Testament == nil || *f.Testament != "ot" || f.HasStrongs == nil || *f.HasStrongs {
+		t.Errorf("filters must be echoed as given: %+v", f)
+	}
+	f = run(`{}`).Filters
+	if f.Testament != nil || f.HasStrongs != nil {
+		t.Errorf("absent filters must echo null: %+v", f)
+	}
+}
+
+func TestVersionListSendsSimplifiedFlag(t *testing.T) {
+	api := &routeAPI{t: t}
+	for _, a := range []string{`{}`, `{"use_simplified":true}`} {
+		if _, err := callTool(t, api, "list_bible_versions", a); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if len(api.abGot) != 2 || api.abGot[0] || !api.abGot[1] {
+		t.Errorf("ab.php simplified flags = %v, want [false true] (D4)", api.abGot)
 	}
 }

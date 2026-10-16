@@ -4,9 +4,9 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the M1 vertical slice exists and M2-a is built (unreleased)**: `go.mod` pins Go 1.27.2 + `go-sdk` v1.8.0 (module path
+Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the M1 vertical slice exists and M2-a/b are built (unreleased)**: `go.mod` pins Go 1.27.2 + `go-sdk` v1.8.0 (module path
 `github.com/snowray712000/FHL-MCP-Go` is an assumption); `cmd/fhl-mcp` (`serve`/`version`/`help`), `internal/{app,transport,mcpserver,tools,bible,fhlapi,version}`
-and `assets/` (embedded frozen `tools-list.json`) are in place. Implemented so far (M2-a): `get_bible_verse`, `get_bible_chapter`, `query_verse_citation`, `get_book_list`, `get_book_info`; the other 24 contract
+and `assets/` (embedded frozen `tools-list.json`) are in place. Implemented so far (M2-a/b): `get_bible_verse`, `get_bible_chapter`, `query_verse_citation`, `get_book_list`, `get_book_info`, `list_bible_versions`, `search_available_versions`; the other 22 contract
 tools are registered but return an `isError` "not implemented yet" result. The plan is `doc/FHL-MCP-Go-重寫計畫書.md`
 (正體中文, "discussion draft v0.1"). Commands that work: `go test ./...`, `go vet ./...`, `CGO_ENABLED=0 go build ./cmd/fhl-mcp`
 (Go is at `C:\Program Files\Go\bin`, add it to PATH in fresh shells); `go test -race` needs cgo/gcc and is not verified on this

@@ -49,6 +49,36 @@ func NewRegistry(svc *bible.Service) *Registry {
 		}
 		return bible.MarshalIndent2(res)
 	}
+	r.handlers["list_bible_versions"] = func(ctx context.Context, a args) (string, error) {
+		simplified, err := a.optBool("use_simplified", false)
+		if err != nil {
+			return "", err
+		}
+		res, err := svc.ListVersions(ctx, simplified)
+		if err != nil {
+			return "", err
+		}
+		return bible.MarshalIndent2(res)
+	}
+	r.handlers["search_available_versions"] = func(ctx context.Context, a args) (string, error) {
+		testament, err := a.optStringPtr("testament")
+		if err != nil {
+			return "", err
+		}
+		hasStrongs, err := a.optBoolPtr("has_strongs")
+		if err != nil {
+			return "", err
+		}
+		simplified, err := a.optBool("use_simplified", false)
+		if err != nil {
+			return "", err
+		}
+		res, err := svc.SearchVersions(ctx, hasStrongs, testament, simplified)
+		if err != nil {
+			return "", err
+		}
+		return bible.MarshalIndent2(res)
+	}
 	return r
 }
 

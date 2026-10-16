@@ -1,0 +1,36 @@
+{
+  "total_count": 3,
+  "filters": {
+    "has_strongs": true,
+    "testament": null
+  },
+  "versions": [
+    {
+      "code": "unv",
+      "name": "FHL和合本",
+      "has_strongs": true,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "kjv",
+      "name": "KJV",
+      "has_strongs": true,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "rcuv",
+      "name": "和合本2010",
+      "has_strongs": true,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    }
+  ]
+}

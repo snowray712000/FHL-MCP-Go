@@ -88,10 +88,14 @@ func TestGetBibleVerseValidationErrors(t *testing.T) {
 
 func TestNotImplemented(t *testing.T) {
 	r := NewRegistry(&bible.Service{API: &fakeAPI{}})
-	if r.Implemented("list_bible_versions") {
-		t.Fatal("list_bible_versions should not be implemented yet")
+	if r.Implemented("list_commentaries") {
+		t.Fatal("list_commentaries should not be implemented yet")
 	}
-	if _, err := r.Call(context.Background(), "list_bible_versions", nil); !errors.Is(err, ErrNotImplemented) {
+	if _, err := r.Call(context.Background(), "list_commentaries", nil); !errors.Is(err, ErrNotImplemented) {
 		t.Fatalf("err = %v", err)
 	}
+}
+
+func (f *fakeAPI) AB(context.Context, bool) (*fhlapi.ABResponse, error) {
+	return nil, errors.New("AB not expected in this test")
 }

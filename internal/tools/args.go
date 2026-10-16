@@ -118,3 +118,28 @@ func (a args) optBool(name string, def bool) (bool, error) {
 	}
 	return false, &bible.InvalidParameterError{Name: name, Value: shown(v), Reason: "must be true or false"}
 }
+
+// optStringPtr returns nil when the parameter is absent or null (D5).
+func (a args) optStringPtr(name string) (*string, error) {
+	v, ok := a.get(name)
+	if !ok {
+		return nil, nil
+	}
+	s, err := decodeString(name, v)
+	if err != nil {
+		return nil, err
+	}
+	return &s, nil
+}
+
+// optBoolPtr returns nil when the parameter is absent or null (D5).
+func (a args) optBoolPtr(name string) (*bool, error) {
+	if _, ok := a.get(name); !ok {
+		return nil, nil
+	}
+	b, err := a.optBool(name, false)
+	if err != nil {
+		return nil, err
+	}
+	return &b, nil
+}

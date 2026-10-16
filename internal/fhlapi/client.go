@@ -119,6 +119,39 @@ func (c *Client) QB(ctx context.Context, r QBRequest) (*QBResponse, error) {
 	return &out, nil
 }
 
+// ABRecord is one Bible version returned by ab.php. Optional fields missing upstream stay zero.
+type ABRecord struct {
+	Book        string `json:"book"`
+	CName       string `json:"cname"`
+	Proc        int    `json:"proc"`
+	Strong      int    `json:"strong"`
+	NTOnly      int    `json:"ntonly"`
+	OTOnly      int    `json:"otonly"`
+	CanDownload int    `json:"candownload"`
+	Version     string `json:"version"`
+}
+
+// ABResponse is the ab.php (version list) response.
+type ABResponse struct {
+	Status      string     `json:"status"`
+	RecordCount int        `json:"record_count"`
+	Record      []ABRecord `json:"record"`
+}
+
+// AB queries ab.php for the list of Bible versions. simplified sends gb=1 (D4).
+func (c *Client) AB(ctx context.Context, simplified bool) (*ABResponse, error) {
+	q := url.Values{}
+	q.Set("gb", boolDigit(simplified))
+	var out ABResponse
+	if err := c.getJSON(ctx, "ab.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
 func (c *Client) getJSON(ctx context.Context, endpoint string, q url.Values, dst any) error {
 	u := strings.TrimRight(c.BaseURL, "/") + "/" + endpoint + "?" + q.Encode()
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)

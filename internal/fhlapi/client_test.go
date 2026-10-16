@@ -98,3 +98,28 @@ func TestQBNetworkErrorAndCancel(t *testing.T) {
 		t.Fatalf("cancelled: err = %v", err)
 	}
 }
+
+func TestABQueryAndParse(t *testing.T) {
+	var path, gb string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		path, gb = r.URL.Path, r.URL.Query().Get("gb")
+		_, _ = w.Write(fixture(t, "ab.json"))
+	})
+	res, err := c.AB(context.Background(), true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if path != "/api/ab.php" || gb != "1" {
+		t.Errorf("path=%s gb=%s, want /api/ab.php and gb=1 (D4)", path, gb)
+	}
+	if len(res.Record) != 86 || res.Record[0].Book != "unv" || res.Record[0].Strong != 1 || res.Record[2].OTOnly != 1 {
+		t.Errorf("unexpected parse: %d records, first %+v", len(res.Record), res.Record[0])
+	}
+}
+
+func TestABUpstreamFailureStatus(t *testing.T) {
+	c := newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"Fail"}`)) })
+	if _, err := c.AB(context.Background(), false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("err = %v, want ErrUpstream", err)
+	}
+}

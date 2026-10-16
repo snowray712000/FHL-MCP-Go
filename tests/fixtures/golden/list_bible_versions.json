@@ -1,0 +1,779 @@
+{
+  "total_count": 86,
+  "versions": [
+    {
+      "code": "unv",
+      "name": "FHL和合本",
+      "has_strongs": true,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "kjv",
+      "name": "KJV",
+      "has_strongs": true,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "bhs",
+      "name": "舊約馬索拉原文",
+      "has_strongs": false,
+      "testament": "ot_only",
+      "special_font": "hebrew",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "apskcl",
+      "name": "紅皮聖經全羅",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "apskhl",
+      "name": "紅皮聖經漢羅",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "bklcl",
+      "name": "巴克禮全羅",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tghg",
+      "name": "巴克禮台漢本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "openhan",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ttvhl2021",
+      "name": "現代台語2021版漢字",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "openhan",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ttvcl2021",
+      "name": "現代台語2021版全羅",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "bklhl",
+      "name": "巴克禮漢羅",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tte",
+      "name": "現代台語2013版全羅",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ttvh",
+      "name": "現代台語2013版漢字",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "fhlwh",
+      "name": "新約原文",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "greek",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "bbe",
+      "name": "BBE",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "asv",
+      "name": "ASV",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "web",
+      "name": "WEB",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "darby",
+      "name": "Darby",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "erv",
+      "name": "ERV",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "baru",
+      "name": "印尼聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ind1958",
+      "name": "印尼舊聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "vietnamese",
+      "name": "越南聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "russian",
+      "name": "俄文聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "korean",
+      "name": "韓文聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "thv2e",
+      "name": "現代客語全羅",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "hakka",
+      "name": "汕頭客語聖經",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "recover",
+      "name": "恢復本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "wlunv",
+      "name": "深文理和合本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "prebklcl",
+      "name": "馬雅各全羅",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "genbklcl",
+      "name": "",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "nt1864",
+      "name": "新遺詔聖經",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "jp",
+      "name": "日語聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "csb",
+      "name": "中文標準譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cnet",
+      "name": "NET聖經中譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cccbst",
+      "name": "四福音書共同譯本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tcv95",
+      "name": "現代中文譯本1995版",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tcv2019",
+      "name": "現代中文譯本2019版",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "rcuv",
+      "name": "和合本2010",
+      "has_strongs": true,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "bunun",
+      "name": "布農語聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "pinuyan",
+      "name": "卑南語",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tay",
+      "name": "泰雅爾語聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tsou",
+      "name": "鄒語聖經",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "rukai",
+      "name": "魯凱語聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ams",
+      "name": "阿美語1997",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "amis2",
+      "name": "阿美語2019",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "sed",
+      "name": "賽德克族Tgdaya語",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ttnt94",
+      "name": "達悟語新約聖經",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "wanshandia",
+      "name": "萬山魯凱語馬可福音",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "maolindia",
+      "name": "茂林魯凱語馬可福音",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tonadia",
+      "name": "多納魯凱語馬可福音",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "tibet",
+      "name": "藏語聖經",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cvul",
+      "name": "武加大譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "nvul",
+      "name": "新武加大譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "lcc",
+      "name": "呂振中譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ofm",
+      "name": "思高譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cumv",
+      "name": "官話和合本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "pmb",
+      "name": "北京官話譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cuwv",
+      "name": "文理和合本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cuwve",
+      "name": "淺文理和合本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwang",
+      "name": "王元德官話譯本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "orthdox",
+      "name": "俄羅斯正教文理譯本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "basset",
+      "name": "白日昇徐約翰文理譯本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "mormil",
+      "name": "神天聖書",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "wdv",
+      "name": "文理委辦譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ssewb",
+      "name": "施約瑟淺文理譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "marwb",
+      "name": "馬殊曼譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "goddwb",
+      "name": "高德譯本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "hudsonwb",
+      "name": "胡德邁譯本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "deanwb",
+      "name": "粦為仁譯本",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "sgebklcl",
+      "name": "全民台語聖經全羅",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "sgebklhl",
+      "name": "全民台語聖經漢羅",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "roman",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cmxuhsb",
+      "name": "徐匯官話新譯福音",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwangdmm",
+      "name": "王多默聖史宗徒行實",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwhsiaosb",
+      "name": "蕭舜華官話",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwmgbm",
+      "name": "四人小組譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwfaubsb",
+      "name": "聖保祿書翰並數位宗徒涵牘",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwjdsb",
+      "name": "德如瑟四史聖經譯註",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwkfag",
+      "name": "郭實臘新遺詔書和舊遺詔聖書",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwliwysb",
+      "name": "宗徒大事錄和新經譯義",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwmxb",
+      "name": "馬相伯救世福音",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwont",
+      "name": "俄羅斯正教新遺詔聖經",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwplbsb",
+      "name": "卜士傑新經公函與默示錄",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cwtaiping",
+      "name": "太平天國文理譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cxubinwsb",
+      "name": "許彬文四史全編",
+      "has_strongs": false,
+      "testament": "nt_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "cogorw",
+      "name": "高連茨基聖詠經",
+      "has_strongs": false,
+      "testament": "ot_only",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "wcb",
+      "name": "環球譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    },
+    {
+      "code": "ncv",
+      "name": "新譯本",
+      "has_strongs": false,
+      "testament": "both",
+      "special_font": "none",
+      "can_download": false,
+      "version": ""
+    }
+  ]
+}
