@@ -82,6 +82,19 @@ func TestGetVerseRequestMapping(t *testing.T) {
 	}
 }
 
+// D17 (approved): Titus is Titus (56), never Tobit (101), however it is spelled; Tobit stays reachable.
+func TestTitusIsNotTobit(t *testing.T) {
+	for book, bid := range map[string]int{"Titus": 56, "提多書": 56, "多": 56, "56": 56, "Tob": 101, "多俾亞傳": 101, "101": 101} {
+		api := &fakeAPI{file: "qb_john_3_16.json"}
+		if _, err := (&Service{API: api}).GetVerse(context.Background(), VerseParams{Book: book, Chapter: 1, Version: "unv"}); err != nil {
+			t.Fatalf("%s: %v", book, err)
+		}
+		if api.got.BID != bid {
+			t.Errorf("%s -> bid %d, want %d", book, api.got.BID, bid)
+		}
+	}
+}
+
 func TestGetVerseUnknownBook(t *testing.T) {
 	svc := &Service{API: &fakeAPI{file: "qb_john_3_16.json"}}
 	_, err := svc.GetVerse(context.Background(), VerseParams{Book: "不存在書卷", Chapter: 1, Verse: "1"})

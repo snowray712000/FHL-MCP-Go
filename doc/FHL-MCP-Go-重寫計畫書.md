@@ -291,6 +291,7 @@ Claude Code 的 user scope 儲存於 `~/.claude.json`，可跨專案使用；Cod
 | D10 | `query_verse_citation` 先照原樣：書卷與章之間須有空白；是否放寬日後再議。 |
 | D11 | 書卷別名表於 M2 從原始碼擷取為 fixture，保留中英別名行為。 |
 | D12 | 已調查：上游 `ssc.php` 對常見詞回 `status:"Fail:record count > 500"`，原版吞成 0 筆。**已核准（2026-10-16）：上游 `status` 非 `success` 時回明確訊息，不當 0 筆**；`Fail:record count > 500` 對應「結果超過 500 筆，請縮小關鍵字」。實作假設（未經使用者逐字確認）：以 D2 的 `isError: true` 錯誤結果回報；此規則先確定適用 `search_commentary`，其他端點的 `status` 慣例（尤其與 D7 保留的「查無資料」形狀的界線）於 M2 逐端點核對後再套用。 |
+| D17 | 已核准（2026-10-16，0.0.0.11）：Python 的中文簡寫 `多` 同時是提多書 (56) 與多俾亞傳 (101)，原版 `Titus`／`提多書` 因而推測會查到多俾亞傳。Go 以書卷全名／英文名直接解析：`Titus`／`提多書`／單獨的 `多` 皆為提多書 (56)；多俾亞傳請用 `Tob`／`多俾亞傳`／`101`。所有以書卷名稱為參數的工具共用同一解析器。 |
 
 D1（text + `structuredContent`）已於上方決定；D13–D16 為相容性描述，不需另行決策。D3 的靜態稽核另指出 `get_commentary`、`search_commentary`、`get_topic_study`、`lookup_strongs`、`search_strongs_occurrences` 可能有同樣缺陷（未實測），納入 D3 的測試範圍。
 
