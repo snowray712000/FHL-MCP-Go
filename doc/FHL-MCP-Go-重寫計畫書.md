@@ -263,6 +263,7 @@ Claude Code 的 user scope 儲存於 `~/.claude.json`，可跨專案使用；Cod
 - 設定磁碟容量上限與逐步清理；不在啟動時遞迴掃描全部快取，也不空閒輪詢全部檔案。
 - 損壞快取視為 miss，記錄診斷後重取；失效資料是否容許 fallback 必須有明確標示。
 - 快取只限本機使用，不隨 release 打包上游內容；保留原專案的資料來源與版權說明。
+- **已實作（0.0.0.15）**：`internal/cache` 為每筆一個檔案（`<資料目錄>/cache/v1/<sha256>.json`，內含格式版本、key、時間、上游原文）、原子寫入（暫存檔＋rename）、同 key 並行請求合併、損壞或過期視為 miss 並刪除、容量上限預設 200 MB（`--cache-max-mb`／`FHL_CACHE_MAX_MB`，0 = 關閉）、超過時刪最久沒用的至 90%；容量只在第一次寫入時掃描一次目錄，之後遞增計算。key = 上游網址（含全部參數與 `gb`）。只快取 `status:"success"` 且是合法 JSON 的回應，錯誤、失敗狀態、不合法 JSON 一律不快取。TTL（我的決定，待你調整）：`qb`／`qp`／`sc`／`st`／`ab` 7 天、`se`／`ssc` 1 天、`sd`（Strong's）永久（只受容量上限清除）；原版只快取 qb／se／qp／sd／ab，註釋與主題為新增。資料目錄：`--data-dir`＞`FHL_DATA_DIR`＞系統使用者快取目錄下的 `fhl-mcp`；`fhl-mcp cache clear` 清除。不提供「過期仍回舊資料」的 fallback。
 
 ### 輸出與錯誤
 

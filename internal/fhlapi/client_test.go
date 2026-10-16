@@ -7,7 +7,11 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"sync"
 	"testing"
+	"time"
+
+	"github.com/snowray712000/FHL-MCP-Go/internal/cache"
 )
 
 func fixture(t *testing.T, name string) []byte {
@@ -341,5 +345,122 @@ func TestCommentaryEndpointsRejectFailureStatus(t *testing.T) {
 	}
 	if _, err := c.ST(context.Background(), 4, "x", false, false); !errors.Is(err, ErrUpstream) {
 		t.Errorf("ST err = %v", err)
+	}
+}
+
+func newCachedMock(t *testing.T, h http.HandlerFunc) (*Client, *int) {
+	t.Helper()
+	n := 0
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) { n++; h(w, r) })
+	c.Cache = cache.New(filepath.Join(t.TempDir(), "cache"), 0)
+	return c, &n
+}
+
+func TestCacheServesRepeatedRequests(t *testing.T) {
+	c, n := newCachedMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write(fixture(t, "qb_john_3_16.json")) })
+	req := QBRequest{BID: 43, Chapter: 3, Verse: "16", Version: "unv"}
+	for i := 0; i < 3; i++ {
+		res, err := c.QB(context.Background(), req)
+		if err != nil || res.Record[0].Sec != 16 {
+			t.Fatalf("QB %d: %+v, %v", i, res, err)
+		}
+	}
+	if *n != 1 {
+		t.Errorf("upstream saw %d requests, want 1", *n)
+	}
+	// Anything that changes the answer is a different entry: simplified, strong numbers, version, verse.
+	for _, r := range []QBRequest{
+		{BID: 43, Chapter: 3, Verse: "16", Version: "unv", Simplified: true},
+		{BID: 43, Chapter: 3, Verse: "16", Version: "unv", Strong: true},
+		{BID: 43, Chapter: 3, Verse: "16", Version: "kjv"},
+		{BID: 43, Chapter: 3, Verse: "17", Version: "unv"},
+	} {
+		if _, err := c.QB(context.Background(), r); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if *n != 5 {
+		t.Errorf("upstream saw %d requests, want 5 (each variant is its own entry)", *n)
+	}
+}
+
+func TestCacheSkipsFailuresAndMalformedBodies(t *testing.T) {
+	body := `{"status":"Fail:record count > 500"}`
+	c, n := newCachedMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(body)) })
+	for i := 0; i < 2; i++ {
+		if _, err := c.SSC(context.Background(), "愛", false); !errors.Is(err, ErrTooManyRecords) {
+			t.Fatalf("err = %v", err)
+		}
+	}
+	if *n != 2 {
+		t.Errorf("a failure status must not be cached (requests=%d)", *n)
+	}
+
+	c, n = newCachedMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write(fixture(t, "qp_john_99_1.json")) })
+	for i := 0; i < 2; i++ {
+		if _, err := c.QP(context.Background(), 43, 99, 1, false); !errors.Is(err, ErrParse) {
+			t.Fatalf("err = %v", err)
+		}
+	}
+	if *n != 2 {
+		t.Errorf("malformed JSON must not be cached (requests=%d)", *n)
+	}
+
+	c, n = newCachedMock(t, func(w http.ResponseWriter, _ *http.Request) { http.Error(w, "boom", 500) })
+	for i := 0; i < 2; i++ {
+		if _, err := c.AB(context.Background(), false); !errors.Is(err, ErrHTTP) {
+			t.Fatalf("err = %v", err)
+		}
+	}
+	if *n != 2 {
+		t.Errorf("HTTP errors must not be cached (requests=%d)", *n)
+	}
+}
+
+func TestCacheMergesConcurrentRequests(t *testing.T) {
+	release := make(chan struct{})
+	c, n := newCachedMock(t, func(w http.ResponseWriter, _ *http.Request) {
+		<-release
+		_, _ = w.Write(fixture(t, "ab.json"))
+	})
+	var wg sync.WaitGroup
+	for i := 0; i < 6; i++ {
+		wg.Add(1)
+		go func() {
+			defer wg.Done()
+			if _, err := c.AB(context.Background(), false); err != nil {
+				t.Error(err)
+			}
+		}()
+	}
+	time.Sleep(100 * time.Millisecond)
+	close(release)
+	wg.Wait()
+	if *n != 1 {
+		t.Errorf("upstream saw %d requests, want 1", *n)
+	}
+}
+
+func TestEveryEndpointHasACachePolicy(t *testing.T) {
+	for _, ep := range []string{"qb.php", "ab.php", "se.php", "sd.php", "qp.php", "sc.php", "ssc.php", "st.php"} {
+		if _, ok := endpointTTL[ep]; !ok {
+			t.Errorf("%s has no cache policy", ep)
+		}
+	}
+	if endpointTTL["sd.php"] != 0 || endpointTTL["se.php"] != 24*time.Hour || endpointTTL["qb.php"] != 7*24*time.Hour {
+		t.Errorf("unexpected TTLs: %v", endpointTTL)
+	}
+}
+
+func TestCacheDisabledByDefault(t *testing.T) {
+	n := 0
+	c := newMock(t, func(w http.ResponseWriter, _ *http.Request) { n++; _, _ = w.Write(fixture(t, "ab.json")) })
+	for i := 0; i < 2; i++ {
+		if _, err := c.AB(context.Background(), false); err != nil {
+			t.Fatal(err)
+		}
+	}
+	if n != 2 {
+		t.Errorf("without a Cache every call goes upstream (requests=%d)", n)
 	}
 }

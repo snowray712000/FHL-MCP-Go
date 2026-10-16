@@ -13,6 +13,7 @@ import (
 	"time"
 
 	"github.com/snowray712000/FHL-MCP-Go/internal/bible"
+	"github.com/snowray712000/FHL-MCP-Go/internal/cache"
 	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
 	"github.com/snowray712000/FHL-MCP-Go/internal/mcpserver"
 	"github.com/snowray712000/FHL-MCP-Go/internal/tools"
@@ -27,6 +28,11 @@ const DefaultPort = 8081
 type Config struct {
 	Host string // must be a loopback address
 	Port int
+	// CacheDir is where upstream responses are cached; "" disables the cache. It is only used for the
+	// production client (a injected API keeps whatever cache it was built with).
+	CacheDir string
+	// CacheMaxBytes caps the cache size; <= 0 means cache.DefaultMaxBytes.
+	CacheMaxBytes int64
 	// API is the upstream client; nil means the production client. Tests inject a mock-backed one.
 	API *fhlapi.Client
 	// Logger receives structured logs; nil discards them.
@@ -70,6 +76,10 @@ func Serve(ctx context.Context, cfg Config, ln net.Listener, out io.Writer) erro
 	api := cfg.API
 	if api == nil {
 		api = fhlapi.NewClient()
+		if cfg.CacheDir != "" {
+			api.Cache = cache.New(cfg.CacheDir, cfg.CacheMaxBytes)
+			log.Info("response cache enabled", "dir", cfg.CacheDir)
+		}
 	}
 
 	registry := tools.NewRegistry(&bible.Service{API: api})

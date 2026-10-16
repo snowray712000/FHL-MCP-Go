@@ -71,7 +71,7 @@
 | D10 | `query_verse_citation` 正規式 `^(.+?)\s+(\d+):(\d+(?:-\d+\|,\d+)*)$`：`約3:16-17` 失敗，`約 3:16-17` 成功 | 先照原樣；是否放寬為接受無空白，另議 | **已核准：先照原樣**（需要空白）；放寬與否日後再議 |
 | D11 | 書卷別名表是資料：`Phm` 不被認得，`Philem`、`Philemon`、`門` 可以 | M2 從原始碼擷取完整別名表作為 fixture | 相容；**已核准**；M2 工作。**M2 查證（2026-10-16）**：Python `BOOK_ALIASES`（約 150 個簡體／縮寫別名）只被 `normalize_book_name`／`parse_reference`／`fuzzy_search` 使用，這三者**不在** 29 個 HTTP 工具的呼叫路徑上；實際解析只看 `BIBLE_BOOKS` 四種名稱＋數字碼，所以「保留中英別名行為」= 現有 `ResolveBookID`，不需另做別名表。若日後要支援簡體／縮寫別名，屬新功能，須另行核准 |
 | D12 | `search_commentary` 以「愛」「耶穌」查詢回 0 筆。**原因已查明**：上游 `ssc.php` 對常見詞回 HTTP 200 的 `{"status":"Fail:record count > 500"}`，Python 找不到 `record` 就輸出 `total_count:0, results:[]`，把上游限制吞掉；冷僻詞「尼哥底母」回 `status:"success"`、`record_count:5`、`record[]`（欄位 `bchap,bid,book_name,bsec,chinesef,echap,engs,esec,tag,title`）。另：HTTP 版未暴露 `commentary_id` 參數 | 上游 `status` 非 `success` 時回明確訊息（`Fail:record count > 500` → 「結果超過 500 筆，請縮小關鍵字」），不當作 0 筆；以 `isError: true` 回報（我的實作假設），先適用 `search_commentary`，其他端點 M2 核對後再套用 | 明確 bug fix；**已核准**（2026-10-16） |
-| D13 | 快取有效：相同 `get_bible_verse` 第二次呼叫 0 個上游請求（見 `cache_repeat_john316`） | 依計畫書 §9 的快取設計，行為對照 TTL | 相容；M2 |
+| D13 | （0.0.0.15 起 Go 版已有快取，見計畫書 §9「快取」）快取有效：相同 `get_bible_verse` 第二次呼叫 0 個上游請求（見 `cache_repeat_john316`） | 依計畫書 §9 的快取設計，行為對照 TTL | 相容；M2 |
 | D14 | 文字 JSON 為 `indent=2`、`ensure_ascii=false`，字串內保留上游的 `\r\n` | 同樣的序列化設定 | 相容；建議 |
 | D15 | `get_parsing_reference` 輸出為 Markdown（非 JSON），仍包在 `outputSchema {result:string}` 裡 | 同樣；以 James 1:1 fixture 驗證 | 相容；已有 fixture |
 | D16 | 工具結果沒有分頁、沒有 `nextCursor`；`tools/list` 一次回 29 項 | 同樣 | 相容 |

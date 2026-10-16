@@ -4,7 +4,7 @@ This file provides guidance to Claude Code (claude.ai/code) when working with co
 
 ## Project state
 
-Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the M1 vertical slice exists and M2-a/b/c/d/e are built (M2-a ~ d released as 0.0.0.9, M2-e as 0.0.0.10, D17 approval as 0.0.0.11, D18 as 0.0.0.12, D19 as 0.0.0.13, D21 cap as 0.0.0.14)**: `go.mod` pins Go 1.27.2 + `go-sdk` v1.8.0 (module path
+Go rewrite of the FHL (信望愛) Bible MCP server. **As of 2026-10-16 the M1 vertical slice exists and M2-a/b/c/d/e are built (M2-a ~ d released as 0.0.0.9, M2-e as 0.0.0.10, D17 approval as 0.0.0.11, D18 as 0.0.0.12, D19 as 0.0.0.13, D21 cap as 0.0.0.14, the file cache (`internal/cache`, wired into `fhlapi.Client`; `fhl-mcp cache clear`, `--data-dir`, `--cache-max-mb`) as 0.0.0.15)**: `go.mod` pins Go 1.27.2 + `go-sdk` v1.8.0 (module path
 `github.com/snowray712000/FHL-MCP-Go` is an assumption); `cmd/fhl-mcp` (`serve`/`version`/`help`), `internal/{app,transport,mcpserver,tools,bible,fhlapi,version}`
 and `assets/` (embedded frozen `tools-list.json`) are in place. Implemented so far (M2-a/b/c/d/e): `get_bible_verse`, `get_bible_chapter`, `query_verse_citation`, `get_book_list`, `get_book_info`, `list_bible_versions`, `search_available_versions`, `search_bible`, `search_bible_advanced`, `lookup_strongs`, `search_strongs_occurrences`, `get_word_analysis`, `get_parsing_reference`, `get_commentary`, `list_commentaries`, `search_commentary`, `get_topic_study`; the other 12 contract
 tools are registered but return an `isError` "not implemented yet" result. The plan is `doc/FHL-MCP-Go-重寫計畫書.md`
@@ -66,7 +66,7 @@ Copied from the user's habit in `D:\coding\信望愛\FHLNUI\FHLNUI` (inferred fr
   Host/Origin; do **not** copy the Python server's `0.0.0.0` bind + open CORS + disabled DNS-rebinding protection.
 - **Layering**: one tool/resource/prompt registration source (`internal/mcpserver`) → domain logic
   (`internal/bible`: book-name normalization, Strong's, etc.) → single injectable FHL API client
-  (`internal/fhlapi`, mockable) → file cache (`internal/cache`). Keep domain logic independent of the SDK.
+  (`internal/fhlapi`, mockable) → file cache (`internal/cache`, built in 0.0.0.15). Keep domain logic independent of the SDK.
   Do not translate Python line-by-line and do not keep two registration paths (Python had `server.py` stdio +
   `http_server.py` HTTP; only the HTTP 29-tool surface is the contract baseline).
 - **Output compatibility**: Python HTTP returns JSON strings as MCP text content. Emit BOTH text content and

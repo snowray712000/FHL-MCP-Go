@@ -12,6 +12,8 @@ import (
 	"strconv"
 	"strings"
 	"time"
+
+	"github.com/snowray712000/FHL-MCP-Go/internal/cache"
 )
 
 const (
@@ -28,6 +30,25 @@ type Client struct {
 	BaseURL   string
 	HTTP      *http.Client
 	UserAgent string
+	// Cache, when set, stores successful responses on disk (see endpointTTL) and merges concurrent
+	// identical requests. nil disables caching.
+	Cache *cache.Cache
+}
+
+// endpointTTL lists the endpoints whose successful responses are cached, with their lifetime
+// (0 = never expires, only the disk cap removes it). Verses, original-language analysis,
+// commentary, topics and the version list change rarely (7 days); searches may follow new
+// data sooner (1 day); the Strong's dictionary is fixed. Python cached only qb/se/qp/sd/ab; the
+// commentary and topic endpoints follow the plan (commentary ~7 days).
+var endpointTTL = map[string]time.Duration{
+	"qb.php":  7 * 24 * time.Hour,
+	"qp.php":  7 * 24 * time.Hour,
+	"sc.php":  7 * 24 * time.Hour,
+	"st.php":  7 * 24 * time.Hour,
+	"ab.php":  7 * 24 * time.Hour,
+	"se.php":  24 * time.Hour,
+	"ssc.php": 24 * time.Hour,
+	"sd.php":  0,
 }
 
 // NewClient returns a Client with production defaults (30 s timeout, like the Python reference).
@@ -434,11 +455,46 @@ func (c *Client) ST(ctx context.Context, source int, keyword string, countOnly, 
 	return &out, nil
 }
 
+// getJSON fetches endpoint (through the cache, when the endpoint is cacheable and a Cache is
+// configured) and decodes the JSON body into dst. Only complete, valid responses with
+// status "success" are stored; failures and malformed bodies are always asked for again.
 func (c *Client) getJSON(ctx context.Context, endpoint string, q url.Values, dst any) error {
+	var body []byte
+	var err error
+	ttl, cacheable := endpointTTL[endpoint]
+	if c.Cache != nil && cacheable {
+		// The key holds everything that shapes the answer: server, endpoint, every parameter (gb included).
+		key := c.BaseURL + "/" + endpoint + "?" + q.Encode()
+		body, err = c.Cache.Do(ctx, key, ttl, func(ctx context.Context) ([]byte, bool, error) {
+			b, err := c.fetch(ctx, endpoint, q)
+			return b, err == nil && isSuccess(b), err
+		})
+	} else {
+		body, err = c.fetch(ctx, endpoint, q)
+	}
+	if err != nil {
+		return err
+	}
+	if err := json.Unmarshal(body, dst); err != nil {
+		return &Error{Kind: ErrParse, Message: fmt.Sprintf("%s: %v", endpoint, err)}
+	}
+	return nil
+}
+
+// isSuccess reports whether body is valid JSON whose "status" is "success".
+func isSuccess(body []byte) bool {
+	var s struct {
+		Status string `json:"status"`
+	}
+	return json.Unmarshal(body, &s) == nil && s.Status == "success"
+}
+
+// fetch performs one upstream GET and returns the body.
+func (c *Client) fetch(ctx context.Context, endpoint string, q url.Values) ([]byte, error) {
 	u := strings.TrimRight(c.BaseURL, "/") + "/" + endpoint + "?" + q.Encode()
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
 	if err != nil {
-		return &Error{Kind: ErrNetwork, Message: err.Error()}
+		return nil, &Error{Kind: ErrNetwork, Message: err.Error()}
 	}
 	if c.UserAgent != "" {
 		req.Header.Set("User-Agent", c.UserAgent)
@@ -447,21 +503,18 @@ func (c *Client) getJSON(ctx context.Context, endpoint string, q url.Values, dst
 
 	resp, err := c.HTTP.Do(req)
 	if err != nil {
-		return &Error{Kind: ErrNetwork, Message: err.Error()}
+		return nil, &Error{Kind: ErrNetwork, Message: err.Error()}
 	}
 	defer resp.Body.Close()
 
 	body, err := io.ReadAll(io.LimitReader(resp.Body, maxBodyBytes))
 	if err != nil {
-		return &Error{Kind: ErrNetwork, Message: err.Error()}
+		return nil, &Error{Kind: ErrNetwork, Message: err.Error()}
 	}
 	if resp.StatusCode >= 400 {
-		return &Error{Kind: ErrHTTP, Status: resp.StatusCode, Message: fmt.Sprintf("%s returned HTTP %d", endpoint, resp.StatusCode)}
+		return nil, &Error{Kind: ErrHTTP, Status: resp.StatusCode, Message: fmt.Sprintf("%s returned HTTP %d", endpoint, resp.StatusCode)}
 	}
-	if err := json.Unmarshal(body, dst); err != nil {
-		return &Error{Kind: ErrParse, Message: fmt.Sprintf("%s: %v", endpoint, err)}
-	}
-	return nil
+	return body, nil
 }
 
 func boolDigit(b bool) string {
