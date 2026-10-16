@@ -173,6 +173,12 @@ func TestSearchAdvanced(t *testing.T) {
 		if len(api.se) != 1 || api.se[0].Orig != 1 || api.se[0].Range != 3 {
 			t.Errorf("request = %+v", api.se)
 		}
+		if _, err := callOn(t, api, "search_bible_advanced", `{"query":"430","search_type":"hebrew_number","range_start":1,"range_end":39}`); err != nil {
+			t.Fatal(err)
+		}
+		if len(api.se) != 2 || api.se[1].Orig != 2 || api.se[1].Range != 3 || api.se[1].RangeBID != 1 || api.se[1].RangeEID != 39 {
+			t.Errorf("request = %+v", api.se)
+		}
 	})
 	errCases := []struct{ name, args, want string }{
 		{"reversed", `{"query":"a","range_start":43,"range_end":40}`, "Invalid parameter 'range': 43 > 40 - range_start must not be greater than range_end."},
