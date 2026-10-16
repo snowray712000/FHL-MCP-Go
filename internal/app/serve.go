@@ -37,6 +37,9 @@ type Config struct {
 	API *fhlapi.Client
 	// Logger receives structured logs; nil discards them.
 	Logger *slog.Logger
+	// Run, when set, publishes a state file and enables the authenticated control endpoints used by
+	// "status"/"stop". Tests that only exercise MCP leave it nil.
+	Run *RunConfig
 }
 
 // ValidateHost accepts only loopback hosts: the first release is local-only.
@@ -88,16 +91,30 @@ func Serve(ctx context.Context, cfg Config, ln net.Listener, out io.Writer) erro
 		return err
 	}
 
+	// A stop request from the control endpoint cancels this context, which takes the graceful-shutdown path below.
+	ctx, cancel := context.WithCancel(ctx)
+	defer cancel()
+
+	url := "http://" + ln.Addr().String() + "/mcp"
+	var opts []transport.Option
+	if cfg.Run != nil {
+		inst, err := cfg.Run.start(ln, url, cancel)
+		if err != nil {
+			return err
+		}
+		defer inst.close(log)
+		opts = append(opts, transport.WithControl(inst.control))
+	}
+
 	httpSrv := &http.Server{
-		Handler:           transport.NewHandler(srv, version.Name, version.Version),
+		Handler:           transport.NewHandler(srv, version.Name, version.Version, opts...),
 		ReadHeaderTimeout: 10 * time.Second,
 		IdleTimeout:       2 * time.Minute,
 		// No WriteTimeout / ReadTimeout: MCP uses long-lived streams.
 		BaseContext: func(net.Listener) context.Context { return ctx },
 	}
 
-	url := "http://" + ln.Addr().String() + "/mcp"
-	fmt.Fprintf(out, "%s %s\nMCP endpoint: %s\nPress Ctrl+C to stop.\n", version.Name, version.Version, url)
+	fmt.Fprintf(out, "%s %s\nMCP endpoint: %s\nPress Ctrl+C to stop (or run: fhl-mcp stop).\n", version.Name, version.Version, url)
 	log.Info("serving", "url", url)
 
 	errCh := make(chan error, 1)

@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **0.0.0.20**
+- last: **0.0.0.21**
 - 版次格式：`主.次.修.小`（例 `0.0.0.1`）。小改動升最後一碼；整理一批小版本時，另立一個較高版次並註明整理範圍。
 - 發版時：先更新本檔，再 commit，標題為 `發版 {版次}：{摘要}`（見 `.claude/CLAUDE.md` 的 commit 慣例）。
 - 程式內版本字串在 `internal/version/version.go`，須與 `last` 一致 (有測試檢查)；`fhl-mcp version` 會顯示。
@@ -17,13 +17,30 @@
 ## TODOs
 
 - ✨ 優化: 上游暫時失敗時自動重試，並控制對信望愛網站送出請求的速度（目前有快取與合併相同請求，但還沒有重試與限速）
-- ✨ 優化: 在 Codex 實際連線驗證（這台電腦只找到 Codex 桌面版，沒有命令列工具，尚未測）
+- ✨ 優化: 在 Codex 實際連線驗證，包括 `setup`／`disconnect`／`doctor` 對 Codex 的部分（這台電腦只找到 Codex 桌面版，沒有命令列工具，尚未測；讀取登錄狀態的寫法是依 Codex 文件推測的）
+- ✨ 優化: 在 Mac 與 Ubuntu 上實際試 `setup`／`serve`／`stop` 與兩個 `.command` 雙擊入口（目前只在 Windows 實測）
+- ✨ 優化: 支援設定檔與 `FHL_` 環境變數來指定埠等選項（計畫書 §8；目前埠只能用 `--port` 指定）
 - ✨ 優化: 兩個 AI 工具同時連線、伺服器重開後自動重連的測試
 - ✨ 優化: 確認之後的版本會在 macOS 13 以上的 Apple 晶片 Mac 與 Linux 上實際跑得起來（目前只有在 Windows 上實測，Mac／Linux 只確認能編譯出程式）
 - ⏳ 待決定: 「搜尋註釋」遇到太常見的字（如「愛」）時，上游會拒絕並說結果超過 500 筆；原 Python 版把它當成 0 筆，Go 版已核准改為明確回報，錯誤訊息的措辭請確認 (D12／D22)
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 0.0.0.21
+
+- 🆕 新功能: `fhl-mcp setup`：一行指令（或雙擊「首次設定」）就能把本服務登錄到 Claude Code 與 Codex，做一次之後所有專案都能用。可以選只連其中一個；登錄完如果服務正好在跑，還會順便做一次連線測試。
+- 🆕 新功能: `fhl-mcp status` 看服務有沒有在跑，`fhl-mcp stop` 乾淨地停止它（不用再找視窗按 Ctrl+C）。
+- 🆕 新功能: `fhl-mcp doctor` 一次檢查環境、設定、服務能不能連、信望愛網站通不通、Claude Code／Codex 登錄對不對，哪裡有問題會告訴你怎麼處理。
+- 🆕 新功能: `fhl-mcp disconnect` 只移除本服務在 Claude Code／Codex 的登錄，不動你其他的 MCP；不是本服務的同名項目不會被刪。
+- 🆕 新功能: 附上雙擊用的入口檔（Windows：`啟動-FHL-MCP.cmd`、`首次設定.cmd`；Mac：`Start-FHL-MCP.command`、`Setup.command`），放在 `scripts/`，之後打包時會跟程式放在同一個資料夾。
+- ✨ 優化: 已經有一份在跑的時候再執行 `serve`，會直接告訴你「已在執行」和網址，不會報埠被占用的錯。埠真的被別的程式占住時還是明確失敗，不會偷偷換埠。
+- ℹ️ 說明: `setup` 不會自動啟動服務、不會設定開機自動執行，也不需要管理員權限。已經登錄相同網址就當作成功，重跑是安全的；同名但網址不同時只會提醒，不會蓋掉。`stop` 一定要驗證過是本服務才會停（不是只看哪個程式占了埠或 PID）；舊版（0.0.0.20 以前）沒有這個功能，所以要先到原本的視窗按 Ctrl+C 關掉，再用新版重新啟動，之後才能用 `stop`。如果你用 `--data-dir` 啟動，`status`／`stop`／`doctor` 也要加上同樣的 `--data-dir`；換過 `--port` 同理。這一版沒有改動任何查經功能。
+- 📝工程師筆記-✨新增: M5：執行狀態 `internal/runstate`（`<資料目錄>/run/state-<port>.json`，內含 instance id、PID、網址、版本、32 bytes 隨機控制 token；暫存檔＋rename 原子寫入、0600；`serve` 啟動後寫入、結束時只刪自己 instance 的檔）。控制通道：同一個 listener 上的 `GET /_control/info`、`POST /_control/stop`（`internal/transport/control.go`），需 `Authorization: Bearer <token>`（`subtle.ConstantTimeCompare`）、Host 必須是 loopback（防 DNS rebinding）、外包 `http.CrossOriginProtection`（瀏覽器跨來源 403）；沒帶 token／錯 token／錯 scheme 一律 401，不存在無驗證的停機端點。`/health` 維持不依賴上游，只回 name／version。`transport.NewHandler` 加 `...Option`（`WithControl`），既有呼叫不變。
+- 📝工程師筆記-✨新增: `internal/app/lifecycle.go`：`Probe` 先打 `/health`（必須 `name == FHL-MCP-Go`，否則視為 `port_in_use`；連線被拒才算 `stopped`；逾時／非 HTTP 也算占用）、再讀狀態檔，最後用 token 打 `/_control/info` 比對 instance id 才判為 `running`；沒有或對不上則 `running_unverified`（`stop` 拒絕動作）。順序是刻意的：`Serve` 先寫狀態檔才開始回應，所以能回應就一定有狀態檔（先讀檔會有競態）。`Stop` 只送 `/_control/stop`，再輪詢到 `/health` 不再回應（最多 10 秒），絕不用 PID 送訊號。過期狀態檔（程序已死）在 `serve`／`stop` 時清除。`ResolveDataDir` 從 `ResolveCacheDir` 抽出（資料目錄＝`--data-dir`＞`FHL_DATA_DIR`＞使用者快取目錄下的 `fhl-mcp`）。`Config.Run` 為 nil 時不寫狀態檔、不開控制端點（既有測試與 `app.Serve` 呼叫不變）。`app.Smoke`：真實 MCP session（initialize → tools/list → 呼叫靜態工具 `get_book_list`，不碰上游）。
+- 📝工程師筆記-✨新增: `internal/clients`：經官方 CLI 登錄，不直接改任何客戶端設定檔。Claude：`mcp get fhl`（解析 `Scope:`／`URL:`）、`mcp add --transport http --scope user fhl URL`、`mcp remove fhl --scope user`（依 get 回報的 scope）；Codex：`mcp get fhl --json`（遞迴找 `url`，退而求其次抓文字中的 URL）、`mcp add fhl --url URL`、`mcp remove fhl`。`get` 非 0 且輸出符合 `no mcp server|not found|…` 才視為「未登錄」，其他錯誤一律回報失敗（不當成未登錄）。`add` 後再 `get` 讀回確認，不信任 exit code。`disconnect` 只移除網址為 loopback＋`/mcp` 的項目，否則 `refused`。每個客戶端獨立回報；`setup` 在 `--client all`／互動選擇時，未安裝的客戶端不算失敗（只要至少一個成功），明確指定未安裝的客戶端則 exit 1。沒指定 `--client` 且 stdin 是終端機時詢問 1/2/3，非終端機＝all。CLI 透過 `Runner` 介面注入，測試用有狀態的 fake。
+- 📝工程師筆記-✨新增: CLI：`status`（`--json`；exit 0＝執行中含未驗證，1＝未執行／埠被占）、`stop`（未執行 exit 0；未驗證／埠被占 exit 1）、`setup`、`disconnect`、`doctor`（`--offline` 略過上游；分「環境／設定／服務／上游／客戶端登錄」五節，有 ✘ 才 exit 1，未安裝客戶端與未啟動服務只是 ⚠；偵測 WSL 並提醒 localhost 不一定相通）。共用旗標 `--host --port --data-dir`。`scripts/` 的 `.cmd` 第一行後必須先 `chcp 65001` 再放中文（cmd 先以系統碼頁剖析，中文 rem 會吃掉換行而執行出錯；已在 Windows 實測），`.gitattributes` 設 `*.cmd` CRLF、`*.command`／`*.sh` LF，兩個 `.command` 以 `git add --chmod=+x` 設為 100755。
+- 📝工程師筆記-ℹ️說明: 驗證：`go vet`、`CGO_ENABLED=0 go test ./...` 通過（新增 runstate、control endpoint 授權／Host／跨來源、Probe 各狀態與過期檔、`Stop` 拒絕無對應狀態或外來程式、clients 的 setup／disconnect 各狀態、`status`→`serve` 重複啟動→`stop` 全循環、`setup`／`disconnect`／`doctor` 的退出碼與輸出）。三平台（windows/amd64、darwin/arm64、linux/amd64）`CGO_ENABLED=0` 皆可編譯。真實實測（Windows）：獨立埠 18081 的 `serve`→`status`→第二次 `serve`→`doctor`→`stop`→`status`；對這台電腦實際的 Claude Code CLI 跑 `setup --client claude`（已登錄 8081，回「相同網址不需變更」並通過連線測試）；對仍在跑的舊版（0.0.0.20，無控制通道）8081 服務跑 `stop`，確認拒絕動作；`doctor` 連真實上游通過；兩個 `.cmd` 入口經 `cmd /c` 實跑。未驗證：Codex CLI（本機沒有）；`.command` 腳本與 Mac／Ubuntu 上的任何指令；Windows 上狀態檔實際的存取權限（沿用 `%LocalAppData%` 預設只有使用者／系統／管理員可讀的 ACL，沒有另外設 ACL）；`--data-dir` 指到共用或同步資料夾時 token 會跟著被同步；`disconnect` 真的移除（只在 fake 與單元測試跑過，沒對使用者實際的 `fhl` 登錄動手）；`status`／`stop` 對 IPv6 `--host ::1` 的行為；兩個 AI 工具同時連線、重開後重連（仍在 TODOs）。
 
 ## 0.0.0.20
 

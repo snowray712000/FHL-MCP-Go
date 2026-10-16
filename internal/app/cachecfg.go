@@ -20,17 +20,7 @@ const (
 // (flag, else FHL_DATA_DIR), otherwise <os.UserCacheDir>/fhl-mcp/cache. It never depends on the
 // working directory unless the user passes a relative --data-dir.
 func ResolveCacheDir(dataDir string) (string, error) {
-	if dataDir == "" {
-		dataDir = os.Getenv(EnvDataDir)
-	}
-	if dataDir == "" {
-		base, err := os.UserCacheDir()
-		if err != nil {
-			return "", fmt.Errorf("cannot find the user cache directory (use --data-dir): %w", err)
-		}
-		dataDir = filepath.Join(base, "fhl-mcp")
-	}
-	abs, err := filepath.Abs(dataDir)
+	abs, err := ResolveDataDir(dataDir)
 	if err != nil {
 		return "", err
 	}
