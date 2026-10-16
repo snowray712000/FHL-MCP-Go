@@ -61,18 +61,29 @@ type BookInfoResult struct {
 	Names     BookNames `json:"names"`
 }
 
+// testamentOf labels a book ID. D18 (approved): the Python reference reported "NT" for every ID
+// outside 1-39; Go says "Apocrypha" for 101-115 and "Apostolic Fathers" for 201-217 (the valid
+// numeric codes), and keeps OT (1-39) and NT (everything else) as before.
+func testamentOf(id int) string {
+	switch {
+	case id >= 1 && id <= 39:
+		return "OT"
+	case id >= 101 && id <= 115:
+		return "Apocrypha"
+	case id >= 201 && id <= 217:
+		return "Apostolic Fathers"
+	}
+	return "NT"
+}
+
 // BookInfo describes one book. Like the Python reference, a valid numeric code that
-// has no table entry (e.g. 113) yields null names, and every book outside 1-39
-// (Apocrypha and Apostolic Fathers included) reports testament "NT".
+// has no table entry (e.g. 113) yields null names.
 func BookInfo(name string) (*BookInfoResult, error) {
 	id, ok := ResolveBookID(name)
 	if !ok {
 		return nil, &InvalidParameterError{Name: "book", Value: name, Reason: "Book not found. Please check the spelling or use a valid book code."}
 	}
-	res := &BookInfoResult{ID: id, Testament: "NT"}
-	if id >= 1 && id <= 39 {
-		res.Testament = "OT"
-	}
+	res := &BookInfoResult{ID: id, Testament: testamentOf(id)}
 	if b, ok := byID[id]; ok {
 		res.Names = BookNames{
 			English: NamePair{Short: &b.EngShort, Full: &b.EngFull},

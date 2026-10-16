@@ -135,7 +135,7 @@ func TestBookInfoEdgeCases(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := "{\n  \"id\": 115,\n  \"testament\": \"NT\",\n  \"names\": {\n    \"english\": {\n      \"short\": null,\n      \"full\": null\n    },\n    \"chinese\": {\n      \"short\": null,\n      \"full\": null\n    }\n  }\n}"
+	want := "{\n  \"id\": 115,\n  \"testament\": \"Apocrypha\",\n  \"names\": {\n    \"english\": {\n      \"short\": null,\n      \"full\": null\n    },\n    \"chinese\": {\n      \"short\": null,\n      \"full\": null\n    }\n  }\n}"
 	if out != want {
 		t.Errorf("code 115:\n got %s\nwant %s", out, want)
 	}

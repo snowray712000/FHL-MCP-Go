@@ -49,3 +49,19 @@ func TestBookTableSize(t *testing.T) {
 		t.Fatalf("book table has %d entries, want 86", len(books))
 	}
 }
+
+// D18 (approved): Apocrypha and Apostolic Fathers are no longer labelled "NT".
+func TestBookInfoTestamentLabels(t *testing.T) {
+	for name, want := range map[string]string{
+		"Gen": "OT", "Mal": "OT", "Matt": "NT", "Rev": "NT", "Tob": "Apocrypha", "101": "Apocrypha", "115": "Apocrypha",
+		"AddEsth": "Apocrypha", "1Clem": "Apostolic Fathers", "201": "Apostolic Fathers", "217": "Apostolic Fathers", "Pap": "Apostolic Fathers",
+	} {
+		got, err := BookInfo(name)
+		if err != nil {
+			t.Fatalf("%s: %v", name, err)
+		}
+		if got.Testament != want {
+			t.Errorf("%s: testament = %q, want %q", name, got.Testament, want)
+		}
+	}
+}
