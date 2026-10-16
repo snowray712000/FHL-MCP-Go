@@ -1,0 +1,56 @@
+# ai-log index
+
+Read this file first. It lists every AI work log in this directory so you can decide which ones to open.
+Logs are written for AI readers, in English. Humans' docs live in `../../doc/`.
+
+## Conventions
+
+**File name:** `YYMMDD` + letter + `-{kebab-title}.md`
+- `YYMMDD` = date of the work (e.g. 2026-10-16 -> `261016`).
+- Letter = `a`, `b`, `c`, ... in order of creation within the same day (several per day are normal).
+- Example: `261016a-bootstrap-claude-and-ai-log.md`, `261016b-m0-source-manifest.md`.
+
+**One log = one logical section of work** (a milestone step, a feature, a decision, an investigation).
+Do not batch unrelated work into one file; do not split one coherent step across many files.
+
+**Required template for each log:**
+
+```markdown
+# {Title}
+
+- Date: YYYY-MM-DD
+- Plan ref: {plan section / milestone, e.g. "§13 M0"}
+- Status: done | partial | blocked
+- Files touched: {paths}
+
+## What
+What the AI did (concrete outcome).
+
+## Why
+Reason / requirement / plan section that motivated it.
+
+## How
+Approach, commands, key design choices, alternatives rejected.
+
+## Decisions & assumptions
+Anything decided or assumed (esp. items the plan marks undecided). "None" if none.
+
+## Verification
+What was actually run/checked and the result. State what was NOT verified.
+
+## Open issues / next
+Follow-ups, risks, what the next section should pick up.
+```
+
+**Maintaining this index:** append one row per new log (newest at the bottom of the table).
+`Read when` must say, in one line, for which kind of task the log is worth opening.
+If a later log supersedes an earlier one, mark the old row's Status as `superseded by <file>`.
+
+## Entries
+
+| File | Date | Plan ref | Status | Summary | Read when |
+| --- | --- | --- | --- | --- | --- |
+| [261016a-bootstrap-claude-and-ai-log.md](261016a-bootstrap-claude-and-ai-log.md) | 2026-10-16 | §1–17 (read), repo setup | done | Read the rewrite plan; created `.claude/CLAUDE.md` and this `ai-log/` system. No Go code yet. | Starting a new session; need project rules, plan digest, or log conventions. |
+| [261016b-init-claude-md.md](261016b-init-claude-md.md) | 2026-10-16 | whole plan | done | `/init`: rewrote `.claude/CLAUDE.md` with project state, log workflow, cross-cutting architecture constraints. | Need to know what CLAUDE.md covers / why no build commands exist yet. |
+| [261016c-git-commit-convention.md](261016c-git-commit-convention.md) | 2026-10-16 | repo process | done | Added commit convention to CLAUDE.md, inferred from the FHLNUI repo (one-line Chinese `{topic}：{detail}`, no body, docs in same commit). | Before making any git commit; want to know where the convention came from. |
+| [261016d-app-versions-md.md](261016d-app-versions-md.md) | 2026-10-16 | repo process | done | Created `app_versions.md` (changelog, first version `0.0.0.1`); commits use `發版 {version}：` again, not milestone prefixes. | Preparing a release/commit; need version format and changelog rules. |
