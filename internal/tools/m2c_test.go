@@ -249,3 +249,7 @@ func TestStrongsRequests(t *testing.T) {
 		t.Errorf("must not reach upstream: %v", api.sd)
 	}
 }
+
+func (f *searchAPI) QP(context.Context, int, int, int, bool) (*fhlapi.QPResponse, error) {
+	return nil, errors.New("QP not expected in this test")
+}

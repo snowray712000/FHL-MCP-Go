@@ -254,3 +254,7 @@ func (f *routeAPI) SE(context.Context, fhlapi.SERequest) (*fhlapi.SEResponse, er
 func (f *routeAPI) SD(context.Context, bool, int, bool) (*fhlapi.SDResponse, error) {
 	return nil, errors.New("SD not expected in this test")
 }
+
+func (f *routeAPI) QP(context.Context, int, int, int, bool) (*fhlapi.QPResponse, error) {
+	return nil, errors.New("QP not expected in this test")
+}

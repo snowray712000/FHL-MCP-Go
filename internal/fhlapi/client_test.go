@@ -198,3 +198,35 @@ func TestSDQueryAndParse(t *testing.T) {
 		t.Errorf("not-found record must keep explicit nulls: %+v", res.Record[0])
 	}
 }
+
+func TestQPQueryAndParse(t *testing.T) {
+	var q map[string]string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		q = map[string]string{}
+		for k := range r.URL.Query() {
+			q[k] = r.URL.Query().Get(k)
+		}
+		_, _ = w.Write(fixture(t, "qp_gen_1_1.json"))
+	})
+	res, err := c.QP(context.Background(), 1, 1, 1, true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	want := map[string]string{"bid": "1", "chap": "1", "sec": "1", "gb": "1"}
+	for k, v := range want {
+		if q[k] != v {
+			t.Errorf("param %s = %q, want %q", k, q[k], v)
+		}
+	}
+	if len(q) != len(want) || res.N != 1 || len(res.Record) != 8 || string(res.Record[0].WID) != "0" {
+		t.Errorf("unexpected parse: q=%v N=%d records=%d", q, res.N, len(res.Record))
+	}
+}
+
+func TestQPMalformedJSONForMissingVerse(t *testing.T) {
+	c := newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write(fixture(t, "qp_john_99_1.json")) })
+	_, err := c.QP(context.Background(), 43, 99, 1, false)
+	if !errors.Is(err, ErrParse) {
+		t.Errorf("err = %v, want ErrParse (upstream sends invalid JSON for a verse that does not exist)", err)
+	}
+}

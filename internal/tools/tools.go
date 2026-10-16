@@ -80,6 +80,7 @@ func NewRegistry(svc *bible.Service) *Registry {
 		return bible.MarshalIndent2(res)
 	}
 	r.registerSearch(svc)
+	r.registerWords(svc)
 	return r
 }
 

@@ -1,0 +1,167 @@
+{
+  "testament": "NT",
+  "book": "John",
+  "chapter": 1,
+  "verse": 1,
+  "original_text": "Ἐν ἀρχῇ ἦν ὁ λόγος,\n καὶ ὁ λόγος ἦν πρὸς τὸν θεόν,\n καὶ θεὸς ἦν ὁ λόγος.",
+  "translation": "太初有道，\n且道與上帝同在，\n道就是上帝。",
+  "word_count": 17,
+  "words": [
+    {
+      "position": 1,
+      "word": "Ἐν",
+      "strongs_number": "01722",
+      "part_of_speech": "介系詞",
+      "morphology": "",
+      "lemma": "ἐν",
+      "gloss": "後接間接受格，意思是「在...之內、藉著」"
+    },
+    {
+      "position": 2,
+      "word": "ἀρχῇ",
+      "strongs_number": "00746",
+      "part_of_speech": "名詞",
+      "morphology": "間接受格 單數 陰性   ",
+      "lemma": "ἀρχή",
+      "gloss": "起初"
+    },
+    {
+      "position": 3,
+      "word": "ἦν",
+      "strongs_number": "01510",
+      "part_of_speech": "動詞",
+      "morphology": "不完成 主動 直說語氣 第三人稱 單數 ",
+      "lemma": "εἰμί",
+      "gloss": "有、是",
+      "remark": "過去已有的，現今是否仍有不確知"
+    },
+    {
+      "position": 4,
+      "word": "ὁ",
+      "strongs_number": "03588",
+      "part_of_speech": "冠詞",
+      "morphology": "主格 單數 陽性   ",
+      "lemma": "ὁ ἡ τό",
+      "gloss": "視情況翻譯，有時可譯成「這個」、「那個」等"
+    },
+    {
+      "position": 5,
+      "word": "λόγος",
+      "strongs_number": "03056",
+      "part_of_speech": "名詞",
+      "morphology": "主格 單數 陽性   ",
+      "lemma": "λόγος",
+      "gloss": "道、話語"
+    },
+    {
+      "position": 6,
+      "word": "καὶ",
+      "strongs_number": "02532",
+      "part_of_speech": "連接詞",
+      "morphology": "",
+      "lemma": "καί",
+      "gloss": "並且、和"
+    },
+    {
+      "position": 7,
+      "word": "ὁ",
+      "strongs_number": "03588",
+      "part_of_speech": "冠詞",
+      "morphology": "主格 單數 陽性   ",
+      "lemma": "ὁ ἡ τό",
+      "gloss": "視情況翻譯，有時可譯成「這個」、「那個」等"
+    },
+    {
+      "position": 8,
+      "word": "λόγος",
+      "strongs_number": "03056",
+      "part_of_speech": "名詞",
+      "morphology": "主格 單數 陽性   ",
+      "lemma": "λόγος",
+      "gloss": "道、話語"
+    },
+    {
+      "position": 9,
+      "word": "ἦν",
+      "strongs_number": "01510",
+      "part_of_speech": "動詞",
+      "morphology": "不完成 主動 直說語氣 第三人稱 單數 ",
+      "lemma": "εἰμί",
+      "gloss": "有、是",
+      "remark": "過去已有的，現今是否仍有不確知"
+    },
+    {
+      "position": 10,
+      "word": "πρὸς",
+      "strongs_number": "04314",
+      "part_of_speech": "介系詞",
+      "morphology": "",
+      "lemma": "πρός",
+      "gloss": "後接直接受格時意思是「與...同在、向...」"
+    },
+    {
+      "position": 11,
+      "word": "τὸν",
+      "strongs_number": "03588",
+      "part_of_speech": "冠詞",
+      "morphology": "直接受格 單數 陽性   ",
+      "lemma": "ὁ ἡ τό",
+      "gloss": "視情況翻譯，有時可譯成「這個」、「那個」等"
+    },
+    {
+      "position": 12,
+      "word": "θεόν",
+      "strongs_number": "02316",
+      "part_of_speech": "名詞",
+      "morphology": "直接受格 單數 陽性   ",
+      "lemma": "θεός",
+      "gloss": "上帝"
+    },
+    {
+      "position": 13,
+      "word": "καὶ",
+      "strongs_number": "02532",
+      "part_of_speech": "連接詞",
+      "morphology": "",
+      "lemma": "καί",
+      "gloss": "並且、和"
+    },
+    {
+      "position": 14,
+      "word": "θεὸς",
+      "strongs_number": "02316",
+      "part_of_speech": "名詞",
+      "morphology": "主格 單數 陽性   ",
+      "lemma": "θεός",
+      "gloss": "上帝"
+    },
+    {
+      "position": 15,
+      "word": "ἦν",
+      "strongs_number": "01510",
+      "part_of_speech": "動詞",
+      "morphology": "不完成 主動 直說語氣 第三人稱 單數 ",
+      "lemma": "εἰμί",
+      "gloss": "有、是",
+      "remark": "過去已有的，現今是否仍有不確知"
+    },
+    {
+      "position": 16,
+      "word": "ὁ",
+      "strongs_number": "03588",
+      "part_of_speech": "冠詞",
+      "morphology": "主格 單數 陽性   ",
+      "lemma": "ὁ ἡ τό",
+      "gloss": "視情況翻譯，有時可譯成「這個」、「那個」等"
+    },
+    {
+      "position": 17,
+      "word": "λόγος",
+      "strongs_number": "03056",
+      "part_of_speech": "名詞",
+      "morphology": "主格 單數 陽性   ",
+      "lemma": "λόγος",
+      "gloss": "道、話語"
+    }
+  ]
+}

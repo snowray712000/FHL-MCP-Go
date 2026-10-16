@@ -1,0 +1,79 @@
+{
+  "testament": "OT",
+  "book": "Gen",
+  "chapter": 1,
+  "verse": 1,
+  "original_text": "בָּרָא אֱלֹהִים אֵת הַשָּׁמַיִם וְאֵת הָאָרֶץ׃\n\rבְּרֵאשִׁית",
+  "translation": "起初，\r\n上帝創造天和地。",
+  "word_count": 7,
+  "words": [
+    {
+      "position": 1,
+      "word": "בְּרֵאשִׁית",
+      "strongs_number": "07225",
+      "part_of_speech": "",
+      "morphology": "介系詞 בְּ + 名詞，陰性單數",
+      "lemma": "רֵאשִׁית",
+      "gloss": "開始、首要"
+    },
+    {
+      "position": 2,
+      "word": "בָּרָא",
+      "strongs_number": "01254",
+      "part_of_speech": "",
+      "morphology": "動詞，Qal 完成式 3 單陽",
+      "lemma": "בָּרָא",
+      "gloss": "Qal 創造；Pi‘el 砍伐；Hif‘il 肥己"
+    },
+    {
+      "position": 3,
+      "word": "אֱלֹהִים",
+      "strongs_number": "00430",
+      "part_of_speech": "",
+      "morphology": "名詞，陽性複數",
+      "lemma": "אֱלֹהִים",
+      "gloss": "上帝、神、神明",
+      "remark": "[#2.25#]"
+    },
+    {
+      "position": 4,
+      "word": "אֵת",
+      "strongs_number": "00853",
+      "part_of_speech": "",
+      "morphology": "受詞記號",
+      "lemma": "אֵת",
+      "gloss": "不必翻譯",
+      "remark": "[#3.7#]"
+    },
+    {
+      "position": 5,
+      "word": "הַשָּׁמַיִם",
+      "strongs_number": "08064",
+      "part_of_speech": "",
+      "morphology": "冠詞 הַ + 名詞，陽性複數",
+      "lemma": "שָׁמַיִם",
+      "gloss": "天",
+      "remark": "[#2.6#]"
+    },
+    {
+      "position": 6,
+      "word": "וְאֵת",
+      "strongs_number": "00853",
+      "part_of_speech": "",
+      "morphology": "連接詞 וְ + 受詞記號",
+      "lemma": "אֵת",
+      "gloss": "不必翻譯",
+      "remark": "[#3.7#]"
+    },
+    {
+      "position": 7,
+      "word": "הָאָרֶץ",
+      "strongs_number": "00776",
+      "part_of_speech": "",
+      "morphology": "冠詞 הַ + 名詞，陰性單數",
+      "lemma": "אֶרֶץ",
+      "gloss": "地、邦國、疆界",
+      "remark": "אֶרֶץ 加冠詞時，根音第一個音節的母音拉長變為 אָ。[#2.20#]"
+    }
+  ]
+}

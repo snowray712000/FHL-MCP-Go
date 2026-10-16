@@ -79,6 +79,7 @@
 | D18 | **新發現（M2-a，靜態稽核＋golden 對照；尚待使用者核准是否修正）**：`get_book_info` 的 `testament` 只有 `OT`／`NT` 兩種值，Python 以 `1<=id<=39` 判斷，**次經(101–112)與使徒教父(201–216)都被標成 `"NT"`**。另外有效但表中沒有的數字碼（如 `113`）會回 `names` 全為 `null` 且 `testament:"NT"`。`get_book_list` 不帶篩選時也包含這些書（共 86 筆） | M2-a 先**照原樣**輸出（byte 相容）；是否改為更正確的值（例如 `Apocrypha`／`Apostolic Fathers`）需核准，會改變輸出 | 待核准；目前相容 |
 | D19 | **新發現（M2-c；尚待使用者核准）**：`search_bible_advanced` 在指定書卷範圍時只有 `search_type:"keyword"` 能用：`greek_number`／`hebrew_number`（工具說明列出的值）被擋，`greek`／`hebrew` 通過第一關卻在端點層被擋。未指定範圍時（走一般搜尋）三種值都可用 | Go 在所有路徑都接受 `keyword`／`greek_number`／`hebrew_number`（實測上游 `RANGE=3` 搭配 `orig=1` 可用） | 明確 bug fix；待核准 |
 | D20 | **發現（M2-c；相容，照原樣）**：`search_bible`／`search_bible_advanced`／`search_strongs_occurrences` 的 `total_count` 取自上游 `record_count`，套用 `limit` 時等於實際回傳筆數，**不是**全部命中數（`limit 3` → 3；`H430 limit 2` → 2）；`showing` 因此恆等於 `total_count` | 先照原樣；若要真正總數，可評估上游 `count_only=1`（未測） | 相容；資訊 |
+| D21 | **發現（M2-d；資訊）**：(a) `qp.php` 對不存在的節（如約 99:1）回**不合法的 JSON**（`"bid":,`），Go 以「上游回應不是合法 JSON」錯誤回報；(b) `get_parsing_reference` 每節一次上游請求（跨章再加每章一次 `qb.php` 查節數），依序進行，目前無上限、無快取，大範圍會產生大量請求；(c) 上游回 0 筆時 Python 會 `IndexError`，Go 回「no original-language data」；(d) 兩個工具只支援正典 1–66 卷，其他書卷回明確錯誤 | 快取與限流於 M2 後段處理；(b) 發版前需決定單次範圍上限 | 資訊；(b) 待決定 |
 
 ## 未涵蓋
 

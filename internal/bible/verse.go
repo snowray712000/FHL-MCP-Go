@@ -15,6 +15,7 @@ type API interface {
 	AB(ctx context.Context, simplified bool) (*fhlapi.ABResponse, error)
 	SE(ctx context.Context, r fhlapi.SERequest) (*fhlapi.SEResponse, error)
 	SD(ctx context.Context, nt bool, number int, simplified bool) (*fhlapi.SDResponse, error)
+	QP(ctx context.Context, bid, chapter, verse int, simplified bool) (*fhlapi.QPResponse, error)
 }
 
 // Service holds the Bible domain logic. It does not know about MCP.

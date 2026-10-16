@@ -107,3 +107,7 @@ func (f *fakeAPI) SE(context.Context, fhlapi.SERequest) (*fhlapi.SEResponse, err
 func (f *fakeAPI) SD(context.Context, bool, int, bool) (*fhlapi.SDResponse, error) {
 	return nil, errors.New("SD not expected in this test")
 }
+
+func (f *fakeAPI) QP(context.Context, int, int, int, bool) (*fhlapi.QPResponse, error) {
+	return nil, errors.New("QP not expected in this test")
+}

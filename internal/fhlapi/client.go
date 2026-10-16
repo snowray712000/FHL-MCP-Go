@@ -255,6 +255,47 @@ func (c *Client) SD(ctx context.Context, nt bool, number int, simplified bool) (
 	return &out, nil
 }
 
+// QPRecord is one row of a qp.php (original-language word analysis) response. Record 0 is the
+// verse summary (wid 0); the others are words. Text fields stay raw JSON so an absent field
+// and an explicit null can be told apart, which the Python reference's output depends on.
+type QPRecord struct {
+	WID      json.RawMessage `json:"wid"`
+	Word     json.RawMessage `json:"word"`
+	Exp      json.RawMessage `json:"exp"`
+	SN       json.RawMessage `json:"sn"`
+	Pro      json.RawMessage `json:"pro"`
+	WForm    json.RawMessage `json:"wform"`
+	Orig     json.RawMessage `json:"orig"`
+	Remark   json.RawMessage `json:"remark"`
+	Chinesef json.RawMessage `json:"chinesef"`
+}
+
+// QPResponse is the qp.php response. N is 0 for the New Testament, 1 for the Old Testament.
+type QPResponse struct {
+	Status      string     `json:"status"`
+	RecordCount int        `json:"record_count"`
+	N           int        `json:"N"`
+	Record      []QPRecord `json:"record"`
+}
+
+// QP queries qp.php for one verse. (A verse that does not exist makes the upstream return
+// malformed JSON; that surfaces as ErrParse.)
+func (c *Client) QP(ctx context.Context, bid, chapter, verse int, simplified bool) (*QPResponse, error) {
+	q := url.Values{}
+	q.Set("bid", strconv.Itoa(bid))
+	q.Set("chap", strconv.Itoa(chapter))
+	q.Set("sec", strconv.Itoa(verse))
+	q.Set("gb", boolDigit(simplified))
+	var out QPResponse
+	if err := c.getJSON(ctx, "qp.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
 func (c *Client) getJSON(ctx context.Context, endpoint string, q url.Values, dst any) error {
 	u := strings.TrimRight(c.BaseURL, "/") + "/" + endpoint + "?" + q.Encode()
 	req, err := http.NewRequestWithContext(ctx, http.MethodGet, u, nil)
