@@ -143,7 +143,7 @@ func checkVersion(root string) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	m := regexp.MustCompile(`const Version = "([0-9]+(?:\.[0-9]+){3})"`).FindSubmatch(b)
+	m := regexp.MustCompile(`const Version = "([0-9]+(?:\.[0-9]+){2,3})"`).FindSubmatch(b)
 	if m == nil {
 		return "", fmt.Errorf("cannot find the version constant in internal/version/version.go")
 	}
