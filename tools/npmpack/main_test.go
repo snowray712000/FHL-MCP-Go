@@ -153,3 +153,17 @@ func TestRejectsTamperedOrMissingArchive(t *testing.T) {
 		t.Error("missing version accepted")
 	}
 }
+
+func TestRejectsNonSemverVersion(t *testing.T) {
+	if _, err := run(t.TempDir(), t.TempDir(), "fhlnet", "1.1.2.1"); err == nil || !strings.Contains(err.Error(), "semver") {
+		t.Errorf("dev build version accepted: %v", err)
+	}
+}
+
+func TestSemverPattern(t *testing.T) {
+	for v, want := range map[string]bool{"1.1.1": true, "1.2.1": true, "1.1.3-rc.1": true, "1x1x1": false, "1.1.2.1": false, "1.1": false} {
+		if semverRe.MatchString(v) != want {
+			t.Errorf("semverRe(%q) = %v, want %v", v, !want, want)
+		}
+	}
+}

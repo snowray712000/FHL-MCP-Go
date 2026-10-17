@@ -24,12 +24,15 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
 
 	"github.com/snowray712000/FHL-MCP-Go/internal/version"
 )
+
+var semverRe = regexp.MustCompile(`^[0-9]+\.[0-9]+\.[0-9]+(-[0-9A-Za-z.-]+)?$`)
 
 const (
 	repoURL = "https://github.com/snowray712000/FHL-MCP-Go"
@@ -79,6 +82,9 @@ func main() {
 
 // run builds every package and returns the .tgz file names in publish order (main package last).
 func run(dist, out, scope, ver string) ([]string, error) {
+	if !semverRe.MatchString(ver) {
+		return nil, fmt.Errorf("version %q is not three-part semver; npm only takes formal releases such as 1.1.3 (dev builds like 1.1.2.1 are not published)", ver)
+	}
 	sums, err := readSums(filepath.Join(dist, "SHA256SUMS.txt"))
 	if err != nil {
 		return nil, err

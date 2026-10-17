@@ -46,7 +46,7 @@ Copied from the user's habit in `D:\coding\信望愛\FHLNUI\FHLNUI` (inferred fr
 - **Format `{topic}：{description}`** — short topic prefix (feature/area), full-width `：`. Docs-only commits use
   `docs: ...`. Identifiers, paths, version numbers stay in original form; item lists go in `( ... )` with ` / `.
 - **Release commits** use `發版 {version}：...`; a roll-up commit reads `發版 X：整理 A ~ B (summary)`.
-  Same as FHLNUI. Versions are 4-part (`0.0.0.1`); the first release is `0.0.0.1`.
+  Same as FHLNUI. Versions are `major.minor.patch.build`; the 3rd number decides the kind (user-defined 2026-10-17): odd (`1.1.1`, `1.1.3`, `1.2.1`; three-part) = formal release, even (`1.1.2.x`) = small dev changes, not formally released and never published to npm (npm needs three-part semver). Dev builds are rolled up into the next odd release (`1.1.3`, or `1.2.1` for an important feature). Earlier `0.0.0.x` were rolled up into `1.1.1`.
   Changelog is `app_versions.md` at the repo root (the Markdown counterpart of FHLNUI's `app_versions.json`):
   newest first, `TODOs` block always on top, `last` field kept in sync.
   Item style (user-decided 2026-10-16, spelled out in `app_versions.md`): `🆕 新功能` / `✨ 優化` / `🐞 Bug` / `ℹ️ 說明` are for
