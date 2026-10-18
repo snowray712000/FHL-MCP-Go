@@ -54,6 +54,9 @@ var endpointTTL = map[string]time.Duration{
 	"se.php":  24 * time.Hour,
 	"ssc.php": 24 * time.Hour,
 	"sd.php":  0,
+	// TWCB dictionaries (浸宣): fixed text.
+	"sbdag.php":     0,
+	"stwcbhdic.php": 0,
 	// Apocrypha and Apostolic Fathers (qsub/qaf = text, sesub/seaf = search).
 	"qsub.php":   7 * 24 * time.Hour,
 	"qaf.php":    7 * 24 * time.Hour,
@@ -282,6 +285,44 @@ func (c *Client) SD(ctx context.Context, nt bool, number int, simplified bool) (
 	q.Set("gb", boolDigit(simplified))
 	var out SDResponse
 	if err := c.getJSON(ctx, "sd.php", q, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// TWCBRecord is one entry of the TWCB dictionaries (sbdag.php for Greek, stwcbhdic.php for Hebrew).
+type TWCBRecord struct {
+	SN      string `json:"sn"`
+	DicText string `json:"dic_text"`
+}
+
+// TWCBResponse is the sbdag.php / stwcbhdic.php response.
+type TWCBResponse struct {
+	Status      string       `json:"status"`
+	RecordCount int          `json:"record_count"`
+	Record      []TWCBRecord `json:"record"`
+}
+
+// TWCB queries the 浸宣 (TWCB) dictionary: sbdag.php for the Greek NT (nt), stwcbhdic.php for the Hebrew OT.
+func (c *Client) TWCB(ctx context.Context, nt bool, number int, simplified bool) (*TWCBResponse, error) {
+	endpoint := "stwcbhdic.php"
+	if nt {
+		endpoint = "sbdag.php"
+	}
+	q := url.Values{}
+	q.Set("k", strconv.Itoa(number))
+	q.Set("gb", boolDigit(simplified))
+	var out TWCBResponse
+	if err := c.getJSON(ctx, endpoint, q, &out); err != nil {
+		// A number without an entry makes these endpoints answer HTTP 500 with a cut-off body
+		// ({"status":"success","record_count":0,"record":[ ), measured 2026-10-19: treat it as "no entry".
+		var ue *Error
+		if errors.As(err, &ue) && ue.Kind == ErrHTTP && ue.Status == 500 {
+			return &TWCBResponse{Status: "success"}, nil
+		}
 		return nil, err
 	}
 	if out.Status != "success" {

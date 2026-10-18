@@ -593,6 +593,34 @@ func TestRTMultiQueries(t *testing.T) {
 	}
 }
 
+func TestTWCBQuery(t *testing.T) {
+	var path, query string
+	status, body := 200, "sbdag_3303.json"
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		path, query = r.URL.Path, r.URL.RawQuery
+		w.WriteHeader(status)
+		_, _ = w.Write(fixture(t, body))
+	})
+	res, err := c.TWCB(context.Background(), true, 3303, false)
+	if err != nil || !strings.HasSuffix(path, "/sbdag.php") || query != "gb=0&k=3303" || len(res.Record) != 1 || res.Record[0].SN != "03303" || res.Record[0].DicText == "" {
+		t.Fatalf("greek: %v %s?%s %+v", err, path, query, res)
+	}
+	body = "stwcbhdic_128.json"
+	if res, err = c.TWCB(context.Background(), false, 128, true); err != nil || !strings.HasSuffix(path, "/stwcbhdic.php") || query != "gb=1&k=128" || len(res.Record) != 1 {
+		t.Fatalf("hebrew: %v %s?%s %+v", err, path, query, res)
+	}
+	// a number without an entry: HTTP 500 with a cut-off body means "no entry"
+	status, body = 500, "sbdag_99999_500body.json"
+	if res, err = c.TWCB(context.Background(), true, 99999, false); err != nil || res.RecordCount != 0 || len(res.Record) != 0 {
+		t.Errorf("500 as no entry: %v %+v", err, res)
+	}
+	// other HTTP errors stay errors
+	status = 503
+	if _, err = c.TWCB(context.Background(), true, 99999, false); err == nil {
+		t.Error("HTTP 503 must be an error")
+	}
+}
+
 func TestArticlesQueryServerAndCache(t *testing.T) {
 	n := 0
 	var path, query string

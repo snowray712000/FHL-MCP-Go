@@ -362,7 +362,7 @@
     },
     {
       "name": "lookup_strongs",
-      "description": "查詢 Strong's 原文字典。支援多種格式：整數+testament (3056, 'NT')、G前綴 ('G3056')、H前綴 ('H430')。\n    \n    Args:\n        number: Strong's Number (整數、字串數字、或帶 G/H 前綴，如 'G3056' 或 'H430')\n        testament: 約別（OT=舊約, NT=新約）。當 number 包含 G/H 前綴時可省略。\n        use_simplified: 是否使用簡體中文\n    ",
+      "description": "查詢 Strong's 原文字典。支援多種格式：整數+testament (3056, 'NT')、G前綴 ('G3056')、H前綴 ('H430')。\n    \n    Args:\n        number: Strong's Number (整數、字串數字、或帶 G/H 前綴，如 'G3056' 或 'H430')\n        testament: 約別（OT=舊約, NT=新約）。當 number 包含 G/H 前綴時可省略。\n        use_simplified: 是否使用簡體中文\n        dictionary: 字典（預設 cbol＝CBOL 原文字典；twcb＝浸宣 TWCB 字典，內容為去掉標記的純文字；both＝兩者都回，TWCB 文字放在 twcb_definition）\n    ",
       "inputSchema": {
         "properties": {
           "number": {
@@ -378,6 +378,11 @@
             "default": false,
             "title": "Use Simplified",
             "type": "boolean"
+          },
+          "dictionary": {
+            "default": "cbol",
+            "title": "Dictionary",
+            "type": "string"
           }
         },
         "required": [

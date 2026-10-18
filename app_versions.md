@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **1.1.2.9**
+- last: **1.1.2.10**
 - 版次格式：`主.次.修.小`（例 `1.1.2.1`），第三碼的奇偶有意義（使用者定，2026-10-17）：
   - 第三碼奇數（如 `1.1.1`、`1.1.3`、`1.2.1`）是正式發佈版，三段式；只有正式版會做發佈包、發到 GitHub Release 與 npm。
   - 第三碼偶數（`1.1.2.x`）是小變更的開發版，給研發用，不做正式發佈；每次小變更升最後一碼。
@@ -36,6 +36,13 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 1.1.2.10
+
+- 🆕 新功能: 「查原文字典」多了浸宣（TWCB）字典：新增選用的 `dictionary`，填 `twcb` 只看浸宣字典（新約是浸宣出版社的希臘文字典，舊約是希伯來文字典，附有詞類、字義、譯詞統計與大量經文出處），填 `both` 則同時回原本的 CBOL 字典與浸宣字典。沒填就跟以前一樣。
+- ℹ️ 說明: 浸宣字典的內容很長（常用字可到上萬字），已整理成純文字：換行與縮排保留，經文出處（原本是 `#太3:11|` 的記法）變成 `太3:11`。簡體模式也適用。若浸宣字典沒有那個編號，填 `twcb` 會回報找不到；填 `both` 則只回 CBOL 字典（沒有 `twcb_definition` 欄位）。目前不支援 `3924a` 這種帶字母的編號（原本就不支援）。
+- 📝工程師筆記-🐞發現: 來源 FHLNUI `index/SnDictOfTwcb.es2023.js`、`docs/api_reference.md`（§5、§6）。實測 2026-10-19：`sbdag.php`（新約）與 `stwcbhdic.php`（舊約）在 `/api/` 與 `/json/` 都有，回的是正常 JSON（FHLNUI 文件說是字串，已不是）；沒有該編號時會回 HTTP 500 加上被截斷的內容（`{"status":"success","record_count":0,"record":[`），所以 `Client.TWCB` 把「HTTP 500」視為沒有此條目（503 等其他錯誤仍是錯誤）。`dic_text` 含 `<div class="idt">`、`<span class="exp">` 與信望愛的 `#經文|` 引用記號。
+- 📝工程師筆記-✨新增: `fhlapi.Client.TWCB`（兩個端點 TTL 0）；`bible.Service.LookupStrongsIn`（可選介面 `TWCBAPI`，既有假 API 不必改）與 `cleanTWCB`；結果 `TWCBEntry`（`strongs_number`、`dictionary:"TWCB"`、`testament`、`definition`）與 `StrongsBoth`（`StrongsEntry` ＋ `twcb_definition`）。`dictionary` 空白或 `cbol` 仍走原本路徑，golden 不變。凍結合約 `tools-list.json`（兩份）新增 `dictionary` 並更新說明（對 Python 合約的刻意差異，沿用使用者 2026-10-19 對 1.1.2.9 的做法）。測試：`internal/bible/twcb_test.go`、`internal/tools/twcb_test.go`、`TestTWCBQuery`，fixture 為真實回應；也用暫時的真實連線測試驗過。希臘文字元為信望愛的 oxia（U+1F73），不要在測試裡手打。未做：`search_strongs_occurrences` 不附 TWCB。
 
 ## 1.1.2.9
 

@@ -2,6 +2,7 @@ package tools
 
 import (
 	"context"
+	"strings"
 
 	"github.com/snowray712000/FHL-MCP-Go/internal/bible"
 )
@@ -122,7 +123,16 @@ func (r *Registry) registerSearch(svc *bible.Service) {
 		if err != nil {
 			return "", err
 		}
-		res, err := svc.LookupStrongs(ctx, number, testament, simplified)
+		dictionary, err := a.optString("dictionary", "")
+		if err != nil {
+			return "", err
+		}
+		var res any
+		if dictionary == "" || strings.EqualFold(strings.TrimSpace(dictionary), "cbol") {
+			res, err = svc.LookupStrongs(ctx, number, testament, simplified)
+		} else {
+			res, err = svc.LookupStrongsIn(ctx, number, testament, dictionary, simplified)
+		}
 		if err != nil {
 			return "", err
 		}
