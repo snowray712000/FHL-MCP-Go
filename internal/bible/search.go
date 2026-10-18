@@ -57,7 +57,7 @@ func (s *Service) SearchBible(ctx context.Context, p SearchParams) (*SearchResul
 	if strings.TrimSpace(p.Query) == "" {
 		return nil, emptyQuery()
 	}
-	resp, err := s.API.SE(ctx, fhlapi.SERequest{
+	resp, err := s.searchPaged(ctx, fhlapi.SERequest{
 		Query: p.Query, Version: p.Version, Orig: orig, Range: rng,
 		Offset: p.Offset, Limit: p.Limit, Simplified: p.Simplified,
 	})
@@ -68,6 +68,47 @@ func (s *Service) SearchBible(ctx context.Context, p SearchParams) (*SearchResul
 		TotalCount: resp.RecordCount, Query: p.Query, SearchType: p.SearchType, Scope: p.Scope,
 		Limit: p.Limit, Offset: p.Offset, Results: hits(resp.Record),
 	}, nil
+}
+
+// seMaxPage is the most records se.php returns per request: any limit above it is answered with
+// status "Fail: record count > 500". seMaxLimit caps one call so a huge limit cannot fan out
+// into unbounded upstream requests (10 pages).
+const (
+	seMaxPage  = 500
+	seMaxLimit = 5000
+)
+
+// searchPaged queries se.php, splitting a limit above seMaxPage into consecutive offset pages
+// (the same approach as the FHLNUI web client) and merging them. A page shorter than requested
+// ends the walk. The merged RecordCount is the number of records returned, as for a single page.
+func (s *Service) searchPaged(ctx context.Context, r fhlapi.SERequest) (*fhlapi.SEResponse, error) {
+	if r.Limit > seMaxLimit {
+		return nil, &InvalidParameterError{Name: "limit", Value: strconv.Itoa(r.Limit), Reason: "too large, at most " + strconv.Itoa(seMaxLimit) + " results per call; use a smaller limit (上限 " + strconv.Itoa(seMaxLimit) + " 筆)"}
+	}
+	if r.Limit <= seMaxPage {
+		return s.API.SE(ctx, r)
+	}
+	var merged *fhlapi.SEResponse
+	for remaining, offset := r.Limit, r.Offset; remaining > 0; {
+		page := r
+		page.Offset, page.Limit = offset, min(remaining, seMaxPage)
+		resp, err := s.API.SE(ctx, page)
+		if err != nil {
+			return nil, err
+		}
+		if merged == nil {
+			merged = resp
+		} else {
+			merged.Record = append(merged.Record, resp.Record...)
+		}
+		if len(resp.Record) < page.Limit {
+			break
+		}
+		offset += len(resp.Record)
+		remaining -= len(resp.Record)
+	}
+	merged.RecordCount = len(merged.Record)
+	return merged, nil
 }
 
 func hits(rs []fhlapi.SERecord) []VerseItem {
@@ -135,7 +176,7 @@ func (s *Service) SearchAdvanced(ctx context.Context, p AdvancedParams) (any, er
 	if strings.TrimSpace(p.Query) == "" {
 		return nil, emptyQuery()
 	}
-	resp, err := s.API.SE(ctx, fhlapi.SERequest{
+	resp, err := s.searchPaged(ctx, fhlapi.SERequest{
 		Query: p.Query, Version: p.Version, Orig: orig, Range: 3, Offset: p.Offset, Limit: p.Limit,
 		RangeBID: startID, RangeEID: endID, Simplified: p.Simplified,
 	})

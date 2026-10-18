@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **1.1.2.5**
+- last: **1.1.2.6**
 - 版次格式：`主.次.修.小`（例 `1.1.2.1`），第三碼的奇偶有意義（使用者定，2026-10-17）：
   - 第三碼奇數（如 `1.1.1`、`1.1.3`、`1.2.1`）是正式發佈版，三段式；只有正式版會做發佈包、發到 GitHub Release 與 npm。
   - 第三碼偶數（`1.1.2.x`）是小變更的開發版，給研發用，不做正式發佈；每次小變更升最後一碼。
@@ -36,6 +36,13 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 1.1.2.6
+
+- 🆕 新功能: 搜尋經文、進階搜尋、查某個原文編號的出現處，「limit」可以設超過 500（最多 5000）；程式會自動分批向信望愛網站取回再合併，不會再因為超過 500 筆而失敗。超過 5000 會請你縮小範圍。
+- ℹ️ 說明: 信望愛網站的搜尋一次最多給 500 筆，原本 limit 設超過 500 就會被拒絕。預設 limit 仍是 50。尚未用真實網站完整跑過 5000 筆，單元測試通過。
+- 📝工程師筆記-🐞發現: 實測 `se.php`：`limit` 501 以上（含 0）一律回 `status:"Fail: record count > 500"`，`offset=500&limit=500` 可翻頁；`record_count` 為本頁回傳筆數而非總數。FHLNUI 以 `offset` 遞迴直到 `record_count < 500`（`docs/api_reference.md` §8）。
+- 📝工程師筆記-✨新增: `bible.Service.searchPaged`（`internal/bible/search.go`）：limit ≤ 500 直接單次請求（行為不變），否則每頁 ≤ 500 依 `offset` 連續取，頁不滿即停；合併後 `record_count` = 回傳筆數；limit > 5000 回 `InvalidParameterError`（5000 為我的假設上限）。`SearchBible`／`SearchAdvanced`（及經由它們的 `search_strongs_occurrences`）套用。測試 `TestSearchBibleLimitAbove500IsPaged`。未涉及：`search_commentary` 的 500 筆仍是 D12 明確錯誤、`sesub/seaf` 上游 limit 0 = 不限。
 
 ## 1.1.2.5
 

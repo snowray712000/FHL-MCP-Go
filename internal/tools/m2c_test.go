@@ -303,3 +303,48 @@ func (f *searchAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, err
 func (f *searchAPI) Articles(context.Context, fhlapi.ArticleQuery) (*fhlapi.ArticlesResponse, error) {
 	return nil, errors.New("Articles not expected in this test")
 }
+
+// pagedAPI mimics se.php's real cap: limit > 500 is refused, otherwise `total` records are served by offset.
+type pagedAPI struct {
+	searchAPI
+	total int
+	reqs  []fhlapi.SERequest
+}
+
+func (f *pagedAPI) SE(_ context.Context, r fhlapi.SERequest) (*fhlapi.SEResponse, error) {
+	f.reqs = append(f.reqs, r)
+	if r.Limit > 500 {
+		return nil, &fhlapi.Error{Kind: fhlapi.ErrUpstream, Message: `status "Fail: record count > 500"`}
+	}
+	out := &fhlapi.SEResponse{Status: "success"}
+	for i := r.Offset; i < f.total && len(out.Record) < r.Limit; i++ {
+		out.Record = append(out.Record, fhlapi.SERecord{Chineses: "約", Engs: "Joh", Chap: 1, Sec: i + 1})
+	}
+	out.RecordCount = len(out.Record)
+	return out, nil
+}
+
+func TestSearchBibleLimitAbove500IsPaged(t *testing.T) {
+	api := &pagedAPI{total: 1200}
+	got, err := callOn(t, api, "search_bible", `{"query":"愛","limit":1500}`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	var res struct {
+		TotalCount int           `json:"total_count"`
+		Limit      int           `json:"limit"`
+		Results    []interface{} `json:"results"`
+	}
+	if err := json.Unmarshal([]byte(got), &res); err != nil {
+		t.Fatal(err)
+	}
+	if len(res.Results) != 1200 || res.TotalCount != 1200 || res.Limit != 1500 {
+		t.Errorf("results=%d total=%d limit=%d", len(res.Results), res.TotalCount, res.Limit)
+	}
+	if len(api.reqs) != 3 || api.reqs[1].Offset != 500 || api.reqs[2].Offset != 1000 || api.reqs[2].Limit != 500 {
+		t.Errorf("unexpected page requests: %+v", api.reqs)
+	}
+	if _, err := callOn(t, &pagedAPI{total: 10}, "search_bible", `{"query":"愛","limit":5001}`); err == nil {
+		t.Error("limit above 5000 should be refused")
+	}
+}
