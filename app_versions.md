@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **1.1.2.8**
+- last: **1.1.2.9**
 - 版次格式：`主.次.修.小`（例 `1.1.2.1`），第三碼的奇偶有意義（使用者定，2026-10-17）：
   - 第三碼奇數（如 `1.1.1`、`1.1.3`、`1.2.1`）是正式發佈版，三段式；只有正式版會做發佈包、發到 GitHub Release 與 npm。
   - 第三碼偶數（`1.1.2.x`）是小變更的開發版，給研發用，不做正式發佈；每次小變更升最後一碼。
@@ -36,6 +36,14 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 1.1.2.9
+
+- 🆕 新功能: 「查註腳」現在不只現代中文譯本（TCV），也能查有註腳的其他譯本，例如呂振中譯本（lcc）、cnet 等：多了選用的 `version`（譯本）與 `chapter`（章）。呂振中（lcc）與 csb 的註腳每章重新編號，所以要同時給 `chapter`。
+- 🆕 新功能: 不給註腳編號（`footnote_id`）時，會一次列出整章（lcc、csb）或整本書（其他譯本）的全部註腳，不必一個一個問。
+- ℹ️ 說明: 原本的用法（只給書卷與註腳編號查 TCV）完全不變。cnet 等譯本的註腳編號是整本書連號，所以列出的是整本書的註腳（數量可能很多，例如詩篇有三千多筆）。只支援 1~66 卷；次經與使徒教父沒有註腳。沒有註腳或不公開的譯本（例如 `ncv`）會回報上游失敗。工具說明已更新（`footnote_id` 不再是必填）。
+- 📝工程師筆記-🐞發現: 來源 FHLNUI `docs/z261010b`、`z261011a`。實測 2026-10-19：`/api/` 沒有 `rt-nui.php`，且 `/api/rt.php` 不認 `engs`（非 TCV 一律空結果），要走 `https://bible.fhl.net/json/`；`rt-nui.php` 已在正式站，無 `id` 回整章（lcc、csb，`scope:"chapter"`）或整本（其他，`scope:"book"`），不認 `bid`、只認 `engs`，未知或不公開的譯本回 `{"status":"fail"}`（`rt.php` 則會把 SQL 回給使用者，所以新程式一律先檢查譯本代碼為英數 1~16 字）。上游書卷縮寫與 `qb` 的不同：數字開頭要加空白（`1 Sam`、`1 John`），且 1 Kin／2 Kin／1 Chr／2 Chr／Esth／Hos／Jon／Mic／Nah 與本專案書卷表（`1Kings`、`Esther`、`Hosea` …）不同，cnet 66 卷逐本實測過。
+- 📝工程師筆記-✨新增: `fhlapi.Client.RTMulti(RTQuery)`（`jsonBase()` 把 `/api` 換成 `/json`；`rt-nui.php` TTL 7 天；`RTResponse.Scope`）；`bible.Service.GetFootnoteMulti`（可選介面 `FootnoteMultiAPI`，所以既有測試用的假 API 不必改）與 `rtEngs`；結果新增 `query_type: bible_footnote`（單筆，多 `chapter`）與 `bible_footnotes`（`scope`、`record_count`、`footnotes[]`）。TCV 且有給 `footnote_id` 仍走原本 `rt.php?bid=` 路徑，golden 不變。凍結合約 `tools-list.json`（`doc/m0/contract` 與 `assets` 兩份）已改：新增 `version`、`chapter`，`required` 只剩 `book_id`，說明文字更新；這是對 Python 合約的刻意差異（使用者 2026-10-19 核准）。測試：`internal/tools/footnote_multi_test.go`、`TestRTMultiQueries`、`TestRTEngs`，fixture 為真實上游回應；另以暫時的真實連線測試驗過 lcc／cnet／ncv。lcc／csb 以外的版本是否真的整本連號，只驗了 cnet 與 tcv。
 
 ## 1.1.2.8
 

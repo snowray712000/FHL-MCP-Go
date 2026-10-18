@@ -13,7 +13,15 @@ func (r *Registry) registerFootnote(svc *bible.Service) {
 		if err != nil {
 			return "", err
 		}
-		footnoteID, err := a.requiredInt("footnote_id")
+		footnoteID, err := a.optInt("footnote_id", -1)
+		if err != nil {
+			return "", err
+		}
+		version, err := a.optString("version", "")
+		if err != nil {
+			return "", err
+		}
+		chapter, err := a.optInt("chapter", 0)
 		if err != nil {
 			return "", err
 		}
@@ -21,7 +29,13 @@ func (r *Registry) registerFootnote(svc *bible.Service) {
 		if err != nil {
 			return "", err
 		}
-		res, err := svc.GetFootnote(ctx, bookID, footnoteID, simplified)
+		p := bible.FootnoteParams{BookID: bookID, FootnoteID: footnoteID, Version: version, Chapter: chapter, Simplified: simplified}
+		var res any
+		if p.IsClassicFootnote() {
+			res, err = svc.GetFootnote(ctx, bookID, footnoteID, simplified)
+		} else {
+			res, err = svc.GetFootnoteMulti(ctx, p)
+		}
 		if err != nil {
 			return "", err
 		}

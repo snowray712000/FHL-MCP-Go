@@ -125,7 +125,9 @@ func TestFootnoteRequests(t *testing.T) {
 func TestFootnoteValidation(t *testing.T) {
 	cases := []struct{ name, args, want string }{
 		{"missing book_id", `{"footnote_id":1}`, "Invalid parameter 'book_id': required parameter is missing"},
-		{"missing footnote_id", `{"book_id":1}`, "Invalid parameter 'footnote_id': required parameter is missing"},
+		{"bad version", `{"book_id":1,"footnote_id":1,"version":"a/b"}`, "Invalid parameter 'version': a/b - Version code must be 1-16 letters or digits (see list_bible_versions)."},
+		{"lcc without chapter", `{"book_id":35,"footnote_id":1,"version":"lcc"}`, "Invalid parameter 'chapter': Version lcc numbers its footnotes per chapter, so chapter is required."},
+		{"apocrypha book", `{"book_id":101,"version":"cnet"}`, "Invalid parameter 'book_id': 101 - Footnotes exist for books 1-66 only."},
 		{"not a number", `{"book_id":"John","footnote_id":1}`, "Invalid parameter 'book_id': \"John\" - must be an integer"},
 	}
 	for _, c := range cases {

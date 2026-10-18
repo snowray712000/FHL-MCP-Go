@@ -7,6 +7,7 @@ import (
 	"net/http/httptest"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"testing"
 	"time"
@@ -559,6 +560,36 @@ func TestRTQueryAndNotFound(t *testing.T) {
 	res, err = c.RT(context.Background(), 999, 999, false)
 	if err != nil || res.RecordCount != 0 || len(res.Record) != 0 {
 		t.Errorf("not found: %v %+v", err, res)
+	}
+}
+
+func TestRTMultiQueries(t *testing.T) {
+	var path, query string
+	body := "rtnui_hab_2_lcc.json"
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		path, query = r.URL.Path, r.URL.RawQuery
+		_, _ = w.Write(fixture(t, body))
+	})
+	res, err := c.RTMulti(context.Background(), RTQuery{Engs: "Hab", Version: "lcc", Chap: 2, ID: -1})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if !strings.HasSuffix(path, "/rt-nui.php") || query != "chap=2&engs=Hab&gb=0&version=lcc" {
+		t.Errorf("whole chapter request = %s?%s", path, query)
+	}
+	if res.Scope != "chapter" || res.RecordCount != 11 || len(res.Record) != 11 {
+		t.Errorf("response = %+v", res)
+	}
+	body = "rt_hab_2_lcc_1.json"
+	if _, err = c.RTMulti(context.Background(), RTQuery{Engs: "1 Sam", Version: "cnet", ID: 3, Simplified: true}); err != nil {
+		t.Fatal(err)
+	}
+	if !strings.HasSuffix(path, "/rt.php") || query != "engs=1+Sam&gb=1&id=3&version=cnet" {
+		t.Errorf("single request = %s?%s", path, query)
+	}
+	body = "rtnui_fail.json"
+	if _, err = c.RTMulti(context.Background(), RTQuery{Engs: "Hab", Version: "nosuch", ID: -1}); err == nil || !strings.Contains(err.Error(), "unknown or not public") {
+		t.Errorf("fail status: %v", err)
 	}
 }
 

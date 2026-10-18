@@ -193,3 +193,17 @@ func TestMergedVersePlaceholder(t *testing.T) {
 		t.Fatalf("normal verse JSON changed: %s", b)
 	}
 }
+
+func TestRTEngs(t *testing.T) {
+	want := map[int]string{1: "Gen", 9: "1 Sam", 11: "1 Kin", 14: "2 Chr", 17: "Esth", 19: "Ps", 28: "Hos", 34: "Nah", 59: "James", 62: "1 John", 66: "Rev"}
+	for id, w := range want {
+		if got, ok := rtEngs(id); !ok || got != w {
+			t.Errorf("rtEngs(%d) = %q, %v; want %q", id, got, ok, w)
+		}
+	}
+	for _, id := range []int{0, 67, 101, -1} {
+		if _, ok := rtEngs(id); ok {
+			t.Errorf("rtEngs(%d) should fail", id)
+		}
+	}
+}

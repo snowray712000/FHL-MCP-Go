@@ -1040,7 +1040,7 @@
     },
     {
       "name": "get_bible_footnote",
-      "description": "查詢聖經經文註腳（僅限 TCV 現代中文譯本）。\n    註腳提供原文翻譯的不同選擇、古卷差異說明、或其他重要補充資訊。\n\n    **重要提示**: 僅台灣聖經公會現代中文譯本 (TCV) 有註腳功能。\n    \n    Args:\n        book_id: 書卷編號 (1-66)。例如：1=創世記, 19=詩篇, 43=約翰福音, 45=羅馬書\n        footnote_id: 註腳編號（每個書卷有自己的編號系統）。從 1 開始遞增。若編號不存在，會返回空結果。\n        use_simplified: 是否使用簡體中文（預設：否）\n    ",
+      "description": "查詢聖經經文註腳（預設為 TCV 現代中文譯本；也可指定 version 查 lcc 呂振中譯本、csb、cnet 等有註腳的譯本）。\n    註腳提供原文翻譯的不同選擇、古卷差異說明、或其他重要補充資訊。\n\n    **重要提示**: 只有部分譯本有註腳功能，預設為台灣聖經公會現代中文譯本 (TCV)。\n    \n    Args:\n        book_id: 書卷編號 (1-66)。例如：1=創世記, 19=詩篇, 43=約翰福音, 45=羅馬書\n        footnote_id: 註腳編號（每個書卷有自己的編號系統）。從 1 開始遞增。若編號不存在，會返回空結果。省略時，列出該章（lcc、csb）或該書卷（其他譯本）的全部註腳。\n        version: 譯本代碼（預設：tcv）。lcc、csb 的註腳每章重編，須同時指定 chapter。\n        chapter: 章（lcc、csb 必填；其他譯本不需要）。\n        use_simplified: 是否使用簡體中文（預設：否）\n    ",
       "inputSchema": {
         "properties": {
           "book_id": {
@@ -1051,6 +1051,15 @@
             "title": "Footnote Id",
             "type": "integer"
           },
+          "version": {
+            "default": "tcv",
+            "title": "Version",
+            "type": "string"
+          },
+          "chapter": {
+            "title": "Chapter",
+            "type": "integer"
+          },
           "use_simplified": {
             "default": false,
             "title": "Use Simplified",
@@ -1058,8 +1067,7 @@
           }
         },
         "required": [
-          "book_id",
-          "footnote_id"
+          "book_id"
         ],
         "title": "get_bible_footnoteArguments",
         "type": "object"

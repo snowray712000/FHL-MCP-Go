@@ -55,11 +55,12 @@ var endpointTTL = map[string]time.Duration{
 	"ssc.php": 24 * time.Hour,
 	"sd.php":  0,
 	// Apocrypha and Apostolic Fathers (qsub/qaf = text, sesub/seaf = search).
-	"qsub.php":  7 * 24 * time.Hour,
-	"qaf.php":   7 * 24 * time.Hour,
-	"sesub.php": 24 * time.Hour,
-	"seaf.php":  24 * time.Hour,
-	"rt.php":    7 * 24 * time.Hour,
+	"qsub.php":   7 * 24 * time.Hour,
+	"qaf.php":    7 * 24 * time.Hour,
+	"sesub.php":  24 * time.Hour,
+	"seaf.php":   24 * time.Hour,
+	"rt.php":     7 * 24 * time.Hour,
+	"rt-nui.php": 7 * 24 * time.Hour,
 	// Articles (www.fhl.net/api/json.php): the site updates weekly.
 	"json.php": 24 * time.Hour,
 }
@@ -598,6 +599,7 @@ type RTResponse struct {
 	RecordCount int        `json:"record_count"`
 	Version     string     `json:"version"`
 	Engs        *string    `json:"engs"`
+	Scope       string     `json:"scope"` // rt-nui.php only: "chapter" (lcc/csb) or "book" (other versions)
 	Record      []RTRecord `json:"record"`
 }
 
@@ -614,6 +616,49 @@ func (c *Client) RT(ctx context.Context, bid, id int, simplified bool) (*RTRespo
 	}
 	if out.Status != "success" {
 		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// RTQuery asks for footnotes of any version by upstream book abbreviation (engs, e.g. "1 Sam"). With ID >= 0 it is
+// one footnote (rt.php); with ID < 0 it is every footnote of the chapter (lcc, csb) or the whole book (other
+// versions), through rt-nui.php. Chap is only sent when > 0.
+type RTQuery struct {
+	Engs, Version string
+	Chap, ID      int
+	Simplified    bool
+}
+
+// jsonBase is the /json/ twin of the /api/ base: only /json/ has rt-nui.php and honours engs on rt.php
+// (measured 2026-10-19; /api/rt.php ignores engs and answers an empty result for non-TCV versions).
+func (c *Client) jsonBase() string {
+	if strings.HasSuffix(c.BaseURL, "/api") {
+		return strings.TrimSuffix(c.BaseURL, "/api") + "/json"
+	}
+	return c.BaseURL
+}
+
+// RTMulti queries rt.php / rt-nui.php with an RTQuery. An upstream "fail" status (unknown version, a version that
+// is not public) is an ErrUpstream error with a fixed message (rt.php would echo its SQL otherwise).
+func (c *Client) RTMulti(ctx context.Context, rq RTQuery) (*RTResponse, error) {
+	q := url.Values{}
+	q.Set("engs", rq.Engs)
+	q.Set("version", rq.Version)
+	q.Set("gb", boolDigit(rq.Simplified))
+	if rq.Chap > 0 {
+		q.Set("chap", strconv.Itoa(rq.Chap))
+	}
+	endpoint := "rt-nui.php"
+	if rq.ID >= 0 {
+		endpoint = "rt.php"
+		q.Set("id", strconv.Itoa(rq.ID))
+	}
+	var out RTResponse
+	if err := c.getJSONAt(ctx, c.jsonBase(), endpoint, q, isSuccess, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" {
+		return nil, &Error{Kind: ErrUpstream, Message: "footnote query failed (version " + strconv.Quote(rq.Version) + " unknown or not public)"}
 	}
 	return &out, nil
 }
