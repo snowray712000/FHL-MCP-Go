@@ -7,6 +7,8 @@ import (
 	"fmt"
 	"strconv"
 	"strings"
+
+	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
 )
 
 // ParseStrongsInput parses a Strong's number the way the Python reference does:
@@ -136,12 +138,18 @@ type Occurrences struct {
 
 // StrongsOccurrencesResult is the search_strongs_occurrences result object.
 type StrongsOccurrencesResult struct {
-	StrongsInfo *StrongsEntry `json:"strongs_info"`
-	Occurrences Occurrences   `json:"occurrences"`
+	StrongsInfo *StrongsEntry `json:"strongs_info,omitempty"`
+	// StrongsInfos replaces StrongsInfo for a combined query (or / and / not / range): the
+	// dictionary entries of its non-negated numbers (at most snInfoMax, unknown numbers skipped).
+	StrongsInfos []*StrongsEntry `json:"strongs_infos,omitempty"`
+	Occurrences  Occurrences     `json:"occurrences"`
 }
 
 // SearchStrongsOccurrences looks the number up, then searches the matching testament for it.
 func (s *Service) SearchStrongsOccurrences(ctx context.Context, number string, testament *string, limit int, simplified bool) (*StrongsOccurrencesResult, error) {
+	if res, ok, err := s.searchStrongsCombined(ctx, number, testament, limit, simplified); ok || err != nil {
+		return res, err
+	}
 	n, ot, err := ParseStrongsInput(number, testament)
 	if err != nil {
 		return nil, err
@@ -162,4 +170,45 @@ func (s *Service) SearchStrongsOccurrences(ctx context.Context, number string, t
 		StrongsInfo: info,
 		Occurrences: Occurrences{TotalCount: found.TotalCount, Showing: len(found.Results), Results: found.Results},
 	}, nil
+}
+
+// snInfoMax caps the dictionary lookups made for a combined query.
+const snInfoMax = 10
+
+// searchStrongsCombined handles number expressions such as "G34 or G35", "G3114-G3120" or
+// "G25 not G26". ok is false for a single plain number (normal path).
+func (s *Service) searchStrongsCombined(ctx context.Context, number string, testament *string, limit int, simplified bool) (*StrongsOccurrencesResult, bool, error) {
+	var def *bool
+	if testament != nil {
+		nt := strings.ToUpper(*testament) == "NT"
+		if !nt && strings.ToUpper(*testament) != "OT" {
+			return nil, false, nil // let the normal path report the bad testament
+		}
+		def = &nt
+	}
+	q, combo, err := parseSNQuery(number, def)
+	if err != nil {
+		return nil, true, err
+	}
+	if !combo {
+		return nil, false, nil
+	}
+	searchType := ""
+	if def != nil {
+		searchType = map[bool]string{true: "greek_number", false: "hebrew_number"}[*def]
+	}
+	recs, total, _, err := s.searchSNCombined(ctx, number, searchType, fhlapi.SERequest{Version: "unv", Simplified: simplified}, 0, limit)
+	if err != nil {
+		return nil, true, err
+	}
+	res := &StrongsOccurrencesResult{Occurrences: Occurrences{TotalCount: total, Showing: len(recs), Results: hits(recs)}}
+	for i, t := range q.positiveTerms() {
+		if i >= snInfoMax {
+			break
+		}
+		if info, err := s.lookup(ctx, snName(t), t.n, map[bool]string{true: "NT", false: "OT"}[t.nt], simplified); err == nil {
+			res.StrongsInfos = append(res.StrongsInfos, info)
+		}
+	}
+	return res, true, nil
 }

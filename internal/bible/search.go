@@ -57,6 +57,16 @@ func (s *Service) SearchBible(ctx context.Context, p SearchParams) (*SearchResul
 	if strings.TrimSpace(p.Query) == "" {
 		return nil, emptyQuery()
 	}
+	if orig != 0 {
+		recs, total, ok, err := s.searchSNCombined(ctx, p.Query, p.SearchType, fhlapi.SERequest{Version: p.Version, Range: rng, Simplified: p.Simplified}, p.Offset, p.Limit)
+		if err != nil {
+			return nil, err
+		}
+		if ok {
+			return &SearchResult{TotalCount: total, Query: p.Query, SearchType: p.SearchType, Scope: p.Scope,
+				Limit: p.Limit, Offset: p.Offset, Results: hits(recs)}, nil
+		}
+	}
 	resp, err := s.searchPaged(ctx, fhlapi.SERequest{
 		Query: p.Query, Version: p.Version, Orig: orig, Range: rng,
 		Offset: p.Offset, Limit: p.Limit, Simplified: p.Simplified,
@@ -175,6 +185,16 @@ func (s *Service) SearchAdvanced(ctx context.Context, p AdvancedParams) (any, er
 	}
 	if strings.TrimSpace(p.Query) == "" {
 		return nil, emptyQuery()
+	}
+	if orig != 0 {
+		recs, total, ok, err := s.searchSNCombined(ctx, p.Query, p.SearchType, fhlapi.SERequest{Version: p.Version, Range: 3, RangeBID: startID, RangeEID: endID, Simplified: p.Simplified}, p.Offset, p.Limit)
+		if err != nil {
+			return nil, err
+		}
+		if ok {
+			return &AdvancedResult{TotalCount: total, Query: p.Query, SearchType: p.SearchType,
+				Range: RangeEcho{Start: start, End: end}, Limit: p.Limit, Offset: p.Offset, Results: hits(recs)}, nil
+		}
 	}
 	resp, err := s.searchPaged(ctx, fhlapi.SERequest{
 		Query: p.Query, Version: p.Version, Orig: orig, Range: 3, Offset: p.Offset, Limit: p.Limit,
