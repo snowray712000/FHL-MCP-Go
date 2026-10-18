@@ -97,3 +97,36 @@ func TestGetVerseOrigStrongsOffline(t *testing.T) {
 		}
 	}
 }
+
+func TestSearchBibleByNumberInOrigVersions(t *testing.T) {
+	svc := &Service{API: &origAPI{}} // rows: Gen 1:1 {1,2}, 1:2 {3}, 1:3 {4}, 2:1 {5}; SE is never asked
+	ctx := context.Background()
+	search := func(q, typ, scope string) *SearchResult {
+		t.Helper()
+		r, err := svc.SearchBible(ctx, SearchParams{Query: q, SearchType: typ, Scope: scope, Version: "lxx", Limit: 10})
+		if err != nil {
+			t.Fatalf("%s: %v", q, err)
+		}
+		return r
+	}
+	if r := search("3", "greek_number", "all"); r.TotalCount != 1 || r.Results[0].Verse != 2 || r.Results[0].Text != "two<WG3>" {
+		t.Errorf("single number = %+v", r)
+	}
+	if r := search("G3 or G4", "greek_number", "all"); r.TotalCount != 2 || r.Results[1].Verse != 3 {
+		t.Errorf("or = %+v", r)
+	}
+	if r := search("G1-G2", "greek_number", "all"); r.TotalCount != 1 {
+		t.Errorf("range = %+v", r)
+	}
+	if r := search("3", "hebrew_number", "all"); r.TotalCount != 0 {
+		t.Errorf("hebrew number in lxx = %+v", r)
+	}
+	if r := search("3", "greek_number", "nt"); r.TotalCount != 0 {
+		t.Errorf("scope nt excludes Genesis = %+v", r)
+	}
+	one, two := 1, 1
+	adv, err := svc.SearchAdvanced(ctx, AdvancedParams{Query: "5", SearchType: "greek_number", RangeStart: &one, RangeEnd: &two, Version: "lxx", Limit: 10})
+	if err != nil || adv.(*AdvancedResult).TotalCount != 1 {
+		t.Errorf("advanced = %+v %v", adv, err)
+	}
+}

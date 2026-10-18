@@ -4,7 +4,11 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strconv"
+	"strings"
 	"sync"
+
+	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
 )
 
 // OrigDataAPI is the optional offline-data part of the upstream client: the decompressed JSON of one of FHL's
@@ -149,4 +153,43 @@ func (s *Service) getVerseOrig(ctx context.Context, bid int, p VerseParams, vers
 func origRef(r origRow) *NavRef {
 	b := byID[r.bid]
 	return &NavRef{Book: b.ChiShort, BookEng: b.EngShort, Chapter: r.chap, Verse: r.sec}
+}
+
+// hasOrigSN reports whether Strong's number searches in version run on the pre-built files: se.php cannot search
+// lxx / bhs / fhlwh by number (it answers "Fail: Empty Query"), and the files carry the numbers.
+func (s *Service) hasOrigSN(version string) bool {
+	_, known := origVersionNames[strings.ToLower(version)]
+	_, hasAPI := s.API.(OrigDataAPI)
+	return known && hasAPI
+}
+
+// origSNRecords finds the verses of lxx / bhs / fhlwh that carry the number t (exact: 3608 does not match
+// <WG3608a>), narrowed by the range of base (Range 1 = NT, 2 = OT, 3 = RangeBID..RangeEID). ok is false when
+// base.Version is not such a version, and the caller searches upstream. Hebrew numbers only exist in bhs,
+// Greek ones in lxx and fhlwh; the other combination simply finds nothing.
+func (s *Service) origSNRecords(ctx context.Context, base fhlapi.SERequest, t snTerm) (recs []fhlapi.SERecord, ok bool, err error) {
+	version := strings.ToLower(base.Version)
+	if !s.hasOrigSN(version) {
+		return nil, false, nil
+	}
+	ob, err := s.loadOrig(ctx, s.API.(OrigDataAPI), version)
+	if err != nil {
+		return nil, true, err
+	}
+	token := "<WH" + strconv.Itoa(t.n) + ">"
+	if t.nt {
+		token = "<WG" + strconv.Itoa(t.n) + ">"
+	}
+	for _, r := range ob.rows {
+		switch {
+		case base.Range == 1 && r.bid < 40, base.Range == 2 && r.bid > 39,
+			base.Range == 3 && (r.bid < base.RangeBID || r.bid > base.RangeEID):
+			continue
+		}
+		if strings.Contains(r.text, token) {
+			b := byID[r.bid]
+			recs = append(recs, fhlapi.SERecord{Chineses: b.ChiShort, Engs: b.EngShort, Chap: r.chap, Sec: r.sec, BibleText: r.text})
+		}
+	}
+	return recs, true, nil
 }

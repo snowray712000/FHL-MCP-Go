@@ -203,6 +203,20 @@ func (s *Service) evalSN(ctx context.Context, q snQuery, base fhlapi.SERequest) 
 		if set, ok := sets[t]; ok {
 			return set, nil
 		}
+		if found, ok, err := s.origSNRecords(ctx, base, t); ok {
+			if err != nil {
+				return nil, err
+			}
+			set := make(map[verseKey]bool, len(found))
+			for _, rec := range found {
+				id, _ := ResolveBookID(rec.Chineses)
+				k := verseKey{id, rec.Chap, rec.Sec}
+				set[k] = true
+				recs[k] = rec
+			}
+			sets[t] = set
+			return set, nil
+		}
 		r := base
 		r.Query, r.Offset, r.Limit = strconv.Itoa(t.n), 0, seMaxLimit
 		r.Orig = 2
@@ -345,7 +359,7 @@ func (s *Service) searchSNCombined(ctx context.Context, query, searchType string
 	if perr != nil {
 		return nil, 0, true, perr
 	}
-	if !combo {
+	if !combo && !s.hasOrigSN(base.Version) {
 		return nil, 0, false, nil // one plain number: the caller keeps its normal path
 	}
 	all, err := s.evalSN(ctx, q, base)
