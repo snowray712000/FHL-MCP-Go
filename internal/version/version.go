@@ -2,7 +2,7 @@
 package version
 
 // Version is the product version.
-const Version = "1.1.2.17"
+const Version = "1.2.1"
 
 // Name is the product name reported in serverInfo and logs.
 const Name = "FHL-MCP-Go"
