@@ -2,6 +2,8 @@
 package fhlapi
 
 import (
+	"bytes"
+	"compress/gzip"
 	"context"
 	"encoding/json"
 	"errors"
@@ -205,6 +207,58 @@ func (c *Client) UIABV(ctx context.Context, simplified bool) (*ABResponse, error
 		return nil, &Error{Kind: ErrUpstream, Message: "uiabv.php: no version list"}
 	}
 	return &out, nil
+}
+
+// origDataNames are the pre-built original-text files FHL's web UI publishes under bible.fhl.net/NUI/index/
+// (made offline from bible_parsing.zip, see FHLNUI docs z260928a / z260928c): text with <WG..> / <WH..> numbers.
+var origDataNames = map[string]bool{"lxx": true, "bhs": true, "fhlwh": true}
+
+// origDataMaxBytes bounds the decompressed size (the largest file is about 9 MB).
+const origDataMaxBytes = 64 << 20
+
+// origDataTTL is how long a downloaded file stays in the file cache (the files change a few times a year).
+const origDataTTL = 7 * 24 * time.Hour
+
+// nuiBase is the server root of the UI files: the /api (or /json) base without that last path segment.
+func (c *Client) nuiBase() string {
+	b := strings.TrimRight(c.BaseURL, "/")
+	for _, suffix := range []string{"/api", "/json"} {
+		if strings.HasSuffix(b, suffix) {
+			return strings.TrimSuffix(b, suffix) + "/NUI/index"
+		}
+	}
+	return b + "/NUI/index"
+}
+
+// OrigData downloads (through the file cache) and decompresses bible_<name>.json.gz for name lxx, bhs or fhlwh.
+func (c *Client) OrigData(ctx context.Context, name string) ([]byte, error) {
+	if !origDataNames[name] {
+		return nil, &Error{Kind: ErrUpstream, Message: "no original-text file for version " + strconv.Quote(name)}
+	}
+	file := "bible_" + name + ".json.gz"
+	var gz []byte
+	var err error
+	if c.Cache != nil {
+		gz, err = c.Cache.Do(ctx, c.nuiBase()+"/"+file, origDataTTL, func(ctx context.Context) ([]byte, bool, error) {
+			b, err := c.fetch(ctx, c.nuiBase(), file, url.Values{})
+			return b, err == nil && len(b) > 2 && b[0] == 0x1f && b[1] == 0x8b, err
+		})
+	} else {
+		gz, err = c.fetch(ctx, c.nuiBase(), file, url.Values{})
+	}
+	if err != nil {
+		return nil, err
+	}
+	zr, err := gzip.NewReader(bytes.NewReader(gz))
+	if err != nil {
+		return nil, &Error{Kind: ErrParse, Message: file + ": " + err.Error()}
+	}
+	defer zr.Close()
+	out, err := io.ReadAll(io.LimitReader(zr, origDataMaxBytes))
+	if err != nil {
+		return nil, &Error{Kind: ErrParse, Message: file + ": " + err.Error()}
+	}
+	return out, nil
 }
 
 // SERequest are the se.php (search) query parameters. count_only / index_only are always 0:

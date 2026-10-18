@@ -26,7 +26,8 @@ type API interface {
 
 // Service holds the Bible domain logic. It does not know about MCP.
 type Service struct {
-	API API
+	API  API
+	orig origCache // parsed lxx / bhs / fhlwh files, loaded on first use
 }
 
 // InvalidParameterError is a caller mistake (bad or missing parameter), reported to the model as a tool error.
@@ -108,6 +109,9 @@ func (s *Service) GetVerse(ctx context.Context, p VerseParams) (*VerseResult, er
 	version := p.Version
 	if version == "" {
 		version = "unv"
+	}
+	if res, ok := s.getVerseOrig(ctx, bid, p, version); ok {
+		return res, nil
 	}
 	resp, err := s.API.QB(ctx, fhlapi.QBRequest{
 		BID:        bid,

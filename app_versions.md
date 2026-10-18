@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **1.1.2.11**
+- last: **1.1.2.12**
 - 版次格式：`主.次.修.小`（例 `1.1.2.1`），第三碼的奇偶有意義（使用者定，2026-10-17）：
   - 第三碼奇數（如 `1.1.1`、`1.1.3`、`1.2.1`）是正式發佈版，三段式；只有正式版會做發佈包、發到 GitHub Release 與 npm。
   - 第三碼偶數（`1.1.2.x`）是小變更的開發版，給研發用，不做正式發佈；每次小變更升最後一碼。
@@ -36,6 +36,13 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 1.1.2.12
+
+- 🆕 新功能: 查經文時把「包含原文編號」打開，現在七十士譯本（lxx）、舊約馬索拉原文（bhs）、新約原文（fhlwh）也會在每個字後面附上 Strong 編號（例如 `θεὸς<WG2316>`、`אֱלֹהִים<WH430>`）。以前這三個譯本即使要求編號，信望愛也只回純文字。
+- ℹ️ 說明: 這些編號來自信望愛網站事先做好的資料檔（約 1.7 MB、1.4 MB、0.6 MB），第一次用到才下載，之後存在本機快取（7 天）。七十士譯本的編號是由新約同形的字推得，約 85% 的字有編號；新約沒有的字（許多人名、地名）沒有編號。沒開「包含原文編號」時行為完全不變；資料檔下載失敗時會退回原本不含編號的結果。
+- 📝工程師筆記-🐞發現: 來源 FHLNUI `docs/z260928a`、`z260928c`。實測 2026-10-19：`qb.php` 對 lxx／bhs／fhlwh 的 `strong=1` 與 `strong=0` 回傳相同（無編號）；`https://bible.fhl.net/NUI/index/bible_{lxx,bhs,fhlwh}.json.gz` 可直接下載（Last-Modified 2026-09-28），格式 `{col:[book,chap,sec,text], ver, src, data:[[bid,chap,sec,text]…]}`，lxx 22719 節、bhs 已修正行序。fhlwh 的經文與 qb.php 略有差異（來源為 bible_parsing 的整節原文，較正確）。另有 `bible_bhs_code.json.gz`（舊約整節內碼，供希伯來文搜尋），本版未用。
+- 📝工程師筆記-✨新增: `fhlapi.Client.OrigData`（`nuiBase()` 由 `/api` 換成 `/NUI/index`，經檔案快取 7 天，驗 gzip 魔術數字才快取，解壓上限 64 MB）；可選介面 `bible.OrigDataAPI`；`bible/origtext.go`：`parseOrig`、`Service.loadOrig`（解析後留在記憶體，行程內只載入一次）、`getVerseOrig`（只在 `include_strong` 且版本為 lxx／bhs／fhlwh 且客戶端有實作時啟用；節範圍用既有 `parseVerseSpec`；導覽上一節／下一節依檔案順序）。`GetVerse` 前置此分支，因此 `query_verse_citation` 帶 `include_strong` 也受惠。凍結合約不變。測試：`TestOrigDataDownloadsAndDecompresses`、`TestGetVerseOrigStrongsOffline`；另用暫時的真實連線測試驗過三個譯本。未做：以編號搜尋 lxx／bhs（`se.php` 不支援）、`get_bible_chapter` 沒有 `include_strong` 參數所以不受影響。
 
 ## 1.1.2.11
 

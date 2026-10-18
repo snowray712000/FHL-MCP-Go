@@ -1,6 +1,8 @@
 package fhlapi
 
 import (
+	"bytes"
+	"compress/gzip"
 	"context"
 	"errors"
 	"net/http"
@@ -704,5 +706,25 @@ func TestUIABVQueryAndParse(t *testing.T) {
 	c = newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"success","record_count":0,"record":[]}`)) })
 	if _, err := c.UIABV(context.Background(), false); !errors.Is(err, ErrUpstream) {
 		t.Errorf("empty list: err = %v, want ErrUpstream", err)
+	}
+}
+
+func TestOrigDataDownloadsAndDecompresses(t *testing.T) {
+	var path string
+	var buf bytes.Buffer
+	zw := gzip.NewWriter(&buf)
+	_, _ = zw.Write([]byte(`{"col":["book","chap","sec","text"],"data":[]}`))
+	_ = zw.Close()
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) { path = r.URL.Path; _, _ = w.Write(buf.Bytes()) })
+	got, err := c.OrigData(context.Background(), "lxx")
+	if err != nil || path != "/NUI/index/bible_lxx.json.gz" || !strings.Contains(string(got), `"data":[]`) {
+		t.Errorf("got %q path %s err %v", got, path, err)
+	}
+	if _, err := c.OrigData(context.Background(), "../x"); !errors.Is(err, ErrUpstream) {
+		t.Errorf("unknown name: err = %v", err)
+	}
+	bad := newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte("<html>")) })
+	if _, err := bad.OrigData(context.Background(), "bhs"); !errors.Is(err, ErrParse) {
+		t.Errorf("not gzip: err = %v", err)
 	}
 }
