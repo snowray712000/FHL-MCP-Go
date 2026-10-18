@@ -141,7 +141,7 @@ func TestSEQuery(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	want := map[string]string{"VERSION": "unv", "orig": "0", "q": "愛", "RANGE": "3", "offset": "0", "count_only": "0", "index_only": "0", "limit": "3", "range_bid": "43", "range_eid": "43", "gb": "1"}
+	want := map[string]string{"VERSION": "unv", "orig": "0", "q": "爱", "RANGE": "3", "offset": "0", "count_only": "0", "index_only": "0", "limit": "3", "range_bid": "43", "range_eid": "43", "gb": "1"}
 	for k, v := range want {
 		if q[k] != v {
 			t.Errorf("param %s = %q, want %q", k, q[k], v)
@@ -579,7 +579,7 @@ func TestArticlesQueryServerAndCache(t *testing.T) {
 	if err != nil {
 		t.Fatal(err)
 	}
-	if path != "/api/json.php" || query != "gb=1&ptab=women3&title=%E6%84%9B" {
+	if path != "/api/json.php" || query != "gb=1&ptab=women3&title=%E7%88%B1" {
 		t.Errorf("request = %s?%s", path, query)
 	}
 	if res.Status != 1 || res.RecordCount != 3 || len(res.Record) != 3 || string(res.Record[0].ID) != `"9247"` || len(res.Record[0].Txt) == 0 {
@@ -599,5 +599,28 @@ func TestArticlesQueryServerAndCache(t *testing.T) {
 	}
 	if n != 3 {
 		t.Errorf("requests = %d, want 3 (failures are asked again)", n)
+	}
+}
+
+func TestSEKeywordFollowsScriptOfMode(t *testing.T) {
+	var got []string
+	srv := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		got = append(got, r.URL.Query().Get("gb")+":"+r.URL.Query().Get("q"))
+		_, _ = w.Write([]byte(`{"status":"success","record_count":0,"record":[]}`))
+	}))
+	t.Cleanup(srv.Close)
+	c := &Client{BaseURL: srv.URL, HTTP: srv.Client()}
+	for _, simp := range []bool{true, false} {
+		for _, kw := range []string{"神愛世人", "神爱世人"} {
+			if _, err := c.SE(context.Background(), SERequest{Query: kw, Version: "unv", Range: 0, Limit: 1, Simplified: simp}); err != nil {
+				t.Fatal(err)
+			}
+		}
+	}
+	want := []string{"1:神爱世人", "1:神爱世人", "0:神愛世人", "0:神愛世人"}
+	for i := range want {
+		if got[i] != want[i] {
+			t.Errorf("request %d = %q, want %q", i, got[i], want[i])
+		}
 	}
 }

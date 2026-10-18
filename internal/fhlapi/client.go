@@ -14,6 +14,7 @@ import (
 	"time"
 
 	"github.com/snowray712000/FHL-MCP-Go/internal/cache"
+	"github.com/snowray712000/FHL-MCP-Go/internal/hanzi"
 )
 
 const (
@@ -221,7 +222,7 @@ func (c *Client) SE(ctx context.Context, r SERequest) (*SEResponse, error) {
 	q := url.Values{}
 	q.Set("VERSION", r.Version)
 	q.Set("orig", strconv.Itoa(r.Orig))
-	q.Set("q", r.Query)
+	q.Set("q", hanzi.ForMode(r.Query, r.Simplified))
 	q.Set("RANGE", strconv.Itoa(r.Range))
 	q.Set("offset", strconv.Itoa(r.Offset))
 	q.Set("count_only", "0")
@@ -419,7 +420,7 @@ type SSCResponse struct {
 // SSC searches the commentaries (ssc.php). Too common a keyword yields ErrTooManyRecords.
 func (c *Client) SSC(ctx context.Context, key string, simplified bool) (*SSCResponse, error) {
 	q := url.Values{}
-	q.Set("key", key)
+	q.Set("key", hanzi.ForMode(key, simplified))
 	q.Set("gb", boolDigit(simplified))
 	var out SSCResponse
 	if err := c.getJSON(ctx, "ssc.php", q, &out); err != nil {
@@ -455,7 +456,7 @@ func (c *Client) ST(ctx context.Context, source int, keyword string, countOnly, 
 	q := url.Values{}
 	q.Set("N", strconv.Itoa(source))
 	q.Set("count_only", boolDigit(countOnly))
-	q.Set("keyword", keyword)
+	q.Set("keyword", hanzi.ForMode(keyword, simplified))
 	q.Set("gb", boolDigit(simplified))
 	var out STResponse
 	if err := c.getJSON(ctx, "st.php", q, &out); err != nil {
@@ -572,7 +573,7 @@ func (c *Client) subVerse(ctx context.Context, endpoint string, bid, chapter int
 
 func (c *Client) subSearch(ctx context.Context, endpoint, keyword string, limit, offset int) (*SubSearchResponse, error) {
 	q := url.Values{}
-	q.Set("q", keyword)
+	q.Set("q", hanzi.ToTraditional(keyword))
 	q.Set("offset", strconv.Itoa(offset))
 	q.Set("limit", strconv.Itoa(limit))
 	var out SubSearchResponse
@@ -653,6 +654,9 @@ func (c *Client) Articles(ctx context.Context, a ArticleQuery) (*ArticlesRespons
 	q.Set("gb", boolDigit(a.Simplified))
 	for k, v := range map[string]string{"title": a.Title, "author": a.Author, "txt": a.Content, "abst": a.Abstract, "ptab": a.Column, "pubtime": a.PubDate} {
 		if v != "" {
+			if k == "title" || k == "author" || k == "txt" || k == "abst" {
+				v = hanzi.ForMode(v, a.Simplified)
+			}
 			q.Set(k, v)
 		}
 	}

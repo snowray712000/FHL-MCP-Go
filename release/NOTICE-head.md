@@ -49,3 +49,9 @@ SOFTWARE.
 ## 內含的 Go 函式庫 / Bundled Go modules
 
 下列函式庫被編進執行檔，授權條款全文附在後面。 The following modules are linked into the executable; their license texts follow.
+
+## 簡繁字表 (GPL-2.0-or-later)
+
+`internal/hanzi` 的簡繁對照字表（單字部分）取自 Python 套件 zhconv 1.4.3 的 `zhcdict.json`，其資料源自 MediaWiki 的 `ZhConversion.php`，以 GNU General Public License 第 2 版或（由你選擇）任何較新的版本授權，與本程式的 GPL-3.0-or-later 相容。
+
+The simplified/traditional character table in `internal/hanzi` (single-character entries) is derived from `zhcdict.json` of zhconv 1.4.3, itself derived from MediaWiki's `ZhConversion.php` (GPL-2.0-or-later, compatible with this program's GPL-3.0-or-later).
