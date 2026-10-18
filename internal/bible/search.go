@@ -95,6 +95,9 @@ func (s *Service) searchPaged(ctx context.Context, r fhlapi.SERequest) (*fhlapi.
 	if r.Limit > seMaxLimit {
 		return nil, &InvalidParameterError{Name: "limit", Value: strconv.Itoa(r.Limit), Reason: "too large, at most " + strconv.Itoa(seMaxLimit) + " results per call; use a smaller limit (上限 " + strconv.Itoa(seMaxLimit) + " 筆)"}
 	}
+	if resp, ok, err := s.origKeyword(ctx, r); ok {
+		return resp, err
+	}
 	if r.Limit <= seMaxPage {
 		return s.API.SE(ctx, r)
 	}

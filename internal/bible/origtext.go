@@ -35,6 +35,8 @@ type origRow struct {
 type origBible struct {
 	rows     []origRow
 	chapters map[[2]int][2]int
+	hebOnce  sync.Once   // heb is built on the first Hebrew keyword search
+	heb      [][]cluster // clusters of each row (bhs only)
 }
 
 func parseOrig(b []byte) (*origBible, error) {
@@ -181,9 +183,7 @@ func (s *Service) origSNRecords(ctx context.Context, base fhlapi.SERequest, t sn
 		token = "<WG" + strconv.Itoa(t.n) + ">"
 	}
 	for _, r := range ob.rows {
-		switch {
-		case base.Range == 1 && r.bid < 40, base.Range == 2 && r.bid > 39,
-			base.Range == 3 && (r.bid < base.RangeBID || r.bid > base.RangeEID):
+		if !inSERange(base, r.bid) {
 			continue
 		}
 		if strings.Contains(r.text, token) {
@@ -192,4 +192,14 @@ func (s *Service) origSNRecords(ctx context.Context, base fhlapi.SERequest, t sn
 		}
 	}
 	return recs, true, nil
+}
+
+// inSERange applies the range of an se.php request to a book: Range 1 = NT, 2 = OT, 3 = RangeBID..RangeEID.
+func inSERange(r fhlapi.SERequest, bid int) bool {
+	switch {
+	case r.Range == 1 && bid < 40, r.Range == 2 && bid > 39,
+		r.Range == 3 && (bid < r.RangeBID || bid > r.RangeEID):
+		return false
+	}
+	return true
 }

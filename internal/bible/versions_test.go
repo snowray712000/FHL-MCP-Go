@@ -6,6 +6,7 @@ import (
 	"errors"
 	"os"
 	"path/filepath"
+	"strings"
 	"testing"
 
 	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
@@ -128,5 +129,70 @@ func TestSearchBibleByNumberInOrigVersions(t *testing.T) {
 	adv, err := svc.SearchAdvanced(ctx, AdvancedParams{Query: "5", SearchType: "greek_number", RangeStart: &one, RangeEnd: &two, Version: "lxx", Limit: 10})
 	if err != nil || adv.(*AdvancedResult).TotalCount != 1 {
 		t.Errorf("advanced = %+v %v", adv, err)
+	}
+}
+
+// hebAPI serves a tiny bhs file; the Hebrew is written with \u escapes (editors normalise the points).
+type hebAPI struct{ fakeAPI }
+
+func (f *hebAPI) OrigData(_ context.Context, name string) ([]byte, error) {
+	if name != "bhs" {
+		return nil, errors.New("only bhs")
+	}
+	bereshit := `בְּרֵאשִׁית<WH7225> בָּרָא<WH1254> אֱלֹהִים<WH430>׃`
+	erets := `וְהָאָרֶץ<WH776>׃`
+	exodus := `אֱלֹהֵים<WH430>־הָאָרֶץ`
+	return []byte(`{"col":["book","chap","sec","text"],"data":[[1,1,1,"` + bereshit + `"],[1,1,2,"` + erets + `"],[2,1,1,"` + exodus + `"]]}`), nil
+}
+
+func TestSearchBibleHebrewKeywordInBHS(t *testing.T) {
+	svc := &Service{API: &hebAPI{}}
+	ctx := context.Background()
+	verses := func(q, scope string) []int {
+		t.Helper()
+		r, err := svc.SearchBible(ctx, SearchParams{Query: q, SearchType: "keyword", Scope: scope, Version: "bhs", Limit: 10})
+		if err != nil {
+			t.Fatalf("%q: %v", q, err)
+		}
+		var out []int
+		for _, v := range r.Results {
+			out = append(out, v.Chapter*100+v.Verse)
+			if strings.Contains(v.Text, "<WH") {
+				t.Errorf("numbers must not leak into the text: %q", v.Text)
+			}
+		}
+		if r.TotalCount != len(out) {
+			t.Errorf("total %d, results %d", r.TotalCount, len(out))
+		}
+		return out
+	}
+	elohim := "אלהים"
+	if got := verses(elohim, "all"); len(got) != 2 { // bare consonants: Gen 1:1 and Ex 1:1
+		t.Errorf("bare = %v", got)
+	}
+	if got := verses("אֱלֹהִים", "all"); len(got) != 1 || got[0] != 101 { // with points: hiriq only
+		t.Errorf("with points = %v", got)
+	}
+	if got := verses("אלהימ", "all"); len(got) != 2 { // final mem == mem
+		t.Errorf("final form = %v", got)
+	}
+	if got := verses("ברא "+elohim, "all"); len(got) != 1 { // every word must occur
+		t.Errorf("two words = %v", got)
+	}
+	if got := verses("ראש", "all"); len(got) != 1 { // part of a word
+		t.Errorf("substring = %v", got)
+	}
+	if got := verses("הארץ", "all"); len(got) != 2 { // after a maqaf, and in a word with prefix vav is not whole-word but substring
+		t.Errorf("maqaf = %v", got)
+	}
+	if got := verses("בּרא", "all"); len(got) != 1 { // dagesh typed: must have it (bet in Gen 1:1 has dagesh)
+		t.Errorf("dagesh = %v", got)
+	}
+	if got := verses(elohim, "nt"); len(got) != 0 {
+		t.Errorf("nt scope = %v", got)
+	}
+	// a query without Hebrew letters (FHL's old ASCII code) still goes to se.php
+	if _, err := svc.SearchBible(ctx, SearchParams{Query: "abc", SearchType: "keyword", Scope: "all", Version: "bhs", Limit: 10}); err == nil {
+		t.Error("ASCII query must reach the upstream API")
 	}
 }
