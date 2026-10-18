@@ -33,10 +33,12 @@ type origRow struct {
 
 // origBible is one parsed file: rows in canonical order plus the [start,end) slice of every chapter.
 type origBible struct {
-	rows     []origRow
-	chapters map[[2]int][2]int
-	hebOnce  sync.Once   // heb is built on the first Hebrew keyword search
-	heb      [][]cluster // clusters of each row (bhs only)
+	rows      []origRow
+	chapters  map[[2]int][2]int
+	hebOnce   sync.Once   // heb is built on the first Hebrew keyword search
+	heb       [][]cluster // clusters of each row (bhs only)
+	greekOnce sync.Once   // greek is built on the first Greek keyword search
+	greek     []string    // folded text of each row (fhlwh only)
 }
 
 func parseOrig(b []byte) (*origBible, error) {

@@ -196,3 +196,56 @@ func TestSearchBibleHebrewKeywordInBHS(t *testing.T) {
 		t.Error("ASCII query must reach the upstream API")
 	}
 }
+
+// whAPI serves a tiny fhlwh file; the Greek is written with \u escapes (oxia, as FHL spells it).
+type whAPI struct{ fakeAPI }
+
+func (f *whAPI) OrigData(_ context.Context, name string) ([]byte, error) {
+	if name != "fhlwh" {
+		return nil, errors.New("only fhlwh")
+	}
+	// Jn 1:1 "Ἐν ἀρχῇ ἦν ὁ λόγος", Jn 1:14 "Καὶ ὁ λόγος σὰρξ ἐγένετο", Mt 1:1 (bid 40) "Βίβλος γενέσεως"
+	jn11 := `Ἐν<WG1722> ἀρχῇ<WG746> ἦν<WG1510> ὁ<WG3588> λόγος<WG3056>.`
+	jn114 := `Καὶ<WG2532> ὁ<WG3588> λόγος<WG3056> σὰρξ<WG4561>`
+	mt11 := `Βίβλος<WG976> γενέσεως<WG1078>`
+	return []byte(`{"col":["book","chap","sec","text"],"data":[[40,1,1,"` + mt11 + `"],[43,1,1,"` + jn11 + `"],[43,1,14,"` + jn114 + `"]]}`), nil
+}
+
+func TestSearchBibleGreekKeywordInFHLWH(t *testing.T) {
+	svc := &Service{API: &whAPI{}}
+	ctx := context.Background()
+	found := func(q, scope string) int {
+		t.Helper()
+		r, err := svc.SearchBible(ctx, SearchParams{Query: q, SearchType: "keyword", Scope: scope, Version: "fhlwh", Limit: 10})
+		if err != nil {
+			t.Fatalf("%q: %v", q, err)
+		}
+		for _, v := range r.Results {
+			if strings.Contains(v.Text, "<WG") {
+				t.Errorf("numbers must not leak into the text: %q", v.Text)
+			}
+		}
+		return r.TotalCount
+	}
+	if n := found("λογος", "all"); n != 2 { // bare, final sigma
+		t.Errorf("bare = %d", n)
+	}
+	if n := found("Λόγοσ", "all"); n != 2 { // capital, tonos (U+03CC), medial sigma at the end
+		t.Errorf("tonos/sigma = %d", n)
+	}
+	if n := found("λόγος", "all"); n != 2 { // FHL's own oxia
+		t.Errorf("oxia = %d", n)
+	}
+	if n := found("αρχ λογ", "all"); n != 1 { // two words, part of words
+		t.Errorf("two words = %d", n)
+	}
+	if n := found("λογος", "nt"); n != 2 || found("λογος", "ot") != 0 {
+		t.Errorf("scope: nt %d", n)
+	}
+	if n := found("βιβλος", "all"); n != 1 {
+		t.Errorf("Matthew = %d", n)
+	}
+	if _, err := svc.SearchBible(ctx, SearchParams{Query: "abc", SearchType: "keyword", Scope: "all", Version: "fhlwh", Limit: 10}); err == nil {
+		t.Error("a query without Greek letters must reach the upstream API")
+	}
+}

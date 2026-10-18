@@ -111,38 +111,54 @@ func hebQueryWords(q string) [][]cluster {
 	return words
 }
 
-// origKeyword answers a keyword se.php request for bhs with a Hebrew query from the pre-built file.
+// origKeyword answers a keyword se.php request for bhs (Hebrew query) or fhlwh (Greek query) from the pre-built file.
 // ok is false for anything else, and the caller asks upstream.
 func (s *Service) origKeyword(ctx context.Context, r fhlapi.SERequest) (*fhlapi.SEResponse, bool, error) {
-	if r.Orig != 0 || strings.ToLower(r.Version) != "bhs" || !s.hasOrigSN("bhs") || !hasHebrew(r.Query) {
+	version := strings.ToLower(r.Version)
+	if r.Orig != 0 || !s.hasOrigSN(version) ||
+		!(version == "bhs" && hasHebrew(r.Query) || version == "fhlwh" && hasGreek(r.Query)) {
 		return nil, false, nil
 	}
-	words := hebQueryWords(r.Query)
-	ob, err := s.loadOrig(ctx, s.API.(OrigDataAPI), "bhs")
+	ob, err := s.loadOrig(ctx, s.API.(OrigDataAPI), version)
 	if err != nil {
 		return nil, true, err
 	}
-	if ob.heb == nil {
+	var match func(i int) bool
+	if version == "fhlwh" {
+		words := strings.Fields(greekFolded(r.Query))
+		if len(words) == 0 {
+			return nil, false, nil
+		}
+		ob.greekOnce.Do(func() {
+			ob.greek = make([]string, len(ob.rows))
+			for i, row := range ob.rows {
+				ob.greek[i] = greekFolded(row.text)
+			}
+		})
+		match = func(i int) bool { return greekMatches(ob.greek[i], words) }
+	} else {
+		words := hebQueryWords(r.Query)
 		ob.hebOnce.Do(func() {
 			ob.heb = make([][]cluster, len(ob.rows))
 			for i, row := range ob.rows {
 				ob.heb[i] = hebClusters(row.text)
 			}
 		})
+		match = func(i int) bool {
+			for _, w := range words {
+				if !hebWord(ob.heb[i], w) {
+					return false
+				}
+			}
+			return true
+		}
 	}
 	var recs []fhlapi.SERecord
 	for i, row := range ob.rows {
 		if !inSERange(r, row.bid) {
 			continue
 		}
-		all := true
-		for _, w := range words {
-			if !hebWord(ob.heb[i], w) {
-				all = false
-				break
-			}
-		}
-		if all {
+		if match(i) {
 			b := byID[row.bid]
 			recs = append(recs, fhlapi.SERecord{Chineses: b.ChiShort, Engs: b.EngShort, Chap: row.chap, Sec: row.sec, BibleText: snMarker.ReplaceAllString(row.text, "")})
 		}
