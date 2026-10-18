@@ -153,9 +153,30 @@ func TestCitationParsing(t *testing.T) {
 		{"  約 3:16-17  ", "約", 3, "16-17", true},
 		{"John 3:16,18", "John", 3, "16,18", true},
 		{"1 John 4:8", "1 John", 4, "8", true},
-		{"約3:16", "", 0, "", false}, // D10: the space is required
-		{"約 3", "", 0, "", false},
+		// relaxed (was D10: a space after the book was required)
+		{"約3:16", "約", 3, "16", true},
+		{"約3:16-17", "約", 3, "16-17", true},
+		{"1John 4:8", "1John", 4, "8", true},
+		{"John 3：16－18，20", "John", 3, "16-18,20", true},
+		{"約３：１６～１８", "約", 3, "16-18", true},
+		{"約 3:16-End", "約", 3, "16-end", true},
+		{"John 3:16-e.", "John", 3, "16-e", true},
+		{"#約 3:16|", "約", 3, "16", true},
+		{"路1．23", "路", 1, "23", true},
+		{"約 3:18-16", "約", 3, "18-16", true},
+		{"約 3", "約", 3, "", true},
+		{"約3", "約", 3, "", true},
+		{"Gen. 1", "Gen", 1, "", true},
+		{"猶", "猶", 1, "", true},
+		{"猶大書", "猶大書", 1, "", true},
+		{"Jude 5", "Jude", 1, "5", true},
+		{"猶 5-7", "猶", 1, "5-7", true},
+		{"猶 23-end", "猶", 1, "23-end", true},
+		{"猶1:5", "猶", 1, "5", true},
 		{"約 3:16-", "", 0, "", false},
+		{"約", "", 0, "", false},
+		{"31", "", 0, "", false},
+		{"約 3-4", "", 0, "", false},
 		{"", "", 0, "", false},
 	}
 	for _, c := range cases {
@@ -165,9 +186,9 @@ func TestCitationParsing(t *testing.T) {
 		}
 	}
 	api := &routeAPI{t: t}
-	_, err := callTool(t, api, "query_verse_citation", `{"citation":"約3:16-17"}`)
+	_, err := callTool(t, api, "query_verse_citation", `{"citation":"約 3:16-"}`)
 	var ip *bible.InvalidParameterError
-	if !errors.As(err, &ip) || ip.Name != "citation" || ip.Value != "約3:16-17" {
+	if !errors.As(err, &ip) || ip.Name != "citation" || ip.Value != "約 3:16-" {
 		t.Errorf("want InvalidParameterError on citation, got %v", err)
 	}
 	if len(api.got) != 0 {
@@ -301,4 +322,48 @@ func (f *routeAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, erro
 
 func (f *routeAPI) Articles(context.Context, fhlapi.ArticleQuery) (*fhlapi.ArticlesResponse, error) {
 	return nil, errors.New("Articles not expected in this test")
+}
+
+func TestCitationRelaxedQueries(t *testing.T) {
+	// "end" fetches the whole chapter and keeps the named verses; navigation is dropped.
+	api := &routeAPI{t: t}
+	out, err := callTool(t, api, "query_verse_citation", `{"citation":"門 23-end"}`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if len(api.got) != 1 || api.got[0].BID != 57 || api.got[0].Chapter != 1 || api.got[0].Verse != "" {
+		t.Errorf("end must query the whole chapter: %+v", api.got)
+	}
+	var res struct {
+		RecordCount int `json:"record_count"`
+		Verses      []struct {
+			Verse int `json:"verse"`
+		} `json:"verses"`
+		Navigation any `json:"navigation"`
+	}
+	if err := json.Unmarshal([]byte(out), &res); err != nil {
+		t.Fatal(err)
+	}
+	if res.RecordCount != len(res.Verses) || len(res.Verses) == 0 || res.Verses[0].Verse != 23 || res.Navigation != nil {
+		t.Errorf("end result: %+v", res)
+	}
+
+	// One-chapter book without a chapter, and a whole-chapter citation.
+	for _, c := range []string{`{"citation":"門"}`, `{"citation":"腓利門書"}`} {
+		api := &routeAPI{t: t}
+		if _, err := callTool(t, api, "query_verse_citation", c); err != nil {
+			t.Fatalf("%s: %v", c, err)
+		}
+		if len(api.got) != 1 || api.got[0].BID != 57 || api.got[0].Chapter != 1 || api.got[0].Verse != "" {
+			t.Errorf("%s: %+v", c, api.got)
+		}
+	}
+	// Fixture only has 3:16-17: relaxed spelling must reach upstream as the same normalized request.
+	api = &routeAPI{t: t}
+	if _, err := callTool(t, api, "query_verse_citation", `{"citation":"約３：１６－１７"}`); err != nil {
+		t.Fatal(err)
+	}
+	if len(api.got) != 1 || api.got[0].BID != 43 || api.got[0].Chapter != 3 || api.got[0].Verse != "16-17" {
+		t.Errorf("full-width citation: %+v", api.got)
+	}
 }
