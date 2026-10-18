@@ -13,6 +13,7 @@ import (
 const (
 	EnvDataDir     = "FHL_DATA_DIR"
 	EnvCacheMaxMB  = "FHL_CACHE_MAX_MB"
+	EnvSimplified  = "FHL_SIMPLIFIED"
 	defaultCacheMB = int(cache.DefaultMaxBytes >> 20)
 )
 

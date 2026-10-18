@@ -36,6 +36,8 @@ serve 選項:
   --log-level debug|info|warn|error (預設 info；日誌寫到 stderr)
   --data-dir 資料目錄 (預設為系統使用者快取目錄下的 fhl-mcp；也可用 FHL_DATA_DIR)；快取放在其下的 cache/
   --cache-max-mb 快取容量上限，單位 MB (預設 200，0 = 不使用快取；也可用 FHL_CACHE_MAX_MB)
+  --simplified 工具預設回簡體中文 (呼叫時明確給 use_simplified 者以呼叫為準；也可用 FHL_SIMPLIFIED=1)；
+               固定訊息 (錯誤說明等) 仍為繁體
 
 status / stop / doctor 選項:
   --host --port --data-dir 同 serve (要與啟動時相同才找得到)
@@ -97,7 +99,19 @@ func serve(args []string, stdout, stderr io.Writer) int {
 	level := fs.String("log-level", "info", "debug|info|warn|error")
 	dataDir := fs.String("data-dir", "", "data directory (default: user cache dir; env FHL_DATA_DIR)")
 	cacheMB := fs.Int("cache-max-mb", -1, "cache size cap in MB (default 200, 0 disables; env FHL_CACHE_MAX_MB)")
+	simplifiedFlag := fs.Bool("simplified", false, "default tools to simplified Chinese (env FHL_SIMPLIFIED)")
 	if err := fs.Parse(args); err != nil {
+		return 2
+	}
+	var simplifiedArg *bool
+	fs.Visit(func(f *flag.Flag) {
+		if f.Name == "simplified" {
+			simplifiedArg = simplifiedFlag
+		}
+	})
+	defSimplified, err := app.ResolveSimplified(simplifiedArg)
+	if err != nil {
+		fmt.Fprintf(stderr, "%v\n", err)
 		return 2
 	}
 	maxBytes, err := app.ResolveCacheMaxBytes(*cacheMB)
@@ -144,7 +158,7 @@ func serve(args []string, stdout, stderr io.Writer) int {
 		}
 	}
 
-	cfg := app.Config{Host: *host, Port: *port, Logger: logger, CacheDir: cacheDir, CacheMaxBytes: maxBytes, Run: &app.RunConfig{DataDir: dd}}
+	cfg := app.Config{Host: *host, Port: *port, Logger: logger, CacheDir: cacheDir, CacheMaxBytes: maxBytes, DefaultSimplified: defSimplified, Run: &app.RunConfig{DataDir: dd}}
 	ln, err := app.Listen(cfg)
 	if err != nil {
 		fmt.Fprintf(stderr, "無法啟動: %v\n", err)

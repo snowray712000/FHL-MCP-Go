@@ -44,9 +44,20 @@ func validNumericID(id int) bool {
 
 // ResolveBookID resolves a book name to its FHL book ID. It accepts a numeric
 // book code, English short/full names (case-insensitive), and Chinese
-// short/full names. No whitespace trimming and no alias table: this matches
+// short/full names, in traditional or simplified form. No whitespace trimming and no alias table: this matches
 // the Python reference's BookNameConverter.get_book_id (alias handling is D11, M2).
 func ResolveBookID(name string) (int, bool) {
+	if id, ok := resolveBookExact(name); ok {
+		return id, true
+	}
+	// Simplified Chinese names (约翰福音, 创, 启) fall back to the traditional table.
+	if folded, changed := foldSimplifiedBook(name); changed {
+		return resolveBookExact(folded)
+	}
+	return 0, false
+}
+
+func resolveBookExact(name string) (int, bool) {
 	if name == "" {
 		return 0, false
 	}

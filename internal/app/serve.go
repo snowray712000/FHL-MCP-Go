@@ -35,6 +35,8 @@ type Config struct {
 	CacheMaxBytes int64
 	// API is the upstream client; nil means the production client. Tests inject a mock-backed one.
 	API *fhlapi.Client
+	// DefaultSimplified makes tools return simplified Chinese unless the call says use_simplified=false.
+	DefaultSimplified bool
 	// Logger receives structured logs; nil discards them.
 	Logger *slog.Logger
 	// Run, when set, publishes a state file and enables the authenticated control endpoints used by
@@ -86,6 +88,7 @@ func Serve(ctx context.Context, cfg Config, ln net.Listener, out io.Writer) erro
 	}
 
 	registry := tools.NewRegistry(&bible.Service{API: api})
+	registry.DefaultSimplified = cfg.DefaultSimplified
 	srv, err := mcpserver.New(mcpserver.Options{Name: version.Name, Version: version.Version, Tools: registry, Logger: log})
 	if err != nil {
 		return err

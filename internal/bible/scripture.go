@@ -126,6 +126,11 @@ func (s *ScriptureSet) resolve(book string) (*scriptureBook, error) {
 	if b, ok := s.byAlias[aliasKey(book)]; ok {
 		return b, nil
 	}
+	if folded, changed := foldSimplifiedBook(book); changed {
+		if b, ok := s.byAlias[aliasKey(folded)]; ok {
+			return b, nil
+		}
+	}
 	return nil, s.notBook(book)
 }
 

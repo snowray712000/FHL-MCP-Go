@@ -17,6 +17,9 @@ type handler func(ctx context.Context, a args) (string, error)
 // Registry maps tool names to handlers.
 type Registry struct {
 	handlers map[string]handler
+	// DefaultSimplified makes use_simplified default to true when a call omits it (or sends null).
+	// An explicit true/false from the caller always wins.
+	DefaultSimplified bool
 }
 
 // NewRegistry wires the implemented tools to the domain service.
@@ -105,6 +108,11 @@ func (r *Registry) Call(ctx context.Context, name string, raw json.RawMessage) (
 	a, err := parseArgs(raw)
 	if err != nil {
 		return "", err
+	}
+	if r.DefaultSimplified {
+		if _, given := a.get("use_simplified"); !given {
+			a["use_simplified"] = json.RawMessage("true")
+		}
 	}
 	return h(ctx, a)
 }

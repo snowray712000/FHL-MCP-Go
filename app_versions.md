@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **1.1.2.3**
+- last: **1.1.2.4**
 - 版次格式：`主.次.修.小`（例 `1.1.2.1`），第三碼的奇偶有意義（使用者定，2026-10-17）：
   - 第三碼奇數（如 `1.1.1`、`1.1.3`、`1.2.1`）是正式發佈版，三段式；只有正式版會做發佈包、發到 GitHub Release 與 npm。
   - 第三碼偶數（`1.1.2.x`）是小變更的開發版，給研發用，不做正式發佈；每次小變更升最後一碼。
@@ -23,7 +23,9 @@
 
 - ✨ 優化: npm 啟動器出錯時顯示真正的原因（現在所有錯誤都說「找不到執行檔套件」），並提示「先解除安裝殘留的平台套件再重裝」（需要新的正式版才能發到 npm）
 - ✨ 優化: 快速開始補上 Ubuntu 用 apt 裝的 npm 遇到 `EACCES` 權限錯誤時，改用自己的全域資料夾的做法
-- ✨ 優化: 「用引用查經文」還不支援書卷名帶簡體（如 `约翰福音`）與章範圍（`太 5-7`）；其餘寫法已在 1.1.2.3 放寬
+- ✨ 優化: 「用引用查經文」還不支援章範圍（`太 5-7`）；簡體書卷名已在 1.1.2.4 支援
+- ✨ 優化: 簡體搜尋關鍵字的自動轉換：信望愛網站要求關鍵字的字體要和 `use_simplified` 一致（簡體模式要輸入簡體字、繁體模式要輸入繁體字，不一致會搜到 0 筆）。目前沒有簡繁轉換，需決定是否引入簡繁轉換字庫，把關鍵字轉成與模式一致
+- ✨ 優化: 預設簡體模式下，本程式自己產生的固定文字（錯誤說明、導覽書名等）仍是繁體，尚未提供簡體版
 - ✨ 優化: 上游暫時失敗時自動重試，並控制對信望愛網站送出請求的速度（目前有快取與合併相同請求，但還沒有重試與限速）
 - ✨ 優化: 在 Mac 上確認兩個 `.command` 雙擊入口（`Setup.command`、`Start-FHL-MCP.command`）；在 Ubuntu 上確認 `disconnect` 真的移除登錄（上次測試時 Ubuntu 還沒登錄，只驗到「沒有登錄就略過」），以及 Ubuntu 上 Codex 的連接與移除；也還沒分別確認 macOS 13 與更新版本
 - ✨ 優化: 支援設定檔與 `FHL_` 環境變數來指定埠等選項（計畫書 §8；目前埠只能用 `--port` 指定）
@@ -35,6 +37,15 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 1.1.2.4
+
+- 🆕 新功能: 書卷名可以直接寫簡體：`约翰福音`、`创世记`、`罗马书`、`启示录`、`约 3:16` 都能查；次經與使徒教父的簡體書名（如 `友弟德传`、`黑马牧人书`）也可以。繁體寫法完全不受影響。
+- 🆕 新功能: 新增「預設簡體」選項：啟動時加 `--simplified`（或設環境變數 `FHL_SIMPLIFIED=1`），所有支援簡體的工具在沒指定 `use_simplified` 時都回簡體；呼叫時明確指定 `use_simplified` 為 true 或 false 的，仍以呼叫為準。
+- ℹ️ 說明: 預設簡體只影響信望愛網站回來的內容；本程式自己寫的提示文字（例如錯誤說明）仍是繁體。另外，信望愛網站要求「搜尋關鍵字的字體」要和簡繁模式一致：簡體模式搜 `爱` 才找得到、搜 `愛` 會是 0 筆，反之亦然（已用真實網站實測）；目前尚未自動轉換，已列入待辦。尚未用 Claude Code／Codex 實際連線逐項實測，單元測試皆通過。
+- 📝工程師筆記-✨新增: `internal/bible/simplified.go`：`s2tBookChars` 簡→繁字對照 (僅書卷名用到的 30 多個字)，`ResolveBookID` 先原樣查、查不到且含簡體字才轉繁體重查，所以繁體輸入行為不變；`ScriptureSet.resolve` (次經／使徒教父) 同樣處理；引用解析 `resolveBookLoose` 經 `ResolveBookID` 自動支援。`--simplified` (serve) → `app.ResolveSimplified` (旗標 > `FHL_SIMPLIFIED` > false) → `app.Config.DefaultSimplified` → `tools.Registry.DefaultSimplified`：`Call` 在 `use_simplified` 缺漏或為 null 時注入 `true`，明確值不動；`get_audio_bible` 契約沒有此參數，不受影響。快取 key 已含 `gb`，簡繁不會混用。
+- 📝工程師筆記-🐞發現: 實測 `se.php`：`gb=1` 搜 `爱` 有結果、搜 `愛` 為 0；`gb=0` 相反 (`神爱世人`／`神愛世人` 亦同)，即上游依 `gb` 選簡體或繁體資料表，關鍵字不轉換。
+- 📝工程師筆記-ℹ️說明: 測試：`TestResolveBookID` 增簡體案例、`TestCitationAcceptsSimplifiedBookNames`、`TestScriptureSetAcceptsSimplifiedBookNames`、`TestFoldSimplifiedBookLeavesTraditionalAlone`、`TestDefaultSimplifiedInjectsOnlyWhenOmitted`、`TestResolveSimplified`；`go vet`、`CGO_ENABLED=0 go test ./...` 通過。未驗證：設定檔 (專案目前仍無設定檔機制，只有旗標與環境變數)、經真實 MCP 客戶端的 `--simplified` 行為。
 
 ## 1.1.2.3
 
