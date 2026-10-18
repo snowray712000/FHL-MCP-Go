@@ -111,20 +111,21 @@ func hebQueryWords(q string) [][]cluster {
 	return words
 }
 
-// origKeyword answers a keyword se.php request for bhs (Hebrew query) or fhlwh (Greek query) from the pre-built file.
+// origKeyword answers a keyword se.php request for bhs (Hebrew query), fhlwh or lxx (Greek query) from the pre-built file.
 // ok is false for anything else, and the caller asks upstream.
 func (s *Service) origKeyword(ctx context.Context, r fhlapi.SERequest) (*fhlapi.SEResponse, bool, error) {
 	version := strings.ToLower(r.Version)
 	if r.Orig != 0 || !s.hasOrigSN(version) ||
-		!(version == "bhs" && hasHebrew(r.Query) || version == "fhlwh" && hasGreek(r.Query)) {
+		!(version == "bhs" && hasHebrew(r.Query) || (version == "fhlwh" || version == "lxx") && hasGreek(r.Query)) {
 		return nil, false, nil
 	}
 	ob, err := s.loadOrig(ctx, s.API.(OrigDataAPI), version)
 	if err != nil {
-		return nil, true, err
+		// se.php still searches lxx (exact forms), so a failed download only costs the accent-insensitivity
+		return nil, version != "lxx", err
 	}
 	var match func(i int) bool
-	if version == "fhlwh" {
+	if version == "fhlwh" || version == "lxx" {
 		words := strings.Fields(greekFolded(r.Query))
 		if len(words) == 0 {
 			return nil, false, nil

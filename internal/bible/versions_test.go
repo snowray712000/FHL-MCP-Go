@@ -201,8 +201,8 @@ func TestSearchBibleHebrewKeywordInBHS(t *testing.T) {
 type whAPI struct{ fakeAPI }
 
 func (f *whAPI) OrigData(_ context.Context, name string) ([]byte, error) {
-	if name != "fhlwh" {
-		return nil, errors.New("only fhlwh")
+	if name != "fhlwh" && name != "lxx" {
+		return nil, errors.New("only fhlwh and lxx")
 	}
 	// Jn 1:1 "Ἐν ἀρχῇ ἦν ὁ λόγος", Jn 1:14 "Καὶ ὁ λόγος σὰρξ ἐγένετο", Mt 1:1 (bid 40) "Βίβλος γενέσεως"
 	jn11 := `Ἐν<WG1722> ἀρχῇ<WG746> ἦν<WG1510> ὁ<WG3588> λόγος<WG3056>.`
@@ -248,4 +248,23 @@ func TestSearchBibleGreekKeywordInFHLWH(t *testing.T) {
 	if _, err := svc.SearchBible(ctx, SearchParams{Query: "abc", SearchType: "keyword", Scope: "all", Version: "fhlwh", Limit: 10}); err == nil {
 		t.Error("a query without Greek letters must reach the upstream API")
 	}
+}
+
+func TestSearchBibleGreekKeywordInLXX(t *testing.T) {
+	ctx := context.Background()
+	r, err := (&Service{API: &whAPI{}}).SearchBible(ctx, SearchParams{Query: "λογοσ", SearchType: "keyword", Scope: "all", Version: "lxx", Limit: 10})
+	if err != nil || r.TotalCount != 2 {
+		t.Errorf("lxx accent-insensitive: %v %+v", err, r)
+	}
+	// the file cannot be loaded: lxx falls back to se.php (the fake answers with its "not expected" error)
+	_, err = (&Service{API: &failingOrigAPI{}}).SearchBible(ctx, SearchParams{Query: "λογος", SearchType: "keyword", Scope: "all", Version: "lxx", Limit: 10})
+	if err == nil || !strings.Contains(err.Error(), "SE not expected") {
+		t.Errorf("fallback to upstream: %v", err)
+	}
+}
+
+type failingOrigAPI struct{ fakeAPI }
+
+func (f *failingOrigAPI) OrigData(context.Context, string) ([]byte, error) {
+	return nil, errors.New("down")
 }

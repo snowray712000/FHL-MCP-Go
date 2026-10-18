@@ -4,8 +4,8 @@ import (
 	"strings"
 )
 
-// Greek keyword search in fhlwh (the NT original text). se.php answers VERSION=fhlwh with "not found", so the
-// search runs on the pre-built Unicode file (261019g). Matching ignores case, accents, breathings, iota subscript
+// Greek keyword search in fhlwh (the NT original text) and lxx. se.php answers VERSION=fhlwh with "not found" and
+// matches lxx only by exact form (καί does not find καὶ), so the search runs on the pre-built Unicode file. Matching ignores case, accents, breathings, iota subscript
 // and the sigma / final sigma difference (FHL spells accents with oxia, keyboards produce tonos, so exact
 // matching would miss most typed queries); a keyword may be a part of a word, and every space-separated word
 // of the query must occur in the verse.
