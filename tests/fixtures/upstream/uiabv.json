@@ -1,0 +1,68 @@
+{
+ "status": "success",
+ "parsing": "2026/10/15 05:50:03",
+ "comment": "2026/10/15 05:53:01",
+ "record_count": 6,
+ "record": [
+  {
+   "book": "unv",
+   "cname": "FHL和合本",
+   "proc": 0,
+   "strong": 1,
+   "ntonly": 0,
+   "candownload": 1,
+   "otonly": 0,
+   "version": "2026/06/11 05:50:01"
+  },
+  {
+   "book": "lcc",
+   "cname": "呂振中譯本",
+   "proc": 0,
+   "strong": 0,
+   "ntonly": 0,
+   "candownload": 1,
+   "otonly": 0,
+   "version": "2020-01-25 06:50:01"
+  },
+  {
+   "book": "cbol",
+   "cname": "原文直譯(參考用)",
+   "proc": 0,
+   "strong": 0,
+   "ntonly": 0,
+   "candownload": 1,
+   "otonly": 0,
+   "version": "2026/10/15 06:04:20"
+  },
+  {
+   "book": "esv",
+   "cname": "ESV",
+   "proc": 0,
+   "strong": 0,
+   "ntonly": 0,
+   "candownload": 0,
+   "otonly": 0,
+   "version": ""
+  },
+  {
+   "book": "gnt6",
+   "cname": "UBS6",
+   "proc": 0,
+   "strong": 0,
+   "ntonly": 1,
+   "candownload": 0,
+   "otonly": 0,
+   "version": ""
+  },
+  {
+   "book": "lxx",
+   "cname": "七十士譯本",
+   "proc": 0,
+   "strong": 0,
+   "ntonly": 0,
+   "candownload": 1,
+   "otonly": 1,
+   "version": "2014-07-08 05:50:01"
+  }
+ ]
+}

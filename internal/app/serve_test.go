@@ -37,7 +37,7 @@ func fakeUpstream(t *testing.T) *fhlapi.Client {
 		q := r.URL.Query()
 		name := "qb_john_3_16.json"
 		switch {
-		case strings.HasSuffix(r.URL.Path, "/ab.php"):
+		case strings.HasSuffix(r.URL.Path, "/ab.php") || strings.HasSuffix(r.URL.Path, "/uiabv.php"):
 			name = "ab.json"
 		case q.Get("chap") == "99":
 			name = "qb_john_99_1_empty.json"

@@ -45,15 +45,16 @@ type Client struct {
 // data sooner (1 day); the Strong's dictionary is fixed. Python cached only qb/se/qp/sd/ab; the
 // commentary and topic endpoints follow the plan (commentary ~7 days).
 var endpointTTL = map[string]time.Duration{
-	"qb.php":  7 * 24 * time.Hour,
-	"qp.php":  7 * 24 * time.Hour,
-	"sc.php":  7 * 24 * time.Hour,
-	"st.php":  7 * 24 * time.Hour,
-	"au.php":  7 * 24 * time.Hour,
-	"ab.php":  7 * 24 * time.Hour,
-	"se.php":  24 * time.Hour,
-	"ssc.php": 24 * time.Hour,
-	"sd.php":  0,
+	"qb.php":    7 * 24 * time.Hour,
+	"qp.php":    7 * 24 * time.Hour,
+	"sc.php":    7 * 24 * time.Hour,
+	"st.php":    7 * 24 * time.Hour,
+	"au.php":    7 * 24 * time.Hour,
+	"ab.php":    7 * 24 * time.Hour,
+	"uiabv.php": 7 * 24 * time.Hour,
+	"se.php":    24 * time.Hour,
+	"ssc.php":   24 * time.Hour,
+	"sd.php":    0,
 	// TWCB dictionaries (浸宣): fixed text.
 	"sbdag.php":     0,
 	"stwcbhdic.php": 0,
@@ -186,6 +187,22 @@ func (c *Client) AB(ctx context.Context, simplified bool) (*ABResponse, error) {
 	}
 	if out.Status != "success" {
 		return nil, &Error{Kind: ErrUpstream, Message: "status " + strconv.Quote(out.Status)}
+	}
+	return &out, nil
+}
+
+// UIABV queries uiabv.php (bible.fhl.net/json), the version list FHL's own web UI uses. It is a superset of
+// ab.php: it also lists versions ab.php omits (esv, lxx, cbol, tru, thv12h ...) and fills candownload / version.
+// An empty list is an ErrUpstream error so callers can fall back to AB.
+func (c *Client) UIABV(ctx context.Context, simplified bool) (*ABResponse, error) {
+	q := url.Values{}
+	q.Set("gb", boolDigit(simplified))
+	var out ABResponse
+	if err := c.getJSONAt(ctx, c.jsonBase(), "uiabv.php", q, isSuccess, &out); err != nil {
+		return nil, err
+	}
+	if out.Status != "success" || len(out.Record) == 0 || out.Record[0].Book == "" {
+		return nil, &Error{Kind: ErrUpstream, Message: "uiabv.php: no version list"}
 	}
 	return &out, nil
 }

@@ -683,3 +683,26 @@ func TestSEKeywordFollowsScriptOfMode(t *testing.T) {
 		}
 	}
 }
+
+func TestUIABVQueryAndParse(t *testing.T) {
+	var path, gb string
+	c := newMock(t, func(w http.ResponseWriter, r *http.Request) {
+		path, gb = r.URL.Path, r.URL.Query().Get("gb")
+		_, _ = w.Write(fixture(t, "uiabv.json"))
+	})
+	res, err := c.UIABV(context.Background(), true)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if path != "/json/uiabv.php" || gb != "1" {
+		t.Errorf("path=%s gb=%s, want /json/uiabv.php and gb=1", path, gb)
+	}
+	if len(res.Record) != 6 || res.Record[0].Book != "unv" || res.Record[0].CanDownload != 1 || res.Record[0].Version == "" {
+		t.Errorf("unexpected parse: %d records, first %+v", len(res.Record), res.Record[0])
+	}
+	// a body without a version list (wrong shape, empty) is an upstream error so callers can fall back to ab.php
+	c = newMock(t, func(w http.ResponseWriter, _ *http.Request) { _, _ = w.Write([]byte(`{"status":"success","record_count":0,"record":[]}`)) })
+	if _, err := c.UIABV(context.Background(), false); !errors.Is(err, ErrUpstream) {
+		t.Errorf("empty list: err = %v, want ErrUpstream", err)
+	}
+}

@@ -3,7 +3,15 @@ package bible
 import (
 	"context"
 	"strings"
+
+	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
 )
+
+// VersionListAPI is the optional richer version list (uiabv.php: more versions, real candownload / version).
+// The real client implements it; test fakes that only know ab.php need not.
+type VersionListAPI interface {
+	UIABV(ctx context.Context, simplified bool) (*fhlapi.ABResponse, error)
+}
 
 // VersionItem is one Bible version in list_bible_versions (field order is part of the contract).
 type VersionItem struct {
@@ -22,11 +30,17 @@ type VersionListResult struct {
 	Versions   []VersionItem `json:"versions"`
 }
 
-// ListVersions lists every upstream Bible version (ab.php).
+// ListVersions lists every upstream Bible version: uiabv.php when the client has it and it answers, else ab.php.
 func (s *Service) ListVersions(ctx context.Context, simplified bool) (*VersionListResult, error) {
-	resp, err := s.API.AB(ctx, simplified)
-	if err != nil {
-		return nil, err
+	var resp *fhlapi.ABResponse
+	if api, ok := s.API.(VersionListAPI); ok {
+		resp, _ = api.UIABV(ctx, simplified)
+	}
+	if resp == nil {
+		var err error
+		if resp, err = s.API.AB(ctx, simplified); err != nil {
+			return nil, err
+		}
 	}
 	items := make([]VersionItem, 0, len(resp.Record))
 	for _, r := range resp.Record {

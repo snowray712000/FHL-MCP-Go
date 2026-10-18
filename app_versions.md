@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **1.1.2.10**
+- last: **1.1.2.11**
 - 版次格式：`主.次.修.小`（例 `1.1.2.1`），第三碼的奇偶有意義（使用者定，2026-10-17）：
   - 第三碼奇數（如 `1.1.1`、`1.1.3`、`1.2.1`）是正式發佈版，三段式；只有正式版會做發佈包、發到 GitHub Release 與 npm。
   - 第三碼偶數（`1.1.2.x`）是小變更的開發版，給研發用，不做正式發佈；每次小變更升最後一碼。
@@ -36,6 +36,14 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 1.1.2.11
+
+- ✨ 優化: 「列出聖經譯本」與「搜尋可用譯本」多收了 6 個以前漏掉的譯本：ESV、七十士譯本（lxx）、UBS6（gnt6）、原文直譯（cbol）、太魯閣語、現代客語漢字，這幾個本來就能查經文，只是清單裡看不到。
+- 🐞 Bug: 清單裡每個譯本的「可否下載」與「版本日期」以前一律是「否」與空白，現在會照信望愛實際資料顯示。
+- ℹ️ 說明: 只有新約或只有舊約的旗標、有沒有原文編號的旗標，原本就有，這次沒變。信望愛的新清單暫時取不到時，會自動退回舊清單，不會報錯。
+- 📝工程師筆記-🐞發現: 來源 FHLNUI `abvphp_snapshot.js`／`uiabv.php`。實測 2026-10-19：`/json/uiabv.php` 91 筆，`/api/ab.php` 86 筆（`/json/ab.php` 87）；多出的 `cbol esv gnt6 lxx thv12h tru` 用 qb.php 都能查（gnt6 查創 1:1 當然是空的，它只有新約）。`ab.php` 沒有 `candownload`、`version` 欄位，所以過去這兩欄固定是 false／空字串；`uiabv.php` 兩欄都有（另有 `parsing`、`comment` 時間戳，未用）。`gb=1` 對書名有效。譯本名稱兩邊少數不同（例如 `tghg`：「聖經公會巴克禮台漢本」對「巴克禮台漢本」）。
+- 📝工程師筆記-✨新增: `fhlapi.Client.UIABV`（走 `jsonBase()`，TTL 7 天，空清單或第一筆沒有 `book` 回 `ErrUpstream`）；可選介面 `bible.VersionListAPI`，`ListVersions` 先用它，失敗或沒實作就退回 `AB`（既有假 API 不必改）。輸出格式不變；與 Python 版 golden 的差異是譯本數與 `can_download`／`version` 欄位的實際值（刻意）。凍結合約不需改。測試：`TestUIABVQueryAndParse`、`TestListVersionsPrefersUIABVAndFallsBack`，fixture `uiabv.json`（真實回應節選 6 筆）。
 
 ## 1.1.2.10
 
