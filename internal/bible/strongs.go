@@ -138,23 +138,33 @@ type Occurrences struct {
 
 // StrongsOccurrencesResult is the search_strongs_occurrences result object.
 type StrongsOccurrencesResult struct {
-	StrongsInfo *StrongsEntry `json:"strongs_info,omitempty"`
+	// StrongsInfo is *StrongsEntry (dictionary cbol), *TWCBEntry (twcb) or *StrongsBoth (both).
+	StrongsInfo any `json:"strongs_info,omitempty"`
 	// StrongsInfos replaces StrongsInfo for a combined query (or / and / not / range): the
 	// dictionary entries of its non-negated numbers (at most snInfoMax, unknown numbers skipped).
-	StrongsInfos []*StrongsEntry `json:"strongs_infos,omitempty"`
+	StrongsInfos []any `json:"strongs_infos,omitempty"`
 	Occurrences  Occurrences     `json:"occurrences"`
 }
 
 // SearchStrongsOccurrences looks the number up, then searches the matching testament for it.
-func (s *Service) SearchStrongsOccurrences(ctx context.Context, number string, testament *string, limit int, simplified bool) (*StrongsOccurrencesResult, error) {
-	if res, ok, err := s.searchStrongsCombined(ctx, number, testament, limit, simplified); ok || err != nil {
+// dictionary picks the entry shown with the occurrences: ""/"cbol" (default), "twcb" or "both" (see LookupStrongsIn).
+// With twcb, a number the TWCB dictionary lacks just has no strongs_info; the occurrences are still returned.
+func (s *Service) SearchStrongsOccurrences(ctx context.Context, number string, testament *string, limit int, dictionary string, simplified bool) (*StrongsOccurrencesResult, error) {
+	dict := strings.ToLower(strings.TrimSpace(dictionary))
+	if dict == "" {
+		dict = "cbol"
+	}
+	if dict != "cbol" && dict != "twcb" && dict != "both" {
+		return nil, &InvalidParameterError{Name: "dictionary", Value: dictionary, Reason: "must be 'cbol', 'twcb' or 'both'"}
+	}
+	if res, ok, err := s.searchStrongsCombined(ctx, number, testament, limit, dict, simplified); ok || err != nil {
 		return res, err
 	}
 	n, ot, err := ParseStrongsInput(number, testament)
 	if err != nil {
 		return nil, err
 	}
-	info, err := s.lookup(ctx, number, n, ot, simplified)
+	info, err := s.entryIn(ctx, number, n, ot, dict, simplified)
 	if err != nil {
 		return nil, err
 	}
@@ -177,7 +187,7 @@ const snInfoMax = 10
 
 // searchStrongsCombined handles number expressions such as "G34 or G35", "G3114-G3120" or
 // "G25 not G26". ok is false for a single plain number (normal path).
-func (s *Service) searchStrongsCombined(ctx context.Context, number string, testament *string, limit int, simplified bool) (*StrongsOccurrencesResult, bool, error) {
+func (s *Service) searchStrongsCombined(ctx context.Context, number string, testament *string, limit int, dict string, simplified bool) (*StrongsOccurrencesResult, bool, error) {
 	var def *bool
 	if testament != nil {
 		nt := strings.ToUpper(*testament) == "NT"
@@ -206,9 +216,36 @@ func (s *Service) searchStrongsCombined(ctx context.Context, number string, test
 		if i >= snInfoMax {
 			break
 		}
-		if info, err := s.lookup(ctx, snName(t), t.n, map[bool]string{true: "NT", false: "OT"}[t.nt], simplified); err == nil {
+		if info, err := s.entryIn(ctx, snName(t), t.n, map[bool]string{true: "NT", false: "OT"}[t.nt], dict, simplified); err == nil && info != nil {
 			res.StrongsInfos = append(res.StrongsInfos, info)
 		}
 	}
 	return res, true, nil
+}
+
+// entryIn is the dictionary entry for one number in the chosen dictionary (dict already validated). The cbol
+// entry is an error when missing; a missing TWCB entry is nil (twcb) or just leaves out twcb_definition (both).
+func (s *Service) entryIn(ctx context.Context, input string, n int, testament, dict string, simplified bool) (any, error) {
+	if dict == "cbol" {
+		return s.lookup(ctx, input, n, testament, simplified)
+	}
+	api, ok := s.API.(TWCBAPI)
+	if !ok {
+		return nil, fmt.Errorf("the TWCB dictionary is not supported by this upstream client")
+	}
+	text, found, err := twcbText(ctx, api, n, testament, simplified)
+	if err != nil {
+		return nil, err
+	}
+	if dict == "twcb" {
+		if !found {
+			return nil, nil
+		}
+		return &TWCBEntry{StrongsNumber: fmt.Sprintf("%05d", n), Dictionary: "TWCB", Testament: testament, Definition: text}, nil
+	}
+	entry, err := s.lookup(ctx, input, n, testament, simplified)
+	if err != nil {
+		return nil, err
+	}
+	return &StrongsBoth{StrongsEntry: entry, TWCBDefinition: text}, nil
 }

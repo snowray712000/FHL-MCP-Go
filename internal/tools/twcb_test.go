@@ -96,3 +96,72 @@ func TestLookupStrongsDictionaryValidation(t *testing.T) {
 		t.Errorf("unsupported client: %v", err)
 	}
 }
+
+// occTWCBAPI is the occurrence-search fake plus the TWCB dictionary.
+type occTWCBAPI struct {
+	searchAPI
+	twcb     string
+	twcbCall int
+}
+
+func (f *occTWCBAPI) TWCB(_ context.Context, _ bool, _ int, _ bool) (*fhlapi.TWCBResponse, error) {
+	f.twcbCall++
+	out := fhlapi.TWCBResponse{Status: "success"}
+	if f.twcb == "" {
+		return &out, nil
+	}
+	return &out, json.Unmarshal(fixture(f.t, "upstream", f.twcb), &out)
+}
+
+func TestSearchStrongsOccurrencesDictionary(t *testing.T) {
+	newAPI := func(twcb string) *occTWCBAPI { return &occTWCBAPI{searchAPI: searchAPI{t: t}, twcb: twcb} }
+	info := func(t *testing.T, got string) map[string]any {
+		t.Helper()
+		var res struct {
+			Info map[string]any `json:"strongs_info"`
+			Occ  struct {
+				Total int `json:"total_count"`
+			} `json:"occurrences"`
+		}
+		if err := json.Unmarshal([]byte(got), &res); err != nil {
+			t.Fatal(err)
+		}
+		return res.Info
+	}
+	// default and explicit cbol: no TWCB request, same output
+	api := newAPI("sbdag_3303.json")
+	plain, err := callOn(t, api, "search_strongs_occurrences", `{"number":"25","testament":"NT","limit":3}`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	explicit, _ := callOn(t, api, "search_strongs_occurrences", `{"number":"25","testament":"NT","limit":3,"dictionary":"CBOL"}`)
+	if plain != explicit || api.twcbCall != 0 {
+		t.Errorf("cbol must be the unchanged default (twcb calls %d)", api.twcbCall)
+	}
+	// twcb: only the TWCB entry
+	got, err := callOn(t, api, "search_strongs_occurrences", `{"number":"G3303","dictionary":"twcb","limit":3}`)
+	if err != nil {
+		t.Fatal(err)
+	}
+	if in := info(t, got); in["dictionary"] != "TWCB" || in["definition"] == "" || in["chinese_definition"] != nil {
+		t.Errorf("twcb info = %v", in)
+	}
+	// both: CBOL entry plus twcb_definition
+	got, _ = callOn(t, api, "search_strongs_occurrences", `{"number":"G25","dictionary":"both","limit":3}`)
+	if in := info(t, got); in["chinese_definition"] == nil || in["twcb_definition"] == nil {
+		t.Errorf("both info = %v", in)
+	}
+	// TWCB lacks the number: twcb leaves strongs_info out but keeps the occurrences
+	got, err = callOn(t, newAPI(""), "search_strongs_occurrences", `{"number":"G25","dictionary":"twcb","limit":3}`)
+	if err != nil || strings.Contains(got, "strongs_info") || !strings.Contains(got, `"occurrences"`) {
+		t.Errorf("no TWCB entry: %v %.200s", err, got)
+	}
+	// combined query: TWCB entries land in strongs_infos
+	got, err = callOn(t, newAPI("sbdag_3303.json"), "search_strongs_occurrences", `{"number":"G25 or G26","dictionary":"twcb","limit":3}`)
+	if err != nil || !strings.Contains(got, `"strongs_infos"`) || !strings.Contains(got, `"dictionary": "TWCB"`) {
+		t.Errorf("combined: %v %.300s", err, got)
+	}
+	if _, err = callOn(t, newAPI(""), "search_strongs_occurrences", `{"number":"G25","dictionary":"x"}`); err == nil || !strings.Contains(err.Error(), "must be 'cbol', 'twcb' or 'both'") {
+		t.Errorf("bad dictionary: %v", err)
+	}
+}

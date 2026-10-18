@@ -156,7 +156,11 @@ func (r *Registry) registerSearch(svc *bible.Service) {
 		if err != nil {
 			return "", err
 		}
-		res, err := svc.SearchStrongsOccurrences(ctx, number, testament, limit, simplified)
+		dictionary, err := a.optString("dictionary", "")
+		if err != nil {
+			return "", err
+		}
+		res, err := svc.SearchStrongsOccurrences(ctx, number, testament, limit, dictionary, simplified)
 		if err != nil {
 			return "", err
 		}

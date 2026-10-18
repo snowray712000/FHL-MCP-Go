@@ -2,7 +2,7 @@
 
 版本更新紀錄（對應 FHLNUI 的 `app_versions.json`）。最新的在最上面；`TODOs` 區塊永遠放第一。
 
-- last: **1.1.2.12**
+- last: **1.1.2.13**
 - 版次格式：`主.次.修.小`（例 `1.1.2.1`），第三碼的奇偶有意義（使用者定，2026-10-17）：
   - 第三碼奇數（如 `1.1.1`、`1.1.3`、`1.2.1`）是正式發佈版，三段式；只有正式版會做發佈包、發到 GitHub Release 與 npm。
   - 第三碼偶數（`1.1.2.x`）是小變更的開發版，給研發用，不做正式發佈；每次小變更升最後一碼。
@@ -36,6 +36,12 @@
 - ⏳ 待決定: 次經（以及接著的使徒教父）書卷的中文全名與英文名，有一部分是我依信望愛網站回傳的簡稱與英文縮寫整理的（例如「以斯拉上」「三童歌」「蘇撒拿傳」），請確認用字 (D24)
 - ⏳ 待決定: 「信望愛文章專欄清單」是原 Python 版自己維護的 12 個專欄，實測除了 `women3`（麻辣姊妹）之外，其餘代碼用來搜尋都查不到文章；網站實際有 `lk`（家庭之歌）、`perseverance`、`reading`、`theo`、`thought`、`writer2` 等。要不要改成網站實際的專欄代碼？(D25)
 - ⏳ 待決定: 是否讓本程式只講跟原 Python 版相同的 MCP 協定版本 (2025-11-25)，不啟用更新的版本
+
+## 1.1.2.13
+
+- 🆕 新功能: 「查原文編號出現處」也能附上浸宣（TWCB）字典了：新增選用的 `dictionary`，填 `twcb` 附浸宣字典，填 `both` 同時附 CBOL 與浸宣字典，沒填就跟以前一樣（CBOL）。
+- ℹ️ 說明: 填 `twcb` 時，若浸宣字典沒有那個編號，只是不附字典條目，出現處仍照常回傳（不像「查原文字典」會回報找不到）。「G25 or G26」這類組合查詢也適用，每個編號各附一條字典。
+- 📝工程師筆記-✨新增: `bible.Service.SearchStrongsOccurrences` 多一個 `dictionary` 參數；新的 `entryIn` 依字典回 `*StrongsEntry`／`*TWCBEntry`／`*StrongsBoth`（與 1.1.2.10 的 `lookup_strongs` 同形），`StrongsOccurrencesResult.StrongsInfo`／`StrongsInfos` 改為 `any`（JSON 輸出對 cbol 完全不變）。非法值回 `InvalidParameterError`。凍結合約 `tools-list.json`（兩份）新增 `dictionary` 並更新說明（刻意差異，沿用 1.1.2.9／.10 的做法）。測試 `TestSearchStrongsOccurrencesDictionary`。未驗證：真實上游端對端（TWCB 端點在 1.1.2.10 已實測）。
 
 ## 1.1.2.12
 
