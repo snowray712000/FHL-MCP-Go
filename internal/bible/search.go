@@ -124,7 +124,7 @@ func (s *Service) searchPaged(ctx context.Context, r fhlapi.SERequest) (*fhlapi.
 func hits(rs []fhlapi.SERecord) []VerseItem {
 	out := make([]VerseItem, 0, len(rs))
 	for _, r := range rs {
-		out = append(out, VerseItem{Book: r.Chineses, BookEng: r.Engs, Chapter: r.Chap, Verse: r.Sec, Text: r.BibleText})
+		out = append(out, newVerseItem(r.Chineses, r.Engs, r.Chap, r.Sec, r.BibleText))
 	}
 	return out
 }

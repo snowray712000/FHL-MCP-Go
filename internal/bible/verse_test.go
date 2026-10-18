@@ -175,3 +175,21 @@ func (f *fakeAPI) RT(context.Context, int, int, bool) (*fhlapi.RTResponse, error
 func (f *fakeAPI) Articles(context.Context, fhlapi.ArticleQuery) (*fhlapi.ArticlesResponse, error) {
 	return nil, errors.New("Articles not expected in this test")
 }
+
+func TestMergedVersePlaceholder(t *testing.T) {
+	svc := &Service{API: &fakeAPI{file: "qb_col_2_20_21_merged.json"}}
+	res, err := svc.GetVerse(context.Background(), VerseParams{Book: "西", Chapter: 2, Verse: "20-21"})
+	if err != nil {
+		t.Fatal(err)
+	}
+	if res.Verses[0].MergedIntoPrevious || res.Verses[0].Text == mergedPlaceholder {
+		t.Fatalf("verse 20 must stay normal: %+v", res.Verses[0])
+	}
+	if v := res.Verses[1]; !v.MergedIntoPrevious || v.Text != "（併入上節）" || v.Verse != 21 {
+		t.Fatalf("verse 21 not marked: %+v", v)
+	}
+	b, _ := json.Marshal(res.Verses[0])
+	if string(b) != `{"book":"歌","book_eng":"Col","chapter":2,"verse":20,"text":"既然與基督一同死"}` {
+		t.Fatalf("normal verse JSON changed: %s", b)
+	}
+}

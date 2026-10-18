@@ -5,6 +5,7 @@ import (
 	"context"
 	"encoding/json"
 	"fmt"
+	"strings"
 
 	"github.com/snowray712000/FHL-MCP-Go/internal/fhlapi"
 )
@@ -59,6 +60,20 @@ type VerseItem struct {
 	Chapter int    `json:"chapter"`
 	Verse   int    `json:"verse"`
 	Text    string `json:"text"`
+	// MergedIntoPrevious is set (and Text replaced by mergedPlaceholder) when upstream sends the lone
+	// marker "a": this version translated the verse together with the previous one (e.g. 西 2:20-21).
+	MergedIntoPrevious bool `json:"merged_into_previous,omitempty"`
+}
+
+const mergedPlaceholder = "（併入上節）"
+
+// newVerseItem builds a VerseItem and turns upstream's merged-verse marker "a" into a readable placeholder.
+func newVerseItem(book, bookEng string, chap, sec int, text string) VerseItem {
+	it := VerseItem{Book: book, BookEng: bookEng, Chapter: chap, Verse: sec, Text: text}
+	if strings.TrimSpace(text) == "a" {
+		it.Text, it.MergedIntoPrevious = mergedPlaceholder, true
+	}
+	return it
 }
 
 // NavRef is one navigation endpoint.
@@ -113,7 +128,7 @@ func (s *Service) GetVerse(ctx context.Context, p VerseParams) (*VerseResult, er
 		Verses:      make([]VerseItem, 0, len(resp.Record)),
 	}
 	for _, r := range resp.Record {
-		res.Verses = append(res.Verses, VerseItem{Book: r.Chineses, BookEng: r.Engs, Chapter: r.Chap, Verse: r.Sec, Text: r.BibleText})
+		res.Verses = append(res.Verses, newVerseItem(r.Chineses, r.Engs, r.Chap, r.Sec, r.BibleText))
 	}
 	if resp.Prev != nil {
 		nav := &Navigation{Prev: refToNav(resp.Prev)}
